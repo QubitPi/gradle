@@ -5398,7 +5398,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 8.x to 9.0</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250620105535+0000</span>
+<span id="revnumber">version 9.1.0-20250620110751+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5455,7 +5455,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250620105535+0000</code> to update the project to 9.1.0-20250620105535+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250620110751+0000</code> to update the project to 9.1.0-20250620110751+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -8184,7 +8184,7 @@ This means that if you return to an older version of Gradle, an 8.9-provisioned 
 <div class="sect3">
 <h4 id="change_the_encoding_of_daemon_log_files"><a class="anchor" href="#change_the_encoding_of_daemon_log_files"></a><a class="link" href="#change_the_encoding_of_daemon_log_files">Change the encoding of daemon log files</a></h4>
 <div class="paragraph">
-<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250620105535+0000/</code>, was encoded with the default JVM encoding.
+<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250620110751+0000/</code>, was encoded with the default JVM encoding.
 This file is now always encoded with UTF-8 to prevent clients who may use different default encodings from reading data incorrectly.
 This change may affect third-party tools trying to read this file.</p>
 </div>

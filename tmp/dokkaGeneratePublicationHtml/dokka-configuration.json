@@ -1,6 +1,6 @@
 {
   "moduleName": "gradle",
-  "moduleVersion": "9.1.0-20250620105535+0000",
+  "moduleVersion": "9.1.0-20250620110751+0000",
   "outputDir": "/home/runner/work/gradle/gradle/platforms/documentation/docs/build/dokka/html",
   "cacheRoot": null,
   "offlineMode": false,
