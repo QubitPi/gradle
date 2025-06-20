@@ -1,0 +1,4 @@
+plugins {
+    id 'buildlogic.groovy-common-conventions' // <1>
+    id 'application' // <2>
+}

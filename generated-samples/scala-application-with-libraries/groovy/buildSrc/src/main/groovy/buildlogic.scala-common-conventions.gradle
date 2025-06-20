@@ -1,0 +1,25 @@
+plugins {
+    id 'scala' // <1>
+}
+
+repositories {
+    mavenCentral() // <2>
+}
+
+dependencies {
+    constraints {
+        implementation 'org.apache.commons:commons-text:1.13.0' // <3>
+
+        implementation 'org.scala-lang:scala-library:2.13.16'
+    }
+
+    implementation 'org.scala-lang:scala-library' // <4>
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.1' // <5>
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform() // <6>
+}

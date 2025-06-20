@@ -1,0 +1,114 @@
+<meta property="og:image" content="https://gradle.org/images/releases/gradle-default.png" />
+<meta property="og:type"  content="article" />
+<meta property="og:title" content="Gradle @version@ Release Notes" />
+<meta property="og:site_name" content="Gradle Release Notes">
+<meta property="og:description" content="We are excited to announce Gradle @version@.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@gradle">
+<meta name="twitter:creator" content="@gradle">
+<meta name="twitter:title" content="Gradle @version@ Release Notes">
+<meta name="twitter:description" content="We are excited to announce Gradle @version@.">
+<meta name="twitter:image" content="https://gradle.org/images/releases/gradle-default.png">
+<p>We are excited to announce Gradle @version@ (released <a href="https://gradle.org/releases/">@releaseDate@</a>).</p>
+<p>This release features <a href="">1</a>, <a href="">2</a>, ... <a href="">n</a>, and more.</p>
+<!-- 
+Include only their name, impactful features should be called out separately below.
+ [Some person](https://github.com/some-person)
+
+ THIS LIST SHOULD BE ALPHABETIZED BY [PERSON NAME] - the docs:updateContributorsInReleaseNotes task will enforce this ordering, which is case-insensitive.
+-->
+<p>We would like to thank the following community members for their contributions to this release of Gradle:</p>
+<p>Be sure to check out the <a href="https://roadmap.gradle.org">public roadmap</a> for insight into what's planned for future releases.</p>
+<h2><a href="#upgrade-instructions" id="upgrade-instructions">Upgrade instructions</a></h2>
+<p>Switch your build to use Gradle @version@ by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
+<pre><code class="language-text">./gradlew wrapper --gradle-version=@version@ &amp;&amp; ./gradlew wrapper
+</code></pre>
+<p>See the <a href="userguide/upgrading_version_8.html#changes_@baseVersion@">Gradle 8.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle @version@.</p>
+<p>For Java, Groovy, Kotlin, and Android compatibility, see the <a href="userguide/compatibility.html">full compatibility notes</a>.</p>
+<h2><a href="#new-features-and-usability-improvements" id="new-features-and-usability-improvements">New features and usability improvements</a></h2>
+<!-- Do not add breaking changes or deprecations here! Add them to the upgrade guide instead. -->
+<!--
+
+================== TEMPLATE ==============================
+
+<a name="FILL-IN-KEY-AREA"></a>
+### FILL-IN-KEY-AREA improvements
+
+<<<FILL IN CONTEXT FOR KEY AREA>>>
+Example:
+> The [configuration cache](userguide/configuration_cache.html) improves build performance by caching the result of
+> the configuration phase. Using the configuration cache, Gradle can skip the configuration phase entirely when
+> nothing that affects the build configuration has changed.
+
+#### FILL-IN-FEATURE
+> HIGHLIGHT the use case or existing problem the feature solves
+> EXPLAIN how the new release addresses that problem or use case
+> PROVIDE a screenshot or snippet illustrating the new feature, if applicable
+> LINK to the full documentation for more details
+
+To embed videos, use the macros below. 
+You can extract the URL from YouTube by clicking the "Share" button. 
+For Wistia, contact Gradle's Video Team.
+@youtube(Summary,6aRM8lAYyUA?si=qeXDSX8_8hpVmH01)@
+@wistia(Summary,a5izazvgit)@
+
+================== END TEMPLATE ==========================
+
+
+==========================================================
+ADD RELEASE FEATURES BELOW
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
+<p><a name="build-authoring"></a></p>
+<h3><a href="#build-authoring-improvements" id="build-authoring-improvements">Build authoring improvements</a></h3>
+<h4><a href="#introduce-attributecontaineraddalllater" id="introduce-attributecontaineraddalllater">Introduce <code>AttributeContainer#addAllLater</code></a></h4>
+<p>This release introduces a new API on <code>AttributeContainer</code> allowing all attributes from one attribute container to be lazily added to another.</p>
+<p>Consider the following example demonstrating the new API's behavior:</p>
+<pre><code class="language-kotlin">val color = Attribute.of(&quot;color&quot;, String::class.java)
+val shape = Attribute.of(&quot;shape&quot;, String::class.java)
+
+val foo = configurations.create(&quot;foo&quot;).attributes
+foo.attribute(color, &quot;green&quot;)
+
+val bar = configurations.create(&quot;bar&quot;).attributes
+bar.attribute(color, &quot;red&quot;)
+bar.attribute(shape, &quot;square&quot;)
+assert(bar.getAttribute(color) == &quot;red&quot;)    // `color` is originally red
+
+bar.addAllLater(foo)
+assert(bar.getAttribute(color) == &quot;green&quot;)  // `color` gets overwritten
+assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` does not
+
+foo.attribute(color, &quot;purple&quot;)
+bar.getAttribute(color) == &quot;purple&quot;         // addAllLater is lazy
+
+bar.attribute(color, &quot;orange&quot;)
+assert(bar.getAttribute(color) == &quot;orange&quot;) // `color` gets overwritten again
+assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` remains the same
+</code></pre>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ADD RELEASE FEATURES ABOVE
+==========================================================
+
+-->
+<h2><a href="#promoted-features" id="promoted-features">Promoted features</a></h2>
+<p>Promoted features are features that were incubating in previous versions of Gradle but are now supported and subject to backward compatibility.
+See the User Manual section on the &quot;<a href="userguide/feature_lifecycle.html">Feature Lifecycle</a>&quot; for more information.</p>
+<p>The following are the features that have been promoted in this Gradle release.</p>
+<!--
+### Example promoted
+-->
+<h2><a href="#fixed-issues" id="fixed-issues">Fixed issues</a></h2>
+<!--
+This section will be populated automatically
+-->
+<h2><a href="#known-issues" id="known-issues">Known issues</a></h2>
+<p>Known issues are problems that were discovered post-release that are directly related to changes made in this release.</p>
+<!--
+This section will be populated automatically
+-->
+<h2><a href="#external-contributions" id="external-contributions">External contributions</a></h2>
+<p>We love getting contributions from the Gradle community. For information on contributing, please see <a href="https://gradle.org/contribute">gradle.org/contribute</a>.</p>
+<h2><a href="#reporting-problems" id="reporting-problems">Reporting problems</a></h2>
+<p>If you find a problem with this release, please file a bug on <a href="https://github.com/gradle/gradle/issues">GitHub Issues</a> adhering to our issue guidelines.
+If you're not sure if you're encountering a bug, please use the <a href="https://discuss.gradle.org/c/help-discuss">forum</a>.</p>
+<p>We hope you will build happiness with Gradle, and we look forward to your feedback via <a href="https://twitter.com/gradle">Twitter</a> or on <a href="https://github.com/gradle">GitHub</a>.</p>

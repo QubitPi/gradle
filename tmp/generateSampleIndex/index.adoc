@@ -1,0 +1,89 @@
+= Sample Index
+
+== Android
+
+- <<sample_building_android_apps#,Building Android Apps>>: Build a simple Android app.
+
+== Build organization
+
+- <<sample_composite_builds_basics#,Composite Builds Basics>>: Defining and using a composite build
+- <<sample_composite_builds_declared_substitutions#,Composite Builds Declared Substitutions>>: Applying and testing changes in downstream dependencies without publishing.
+- <<sample_composite_builds_hierarchical_multirepo#,Composite Builds Hierarchical Multirepo>>: Defining and using a composite build to combine multiple independent builds.
+- <<sample_composite_builds_plugin_development#,Composite Builds Plugin Development>>: Developing a Gradle plugin in a build without publishing.
+- <<sample_gradle_plugin#,Gradle Plugin>>: Organize your build logic into a Gradle plugin written in Java.
+- <<sample_convention_plugins#,Sharing build logic between subprojects>>: Organize build logic into reusable pieces
+- <<sample_publishing_convention_plugins#,Sharing build logic in a multi-repo setup>>: Organize and publish build logic for reuse in other projects
+- <<sample_sharing_convention_plugins_with_build_logic#,Sharing convention plugins with build logic build>>: Reuse convention plugins in both main build and build logic build
+- <<sample_cross_project_output_sharing#,Sharing task outputs across projects in a multi-project build>>: Sharing a file made by a task in one Gradle project, with a task in another Gradle project.
+- <<sample_structuring_software_projects#,Structuring Software Projects>>: Structuring a software product project with Gradle
+
+== C++
+
+- <<sample_building_cpp_applications#,Building {cpp} Applications>>: Setup a {cpp} application project step-by-step.
+- <<sample_building_cpp_libraries#,Building {cpp} Libraries>>: Setup a {cpp} library project step-by-step.
+
+== Groovy
+
+- <<sample_building_groovy_applications#,Building Groovy Applications>>: Setup a Groovy application project step-by-step.
+- <<sample_building_groovy_applications_multi_project#,Building Groovy Applications with libraries>>: Setup a Groovy application project with libraries step-by-step.
+- <<sample_building_groovy_libraries#,Building Groovy Libraries>>: Setup a Groovy library project step-by-step.
+- <<sample_publishing_groovy_libraries#,Publishing Groovy Libraries>>: Publish a Groovy library to a binary repository.
+
+== IDE integration
+
+- <<sample_problems_api_usage#,Reporting and receiving problems via the Problems API>>: Reporting problems from plugins and consuming it in IDE integrations
+
+== Java
+
+- <<sample_jvm_multi_project_with_code_coverage_distribution#,Aggregating code coverage with JaCoCo from an application/distribution (Incubating)>>: Report code coverage on the application/distribution of a multi-module project using link:https://www.jacoco.org/jacoco/[JaCoCo].
+- <<sample_jvm_multi_project_with_code_coverage_standalone#,Aggregating code coverage with JaCoCo using a standalone utility project (Incubating)>>: Report code coverage on a multi-module project using link:https://www.jacoco.org/jacoco/[JaCoCo].
+- <<sample_jvm_multi_project_with_test_aggregation_distribution#,Aggregating test results of an application/distribution (Incubating)>>: Report all test results using the application/distribution of a multi-module project.
+- <<sample_jvm_multi_project_with_test_aggregation_standalone#,Aggregating test results using a standalone utility project (Incubating)>>: Report all test results using a standalone utility project as part of a multi-module project.
+- <<sample_building_java_applications#,Building Java Applications>>: Setup a Java application project step-by-step.
+- <<sample_building_java_applications_multi_project#,Building Java Applications with libraries>>: Setup a Java application project with libraries step-by-step.
+- <<sample_building_java_libraries#,Building Java Libraries>>: Setup a Java library project step-by-step.
+- <<sample_publishing_java_libraries#,Publishing Java Libraries>>: Publish a Java library to a binary repository.
+- <<sample_incubating_publishing_convention_plugins#,Sharing build logic in a multi-repo setup with Test Suites (Incubating)>>: Organize and publish build logic for reuse in other projects using the new Test Suites API.
+- <<sample_jvm_multi_project_with_additional_test_types#,Using additional test types>>: Add an additional test type (e.g. integration tests) to a project.
+- <<sample_incubating_jvm_multi_project_with_additional_test_types#,Using additional test types with Test Suites (Incubating)>>: Add an additional test type (e.g. integration tests) to a project using the new Test Suites API.
+- <<sample_jvm_multi_project_with_toolchains#,Using toolchains>>: Use toolchains to configure the JVM to use for compilation and testing.
+
+== Java Modules
+
+- <<sample_java_modules_multi_project#,Building Java Modules>>: Build Java Modules and a modular Java application.
+- <<sample_java_modules_multi_project_with_integration_tests#,Building Java Modules with Blackbox Tests>>: Build Java Modules with blackbox integration tests.
+- <<sample_incubating_java_modules_multi_project_with_integration_tests#,Building Java Modules with Blackbox Tests with Test Suites (Incubating)>>: Build Java Modules with blackbox integration tests using the new Test Suites API.
+- <<sample_java_modules_with_transform#,Building Java Modules with Legacy Libraries>>: Build a modular Java application that integrates legacy libraries.
+
+== Kotlin
+
+- <<sample_building_kotlin_applications#,Building Kotlin Applications>>: Setup a Kotlin application project step-by-step.
+- <<sample_building_kotlin_applications_multi_project#,Building Kotlin Applications with libraries>>: Setup a Kotlin application project with libraries step-by-step.
+- <<sample_building_kotlin_libraries#,Building Kotlin Libraries>>: Setup a Kotlin library project step-by-step.
+
+== Scala
+
+- <<sample_building_scala_applications#,Building Scala Applications>>: Setup a Scala application project step-by-step.
+- <<sample_building_scala_applications_multi_project#,Building Scala Applications with libraries>>: Setup a Scala application project with libraries step-by-step.
+- <<sample_building_scala_libraries#,Building Scala Libraries>>: Setup a Scala library project step-by-step.
+
+== Spring
+
+- <<sample_building_spring_boot_web_applications#,Building Spring Boot Web Applications>>: Build a simple Spring Boot application.
+
+== Swift
+
+- <<sample_building_swift_applications#,Building Swift Applications>>: Setup a Swift application project step-by-step.
+- <<sample_building_swift_libraries#,Building Swift Libraries>>: Setup a Swift library project step-by-step.
+
+== Using Credentials
+
+- <<sample_publishing_credentials#,Publishing Credentials>>: Publish to a password protected repository
+- <<sample_credentials_for_external_tool_via_stdin#,Supply credentials to external tool>>: Pass credentials to an external tool via stdin using Gradle properties.
+
+== Writing Custom Tasks
+
+- <<sample_task_with_arguments#,Implementing Tasks with Command-line Arguments>>: Pass arguments to a custom task.
+- <<sample_custom_test_task#,Implementing a task that runs tests>>: Running tests outside of the JVM.
+- <<sample_tasks_with_dependency_resolution_result_inputs#,Implementing tasks with dependency resolution result inputs>>: Consume dependency resolution result inputs in tasks.
+
