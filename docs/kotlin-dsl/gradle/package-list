@@ -1826,6 +1826,7 @@ $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/AntlrTask/#/PointingToDec
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/arguments/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/arguments.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/execute/#org.gradle.work.InputChanges/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/execute.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/getAntlrClasspath/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/get-antlr-classpath.html
+$dokka.location:org.gradle.api.plugins.antlr/AntlrTask/getPackageName/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/get-package-name.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/getSource/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/get-source.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/isTrace/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/is-trace.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/isTraceLexer/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/is-trace-lexer.html

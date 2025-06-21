@@ -5398,7 +5398,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Dependencies</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250620162541+0000</span>
+<span id="revnumber">version 9.1.0-20250621051212+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5628,8 +5628,12 @@ dependencies {
 <div class="sect2">
 <h3 id="explanation_2"><a class="anchor" href="#explanation_2"></a><a class="link" href="#explanation_2">Explanation</a></h3>
 <div class="paragraph">
-<p>Version catalogs provide a centralized way to manage dependencies.
-Adopting clear naming conventions for catalog entries ensures that developers can easily identify and use dependencies throughout the project.</p>
+<p>Version catalogs provide a centralized way to manage dependencies by mapping full dependency coordinates to concise, reusable aliases like <code>airlift-aircompressor</code>.
+Adopting clear naming conventions for those aliases ensures that developers can easily identify and use dependencies throughout the project.</p>
+</div>
+<div class="paragraph">
+<p>Aliases are typically made up of 1 to 3 segments.
+For example <code>org.apache.commons:commons-lang3</code> could be represented as <code>commonsLang3</code>, <code>apache-commonsLang3</code>, or <code>commons-lang3</code>.</p>
 </div>
 <div class="paragraph">
 <p>The following guidelines help in naming catalog entries effectively:</p>
@@ -5637,39 +5641,45 @@ Adopting clear naming conventions for catalog entries ensures that developers ca
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Use dashes to separate segments</strong>: Prefer dashes (<code>-</code>) over underscores (<code>_</code>) to separate different parts of the entry name.</p>
+<p><strong>Use dashes to separate segments</strong>: Prefer hyphen/dashes (<code>-</code>) over underscores (<code>_</code>) to separate different parts of the entry name.</p>
 <div class="paragraph">
-<p><strong>Example</strong>: For <code>org.apache.logging.log4j:log4j-api</code>, use <code>log4j-api</code></p>
+<p>Example: For <code>org.apache.logging.log4j:log4j-api</code>, use <code>log4j-api</code></p>
 </div>
 </li>
 <li>
-<p><strong>Derive the first segment from the project group</strong>: Use a unique identifier from the project&#8217;s group ID as the first segment.</p>
+<p><strong>Derive the first segment from the project group</strong>: Use a unique identifier from the project&#8217;s group ID as the first segment. Do not include the top level domain in the segment (<code>com</code>, <code>org</code>, <code>net</code>, <code>dev</code>).</p>
 <div class="paragraph">
-<p><strong>Example</strong>: For <code>com.fasterxml.jackson.core:jackson-databind</code>, use <code>jackson-databind</code></p>
+<p>Example: For <code>com.fasterxml.jackson.core:jackson-databind</code>, use <code>jackson-databind</code> or <code>jackson-core-databind</code></p>
+</div>
+</li>
+<li>
+<p><strong>Derive the second segment from the artifact ID</strong>: Use a unique identifier from the artifact ID as the second segment.</p>
+<div class="paragraph">
+<p>Example: For <code>com.linecorp.armeria:armeria-grpc</code>, use <code>armeria-grpc</code></p>
+</div>
+</li>
+<li>
+<p><strong>Avoid generic terms in the segments</strong>: Exclude terms that are obvious or implied in the context of your project (<code>core</code>, <code>java</code>, <code>gradle</code>, <code>module</code>, <code>sdk</code>), especially if the term appears by itself.</p>
+<div class="paragraph">
+<p>Example: For <code>com.google.googlejavaformat:google-java-format</code>, use <code>google-java-format</code>, not <code>google-java</code> or <code>java</code></p>
 </div>
 </li>
 <li>
 <p><strong>Omit redundant segments</strong>: If the group and artifact IDs are the same, avoid repeating them.</p>
 <div class="paragraph">
-<p><strong>Example</strong>: For <code>io.ktor:ktor-client-core</code>, use <code>ktor-client-core</code>, not <code>ktor-ktor-client-core</code></p>
+<p>Example: For <code>io.ktor:ktor-client-core</code>, use <code>ktor-client-core</code>, not <code>ktor-ktor-client-core</code></p>
 </div>
 </li>
 <li>
 <p><strong>Convert internal dashes to camelCase</strong>: If the artifact ID contains dashes, convert them to camelCase for better readability in code.</p>
 <div class="paragraph">
-<p><strong>Example</strong>: <code>spring-boot-starter-web</code> becomes <code>springBootStarterWeb</code></p>
-</div>
-</li>
-<li>
-<p><strong>Avoid implicit terms</strong>: Exclude terms that are obvious or implied in the context of your project.</p>
-<div class="paragraph">
-<p><strong>Example</strong>: For <code>com.amazonaws:aws-java-sdk-core</code>, use <code>aws-core</code>, not <code>aws-javaSdkCore</code></p>
+<p>Example: <code>spring-boot-starter-web</code> becomes <code>springBootStarterWeb</code></p>
 </div>
 </li>
 <li>
 <p><strong>Suffix plugin libraries with <code>-plugin</code></strong>: When referencing a plugin as a library (not in the <code>[plugins]</code> section), append <code>-plugin</code> to the name.</p>
 <div class="paragraph">
-<p><strong>Example</strong>: For <code>org.owasp:dependency-check-gradle</code>, use <code>dependency-check-plugin</code></p>
+<p>Example: For <code>org.owasp:dependency-check-gradle</code>, use <code>dependency-check-plugin</code></p>
 </div>
 </li>
 </ol>

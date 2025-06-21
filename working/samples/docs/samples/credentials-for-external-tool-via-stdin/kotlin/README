@@ -1,5 +1,5 @@
 :samples-dir: /home/runner/work/gradle/gradle/platforms/documentation/docs/build/working/samples/install/credentials-for-external-tool-via-stdin
-:gradle-version: 9.0.0-milestone-9
+:gradle-version: 9.0.0-rc-1
 
 = Supply credentials to external tool Sample
 

@@ -5398,7 +5398,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>The Ear Plugin</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250620162541+0000</span>
+<span id="revnumber">version 9.1.0-20250621051212+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5610,7 +5610,7 @@ dependencies {
 
     // The following dependencies will become ear libs and will
     // be placed in a dir configured via the libDirName property
-    earlib group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+    earlib("log4j:log4j:1.2.15@jar")
 }
 
 tasks.named('ear') {

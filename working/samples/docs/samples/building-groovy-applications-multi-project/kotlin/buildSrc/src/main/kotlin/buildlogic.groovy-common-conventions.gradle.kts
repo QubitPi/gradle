@@ -10,7 +10,7 @@ dependencies {
     constraints {
         implementation("org.apache.commons:commons-text:1.13.0") // <3>
 
-        implementation("org.apache.groovy:groovy-all:4.0.26")
+        implementation("org.apache.groovy:groovy-all:4.0.27")
     }
 
     implementation("org.apache.groovy:groovy-all") // <4>

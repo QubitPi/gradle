@@ -5398,14 +5398,12 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Declaring Dependencies Basics</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250620162541+0000</span>
+<span id="revnumber">version 9.1.0-20250621051212+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
 <ul class="sectlevel1">
 <li><a href="#sec:dependency-types">Types of dependencies</a></li>
-<li><a href="#sec:gradle-distribution-dependencies">Gradle distribution-specific dependencies</a></li>
-<li><a href="#sec:documenting-dependencies">Documenting dependencies</a></li>
 </ul>
 </div>
 </div>
@@ -5433,7 +5431,47 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3 id="sec:module-dependencies"><a class="anchor" href="#sec:module-dependencies"></a><a class="link" href="#sec:module-dependencies">1. Module dependencies</a></h3>
 <div class="paragraph">
 <p>Module dependencies are the most common dependencies.
-They refer to a dependency that is identified by module coordinates (group, name, and version):</p>
+They refer to a dependency that is identified by module coordinates (group, name, and version).
+Module dependencies are declared using the String notation, where the group, name, and version are joined into a single string:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
+    runtimeOnly("org.springframework:spring-aop:2.5")
+    runtimeOnly("org.hibernate:hibernate:3.0.5") {
+        isTransitive = true
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
+    runtimeOnly("org.springframework:spring-core:2.5")
+    runtimeOnly("org.springframework:spring-core:2.5",
+                "org.springframework:spring-aop:2.5")
+    runtimeOnly("org.hibernate:hibernate:3.0.5") {
+        transitive = true
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Gradle also supports the multi-string notation, where each coordinate may be declared separately:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -5444,10 +5482,6 @@ They refer to a dependency that is identified by module coordinates (group, name
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
     runtimeOnly(group = "org.springframework", name = "spring-core", version = "2.5")
-    runtimeOnly("org.springframework:spring-aop:2.5")
-    runtimeOnly("org.hibernate:hibernate:3.0.5") {
-        isTransitive = true
-    }
     runtimeOnly(group = "org.hibernate", name = "hibernate", version = "3.0.5") {
         isTransitive = true
     }
@@ -5463,15 +5497,10 @@ They refer to a dependency that is identified by module coordinates (group, name
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
     runtimeOnly group: 'org.springframework', name: 'spring-core', version: '2.5'
-    runtimeOnly 'org.springframework:spring-core:2.5',
-            'org.springframework:spring-aop:2.5'
     runtimeOnly(
         [group: 'org.springframework', name: 'spring-core', version: '2.5'],
         [group: 'org.springframework', name: 'spring-aop', version: '2.5']
     )
-    runtimeOnly('org.hibernate:hibernate:3.0.5') {
-        transitive = true
-    }
     runtimeOnly group: 'org.hibernate', name: 'hibernate', version: '3.0.5', transitive: true
     runtimeOnly(group: 'org.hibernate', name: 'hibernate', version: '3.0.5') {
         transitive = true
@@ -5481,21 +5510,6 @@ They refer to a dependency that is identified by module coordinates (group, name
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="paragraph">
-<p>Gradle offers multiple notations for declaring module dependencies, including string notation and map notation.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>String Notation:</strong> Simplifies dependency declaration by combining the group, name, and version into a single string.</p>
-</li>
-<li>
-<p><strong>Map Notation:</strong> Allows for specifying each part of the coordinates separately.</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>Module dependencies use the <a href="../javadoc/org/gradle/api/artifacts/ExternalModuleDependency.html"><code>ExternalModuleDependency</code></a> and <a href="../dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html"><code>DependencyHandler</code></a> APIs.
 These APIs provide various properties and configuration methods for defining dependencies.</p>
@@ -5503,9 +5517,9 @@ These APIs provide various properties and configuration methods for defining dep
 <div class="paragraph">
 <p>For advanced configurations, such as enforcing strict versions, you can also provide a closure when alongside these notations.</p>
 </div>
+<div id="sec:project-dependencies" class="paragraph">
+<p>=== 2. Project dependencies</p>
 </div>
-<div class="sect2">
-<h3 id="sec:project-dependencies"><a class="anchor" href="#sec:project-dependencies"></a><a class="link" href="#sec:project-dependencies">2. Project dependencies</a></h3>
 <div class="paragraph">
 <p>Project dependencies allow you to reference other projects within a multi-project Gradle build.</p>
 </div>
@@ -5517,8 +5531,8 @@ These APIs provide various properties and configuration methods for defining dep
 <div class="paragraph">
 <p>This is useful for organizing large projects into smaller, modular components:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5545,8 +5559,8 @@ These APIs provide various properties and configuration methods for defining dep
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Gradle uses the <a href="../dsl/org.gradle.api.Project.html#org.gradle.api.Project:project(java.lang.String)"><code>project()</code></a> function to define a project dependency.
 This function takes the relative path to the target project within the build.
@@ -5555,8 +5569,9 @@ The path is typically defined using a colon (<code>:</code>) to separate differe
 <div class="paragraph">
 <p>Project dependencies are automatically resolved such that the dependent project is always built before the project that depends on it.</p>
 </div>
-<div class="sect3">
-<h4 id="sec:type-safe-project-accessors"><a class="anchor" href="#sec:type-safe-project-accessors"></a><a class="link" href="#sec:type-safe-project-accessors">Type-safe project dependencies</a></h4>
+<div id="sec:type-safe-project-accessors" class="paragraph">
+<p>==== Type-safe project dependencies</p>
+</div>
 <div class="paragraph">
 <p>Type-safe project accessors are an incubating feature which must be enabled explicitly.
 Implementation may change at any time.</p>
@@ -5564,8 +5579,8 @@ Implementation may change at any time.</p>
 <div class="paragraph">
 <p>To add support for type-safe project accessors, add <code>enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")</code> this to your <code>settings.gradle(.kts)</code> file:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5586,8 +5601,8 @@ Implementation may change at any time.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>One downside of using the <code>project(":some:path")</code> notation is the need to remember project paths for dependencies.
 Moreover, changing a project path requires manually updating every occurrence, increasing the risk of missing one.</p>
@@ -5595,8 +5610,8 @@ Moreover, changing a project path requires manually updating every occurrence, i
 <div class="paragraph">
 <p>Instead, the experimental type-safe project accessors API provides IDE completion, making it easier to declare dependencies:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5623,8 +5638,8 @@ Moreover, changing a project path requires manually updating every occurrence, i
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>With this API, incorrectly specified projects in Kotlin DSL scripts trigger compilation errors, helping you avoid missed updates.</p>
 </div>
@@ -5632,10 +5647,9 @@ Moreover, changing a project path requires manually updating every occurrence, i
 <p>Project accessors are based on project paths.
 For instance, the path <code>:commons:utils:some:lib</code> becomes <code>projects.commons.utils.some.lib</code>, while kebab-case (<code>some-lib</code>) and snake-case (<code>some_lib</code>) are converted to camel case: <code>projects.someLib</code>.</p>
 </div>
+<div id="sec:file-dependencies" class="paragraph">
+<p>=== 3. File dependencies</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="sec:file-dependencies"><a class="anchor" href="#sec:file-dependencies"></a><a class="link" href="#sec:file-dependencies">3. File dependencies</a></h3>
 <div class="paragraph">
 <p>File dependencies allow you to include external JARs or other files directly into your project by referencing their file paths.
 File dependencies also allow you to add a set of files directly to a configuration without using a repository.</p>
@@ -5661,8 +5675,8 @@ Instead, prefer declaring dependencies on an external repository, or if necessar
 <div class="paragraph">
 <p>File dependencies are unique because they represent a direct reference to files on the filesystem without any associated <a href="glossary.html#sub:terminology_module_metadata">metadata</a>, such as transitive dependencies, origin, or author information.</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5703,8 +5717,8 @@ dependencies {
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>In this example, each dependency explicitly specifies its location within the file system.
 Common methods for referencing these files include:</p>
@@ -5722,22 +5736,15 @@ Common methods for referencing these files include:</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+</div>
+</div>
 <div class="paragraph">
 <p>The order of files in a <code>FileTree</code> is not guaranteed to be stable, even on the same computer.
 As a result, dependency configurations using <code>FileTree</code> may produce resolution results with varying order, which can impact the cacheability of tasks that use these results as inputs.
 To ensure more predictable and stable behavior, it is recommended to use the simpler <code>files</code> method where possible.</p>
 </div>
-</td>
-</tr>
-</table>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Alternatively, you can use a <a href="supported_repository_types.html#sec:flat-dir-resolver">flat directory</a> repository to specify the source directory for multiple file dependencies.</p>
 </div>
@@ -5756,8 +5763,8 @@ To ensure more predictable and stable behavior, it is recommended to use the sim
 <div class="paragraph">
 <p>To add files as dependencies, pass a <a href="working_with_files.html#sec:file_collections">file collection</a> to the configuration:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5784,8 +5791,8 @@ To ensure more predictable and stable behavior, it is recommended to use the sim
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Note that file dependencies are not included in the published dependency descriptor for your project.
 However, they are available in transitive dependencies within the same build, meaning they can be used within the current build but not outside it.</p>
@@ -5794,8 +5801,8 @@ However, they are available in transitive dependencies within the same build, me
 <p>You should specify which tasks produce the files for a file dependency.
 Otherwise, the necessary tasks might not run when you depend on them transitively from another project:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5852,8 +5859,8 @@ tasks.register('list') {
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ gradle -q list
@@ -5861,20 +5868,18 @@ compiling classes
 classpath = [classes]</pre>
 </div>
 </div>
+<div id="sec:gradle-distribution-dependencies" class="paragraph">
+<p>== Gradle distribution-specific dependencies</p>
 </div>
+<div id="sec:api-dependencies" class="paragraph">
+<p>=== Gradle API dependency</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="sec:gradle-distribution-dependencies"><a class="anchor" href="#sec:gradle-distribution-dependencies"></a><a class="link" href="#sec:gradle-distribution-dependencies">Gradle distribution-specific dependencies</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="sec:api-dependencies"><a class="anchor" href="#sec:api-dependencies"></a><a class="link" href="#sec:api-dependencies">Gradle API dependency</a></h3>
 <div class="paragraph">
 <p>You can declare a dependency on the API of the current version of Gradle by using the <a href="../dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html#org.gradle.api.artifacts.dsl.DependencyHandler:gradleApi()">DependencyHandler.gradleApi()</a> method.
 This is useful when you are developing custom Gradle tasks or plugins:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5899,17 +5904,17 @@ This is useful when you are developing custom Gradle tasks or plugins:</p>
 </div>
 </div>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div id="sec:testkit-dependencies" class="paragraph">
+<p>=== Gradle TestKit dependency</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:testkit-dependencies"><a class="anchor" href="#sec:testkit-dependencies"></a><a class="link" href="#sec:testkit-dependencies">Gradle TestKit dependency</a></h3>
 <div class="paragraph">
 <p>You can declare a dependency on the TestKit API of the current version of Gradle by using the <a href="../dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html#org.gradle.api.artifacts.dsl.DependencyHandler:gradleTestKit()">DependencyHandler.gradleTestKit()</a> method.
 This is useful for writing and executing functional tests for Gradle plugins and build scripts:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5934,17 +5939,17 @@ This is useful for writing and executing functional tests for Gradle plugins and
 </div>
 </div>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div id="sec:groovy-dependencies" class="paragraph">
+<p>=== Local Groovy dependency</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:groovy-dependencies"><a class="anchor" href="#sec:groovy-dependencies"></a><a class="link" href="#sec:groovy-dependencies">Local Groovy dependency</a></h3>
 <div class="paragraph">
 <p>You can declare a dependency on the Groovy that is distributed with Gradle by using the <a href="../dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html#org.gradle.api.artifacts.dsl.DependencyHandler:localGroovy()">DependencyHandler.localGroovy()</a> method.
 This is useful when you are developing custom Gradle tasks or plugins in Groovy:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5969,20 +5974,17 @@ This is useful when you are developing custom Gradle tasks or plugins in Groovy:
 </div>
 </div>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div id="sec:documenting-dependencies" class="paragraph">
+<p>== Documenting dependencies</p>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:documenting-dependencies"><a class="anchor" href="#sec:documenting-dependencies"></a><a class="link" href="#sec:documenting-dependencies">Documenting dependencies</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>When declaring a dependency or a <a href="dependency_constraints.html#dependency-constraints">dependency constraint</a>, you can provide a reason to clarify why the dependency is included.
 This helps make your build script and the <a href="viewing_debugging_dependencies.html#sec:identifying-reason-dependency-selection">dependency insight report</a> easier to interpret:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -6027,8 +6029,8 @@ dependencies {
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>In this example, the <a href="../javadoc/org/gradle/api/artifacts/DependencyConstraint.html#because(java.lang.String)"><code>because()</code></a> method provides a reason for including the <code>asm</code> library, which helps explain its purpose in the context of the build:</p>
 </div>
@@ -6053,6 +6055,9 @@ org.ow2.asm:asm:7.1
 \--- compileClasspath
 
 A web-based, searchable dependency report is available by adding the --scan option.</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

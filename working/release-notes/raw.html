@@ -85,6 +85,24 @@ bar.attribute(color, &quot;orange&quot;)
 assert(bar.getAttribute(color) == &quot;orange&quot;) // `color` gets overwritten again
 assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` remains the same
 </code></pre>
+<h3><a href="#configuration-improvements" id="configuration-improvements">Configuration Improvements</a></h3>
+<h4><a href="#simpler-target-package-configuration-for-antlr-4" id="simpler-target-package-configuration-for-antlr-4">Simpler target package configuration for Antlr 4</a></h4>
+<p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4.<br />
+Previously, setting the &quot;-package&quot; argument also required setting the output directory in order to generate classes into the proper package-specific directory structure.
+This release introduces a <code>packageName</code> property that allows you to set the target package without needing to also set the output directory properly.
+Setting this property will set the &quot;-package&quot; argument for the Antlr tool, and will also set the generated class directory to match the package.</p>
+<p>Explicitly setting the &quot;-package&quot; argument is now deprecated, and will become an error in Gradle 10.</p>
+<p>This option is not available for versions before Antlr 4 and will result in an error if this property is set.</p>
+<pre><code class="language-kotlin">tasks.named(&quot;generateGrammarSource&quot;).configure {
+    // Set the target package for generated code
+    packageName = &quot;com.example.generated&quot;
+}
+</code></pre>
+<h4><a href="#antlr-generated-sources-are-automatically-tracked" id="antlr-generated-sources-are-automatically-tracked">Antlr generated sources are automatically tracked</a></h4>
+<p>In previous versions of Gradle, the Antlr-generated sources were added to a java source set for compilation, but if the generated sources directory was changed, this change was not reflected in the source set.<br />
+This required manually updating the source set to include the new generated sources directory any time it was changed.
+In this release, the generated sources directory is automatically tracked and updates the source set accordingly.
+A task dependency is also created between the source generation task and the source set, ensuring that tasks that consume the source set as an input will automatically create a task dependency on the source generation task.</p>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ADD RELEASE FEATURES ABOVE
 ==========================================================
