@@ -4614,7 +4614,7 @@ input:checked+.slider:before {
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<meta name="adoc-src-path" content="authoring-builds/gradle-properties/service_injection.adoc">
+<meta name="adoc-src-path" content="authoring-builds\gradle-properties\service_injection.adoc">
 <link crossorigin href="//assets.gradle.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
 
@@ -5399,7 +5399,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Services and Service Injection</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250623082156+0000</span>
+<span id="revnumber">version 9.1.0-20250624010402+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5433,8 +5433,21 @@ The services are made available through <em>service injection</em>.</p>
 <div class="sect1">
 <h2 id="services_for_injection"><a class="anchor" href="#services_for_injection"></a><a class="link" href="#services_for_injection">Available services</a></h2>
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+You should avoid injecting types not listed below. Internal services can sometimes technically be injected, but this practice is not supported and may lead to breaking changes in the future.
+Only inject the services explicitly listed below to ensure stability and compatibility.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>The following services are available for injection:</p>
+<p>The following services are available for injection in all Gradle instantiated objects:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -5442,16 +5455,7 @@ The services are made available through <em>service injection</em>.</p>
 <p><a href="#objectfactory"><code>ObjectFactory</code></a> - Allows model objects to be created.</p>
 </li>
 <li>
-<p><a href="#sec:projectlayout"><code>ProjectLayout</code></a> - Provides access to key project locations.</p>
-</li>
-<li>
-<p><a href="#buildlayout"><code>BuildLayout</code></a> - Provides access to important locations for a Gradle build.</p>
-</li>
-<li>
 <p><a href="#providerfactory"><code>ProviderFactory</code></a> - Creates <code>Provider</code> instances.</p>
-</li>
-<li>
-<p><a href="#workerexecutor"><code>WorkerExecutor</code></a> - Allows a task to run work in parallel.</p>
 </li>
 <li>
 <p><a href="#filesystemoperations"><code>FileSystemOperations</code></a> - Allows a task to run operations on the filesystem such as deleting files, copying files or syncing directories.</p>
@@ -5462,6 +5466,34 @@ The services are made available through <em>service injection</em>.</p>
 <li>
 <p><a href="#execoperations"><code>ExecOperations</code></a> - Allows a task to run external processes with dedicated support for running external <code>java</code> programs.</p>
 </li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="additional_services_in_workers"><a class="anchor" href="#additional_services_in_workers"></a><a class="link" href="#additional_services_in_workers">Additional services in workers</a></h3>
+<div class="paragraph">
+<p>The following services are available for injection in worker API actions and parameters:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#workerexecutor"><code>WorkerExecutor</code></a> - Allows a task to run work in parallel.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="additional_services_in_projects"><a class="anchor" href="#additional_services_in_projects"></a><a class="link" href="#additional_services_in_projects">Additional services in projects</a></h3>
+<div class="paragraph">
+<p>The following services are available for injection in project plugins, extensions and objects created in a project:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#sec:projectlayout"><code>ProjectLayout</code></a> - Provides access to key project locations.</p>
+</li>
+<li>
+<p><a href="#workerexecutor"><code>WorkerExecutor</code></a> - Allows a task to run work in parallel.</p>
+</li>
 <li>
 <p><a href="#toolingmodelbuilderregistry"><code>ToolingModelBuilderRegistry</code></a> - Allows a plugin to registers a Gradle tooling API model.</p>
 </li>
@@ -5470,26 +5502,22 @@ The services are made available through <em>service injection</em>.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>Out of the above, <code>ProjectLayout</code> and <code>WorkerExecutor</code> services are only available for injection in project plugins.
-<code>BuildLayout</code> is only available in settings plugins and settings files.
-<code>ProjectLayout</code> is unavailable in Worker API actions.</p>
 </div>
+<div class="sect2">
+<h3 id="additional_services_in_settings"><a class="anchor" href="#additional_services_in_settings"></a><a class="link" href="#additional_services_in_settings">Additional services in settings</a></h3>
 <div class="paragraph">
-<p>While other services can technically be injected, this practice is not supported and may lead to breaking changes in the future.
-Only inject the services explicitly listed above to ensure stability and compatibility.</p>
+<p>The following services are available for injection in settings plugins, extensions and objects created in a project:</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You should avoid injecting types not listed above.
-</td>
-</tr>
-</table>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#buildlayout"><code>BuildLayout</code></a> - Provides access to important locations for a Gradle build.</p>
+</li>
+<li>
+<p><a href="#toolingmodelbuilderregistry"><code>ToolingModelBuilderRegistry</code></a> - Allows a plugin to registers a Gradle tooling API model.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>

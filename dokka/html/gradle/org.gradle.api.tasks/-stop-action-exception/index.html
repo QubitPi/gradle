@@ -48,7 +48,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-9.1.0-20250623082156+0000        </div>
+9.1.0-20250624010402+0000        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -112,7 +112,7 @@
     <h1 class="cover"><span>Stop</span><wbr></wbr><span>Action</span><wbr></wbr><span><span>Exception</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">StopActionException</a> : <a href="../../org.gradle.api/-gradle-exception/index.html">GradleException</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/fe3e75ebdd955b5c522f2695cd6fbda8b3e184bd/subprojects/core/src/main/java//org/gradle/api/tasks/StopActionException.java#L36">source</a>)</span></span></div><p class="paragraph">A <code class="lang-kotlin">StopActionException</code> is be thrown by a task <a href="../../org.gradle.api/-action/index.html">org.gradle.api.Action</a> or task action closure to stop its own execution and to start execution of the task's next action. An action can usually be stopped by just calling return inside the action closure. But if the action works with helper methods that can lead to redundant code. For example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">    List existentSourceDirs = HelperUtil.getExistentSourceDirs()
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">StopActionException</a> : <a href="../../org.gradle.api/-gradle-exception/index.html">GradleException</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/aae1481f48ec283e88e9029c7eb21553ed5b4776/subprojects/core/src/main/java//org/gradle/api/tasks/StopActionException.java#L36">source</a>)</span></span></div><p class="paragraph">A <code class="lang-kotlin">StopActionException</code> is be thrown by a task <a href="../../org.gradle.api/-action/index.html">org.gradle.api.Action</a> or task action closure to stop its own execution and to start execution of the task's next action. An action can usually be stopped by just calling return inside the action closure. But if the action works with helper methods that can lead to redundant code. For example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">    List existentSourceDirs = HelperUtil.getExistentSourceDirs()
     if (!existentSourceDirs) {return}
 </code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">If the <code class="lang-kotlin">getExistentSourceDirs()</code> throws a <code class="lang-kotlin">StopActionException</code> instead, the tasks does not need the if statement.</p><p class="paragraph">Note that throwing this exception does not fail the execution of the task or the build.</p></div>    </div>
   </div>
@@ -146,7 +146,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1023347080%2FProperties%2F-1793262594"><span><span>cause</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1023347080%2FProperties%2F-1793262594"><span><span>cause</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1023347080%2FProperties%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -154,7 +154,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1023347080%2FProperties%2F-1793262594">cause</a><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1023347080%2FProperties%2F-1793262594">cause</a><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#1573944892%2FProperties%2F-1793262594"><span>stack</span><wbr></wbr><span><span>Trace</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1573944892%2FProperties%2F-1793262594"><span>stack</span><wbr></wbr><span><span>Trace</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1573944892%2FProperties%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -171,7 +171,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#1573944892%2FProperties%2F-1793262594">stackTrace</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StackTraceElement.html">StackTraceElement</a><span class="token operator">&gt;</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1573944892%2FProperties%2F-1793262594">stackTrace</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StackTraceElement.html">StackTraceElement</a><span class="token operator">&gt;</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -184,7 +184,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1898257014%2FFunctions%2F-1793262594"><span>add</span><wbr></wbr><span><span>Suppressed</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1898257014%2FFunctions%2F-1793262594"><span>add</span><wbr></wbr><span><span>Suppressed</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1898257014%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -192,7 +192,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1898257014%2FFunctions%2F-1793262594"><span class="token function">addSuppressed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1898257014%2FFunctions%2F-1793262594"><span class="token function">addSuppressed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></span></span><span class="token punctuation">)</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1207709164%2FFunctions%2F-1793262594"><span>fill</span><wbr></wbr><span>In</span><wbr></wbr><span>Stack</span><wbr></wbr><span><span>Trace</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1207709164%2FFunctions%2F-1793262594"><span>fill</span><wbr></wbr><span>In</span><wbr></wbr><span>Stack</span><wbr></wbr><span><span>Trace</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1207709164%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -209,7 +209,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1207709164%2FFunctions%2F-1793262594"><span class="token function">fillInStackTrace</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1207709164%2FFunctions%2F-1793262594"><span class="token function">fillInStackTrace</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#-2138642817%2FFunctions%2F-1793262594"><span>get</span><wbr></wbr><span>Localized</span><wbr></wbr><span><span>Message</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-2138642817%2FFunctions%2F-1793262594"><span>get</span><wbr></wbr><span>Localized</span><wbr></wbr><span><span>Message</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2138642817%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -226,7 +226,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#-2138642817%2FFunctions%2F-1793262594"><span class="token function">getLocalizedMessage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-2138642817%2FFunctions%2F-1793262594"><span class="token function">getLocalizedMessage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -235,7 +235,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#1068546184%2FFunctions%2F-1793262594"><span>get</span><wbr></wbr><span><span>Message</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1068546184%2FFunctions%2F-1793262594"><span>get</span><wbr></wbr><span><span>Message</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1068546184%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -243,7 +243,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#1068546184%2FFunctions%2F-1793262594"><span class="token function">getMessage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1068546184%2FFunctions%2F-1793262594"><span class="token function">getMessage</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -252,7 +252,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#1678506999%2FFunctions%2F-1793262594"><span>get</span><wbr></wbr><span><span>Suppressed</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1678506999%2FFunctions%2F-1793262594"><span>get</span><wbr></wbr><span><span>Suppressed</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1678506999%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -260,7 +260,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#1678506999%2FFunctions%2F-1793262594"><span class="token function">getSuppressed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a><span class="token operator">&gt;</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1678506999%2FFunctions%2F-1793262594"><span class="token function">getSuppressed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a><span class="token operator">&gt;</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#-104903378%2FFunctions%2F-1793262594"><span>init</span><wbr></wbr><span><span>Cause</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-104903378%2FFunctions%2F-1793262594"><span>init</span><wbr></wbr><span><span>Cause</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-104903378%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -277,7 +277,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#-104903378%2FFunctions%2F-1793262594"><span class="token function">initCause</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-104903378%2FFunctions%2F-1793262594"><span class="token function">initCause</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html">Throwable</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -286,7 +286,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1357294889%2FFunctions%2F-1793262594"><span>print</span><wbr></wbr><span>Stack</span><wbr></wbr><span><span>Trace</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1357294889%2FFunctions%2F-1793262594"><span>print</span><wbr></wbr><span>Stack</span><wbr></wbr><span><span>Trace</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1357294889%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -294,7 +294,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#-1357294889%2FFunctions%2F-1793262594"><span class="token function">printStackTrace</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#-1357294889%2FFunctions%2F-1793262594"><span class="token function">printStackTrace</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -303,7 +303,7 @@
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../org.gradle.caching/-build-cache-exception/index.html#1869833549%2FFunctions%2F-1793262594"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+                  <div><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1869833549%2FFunctions%2F-1793262594"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1869833549%2FFunctions%2F-1793262594"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -311,7 +311,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.caching/-build-cache-exception/index.html#1869833549%2FFunctions%2F-1793262594"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../org.gradle.tooling.provider.model/-unknown-model-exception/index.html#1869833549%2FFunctions%2F-1793262594"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
                 </div>
               </div>
             </div>
