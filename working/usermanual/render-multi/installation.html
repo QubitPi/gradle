@@ -4614,7 +4614,7 @@ input:checked+.slider:before {
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<meta name="adoc-src-path" content="releases\installation.adoc">
+<meta name="adoc-src-path" content="releases/installation.adoc">
 <link crossorigin href="//assets.gradle.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
 
@@ -5046,7 +5046,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="../userguide/installation.html">Installing Gradle</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#upgrading-gradle" aria-expanded="false" aria-controls="upgrading-gradle">Upgrading Gradle</a>
                     <ul id="upgrading-gradle">
-                        <li><a href="../userguide/upgrading_version_8.html">version 8.X to latest</a></li>
+                        <li><a href="../userguide/upgrading_version_9.html">version 9.X to latest</a></li>
+                        <li><a href="../userguide/upgrading_version_8.html">version 8.X to 9.0</a></li>
                         <li><a href="../userguide/upgrading_version_7.html">version 7.X to 8.0</a></li>
                         <li><a href="../userguide/upgrading_version_6.html">version 6.X to 7.0</a></li>
                         <li><a href="../userguide/upgrading_version_5.html">version 5.X to 6.0</a></li>
@@ -5399,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Installing Gradle</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250624010402+0000</span>
+<span id="revnumber">version 9.1.0-20250625025732+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5452,7 +5453,7 @@ This is identifiable by the presence of the <code>gradlew</code> or <code>gradle
 But you need to make sure your system <a href="#sec:prerequisites">satisfies Gradle&#8217;s prerequisites</a>.</p>
 </div>
 <div class="paragraph">
-<p>You can follow the steps in the <a href="upgrading_version_8.html#upgrading_version_8">Upgrading Gradle section</a> if you want to update the Gradle version for your project.
+<p>You can follow the steps in the <a href="upgrading_version_9.html#upgrading_version_9">Upgrading Gradle section</a> if you want to update the Gradle version for your project.
 Please use the <a href="gradle_wrapper.html#sec:upgrading_wrapper">Gradle Wrapper</a> to upgrade Gradle.</p>
 </div>
 <div class="paragraph">
@@ -5475,7 +5476,7 @@ The installation can be done manually or using a package manager like <a href="h
 <h2 id="sec:prerequisites"><a class="anchor" href="#sec:prerequisites"></a><a class="link" href="#sec:prerequisites">Prerequisites</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Gradle runs on all major operating systems. It requires <a href="https://jdk.java.net/">Java Development Kit</a> (JDK) version 8 or higher to run. You can check the <a href="compatibility.html#compatibility">compatibility matrix</a> for more information.</p>
+<p>Gradle runs on all major operating systems. It requires <a href="https://jdk.java.net/">Java Development Kit</a> (JDK) version 17 or higher to run. You can check the <a href="compatibility.html#compatibility">compatibility matrix</a> for more information.</p>
 </div>
 <div class="paragraph">
 <p>To check, run <code>java -version</code>:</p>
@@ -5483,14 +5484,16 @@ The installation can be done manually or using a package manager like <a href="h
 <div class="listingblock">
 <div class="content">
 <pre>❯ java -version
-openjdk version "11.0.18" 2023-01-17
-OpenJDK Runtime Environment Homebrew (build 11.0.18+0)
-OpenJDK 64-Bit Server VM Homebrew (build 11.0.18+0, mixed mode)</pre>
+openjdk version "17.0.6" 2023-01-17
+OpenJDK Runtime Environment Temurin-17.0.6+10 (build 17.0.6+10)
+OpenJDK 64-Bit Server VM Temurin-17.0.6+10 (build 17.0.6+10, mixed mode)</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Gradle uses the JDK it finds in your path, the JDK used by your IDE, or the JDK specified by your project.
-In this example, the $PATH points to JDK17:</p>
+<p>Gradle uses the JDK it finds in your path, the JDK used by your IDE, or the <a href="gradle_daemon.html#sec:configuring_daemon_jvm">JDK specified in your project</a>.</p>
+</div>
+<div class="paragraph">
+<p>In this example, the $PATH points to JDK17:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5505,13 +5508,13 @@ This is especially useful when multiple JDKs are installed:</p>
 <div class="listingblock">
 <div class="content">
 <pre>❯ echo %JAVA_HOME%
-C:\Program Files\Java\jdk1.7.0_80</pre>
+C:\Program Files\Java\jdk17.0_6</pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>❯ echo $JAVA_HOME
-/Library/Java/JavaVirtualMachines/jdk-16.jdk/Contents/Home</pre>
+/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5576,8 +5579,8 @@ Linux package managers may distribute a modified version of Gradle that is incom
 <div class="listingblock">
 <div class="content">
 <pre>❯ mkdir /opt/gradle
-❯ unzip -d /opt/gradle gradle-9.1.0-20250624010402+0000-bin.zip
-❯ ls /opt/gradle/gradle-9.1.0-20250624010402+0000
+❯ unzip -d /opt/gradle gradle-9.1.0-20250625025732+0000-bin.zip
+❯ ls /opt/gradle/gradle-9.1.0-20250625025732+0000
 LICENSE  NOTICE  bin  README  init.d  lib  media</pre>
 </div>
 </div>
@@ -5590,7 +5593,7 @@ Configure your <code>PATH</code> environment variable to include the <code>bin</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>❯ export PATH=$PATH:/opt/gradle/gradle-9.1.0-20250624010402+0000/bin</pre>
+<pre>❯ export PATH=$PATH:/opt/gradle/gradle-9.1.0-20250625025732+0000/bin</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5600,7 +5603,7 @@ When upgrading to a different version of Gradle, simply change the <code>GRADLE_
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>export GRADLE_HOME=/opt/gradle/gradle-9.1.0-20250624010402+0000
+<pre>export GRADLE_HOME=/opt/gradle/gradle-9.1.0-20250625025732+0000
 export PATH=${GRADLE_HOME}/bin:${PATH}</pre>
 </div>
 </div>
@@ -5675,8 +5678,8 @@ Gradle is deployed and maintained by SDKMAN!:</p>
 <div class="listingblock">
 <div class="content">
 <pre>❯ mkdir /usr/local/gradle
-❯ unzip gradle-9.1.0-20250624010402+0000-bin.zip -d /usr/local/gradle
-❯ ls /usr/local/gradle/gradle-9.1.0-20250624010402+0000
+❯ unzip gradle-9.1.0-20250625025732+0000-bin.zip -d /usr/local/gradle
+❯ ls /usr/local/gradle/gradle-9.1.0-20250625025732+0000
 LICENSE	NOTICE	README	bin	init.d	lib</pre>
 </div>
 </div>
@@ -5689,7 +5692,7 @@ Configure your <code>PATH</code> environment variable to include the <code>bin</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>❯ export PATH=$PATH:/usr/local/gradle/gradle-9.1.0-20250624010402+0000/bin</pre>
+<pre>❯ export PATH=$PATH:/usr/local/gradle/gradle-9.1.0-20250625025732+0000/bin</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5702,7 +5705,7 @@ When upgrading to a different version of Gradle, simply change the <code>GRADLE_
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>export GRADLE_HOME=/usr/local/gradle/gradle-9.1.0-20250624010402+0000
+<pre>export GRADLE_HOME=/usr/local/gradle/gradle-9.1.0-20250625025732+0000
 export PATH=$GRADLE_HOME/bin:$PATH</pre>
 </div>
 </div>
@@ -5743,7 +5746,7 @@ export PATH=$GRADLE_HOME/bin:$PATH</pre>
 </div>
 <div class="paragraph">
 <p>Open a second <strong>File Explorer</strong> window and go to the directory where the Gradle distribution was downloaded. Double-click the ZIP archive to expose the content.
-Drag the content folder <code>gradle-9.1.0-20250624010402+0000</code> to your newly created <code>C:\Gradle</code> folder.</p>
+Drag the content folder <code>gradle-9.1.0-20250625025732+0000</code> to your newly created <code>C:\Gradle</code> folder.</p>
 </div>
 <div class="paragraph">
 <p>Alternatively, you can unpack the Gradle distribution ZIP into <code>C:\Gradle</code> using the archiver tool of your choice.</p>
@@ -5759,7 +5762,7 @@ Drag the content folder <code>gradle-9.1.0-20250624010402+0000</code> to your ne
 </div>
 <div class="paragraph">
 <p>Under <code>System Variables</code> select <code>Path</code>, then click <code>Edit</code>.
-Add an entry for <code>C:\Gradle\gradle-9.1.0-20250624010402+0000\bin</code>.
+Add an entry for <code>C:\Gradle\gradle-9.1.0-20250625025732+0000\bin</code>.
 Click <code>OK</code> to save.</p>
 </div>
 <div class="paragraph">
@@ -5782,7 +5785,7 @@ When upgrading to a different version of Gradle, just change the <code>GRADLE_HO
 <pre>❯ gradle -v
 
 ------------------------------------------------------------
-Gradle 9.1.0-20250624010402+0000
+Gradle 9.1.0-20250625025732+0000
 ------------------------------------------------------------
 
 Build time:    2025-05-13 06:56:13 UTC
