@@ -5275,6 +5275,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#dependency-resolution" aria-expanded="false" aria-controls="dependency-resolution">Controlling Dependency Resolution</a>
                     <ul id="dependency-resolution">
                         <li><a href="../userguide/dependency_resolution_consistency.html">Consistent Dependency Resolution</a></li>
+                        <li><a href="../userguide/resolving_specific_artifacts.html">Resolving Specific Artifacts</a></li>
                         <li><a href="../userguide/component_capabilities.html">Capabilities</a></li>
                         <li><a href="../userguide/variant_attributes.html">Variants and Attributes</a></li>
                         <li><a href="../userguide/artifact_views.html">Artifact Views</a></li>
@@ -5399,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>How to Resolve Specific Artifacts from a Module Dependency with Gradle</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250626030107+0000</span>
+<span id="revnumber">version 9.1.0-20250627023201+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5514,6 +5515,18 @@ dependencies {
 </div>
 </div>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Declaring dependencies with a custom extension (e.g. <code>@zip</code>, <code>@jar</code>, or <code>@custom</code>) disables metadata resolution. Gradle treats this as a request for a specific artifact, skipping variant-aware resolution and component metadata. You may need to provide metadata with a custom <a href="component_metadata_rules.html#component-metadata-rules">component metadata rule</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
