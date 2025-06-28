@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Gradle Wrapper Reference</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250627023201+0000</span>
+<span id="revnumber">version 9.1.0-20250628022042+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5619,7 +5619,7 @@ The URL is validated before it is written to the properties file.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s assume the following use-case to illustrate the use of the command line options.
-You would like to generate the Wrapper with version 9.1.0-20250627023201+0000 and use the <code>-all</code> distribution to enable your IDE to enable code-completion and being able to navigate to the Gradle source code.</p>
+You would like to generate the Wrapper with version 9.1.0-20250628022042+0000 and use the <code>-all</code> distribution to enable your IDE to enable code-completion and being able to navigate to the Gradle source code.</p>
 </div>
 <div class="paragraph">
 <p>The following command-line execution captures those requirements:</p>
@@ -5884,7 +5884,7 @@ You can save yourself some keyboard strokes by re-configuring the <code>wrapper<
 </div>
 </div>
 <div class="paragraph">
-<p>With the configuration in place, running <code>./gradlew wrapper --gradle-version 9.1.0-20250627023201+0000</code> is enough to produce a <code>distributionUrl</code> value in the Wrapper properties file that will request the <code>-all</code> distribution:</p>
+<p>With the configuration in place, running <code>./gradlew wrapper --gradle-version 9.1.0-20250628022042+0000</code> is enough to produce a <code>distributionUrl</code> value in the Wrapper properties file that will request the <code>-all</code> distribution:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6021,7 +6021,7 @@ As with all such files, you should ensure it&#8217;s trustworthy before executin
 <p>Since the Wrapper JAR is usually checked into a project&#8217;s version control system, there is the potential for a malicious actor to replace the original JAR with a modified one by submitting a pull request that only upgrades the Gradle version.</p>
 </div>
 <div class="paragraph">
-<p>To verify the integrity of the Wrapper JAR, Gradle has created a <a href="https://github.com/marketplace/actions/gradle-wrapper-validation">GitHub Action</a> that automatically checks Wrapper JARs in pull requests against a list of known good checksums.</p>
+<p>To verify the integrity of the Wrapper JAR, Gradle has created a <a href="https://github.com/marketplace/actions/build-with-gradle#the-wrapper-validation-action">GitHub Action</a> that automatically checks Wrapper JARs in pull requests against a list of known good checksums.</p>
 </div>
 <div class="paragraph">
 <p>Gradle also publishes the <a href="https://gradle.org/release-checksums/">checksums of all releases</a> (except for version 3.3 to 4.0.2, which did not generate reproducible JARs), so you can manually verify the integrity of the Wrapper JAR.</p>
@@ -6029,7 +6029,7 @@ As with all such files, you should ensure it&#8217;s trustworthy before executin
 <div class="sect2">
 <h3 id="automatically_verifying_the_gradle_wrapper_jar_on_github"><a class="anchor" href="#automatically_verifying_the_gradle_wrapper_jar_on_github"></a><a class="link" href="#automatically_verifying_the_gradle_wrapper_jar_on_github">Automatically verifying the Gradle Wrapper JAR on GitHub</a></h3>
 <div class="paragraph">
-<p>The <a href="https://github.com/marketplace/actions/gradle-wrapper-validation">GitHub Action</a> is released separately from Gradle, so please check its documentation for how to apply it to your project.</p>
+<p>The <a href="https://github.com/marketplace/actions/build-with-gradle#the-wrapper-validation-action">GitHub Action</a> is released separately from Gradle, so please check its documentation for how to apply it to your project.</p>
 </div>
 </div>
 <div class="sect2">

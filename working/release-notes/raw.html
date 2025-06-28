@@ -11,7 +11,7 @@
 <meta name="twitter:image" content="https://gradle.org/images/releases/gradle-default.png">
 <p>We are excited to announce Gradle @version@ (released <a href="https://gradle.org/releases/">@releaseDate@</a>).</p>
 <p>This release features <a href="">1</a>, <a href="">2</a>, ... <a href="">n</a>, and more.</p>
-<!-- 
+<!--
 Include only their name, impactful features should be called out separately below.
  [Some person](https://github.com/some-person)
 
@@ -46,8 +46,8 @@ Example:
 > PROVIDE a screenshot or snippet illustrating the new feature, if applicable
 > LINK to the full documentation for more details
 
-To embed videos, use the macros below. 
-You can extract the URL from YouTube by clicking the "Share" button. 
+To embed videos, use the macros below.
+You can extract the URL from YouTube by clicking the "Share" button.
 For Wistia, contact Gradle's Video Team.
 @youtube(Summary,6aRM8lAYyUA?si=qeXDSX8_8hpVmH01)@
 @wistia(Summary,a5izazvgit)@
@@ -87,7 +87,7 @@ assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` remains the sam
 </code></pre>
 <h3><a href="#configuration-improvements" id="configuration-improvements">Configuration Improvements</a></h3>
 <h4><a href="#simpler-target-package-configuration-for-antlr-4" id="simpler-target-package-configuration-for-antlr-4">Simpler target package configuration for Antlr 4</a></h4>
-<p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4.<br />
+<p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4.
 Previously, setting the &quot;-package&quot; argument also required setting the output directory in order to generate classes into the proper package-specific directory structure.
 This release introduces a <code>packageName</code> property that allows you to set the target package without needing to also set the output directory properly.
 Setting this property will set the &quot;-package&quot; argument for the Antlr tool, and will also set the generated class directory to match the package.</p>
@@ -99,7 +99,7 @@ Setting this property will set the &quot;-package&quot; argument for the Antlr t
 }
 </code></pre>
 <h4><a href="#antlr-generated-sources-are-automatically-tracked" id="antlr-generated-sources-are-automatically-tracked">Antlr generated sources are automatically tracked</a></h4>
-<p>In previous versions of Gradle, the Antlr-generated sources were added to a java source set for compilation, but if the generated sources directory was changed, this change was not reflected in the source set.<br />
+<p>In previous versions of Gradle, the Antlr-generated sources were added to a java source set for compilation, but if the generated sources directory was changed, this change was not reflected in the source set.
 This required manually updating the source set to include the new generated sources directory any time it was changed.
 In this release, the generated sources directory is automatically tracked and updates the source set accordingly.
 A task dependency is also created between the source generation task and the source set, ensuring that tasks that consume the source set as an input will automatically create a task dependency on the source generation task.</p>
@@ -112,9 +112,9 @@ ADD RELEASE FEATURES ABOVE
 <p>Promoted features are features that were incubating in previous versions of Gradle but are now supported and subject to backward compatibility.
 See the User Manual section on the &quot;<a href="userguide/feature_lifecycle.html">Feature Lifecycle</a>&quot; for more information.</p>
 <p>The following are the features that have been promoted in this Gradle release.</p>
-<!--
-### Example promoted
--->
+<ul>
+<li><a href="javadoc/org/gradle/api/Project.html"><code>getDependencyFactory()</code></a> in <code>Project</code></li>
+</ul>
 <h2><a href="#fixed-issues" id="fixed-issues">Fixed issues</a></h2>
 <!--
 This section will be populated automatically

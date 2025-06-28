@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Services and Service Injection</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250627023201+0000</span>
+<span id="revnumber">version 9.1.0-20250628022042+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5417,7 +5417,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#execoperations"><code>ExecOperations</code></a></li>
 <li><a href="#toolingmodelbuilderregistry"><code>ToolingModelBuilderRegistry</code></a></li>
 <li><a href="#testeventreporterfactory"><code>TestEventReporterFactory</code></a></li>
-<li><a href="#constructor_injection">Constructor injection</a></li>
+<li><a href="#dependencyfactory"><code>DependencyFactory</code></a></li>
+<li><a href="#service_injection_patterns">Constructor injection</a></li>
 <li><a href="#property_injection">Property injection</a></li>
 </ul>
 </div>
@@ -5502,6 +5503,9 @@ Only inject the services explicitly listed below to ensure stability and compati
 <li>
 <p><a href="#testeventreporterfactory"><code>TestEventReporterFactory</code></a> - Allows a plugin to access Gradle&#8217;s test events and its corresponding API.</p>
 </li>
+<li>
+<p><a href="#dependencyfactory"><code>DependencyFactory</code></a> - Allows a plugin to create dependencies in a type-safe way.</p>
+</li>
 </ol>
 </div>
 </div>
@@ -5517,6 +5521,9 @@ Only inject the services explicitly listed below to ensure stability and compati
 </li>
 <li>
 <p><a href="#toolingmodelbuilderregistry"><code>ToolingModelBuilderRegistry</code></a> - Allows a plugin to registers a Gradle tooling API model.</p>
+</li>
+<li>
+<p><a href="#dependencyfactory"><code>DependencyFactory</code></a> - Allows a plugin to create dependencies in a type-safe way.</p>
 </li>
 </ol>
 </div>
@@ -6641,7 +6648,18 @@ This API is incubating.
 </div>
 </div>
 <div class="sect1">
-<h2 id="constructor_injection"><a class="anchor" href="#constructor_injection"></a><a class="link" href="#constructor_injection">Constructor injection</a></h2>
+<h2 id="dependencyfactory"><a class="anchor" href="#dependencyfactory"></a><a class="link" href="#dependencyfactory"><code>DependencyFactory</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../javadoc/org/gradle/api/artifacts/dsl/DependencyFactory.html"><code>DependencyFactory</code></a> is a service that provides methods for creating dependencies in a type-safe way.</p>
+</div>
+<div class="paragraph">
+<p>You can learn more in the <a href="implementing_gradle_plugins_binary.html#sec:differences_with_top_level_dependencies">Implementing Binary Plugins guide</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service_injection_patterns"><a class="anchor" href="#service_injection_patterns"></a><a class="link" href="#service_injection_patterns">Constructor injection</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>There are 2 ways that an object can receive the services that it needs. The first option is to add the service as a parameter of the class constructor.

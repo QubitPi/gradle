@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Working With Files</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250627023201+0000</span>
+<span id="revnumber">version 9.1.0-20250628022042+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5416,6 +5416,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#sec:moving_files_example">Moving files and directories</a></li>
 <li><a href="#sec:deleting_files_example">Deleting files and directories</a></li>
 <li><a href="#sec:creating_archives_example">Creating archives</a></li>
+<li><a href="#sec:reproducible_archives">Reproducible archives</a></li>
+<li><a href="#sec:permissions_inside_archives">Permissions for files inside archives</a></li>
 <li><a href="#sec:unpacking_archives_example">Unpacking archives</a></li>
 <li><a href="#sec:creating_uber_jar_example">Creating "uber" or "fat" JARs</a></li>
 <li><a href="#sec:creating_directories_example">Creating directories</a></li>
@@ -7647,11 +7649,13 @@ If it&#8217;s not specified, the JVM default character set is used, which will l
 </td>
 <td class="content">
 Not setting permissions explicitly will preserve the permissions of the original files or directories.
+The exception are archive tasks, see <a href="#sec:reproducible_archives">Reproducible archives</a> for details.
 </td>
 </tr>
 </table>
 </div>
-<div class="exampleblock">
+<div id="ex-setting-file-permissions-for-files-and-directories" class="exampleblock">
+<div class="title">Example 1. <a href="#ex-setting-file-permissions-for-files-and-directories">Setting file permissions for files and directories</a></div>
 <div class="content">
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
@@ -7713,12 +7717,76 @@ Default permissions differ for files and directories:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>file</strong>: read &amp; write for <strong>owner</strong>, read for <strong>group</strong>, read for <strong>other</strong> (<strong>0644</strong>, <strong>rw-r&#8212;&#8203;r--</strong>)</p>
+<p><strong>file</strong>: read &amp; write for <strong>owner</strong>, read for <strong>group</strong>, read for <strong>other</strong> (<code>0644</code>, <code>rw-r&#8212;&#8203;r--</code>)</p>
 </li>
 <li>
-<p><strong>directory</strong>: read, write &amp; execute for <strong>owner</strong>, read &amp; execute for <strong>group</strong>, read &amp; execute for <strong>other</strong> (<strong>0755</strong>, <strong>rwxr-xr-x</strong>)</p>
+<p><strong>directory</strong>: read, write &amp; execute for <strong>owner</strong>, read &amp; execute for <strong>group</strong>, read &amp; execute for <strong>other</strong> (<code>0755</code>, <code>rwxr-xr-x</code>)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>It&#8217;s also possible to set permissions for a specific file. See the following example:</p>
+</div>
+<div id="ex-setting-file-permissions-for-a-specific-file" class="exampleblock">
+<div class="title">Example 2. <a href="#ex-setting-file-permissions-for-a-specific-file">Setting file permissions for a specific file</a></div>
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.register&lt;Copy&gt;("specificPermissions") {
+    from("src/main/webapp")
+    into(layout.buildDirectory.dir("explodedWarWithScript"))
+    eachFile {
+        if (name == "script.sh") {
+            permissions {
+                user {
+                    execute = true
+                }
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">tasks.register("specificPermissions", Copy) {
+    from 'src/main/webapp'
+    into layout.buildDirectory.dir('explodedWarWithScript')
+    eachFile {
+        if (name == "script.sh") {
+            permissions {
+                user {
+                    execute = true
+                }
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Setting file permissions explicitly for a file doesn&#8217;t support <code>UP-TO-DATE</code> checks, so a task using this setting will always run.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -8453,8 +8521,23 @@ FileTree someTar = tarTree(resources.gzip('someTar.ext'))</code></pre>
 <p>You can see a practical example of extracting an archive file <a href="#sec:unpacking_archives_example">in the unpacking archives section</a> below.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="sec:reproducible_archives"><a class="anchor" href="#sec:reproducible_archives"></a><a class="link" href="#sec:reproducible_archives">Using <code>AbstractArchiveTask</code> for reproducible builds</a></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:reproducible_archives"><a class="anchor" href="#sec:reproducible_archives"></a><a class="link" href="#sec:reproducible_archives">Reproducible archives</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Starting with Gradle 9, archives are reproducible by default.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>It&#8217;s desirable to recreate archives exactly the same, byte for byte, on different machines.
 Building an artifact from source code should produce the same result no matter when and where it is built.
@@ -8489,8 +8572,8 @@ Files on disk can also have different timestamps or permissions depending on the
 or <a href="../dsl/org.gradle.api.tasks.bundling.AbstractArchiveTask.html#org.gradle.api.tasks.bundling.AbstractArchiveTask:filePermissions-org.gradle.api.Action-">file permissions</a>
 while keeping the archives reproducible.</p>
 </div>
-<div class="sect3">
-<h4 id="sec:revert_reproducible_archives"><a class="anchor" href="#sec:revert_reproducible_archives"></a><a class="link" href="#sec:revert_reproducible_archives">Preserve file system-defined aspects</a></h4>
+<div class="sect2">
+<h3 id="sec:revert_reproducible_archives"><a class="anchor" href="#sec:revert_reproducible_archives"></a><a class="link" href="#sec:revert_reproducible_archives">Preserve file system-defined aspects</a></h3>
 <div class="paragraph">
 <p>If desired, you can revert individual aspects of reproducible archives.</p>
 </div>
@@ -8558,6 +8641,29 @@ while keeping the archives reproducible.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:permissions_inside_archives"><a class="anchor" href="#sec:permissions_inside_archives"></a><a class="link" href="#sec:permissions_inside_archives">Permissions for files inside archives</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Setting file permissions in Gradle archives is done in the same way as when copying file, see <a href="#sec:setting_file_permissions">Setting file permissions</a> for details.
+The main difference is that archive tasks by default set the permissions of files and directories in the archive to fixed values, which are <code>0644</code> for files and <code>0755</code> for directories for reproducibility.</p>
+</div>
+<div class="paragraph">
+<p>We recognize two main cases, where users may want to change the permissions of files and directories in archives:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Case where the file system is already the source of truth for the permissions.
+For such configuration see <a href="#sec:revert_reproducible_archives">Preserve file system-defined aspects</a> section.</p>
+</li>
+<li>
+<p>Case where the permissions of files and directories in the archive should be set to specific values, for example to set the executable bit on a script file.
+For such configuration see <a href="#sec:setting_file_permissions">Setting file permissions</a> section.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>

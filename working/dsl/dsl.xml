@@ -2720,7 +2720,7 @@ The content and location of the generate solution file can be modified by the su
          solution {
              solutionFile.location = "vs/${name}.sln"
              solutionFile.withContent { TextProvider content -&gt;
-                 content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\n")
+                 content.asBuilder().insert(0, "# GENERATED FILE: DO NOT EDIT\\n")
                  content.text = content.text.replaceAll("HideSolutionNode = FALSE", "HideSolutionNode = TRUE")
              }
          }
@@ -6001,7 +6001,7 @@ distributions {
     }
 }
 </programlisting><para>
-The DSL inside the <literal>contents\{</literal> } block is the same DSL used for Copy tasks.</para></section></section></chapter><chapter id="org.gradle.api.publish.ivy.IvyPublication"><title>IvyPublication</title><segmentedlist><segtitle>API Documentation</segtitle><seglistitem><seg><apilink class="org.gradle.api.publish.ivy.IvyPublication" style="javadoc"/></seg></seglistitem></segmentedlist><para>An <literal>IvyPublication</literal> is the representation/configuration of how Gradle should publish something in Ivy format, to an Ivy repository.
+The DSL inside the <literal>contents{</literal> } block is the same DSL used for Copy tasks.</para></section></section></chapter><chapter id="org.gradle.api.publish.ivy.IvyPublication"><title>IvyPublication</title><segmentedlist><segtitle>API Documentation</segtitle><seglistitem><seg><apilink class="org.gradle.api.publish.ivy.IvyPublication" style="javadoc"/></seg></seglistitem></segmentedlist><para>An <literal>IvyPublication</literal> is the representation/configuration of how Gradle should publish something in Ivy format, to an Ivy repository.
 
 You directly add a named Ivy publication the project's <literal>publishing.publications</literal> container by providing <apilink class="org.gradle.api.publish.ivy.IvyPublication"/> as the type.
 </para><programlisting language="java">
