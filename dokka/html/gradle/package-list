@@ -3633,7 +3633,6 @@ $dokka.location:org.gradle.api.tasks.testing/TestFailureDetails/getStacktrace/#/
 $dokka.location:org.gradle.api.tasks.testing/TestFailureDetails/isAssertionFailure/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-failure-details/is-assertion-failure.html
 $dokka.location:org.gradle.api.tasks.testing/TestFailureDetails/isAssumptionFailure/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-failure-details/is-assumption-failure.html
 $dokka.location:org.gradle.api.tasks.testing/TestFailureDetails/isFileComparisonFailure/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-failure-details/is-file-comparison-failure.html
-$dokka.location:org.gradle.api.tasks.testing/TestFailureDetails/isStartupFailure/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-failure-details/is-startup-failure.html
 $dokka.location:org.gradle.api.tasks.testing/TestFilter///PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-filter/index.html
 $dokka.location:org.gradle.api.tasks.testing/TestFilter/excludeTest/#java.lang.String#java.lang.String/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-filter/exclude-test.html
 $dokka.location:org.gradle.api.tasks.testing/TestFilter/excludeTestsMatching/#java.lang.String/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test-filter/exclude-tests-matching.html

@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Testing in Java &amp; JVM projects</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250628022042+0000</span>
+<span id="revnumber">version 9.1.0-20250629031610+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5415,6 +5415,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#using_junit5">Using JUnit 5</a></li>
 <li><a href="#test_execution_order">Test execution order in TestNG</a></li>
 <li><a href="#sec:configuring_java_integration_tests">Configuring integration tests</a></li>
+<li><a href="#sec:java_testing_troubleshooting">Troubleshooting common problems</a></li>
 <li><a href="#sec:java_testing_modular">Testing Java Modules</a></li>
 <li><a href="#sec:skipping_java_tests">Skipping the tests</a></li>
 <li><a href="#sec:forcing_java_tests_to_run">Forcing tests to run</a></li>
@@ -5619,18 +5620,6 @@ tasks.named('test', Test) {
 </div>
 <div class="paragraph">
 <p>See <a href="../dsl/org.gradle.api.tasks.testing.Test.html">Test</a> for details on all the available configuration options.</p>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="paragraph">
-<p>The test process can exit unexpectedly if configured incorrectly. For instance, if the Java executable does not exist or an invalid JVM argument is provided, the test process will fail to start. Similarly, if a test makes programmatic changes to the test process, this can also cause unexpected failures.</p>
-</div>
-<div class="paragraph">
-<p>For example, issues may occur if a <code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/SecurityManager.html">SecurityManager</a></code> is modified in a test because
-Gradle&#8217;s internal messaging depends on reflection and socket communication, which may be disrupted if the permissions on the security manager change. In this particular case, you should restore the original <code>SecurityManager</code> after the test so that the
-gradle test worker process can continue to function.</p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -6942,6 +6931,98 @@ check.dependsOn integrationTest</code></pre>
 </div>
 <div class="paragraph">
 <p>For information on how to determine code coverage for tests in additional source sets, see the <a href="jacoco_plugin.html#jacoco_plugin">JaCoCo Plugin</a> and the <a href="jacoco_report_aggregation_plugin.html#jacoco_report_aggregation_plugin">JaCoCo Report Aggregation Plugin</a> chapters.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:java_testing_troubleshooting"><a class="anchor" href="#sec:java_testing_troubleshooting"></a><a class="link" href="#sec:java_testing_troubleshooting">Troubleshooting common problems</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="tests_are_not_detected_or_executed"><a class="anchor" href="#tests_are_not_detected_or_executed"></a><a class="link" href="#tests_are_not_detected_or_executed">Tests are not detected or executed</a></h3>
+<div class="paragraph">
+<p>If no tests are detected, Gradle will skip the <code>Test</code> task entirely.</p>
+</div>
+<div class="paragraph">
+<p>This can occur for several reasons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No test sources exist. This is expected behavior for empty test suites.</p>
+</li>
+<li>
+<p>Test sources exist but are not compiled. This may happen if:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The source files are located in the wrong directory.</p>
+</li>
+<li>
+<p>The source set is not configured correctly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>No test classes are configured on the <code>Test</code> task. By default, only the built-in <code>Test</code> task is automatically configured to use the test source set.
+If you&#8217;re using a custom <code>Test</code> task, you must manually configure both <code>testClassesDirs</code> and <code>classpath</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Prior to Gradle 9.0.0, all <code>Test</code> tasks were <a href="upgrading_version_8.html#test_task_default_classpath">implicitly configured</a> to use the <code>test</code> source set.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test_process_fails_to_start_or_stay_running"><a class="anchor" href="#test_process_fails_to_start_or_stay_running"></a><a class="link" href="#test_process_fails_to_start_or_stay_running">Test process fails to start or stay running</a></h3>
+<div class="paragraph">
+<p>The test process may fail to start if configured incorrectly.
+For instance, if the Java executable does not exist or an invalid JVM argument is provided, the test process will fail to start.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, if a test requires changes to the environment that are not compatible with Gradle&#8217;s test worker process, the test process may fail to start.
+For example, tests that rely on modifying the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/SecurityManager.html"><code>SecurityManager</code></a> may interfere with Gradle&#8217;s internal messaging communication between the build and test worker.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test_process_starts_but_test_dependencies_are_missing"><a class="anchor" href="#test_process_starts_but_test_dependencies_are_missing"></a><a class="link" href="#test_process_starts_but_test_dependencies_are_missing">Test process starts but test dependencies are missing</a></h3>
+<div class="paragraph">
+<p>Once the test process starts, it may fail to find its required dependencies if they are missing from the test runtime classpath.</p>
+</div>
+<div class="paragraph">
+<p>Test dependencies need to be declared on the appropriate configuration.
+The <a href="jvm_test_suite_plugin.html#jvm_test_suite_plugin">JVM Test Suite</a> plugin automatically configures all necessary dependencies, but if you are manually configuring a <code>Test</code> task, you need to ensure that all required dependencies are declared on the appropriate configuration.</p>
+</div>
+<div class="paragraph">
+<p>For JUnit4-based tests, you need to declare a dependency on a single JUnit 4.x library.
+For TestNG-based tests, you need to declare a dependency on a single TestNG library.
+For JUnit Jupiter-based tests, you need to declare dependencies on the JUnit Jupiter and JUnit platform libraries.</p>
+</div>
+<div class="paragraph">
+<p>Prior to Gradle 9.0.0, Gradle <a href="upgrading_version_8.html#test_framework_implementation_dependencies">leaked internal dependencies</a> into the test runtime classpath which may have masked missing dependencies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test_process_fails_with_unusual_exit_code"><a class="anchor" href="#test_process_fails_with_unusual_exit_code"></a><a class="link" href="#test_process_fails_with_unusual_exit_code">Test process fails with unusual exit code</a></h3>
+<div class="paragraph">
+<p>The test process can exit with an unusual exit code (non-zero).</p>
+</div>
+<div class="paragraph">
+<p>This can be caused by a variety of issues, such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A test calls <code>System.exit()</code> directly.</p>
+</li>
+<li>
+<p>Too many processes are running which causes the OS to kill the test process.</p>
+</li>
+<li>
+<p>The test process runs out of memory.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>

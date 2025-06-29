@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Building native software</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250628022042+0000</span>
+<span id="revnumber">version 9.1.0-20250629031610+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6657,7 +6657,26 @@ model {
 <div class="listingblock multi-language-sample">
 <div class="title">only-dll/build.gradle</div>
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">Unresolved directive in native_software.adoc - include::snippets/native-binaries/windows-resources/groovy/bonly-dll/build.gradle[tag=resource-only-library]</code></pre>
+<pre class="prettyprint highlight"><code data-lang="groovy">model {
+    components {
+        helloRes(NativeLibrarySpec) {
+            binaries.all {
+                rcCompiler.args "/v"
+                linker.args "/noentry", "/machine:x86"
+            }
+            sources {
+                rc {
+                    source {
+                        srcDirs "src/hello/rc"
+                    }
+                    exportedHeaders {
+                        srcDirs "src/hello/headers"
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">

@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 8.x to 9.0</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250628022042+0000</span>
+<span id="revnumber">version 9.1.0-20250629031610+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5457,7 +5457,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250628022042+0000</code> to update the project to 9.1.0-20250628022042+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250629031610+0000</code> to update the project to 9.1.0-20250629031610+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5743,6 +5743,28 @@ However, these configurations were unresolvable and could lead to errors in the 
 </div>
 <div class="paragraph">
 <p>As of Gradle 9, these configurations are no longer created or used by the Scala plugins.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="settings_file_changes"><a class="anchor" href="#settings_file_changes"></a><a class="link" href="#settings_file_changes">Settings file changes</a></h3>
+<div class="sect3">
+<h4 id="project_directories_must_exist"><a class="anchor" href="#project_directories_must_exist"></a><a class="link" href="#project_directories_must_exist">Project directories must exist</a></h4>
+<div class="paragraph">
+<p>Gradle will now fail if you include a project that does not correspond to a directory
+in the file system, or if the directory exists but is read-only.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="text">* What went wrong:
+Configuring project ':subproject1' without an existing directory is not allowed. The configured projectDirectory '.../subproject1' does not exist, can't be written to or is not a directory.
+
+* Try:
+&gt; Make sure the project directory exists and is writable.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See more in <a href="#deprecated_missing_project_directory">Including projects without an existing directory</a>.</p>
 </div>
 </div>
 </div>
@@ -8198,7 +8220,7 @@ This means that if you return to an older version of Gradle, an 8.9-provisioned 
 <div class="sect3">
 <h4 id="change_the_encoding_of_daemon_log_files"><a class="anchor" href="#change_the_encoding_of_daemon_log_files"></a><a class="link" href="#change_the_encoding_of_daemon_log_files">Change the encoding of daemon log files</a></h4>
 <div class="paragraph">
-<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250628022042+0000/</code>, was encoded with the default JVM encoding.
+<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250629031610+0000/</code>, was encoded with the default JVM encoding.
 This file is now always encoded with UTF-8 to prevent clients who may use different default encodings from reading data incorrectly.
 This change may affect third-party tools trying to read this file.</p>
 </div>
