@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Configuring the Build Environment</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250629031610+0000</span>
+<span id="revnumber">version 9.1.0-20250701033603+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5641,6 +5641,12 @@ Project properties can be retrieved in build scripts <a href="glossary.html#sub:
 <pre class="prettyprint highlight"><code data-lang="text">myProperty='Hi, world'</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The <code>gradle.properties</code> file can be located in a number of places, including <code>&lt;GRADLE_USER_HOME&gt;/gradle.properties</code>, <code>./gradle.properties</code> (the project root) and <code>&lt;GRADLE_HOME&gt;/gradle.properties</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the same property is defined in multiple locations, the file’s location determines its <a href="#priority-table-gradle-properties">precedence</a>.</p>
+</div>
 </li>
 <li>
 <p><strong>Environment Variables:</strong> You can set project properties with environment variables. If the environment variable name looks like <code>ORG_GRADLE_PROJECT<em>_myProperty</em>='Hi, world'</code>, then Gradle will set a <code>myProperty</code> property on your project object, with the value of <code>Hi, world</code>.</p>
@@ -5846,7 +5852,7 @@ Gradle properties should not be used in build logic, their values should not be 
 <p>The final configuration considered by Gradle is a combination of all Gradle properties set on the command line and your <code>gradle.properties</code> files.
 If an option is configured in multiple locations, the <em>first one</em> found in any of these locations wins:</p>
 </div>
-<table class="tableblock frame-all grid-all fit-content stretch">
+<table id="priority-table-gradle-properties" class="tableblock frame-all grid-all fit-content stretch">
 <colgroup>
 <col>
 <col>

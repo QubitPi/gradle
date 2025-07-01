@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 9.x to the latest</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250629031610+0000</span>
+<span id="revnumber">version 9.1.0-20250701033603+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5443,7 +5443,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250629031610+0000</code> to update the project to 9.1.0-20250629031610+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250701033603+0000</code> to update the project to 9.1.0-20250701033603+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5457,7 +5457,27 @@ The previous step will help you identify potential problems by issuing deprecati
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="deprecations"><a class="anchor" href="#deprecations"></a><a class="link" href="#deprecations">Deprecations</a></h3>
+<div class="sect3">
+<h4 id="archives-configuration"><a class="anchor" href="#archives-configuration"></a><a class="link" href="#archives-configuration">Deprecation of the <code>archives</code> configuration</a></h4>
+<div class="paragraph">
+<p>The <code>archives</code> configuration added by the <code>base</code> plugin has been deprecated and will be removed in Gradle 10.0.0.
+Adding artifacts to the <code>archives</code> configuration will now result in a deprecation warning.
+If you want the artifact built when running the <code>assemble</code> task, you should add the artifact (or the task that produces it) as a dependency of the <code>assemble</code> task directly.</p>
+</div>
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val specialJar = tasks.register&lt;Jar&gt;("specialJar") {
+    archiveBaseName.set("special")
+    from("build/special")
+}
 
+tasks.named("assemble") {
+    dependsOn(specialJar)
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="potential_breaking_changes"><a class="anchor" href="#potential_breaking_changes"></a><a class="link" href="#potential_breaking_changes">Potential breaking changes</a></h3>
