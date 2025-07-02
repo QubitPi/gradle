@@ -4613,7 +4613,7 @@ input:checked+.slider:before {
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<meta name="adoc-src-path" content="dep-man\controlling-dependency-resolution\artifact_transforms.adoc">
+<meta name="adoc-src-path" content="dep-man/controlling-dependency-resolution/artifact_transforms.adoc">
 <link crossorigin href="//assets.gradle.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
 
@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Artifact Transforms</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250701230657+0000</span>
+<span id="revnumber">version 9.1.0-20250702163141+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5412,6 +5412,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#sec:implementing-artifact-transforms">Implementing Artifact Transforms</a></li>
 <li><a href="#sec:registering-artifact-transforms">Registering Artifact Transforms</a></li>
 <li><a href="#sec:executing-artifact-transforms">Executing Artifact Transforms</a></li>
+<li><a href="#sec:debugging-artifact-transforms">Debugging Artifact Transforms</a></li>
 </ul>
 </div>
 </div>
@@ -6969,6 +6970,100 @@ This can happen in the middle of a chain of actions, resulting in all subsequent
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:debugging-artifact-transforms"><a class="anchor" href="#sec:debugging-artifact-transforms"></a><a class="link" href="#sec:debugging-artifact-transforms">Debugging Artifact Transforms</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use the <code>artifactTransforms</code> task to inspect the artifact transforms registered in your build.
+This task makes it easier to debug unexpected transform behavior, understand which transforms are applied, and see how artifacts flow through your build.</p>
+</div>
+<div class="paragraph">
+<p>To generate the report, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="bash">$ ./gradlew artifactTransforms</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will produce output listing all registered transforms, including details such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The input and output artifact types for each transform</p>
+</li>
+<li>
+<p>Attributes required for the transform to apply</p>
+</li>
+<li>
+<p>Implementation details of custom transforms</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This report is especially helpful if you encounter issues with artifact selection or resolution errors related to transforms.</p>
+</div>
+<div class="paragraph">
+<p>It’s important to note that the <code>artifactTransforms</code> task operates on a single project.
+If you run it on a subproject, it will report the transforms registered only in that specific project.</p>
+</div>
+<div class="paragraph">
+<p>For example, to view the artifact transforms in the <code>app</code> subproject, you would run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="text">$ ./gradlew :app:artifactTransforms
+
+&gt; Task :app:artifactTransforms
+
+--------------------------------------------------
+CopyTransform
+--------------------------------------------------
+Type: dagger.hilt.android.plugin.transform.CopyTransform
+Cacheable: No
+From Attributes:
+    - artifactType = android-classes
+To Attributes:
+    - artifactType = jar-for-dagger
+
+--------------------------------------------------
+CopyTransform
+--------------------------------------------------
+Type: dagger.hilt.android.plugin.transform.CopyTransform
+Cacheable: No
+From Attributes:
+    - artifactType = directory
+To Attributes:
+    - artifactType = jar-for-dagger
+
+--------------------------------------------------
+AggregatedPackagesTransform
+--------------------------------------------------
+Type: dagger.hilt.android.plugin.transform.AggregatedPackagesTransform
+Cacheable: Yes
+From Attributes:
+    - artifactType = jar-for-dagger
+To Attributes:
+    - artifactType = aggregated-jar-for-hilt
+
+Some artifact transforms are not cacheable.  This can have negative performance impacts.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because the task only inspects the current project, running it on the root project, where no transforms are registered, will produce empty output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="text">$ ./gradlew artifactTransforms
+
+&gt; Task :artifactTransforms
+
+There are no transforms registered in root project 'gradle'.</code></pre>
+</div>
 </div>
 </div>
 </div>

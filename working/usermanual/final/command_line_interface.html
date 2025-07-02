@@ -4614,7 +4614,7 @@ input:checked+.slider:before {
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<meta name="adoc-src-path" content="running-builds\features\command_line_interface.adoc">
+<meta name="adoc-src-path" content="running-builds/features/command_line_interface.adoc">
 <link crossorigin href="//assets.gradle.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
 
@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Command-Line Interface Reference</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250701230657+0000</span>
+<span id="revnumber">version 9.1.0-20250702163141+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6353,15 +6353,18 @@ When enabled, Gradle reuses information it collects about the file system betwee
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><code>-Dorg.gradle.console=(auto,plain,rich,verbose)</code></dt>
+<dt class="hdlist1"><code>-Dorg.gradle.console=(auto,plain,colored,rich,verbose)</code></dt>
 <dd>
 <p>A <a href="build_environment.html#sec:gradle_configuration_properties">Gradle property</a> that specifies the console mode. Different modes are described immediately below.</p>
 </dd>
-<dt class="hdlist1"><code>--console=(auto,plain,rich,verbose)</code></dt>
+<dt class="hdlist1"><code>--console=(auto,plain,colored,rich,verbose)</code></dt>
 <dd>
 <p>Specifies which type of console output to generate.</p>
 <div class="paragraph">
 <p>Set to <code>plain</code> to generate plain text only. This option disables all color and other rich output in the console output. This is the default when Gradle is <em>not</em> attached to a terminal.</p>
+</div>
+<div class="paragraph">
+<p>Set to <code>colored</code> to generate colored output without rich status information such as progress bars.</p>
 </div>
 <div class="paragraph">
 <p>Set to <code>auto</code> (the default) to enable color and other rich output in the console output when the build process is attached to a console or to generate plain text only when not attached to a console. <em>This is the default when Gradle is attached to a terminal.</em></p>
