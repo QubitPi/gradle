@@ -106,6 +106,25 @@ Setting this property will set the &quot;-package&quot; argument for the Antlr t
 This required manually updating the source set to include the new generated sources directory any time it was changed.
 In this release, the generated sources directory is automatically tracked and updates the source set accordingly.
 A task dependency is also created between the source generation task and the source set, ensuring that tasks that consume the source set as an input will automatically create a task dependency on the source generation task.</p>
+<h4><a href="#specify-the-repository-in-mavenpublicationdistributionmanagement" id="specify-the-repository-in-mavenpublicationdistributionmanagement">Specify the Repository in MavenPublication.distributionManagement</a></h4>
+<p>For a Maven publication, it is now possible to specify the repository used for distribution in the published POM file.</p>
+<p>For example, to specify the GitHub Packages repository in the POM file, use this code:</p>
+<pre><code class="language-kotlin">plugins {
+  id(&quot;maven-publish&quot;)
+}
+
+publications.withType&lt;MavenPublication&gt;().configureEach {
+  pom {
+    distributionManagement {
+      repository {
+        id = &quot;github&quot;
+        name = &quot;GitHub OWNER Apache Maven Packages&quot;
+        url = &quot;https://maven.pkg.github.com/OWNER/REPOSITORY&quot;
+      }
+    }
+  }
+}
+</code></pre>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ADD RELEASE FEATURES ABOVE
 ==========================================================
