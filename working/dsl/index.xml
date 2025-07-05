@@ -16,7 +16,7 @@
     <bookinfo>
         <title>Gradle Build Language Reference</title>
         <titleabbrev>Gradle DSL</titleabbrev>
-    <releaseinfo>9.1.0-20250704030721+0000</releaseinfo></bookinfo>
+    <releaseinfo>9.1.0-20250705004025+0000</releaseinfo></bookinfo>
 
     <section>
         <title>Introduction</title>

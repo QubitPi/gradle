@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 8.x to 9.0</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250704030721+0000</span>
+<span id="revnumber">version 9.1.0-20250705004025+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5457,7 +5457,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250704030721+0000</code> to update the project to 9.1.0-20250704030721+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250705004025+0000</code> to update the project to 9.1.0-20250705004025+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5494,19 +5494,6 @@ For more, see the <a href="#minimum_daemon_jvm_version">Running Gradle on older 
 <p>Gradle now embeds Kotlin 2.1.21, upgrading from the previously embedded version 2.0.21.</p>
 </div>
 <div class="paragraph">
-<p>This upgrade includes several important changes:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Support for Kotlin language versions 1.4 and 1.5 has been removed.</p>
-</li>
-<li>
-<p>Kotlin language version 1.7 is now deprecated.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
 <p>For full details and potential breaking changes, consult the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.21">Kotlin release notes</a>.</p>
 </div>
 </div>
@@ -5524,6 +5511,19 @@ Users should review their code for compatibility with <a href="https://kotlinlan
 <p>Due to changes in how the Kotlin 2 compiler handles script compilation, you can no longer refer to the script instance using labels like <code>this@Build_gradle</code>, <code>this@Settings_gradle</code>, or <code>this@Init_gradle</code>.
 If they are used to reference the DSL script target object, then use <code>project</code>, <code>settings</code>, or <code>gradle</code> instead.
 If they are used to reference a top-level symbol that happens to have the same name as a nested symbol, then use a different name, possibly by adding an intermediary variable.</p>
+</div>
+<div class="paragraph">
+<p>This upgrade also includes several important changes for build-logic and plugin authors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Support for Kotlin language versions 1.4 and 1.5 has been removed.</p>
+</li>
+<li>
+<p>Kotlin language version 1.7 is now deprecated.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Read the <a href="#jspecify">JSpecify section</a> below to learn about potential breaking changes in Kotlin build logic code related to nullability.</p>
@@ -6109,6 +6109,12 @@ Some formerly-valid code may now fail to compile due to more precise type checki
 </div>
 <div class="paragraph">
 <p>Another example is using a function from the Gradle API that takes a <code>Map&lt;String, *&gt;</code> parameter ; you could pass a map with nullable values before, you can&#8217;t do that anymore.</p>
+</div>
+</li>
+<li>
+<p>Functions of the Gradle API that take varargs are now strict with regards to elements nullability.</p>
+<div class="paragraph">
+<p>For example, functions of the Gradle API that take varargs with non-nullable elements only were accepting null elements in previous Gradle versions and will now fail to compile.</p>
 </div>
 </li>
 </ul>
@@ -7988,7 +7994,7 @@ This means that if you return to an older version of Gradle, an 8.9-provisioned 
 <div class="sect3">
 <h4 id="change_the_encoding_of_daemon_log_files"><a class="anchor" href="#change_the_encoding_of_daemon_log_files"></a><a class="link" href="#change_the_encoding_of_daemon_log_files">Change the encoding of daemon log files</a></h4>
 <div class="paragraph">
-<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250704030721+0000/</code>, was encoded with the default JVM encoding.
+<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250705004025+0000/</code>, was encoded with the default JVM encoding.
 This file is now always encoded with UTF-8 to prevent clients who may use different default encodings from reading data incorrectly.
 This change may affect third-party tools trying to read this file.</p>
 </div>
