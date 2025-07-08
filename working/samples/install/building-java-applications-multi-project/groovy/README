@@ -1,5 +1,5 @@
 :samples-dir: /home/runner/work/gradle/gradle/platforms/documentation/docs/build/working/samples/install/building-java-applications-multi-project
-:gradle-version: 9.0.0-rc-1
+:gradle-version: 9.0.0-milestone-10
 
 = Building Java Applications with libraries Sample
 

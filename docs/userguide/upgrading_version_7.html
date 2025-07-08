@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Upgrading your build from Gradle 7.x to 8.0</title>
+<title>Upgrading from Gradle 7.x to 8.0</title>
 <style>
 /*
  * Copyright 2018 the original author or authors.
@@ -5045,12 +5045,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="../userguide/installation.html">Installing Gradle</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#upgrading-gradle" aria-expanded="false" aria-controls="upgrading-gradle">Upgrading Gradle</a>
                     <ul id="upgrading-gradle">
-                        <li><a href="../userguide/upgrading_version_9.html">version 9.X to latest</a></li>
-                        <li><a href="../userguide/upgrading_version_8.html">version 8.X to 9.0</a></li>
-                        <li><a href="../userguide/upgrading_version_7.html">version 7.X to 8.0</a></li>
-                        <li><a href="../userguide/upgrading_version_6.html">version 6.X to 7.0</a></li>
-                        <li><a href="../userguide/upgrading_version_5.html">version 5.X to 6.0</a></li>
-                        <li><a href="../userguide/upgrading_version_4.html">version 4.X to 5.0</a></li>
+                        <li><a href="../userguide/upgrading_major_version_9.html">To version 9.0.0</a></li>
+                        <li><a href="../userguide/upgrading_version_8.html">Within versions 8.x</a></li>
+                        <li><a href="../userguide/upgrading_version_7.html">From version 7.x to 8.0</a></li>
+                        <li><a href="../userguide/upgrading_version_6.html">From version 6.x to 7.0</a></li>
+                        <li><a href="../userguide/upgrading_version_5.html">From version 5.x to 6.0</a></li>
+                        <li><a href="../userguide/upgrading_version_4.html">From version 4.x to 5.0</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#migrating-to-gradle" aria-expanded="false" aria-controls="migrating-to-gradle">Migrating to Gradle</a>
@@ -5398,9 +5398,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content">
             <div class="chapter">
 <div id="header">
-<h1>Upgrading your build from Gradle 7.x to 8.0</h1>
+<h1>Upgrading from Gradle 7.x to 8.0</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250708031653+0000</span>
+<span id="revnumber">version 9.1.0-20250708200556+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5420,7 +5420,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="sectionbody">
 <div class="paragraph">
 <p>This chapter provides the information you need to migrate your Gradle 7.x builds to Gradle 8.0.
-For migrating from Gradle 6.x or earlier, complete the  <a href="upgrading_version_6.html#upgrading_version_6">older migration guide</a> first.</p>
+For migrating from Gradle 6.x, see the  <a href="upgrading_version_6.html#upgrading_version_6">older migration guide</a> first.</p>
 </div>
 <div class="paragraph">
 <p>We recommend the following steps for all users:</p>
@@ -5449,7 +5449,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250708031653+0000</code> to update the project to 9.1.0-20250708031653+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 8.0.2</code> to update the project to 8.0.2.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>

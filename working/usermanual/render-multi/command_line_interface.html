@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<meta name="keywords" content="cli, clean, check, projects, tasks, rerun-tasks, continue, build-cache, no-build-cache, configuration-cache, no-configuration-cache, configuration-cache-problems, configure-on-demand, no-configure-on-demand, max-workers, parallel, no-parallel, priority, profile, scan, watch-fs, no-watch-fs, help, version, show-version, full-stacktrace, stacktrace, org.gradle.debug, org.gradle.debug.host, org.gradle.debug.port, org.gradle.debug.server, org.gradle.debug.suspend, org.gradle.daemon.debug, project-cache-dir, system-prop, init-script, project-prop, org.gradle.jvmargs, org.gradle.java.home, gradle-user-home, dependency-verification, write-verification-metadata, refresh-keys, export-keys, include-build, offline, refresh-dependencies, dry-run, continuous, write-locks, update-locks , no-rebuild, org.gradle.warning.mode, warning-mode, no-problems-report, problems-report, org.gradle.console, console, org.gradle.logging.level, quiet, warn, info, debug, daemon, no-daemon, foreground, status, stop, org.gradle.daemon.idletimeout, exclude-task, distribution-type, gradle-distribution-url, gradle-distribution-sha256-sum, gradle-version">
+<meta name="keywords" content="cli, clean, check, projects, tasks, rerun-tasks, continue, build-cache, no-build-cache, configuration-cache, no-configuration-cache, configuration-cache-problems, configure-on-demand, no-configure-on-demand, max-workers, parallel, no-parallel, priority, profile, scan, watch-fs, no-watch-fs, help, version, show-version, full-stacktrace, stacktrace, org.gradle.debug, org.gradle.debug.host, org.gradle.debug.port, org.gradle.debug.server, org.gradle.debug.suspend, project-cache-dir, system-prop, init-script, project-prop, org.gradle.jvmargs, org.gradle.java.home, gradle-user-home, dependency-verification, write-verification-metadata, refresh-keys, export-keys, include-build, offline, refresh-dependencies, dry-run, continuous, write-locks, update-locks , no-rebuild, org.gradle.warning.mode, warning-mode, no-problems-report, problems-report, org.gradle.console, console, org.gradle.logging.level, quiet, warn, info, debug, daemon, no-daemon, foreground, status, stop, org.gradle.daemon.idletimeout, exclude-task, distribution-type, gradle-distribution-url, gradle-distribution-sha256-sum, gradle-version">
 <title>Command-Line Interface Reference</title>
 <style>
 /*
@@ -5046,12 +5046,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="../userguide/installation.html">Installing Gradle</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#upgrading-gradle" aria-expanded="false" aria-controls="upgrading-gradle">Upgrading Gradle</a>
                     <ul id="upgrading-gradle">
-                        <li><a href="../userguide/upgrading_version_9.html">version 9.X to latest</a></li>
-                        <li><a href="../userguide/upgrading_version_8.html">version 8.X to 9.0</a></li>
-                        <li><a href="../userguide/upgrading_version_7.html">version 7.X to 8.0</a></li>
-                        <li><a href="../userguide/upgrading_version_6.html">version 6.X to 7.0</a></li>
-                        <li><a href="../userguide/upgrading_version_5.html">version 5.X to 6.0</a></li>
-                        <li><a href="../userguide/upgrading_version_4.html">version 4.X to 5.0</a></li>
+                        <li><a href="../userguide/upgrading_major_version_9.html">To version 9.0.0</a></li>
+                        <li><a href="../userguide/upgrading_version_8.html">Within versions 8.x</a></li>
+                        <li><a href="../userguide/upgrading_version_7.html">From version 7.x to 8.0</a></li>
+                        <li><a href="../userguide/upgrading_version_6.html">From version 6.x to 7.0</a></li>
+                        <li><a href="../userguide/upgrading_version_5.html">From version 5.x to 6.0</a></li>
+                        <li><a href="../userguide/upgrading_version_4.html">From version 4.x to 5.0</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#migrating-to-gradle" aria-expanded="false" aria-controls="migrating-to-gradle">Migrating to Gradle</a>
@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Command-Line Interface Reference</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250708031653+0000</span>
+<span id="revnumber">version 9.1.0-20250708200556+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6199,10 +6199,6 @@ By default, no host address is passed to JDWP, so on Java 9 and above, the loopb
 <dt class="hdlist1"><code>-Dorg.gradle.debug.suspend=(true,false)</code></dt>
 <dd>
 <p>A <a href="build_environment.html#sec:gradle_configuration_properties">Gradle property</a> that if set to <code>true</code> and debugging is enabled, the JVM running Gradle will suspend until a debugger is attached. <em>Default is <code>true</code>.</em></p>
-</dd>
-<dt class="hdlist1"><code>-Dorg.gradle.daemon.debug=true</code></dt>
-<dd>
-<p>A <a href="build_environment.html#sec:gradle_configuration_properties">Gradle property</a> that debugs the <a href="gradle_daemon.html#gradle_daemon">Gradle Daemon</a> process. (duplicate of <code>-Dorg.gradle.debug</code>)</p>
 </dd>
 </dl>
 </div>

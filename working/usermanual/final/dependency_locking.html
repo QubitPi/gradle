@@ -5045,12 +5045,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="../userguide/installation.html">Installing Gradle</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#upgrading-gradle" aria-expanded="false" aria-controls="upgrading-gradle">Upgrading Gradle</a>
                     <ul id="upgrading-gradle">
-                        <li><a href="../userguide/upgrading_version_9.html">version 9.X to latest</a></li>
-                        <li><a href="../userguide/upgrading_version_8.html">version 8.X to 9.0</a></li>
-                        <li><a href="../userguide/upgrading_version_7.html">version 7.X to 8.0</a></li>
-                        <li><a href="../userguide/upgrading_version_6.html">version 6.X to 7.0</a></li>
-                        <li><a href="../userguide/upgrading_version_5.html">version 5.X to 6.0</a></li>
-                        <li><a href="../userguide/upgrading_version_4.html">version 4.X to 5.0</a></li>
+                        <li><a href="../userguide/upgrading_major_version_9.html">To version 9.0.0</a></li>
+                        <li><a href="../userguide/upgrading_version_8.html">Within versions 8.x</a></li>
+                        <li><a href="../userguide/upgrading_version_7.html">From version 7.x to 8.0</a></li>
+                        <li><a href="../userguide/upgrading_version_6.html">From version 6.x to 7.0</a></li>
+                        <li><a href="../userguide/upgrading_version_5.html">From version 5.x to 6.0</a></li>
+                        <li><a href="../userguide/upgrading_version_4.html">From version 4.x to 5.0</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#migrating-to-gradle" aria-expanded="false" aria-controls="migrating-to-gradle">Migrating to Gradle</a>
@@ -5400,7 +5400,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Locking Versions</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250708031653+0000</span>
+<span id="revnumber">version 9.1.0-20250708200556+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5410,6 +5410,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#sec:disable-locking">Disable locking for specific configurations</a></li>
 <li><a href="#sec:activate-locking-build-script">Activate locking for a buildscript classpath configuration</a></li>
 <li><a href="#sec:generate-locks">Generating and updating dependency locks</a></li>
+<li><a href="#understanding_the_locking_mechanism_during_dependency_resolution">Understanding the locking mechanism during dependency resolution</a></li>
 <li><a href="#sec:lock-state">Understanding lock state location and format</a></li>
 <li><a href="#sec:migrate-single-lockfile">Migrating your legacy lockfile</a></li>
 <li><a href="#sec:configuring-the-per-project-lock-file-name-and-location">Configuring the lock file name and location</a></li>
@@ -5812,6 +5813,31 @@ You have two options for this:</p>
 <p>By filtering and resolving specific configurations, you ensure that only the relevant ones are locked, tailoring the locking process to your project&#8217;s needs.
 This is especially useful in environments like native builds, where not all configurations can be resolved on a single platform.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="understanding_the_locking_mechanism_during_dependency_resolution"><a class="anchor" href="#understanding_the_locking_mechanism_during_dependency_resolution"></a><a class="link" href="#understanding_the_locking_mechanism_during_dependency_resolution">Understanding the locking mechanism during dependency resolution</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When using dependency locking, Gradle enforces the locked versions as if they were declared with <code>strictly()</code>.</p>
+</div>
+<div class="paragraph">
+<p>This means:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the declared version is <strong>lower</strong> than the locked version (e.g., declared <code>1.0.0</code>, locked <code>1.2.0</code>), Gradle will silently upgrade to the locked version.</p>
+</li>
+<li>
+<p>If the declared version is <strong>higher</strong> than the locked version (e.g., declared <code>1.2.0</code>, locked <code>1.0.0</code>), Gradle will <strong>fail resolution</strong>, because the lockfile enforces <code>1.0.0</code> strictly.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This can be surprising if you assume the declared version takes precedence.
+To resolve this, update the lockfile with <code>--write-locks</code>.</p>
 </div>
 </div>
 </div>
