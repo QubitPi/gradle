@@ -5045,6 +5045,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="../userguide/installation.html">Installing Gradle</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#upgrading-gradle" aria-expanded="false" aria-controls="upgrading-gradle">Upgrading Gradle</a>
                     <ul id="upgrading-gradle">
+                        <li><a href="../userguide/upgrading_version_9.html">Within versions 9.x.y</a></li>
                         <li><a href="../userguide/upgrading_major_version_9.html">To version 9.0.0</a></li>
                         <li><a href="../userguide/upgrading_version_8.html">Within versions 8.x</a></li>
                         <li><a href="../userguide/upgrading_version_7.html">From version 7.x to 8.0</a></li>
@@ -5400,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>How to Share Artifacts Between Projects with Gradle</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250708200556+0000</span>
+<span id="revnumber">version 9.1.0-20250709153256+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5448,7 +5449,41 @@ This allows consuming projects to select the appropriate artifact based on defin
 <h2 id="sec:setup-producer"><a class="anchor" href="#sec:setup-producer"></a><a class="link" href="#sec:setup-producer">Step 1: Configuring the Producer Project</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To get started, you should check the existing variants of the producer project by running the <code>outgoingVariants</code> task:</p>
+<p>Let&#8217;s take a producer project that produces a Java library:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">producer/build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
+    id("java-library")
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">producer/build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
+    id("java-library")
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>To get started, you should check the existing variants of the producer project by running the <code>outgoingVariants</code> task.</p>
+</div>
+<div class="paragraph">
+<p>Our Java library produces the following variant for the <code>runtimeElements</code> configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5473,7 +5508,7 @@ Artifacts
 </div>
 </div>
 <div class="paragraph">
-<p>What it tells us is that this Java Library plugin produces variants with 5 attributes:</p>
+<p>Specifically, the Java library produces a variant <code>runtimeElements</code> with 5 attributes:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -5495,12 +5530,15 @@ Artifacts
 </ol>
 </div>
 <div class="paragraph">
-<p>The producer project defines an artifact (e.g., an instrumented JAR) that other projects can consume based on attributes.
-If we want the instrumented classes to be used in place of the existing variant when executing tests, we need to attach similar attributes to this variant.
-In fact, the attribute we care about is <code>org.gradle.libraryelements</code> which explains what the variant contains.</p>
+<p>Let&#8217;s say that the producer project defines an artifact (e.g., an instrumented JAR) that other projects can consume based on attributes.
+If we want the instrumented classes to be used in place of the existing variant when executing tests, we need to attach similar attributes to this variant.</p>
 </div>
 <div class="paragraph">
-<p>First, the following task defines a custom JAR artifact with an instrumented classifier (e.g., <code>producer-instrumented.jar)</code>:</p>
+<p>In this case, the attribute we care about is <code>org.gradle.libraryelements</code>.
+This attribute explains <em>what</em> the variant contains.</p>
+</div>
+<div class="paragraph">
+<p>The following task in the producer build file defines a custom JAR artifact with an instrumented classifier (e.g., <code>producer-instrumented.jar)</code>:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -5509,10 +5547,8 @@ In fact, the attribute we care about is <code>org.gradle.libraryelements</code> 
 <div class="listingblock">
 <div class="title">producer/build.gradle.kts</div>
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("java-library")
-}
-
+<pre class="prettyprint highlight"><code data-lang="kotlin">// Register a custom JAR task that packages the output of the 'main' source set.
+// This JAR will have a classifier of 'instrumented' to distinguish it from the default artifact.
 val instrumentedJar by tasks.registering(Jar::class) {
     archiveClassifier.set("instrumented")
     from(sourceSets.main.get().output)
@@ -5527,10 +5563,8 @@ val instrumentedJar by tasks.registering(Jar::class) {
 <div class="listingblock">
 <div class="title">producer/build.gradle</div>
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id("java-library")
-}
-
+<pre class="prettyprint highlight"><code data-lang="groovy">// Register a custom JAR task that packages the output of the 'main' source set.
+// This JAR will have a classifier of 'instrumented' to distinguish it from the default artifact.
 def instrumentedJar = tasks.register("instrumentedJar", Jar) {
     archiveClassifier.set("instrumented")
     from(sourceSets.main.output)
@@ -5543,7 +5577,7 @@ def instrumentedJar = tasks.register("instrumentedJar", Jar) {
 </div>
 </div>
 <div class="paragraph">
-<p>Second, a configuration  is created which:</p>
+<p>The producer build file also creates a new configuration which:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -5566,17 +5600,18 @@ def instrumentedJar = tasks.register("instrumentedJar", Jar) {
 <div class="title">producer/build.gradle.kts</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="kotlin">configurations {
-    create("instrumentedJars") {
-        isCanBeConsumed = true
-        isCanBeResolved = false
+    // Create a custom consumable configuration named 'instrumentedJars'
+    // This allows the producer to supply the instrumented JAR variant to other projects
+    consumable("instrumentedJars") {
+        // Assign attributes so that consuming projects can match on these
         attributes {
-            attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
-            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+            // The unique attribute allows targeted selection
             attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("instrumented-jar"))
         }
     }
 }
 
+// Add the custom JAR artifact to the 'instrumentedJars' configuration
 artifacts {
     add("instrumentedJars", instrumentedJar)
 }</code></pre>
@@ -5590,17 +5625,18 @@ artifacts {
 <div class="title">producer/build.gradle</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="groovy">configurations {
-    create("instrumentedJars") {
-        canBeConsumed = true
-        canBeResolved = false
+    // Create a custom consumable configuration named 'instrumentedJars'
+    // This allows the producer to supply the instrumented JAR variant to other projects
+    consumable("instrumentedJars") {
+        // Assign attributes so that consuming projects can match on these
         attributes {
-            attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category, Category.LIBRARY))
-            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage, Usage.JAVA_RUNTIME))
+            // The unique attribute allows targeted selection
             attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements, "instrumented-jar"))
         }
     }
 }
 
+// Add the custom JAR artifact to the 'instrumentedJars' configuration
 artifacts {
     add("instrumentedJars", instrumentedJar)
 }</code></pre>
@@ -5619,10 +5655,20 @@ artifacts {
 <h2 id="sec:setup-consumer"><a class="anchor" href="#sec:setup-consumer"></a><a class="link" href="#sec:setup-consumer">Step 2: Configuring the consumer project</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The consumer project requests the instrumented JAR by defining matching attributes.</p>
+<p>In Gradle, it&#8217;s recommended to separate the configuration where you declare dependencies from the one where you resolve artifacts.</p>
 </div>
 <div class="paragraph">
-<p>First, the consumer explicitly requests a runtime usage artifact with the variant marked as <code>instrumented-jar</code>:</p>
+<p>First, the consumer project creates two configurations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>instrumentedRuntimeDependencies</code> is used to declare a dependency on the producer.</p>
+</li>
+<li>
+<p><code>instrumentedRuntime</code> is a resolvable configuration that resolves all the dependencies declared in <code>instrumentedRuntimeDependencies</code>, including <code>instrumentedJars</code>.</p>
+</li>
+</ul>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -5635,14 +5681,19 @@ artifacts {
     id("application")
 }
 
-configurations {
-    create("instrumentedRuntime") {
-        isCanBeConsumed = false
-        isCanBeResolved = true
-        attributes {
-            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
-            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("instrumented-jar"))
-        }
+// This configuration is used to declare dependencies only.
+// It is neither resolvable nor consumable.
+val instrumentedRuntimeDependencies by configurations.dependencyScope("instrumentedRuntimeDependencies")
+
+// This resolvable configuration is used to resolve the instrumented JAR files.
+// It extends from the dependency-declaring configuration above.
+val instrumentedRuntime by configurations.resolvable("instrumentedRuntime") {
+    // Wire the dependency declarations
+    extendsFrom(instrumentedRuntimeDependencies)
+
+    // These attributes must be compatible with the producer
+    attributes {
+        attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("instrumented-jar"))
     }
 }</code></pre>
 </div>
@@ -5658,14 +5709,17 @@ configurations {
     id("application")
 }
 
-configurations {
-    create("instrumentedRuntime") {
-        canBeConsumed = false
-        canBeResolved = true
-        attributes {
-            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage, Usage.JAVA_RUNTIME))
-            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements, "instrumented-jar"))
-        }
+// This configuration is used to declare dependencies only.
+def instrumentedRuntimeDependencies = configurations.dependencyScope("instrumentedRuntimeDependencies")
+
+// This resolvable configuration is used to resolve the instrumented JAR files.
+def instrumentedRuntime = configurations.resolvable("instrumentedRuntime") {
+    // Wire the dependency declarations
+    extendsFrom(instrumentedRuntimeDependencies.get())
+
+    // These attributes must be compatible with the producer
+    attributes {
+        attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements, "instrumented-jar"))
     }
 }</code></pre>
 </div>
@@ -5675,7 +5729,11 @@ configurations {
 </div>
 </div>
 <div class="paragraph">
-<p>Then, a dependency is added on the producer:</p>
+<p>Now, the consumer project declares a dependency on the producer and aligns its configuration with the desired variant by defining attributes.
+When the configuration is resolved, Gradle uses these attributes to select a compatible variant published by the producer.</p>
+</div>
+<div class="paragraph">
+<p>Second, a dependency is added on the producer on <code>instrumentedRuntimeDependencies</code>:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -5685,7 +5743,8 @@ configurations {
 <div class="title">consumer/build.gradle.kts</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
-    add("instrumentedRuntime", project(":producer"))
+    // Declare a project dependency on the producer's instrumented output
+    instrumentedRuntimeDependencies(project(":producer"))
 }</code></pre>
 </div>
 </div>
@@ -5697,7 +5756,8 @@ configurations {
 <div class="title">consumer/build.gradle</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
-    add("instrumentedRuntime", project(":producer"))
+    // Declare a project dependency on the producer's instrumented output
+    add("instrumentedRuntimeDependencies", project(":producer"))
 }</code></pre>
 </div>
 </div>
@@ -5707,7 +5767,7 @@ configurations {
 </div>
 <div class="paragraph">
 <p>Finally, we use the artifact variant in a task.
-This task runs the application using the resolved instrumented JAR from the producer:</p>
+The <code>runWithInstrumentation</code> task runs the application using the resolved instrumented JAR from the producer:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -5717,7 +5777,8 @@ This task runs the application using the resolved instrumented JAR from the prod
 <div class="title">consumer/build.gradle.kts</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="kotlin">tasks.register&lt;JavaExec&gt;("runWithInstrumentation") {
-    classpath = configurations["instrumentedRuntime"]
+    // Use the resolved instrumented classpath
+    classpath = instrumentedRuntime
     mainClass.set("com.example.Main")
 }</code></pre>
 </div>
@@ -5730,6 +5791,7 @@ This task runs the application using the resolved instrumented JAR from the prod
 <div class="title">consumer/build.gradle</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="groovy">tasks.register("runWithInstrumentation",JavaExec) {
+    // Use the resolved instrumented classpath
     classpath = configurations["instrumentedRuntime"]
     mainClass.set("com.example.Main")
 }</code></pre>
@@ -5860,7 +5922,7 @@ The fallback explicitly tells Gradle that it&#8217;s acceptable to use the regul
 <div class="ulist">
 <ul>
 <li>
-<p>The attributes in the consumer match those in the producer.</p>
+<p>The attributes in the consumer are compatible with those in the producer.</p>
 </li>
 <li>
 <p>The producer project properly declares the artifact.</p>
@@ -5875,6 +5937,19 @@ The fallback explicitly tells Gradle that it&#8217;s acceptable to use the regul
 <div class="sect1">
 <h2 id="sec:conclusion"><a class="anchor" href="#sec:conclusion"></a><a class="link" href="#sec:conclusion">Summary</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>There are two perspectives to keep in mind:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Configuring a project</strong>: You configure configurations, which declare how your build consumes or produces artifacts.</p>
+</li>
+<li>
+<p><strong>Referencing a project</strong>: Gradle resolves variants published by other projects, selecting the best match based on compatibility with the consuming configuration’s attributes.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p><em>Variant-aware</em> sharing enables clean and flexible artifact sharing between projects.
 It avoids hardcoded task dependencies and improves build maintainability.</p>

@@ -1824,9 +1824,9 @@ $dokka.location:org.gradle.api.plugins.antlr/AntlrSourceDirectorySet///PointingT
 $dokka.location:org.gradle.api.plugins.antlr/AntlrSourceDirectorySet/NAME/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-source-directory-set/-n-a-m-e.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask///PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/index.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/AntlrTask/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/-antlr-task.html
+$dokka.location:org.gradle.api.plugins.antlr/AntlrTask/antlrClasspath/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/antlr-classpath.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/arguments/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/arguments.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/execute/#org.gradle.work.InputChanges/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/execute.html
-$dokka.location:org.gradle.api.plugins.antlr/AntlrTask/getAntlrClasspath/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/get-antlr-classpath.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/getPackageName/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/get-package-name.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/getSource/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/get-source.html
 $dokka.location:org.gradle.api.plugins.antlr/AntlrTask/isTrace/#/PointingToDeclaration/gradle/org.gradle.api.plugins.antlr/-antlr-task/is-trace.html
@@ -3506,6 +3506,7 @@ $dokka.location:org.gradle.api.tasks.testing/JUnitXmlReport/setOutputPerTestCase
 $dokka.location:org.gradle.api.tasks.testing/Test///PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/index.html
 $dokka.location:org.gradle.api.tasks.testing/Test/Test/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/-test.html
 $dokka.location:org.gradle.api.tasks.testing/Test/bootstrapClasspath/#java.lang.Object.../PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/bootstrap-classpath.html
+$dokka.location:org.gradle.api.tasks.testing/Test/classpath/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/classpath.html
 $dokka.location:org.gradle.api.tasks.testing/Test/copyTo/#org.gradle.process.JavaForkOptions/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/copy-to.html
 $dokka.location:org.gradle.api.tasks.testing/Test/copyTo/#org.gradle.process.ProcessForkOptions/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/copy-to.html
 $dokka.location:org.gradle.api.tasks.testing/Test/debugOptions/#org.gradle.api.Action<org.gradle.process.JavaDebugOptions>/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/debug-options.html
@@ -3522,7 +3523,6 @@ $dokka.location:org.gradle.api.tasks.testing/Test/forkEvery/#/PointingToDeclarat
 $dokka.location:org.gradle.api.tasks.testing/Test/getAllJvmArgs/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-all-jvm-args.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getBootstrapClasspath/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-bootstrap-classpath.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getCandidateClassFiles/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-candidate-class-files.html
-$dokka.location:org.gradle.api.tasks.testing/Test/getClasspath/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-classpath.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getDebug/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-debug.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getDebugOptions/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-debug-options.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getDefaultCharacterEncoding/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-default-character-encoding.html
@@ -3540,7 +3540,6 @@ $dokka.location:org.gradle.api.tasks.testing/Test/getMaxHeapSize/#/PointingToDec
 $dokka.location:org.gradle.api.tasks.testing/Test/getMinHeapSize/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-min-heap-size.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getOptions/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-options.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getSystemProperties/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-system-properties.html
-$dokka.location:org.gradle.api.tasks.testing/Test/getTestClassesDirs/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-test-classes-dirs.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getTestFramework/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-test-framework.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getTestFrameworkProperty/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-test-framework-property.html
 $dokka.location:org.gradle.api.tasks.testing/Test/getWorkingDir/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/get-working-dir.html
@@ -3559,7 +3558,6 @@ $dokka.location:org.gradle.api.tasks.testing/Test/options/#org.gradle.api.Action
 $dokka.location:org.gradle.api.tasks.testing/Test/setAllJvmArgs/#java.lang.Iterable<?>/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-all-jvm-args.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setAllJvmArgs/#java.util.List<java.lang.String>/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-all-jvm-args.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setBootstrapClasspath/#org.gradle.api.file.FileCollection/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-bootstrap-classpath.html
-$dokka.location:org.gradle.api.tasks.testing/Test/setClasspath/#org.gradle.api.file.FileCollection/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-classpath.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setDebug/#boolean/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-debug.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setDefaultCharacterEncoding/#java.lang.String/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-default-character-encoding.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setEnableAssertions/#boolean/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-enable-assertions.html
@@ -3575,12 +3573,12 @@ $dokka.location:org.gradle.api.tasks.testing/Test/setMaxHeapSize/#java.lang.Stri
 $dokka.location:org.gradle.api.tasks.testing/Test/setMinHeapSize/#java.lang.String/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-min-heap-size.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setScanForTestClasses/#boolean/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-scan-for-test-classes.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setSystemProperties/#java.util.Map<java.lang.String,? extends java.lang.Object>/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-system-properties.html
-$dokka.location:org.gradle.api.tasks.testing/Test/setTestClassesDirs/#org.gradle.api.file.FileCollection/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-test-classes-dirs.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setTestNameIncludePatterns/#java.util.List<java.lang.String>/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-test-name-include-patterns.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setWorkingDir/#java.io.File/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-working-dir.html
 $dokka.location:org.gradle.api.tasks.testing/Test/setWorkingDir/#java.lang.Object/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/set-working-dir.html
 $dokka.location:org.gradle.api.tasks.testing/Test/systemProperties/#java.util.Map<java.lang.String,? extends java.lang.Object>/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/system-properties.html
 $dokka.location:org.gradle.api.tasks.testing/Test/systemProperty/#java.lang.String#java.lang.Object/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/system-property.html
+$dokka.location:org.gradle.api.tasks.testing/Test/testClassesDirs/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/test-classes-dirs.html
 $dokka.location:org.gradle.api.tasks.testing/Test/testFramework/#groovy.lang.Closure/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/test-framework.html
 $dokka.location:org.gradle.api.tasks.testing/Test/useJUnit/#/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/use-j-unit.html
 $dokka.location:org.gradle.api.tasks.testing/Test/useJUnit/#groovy.lang.Closure/PointingToDeclaration/gradle/org.gradle.api.tasks.testing/-test/use-j-unit.html

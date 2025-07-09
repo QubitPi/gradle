@@ -48,7 +48,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-9.1.0-20250708200556+0000        </div>
+9.1.0-20250709153256+0000        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -112,7 +112,7 @@
     <h1 class="cover"><span>Gradle</span><wbr></wbr><span><span>Connector</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">GradleConnector</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/0dc5c26ec5d165d83db5dfaf2790d7128f3b0df7/platforms/ide/tooling-api/src/main/java//org/gradle/tooling/GradleConnector.java#L76">source</a>)</span></span></div><p class="paragraph">A <code class="lang-kotlin">GradleConnector</code> is the main entry point to the Gradle tooling API. You use this API as follows:</p><ol><li>Call <a href="new-connector.html">newConnector</a> to create a new connector instance.</li><li>Configure the connector. You must call <a href="for-project-directory.html">forProjectDirectory</a> to specify which project you wish to connect to. Other methods are optional.</li><li>Call <a href="connect.html">connect</a> to create the connection to a project.</li><li>When finished with the connection, call close to clean up.</li></ol><p class="paragraph">Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">ProjectConnection connection = GradleConnector.newConnector()
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">GradleConnector</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/ae5b62fab78a96f066ebb10f6dab185037368b30/platforms/ide/tooling-api/src/main/java//org/gradle/tooling/GradleConnector.java#L76">source</a>)</span></span></div><p class="paragraph">A <code class="lang-kotlin">GradleConnector</code> is the main entry point to the Gradle tooling API. You use this API as follows:</p><ol><li>Call <a href="new-connector.html">newConnector</a> to create a new connector instance.</li><li>Configure the connector. You must call <a href="for-project-directory.html">forProjectDirectory</a> to specify which project you wish to connect to. Other methods are optional.</li><li>Call <a href="connect.html">connect</a> to create the connection to a project.</li><li>When finished with the connection, call close to clean up.</li></ol><p class="paragraph">Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">ProjectConnection connection = GradleConnector.newConnector()
    .forProjectDirectory(new File(&quot;someProjectFolder&quot;))
    .connect();
 

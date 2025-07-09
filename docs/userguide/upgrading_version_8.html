@@ -5045,6 +5045,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="../userguide/installation.html">Installing Gradle</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#upgrading-gradle" aria-expanded="false" aria-controls="upgrading-gradle">Upgrading Gradle</a>
                     <ul id="upgrading-gradle">
+                        <li><a href="../userguide/upgrading_version_9.html">Within versions 9.x.y</a></li>
                         <li><a href="../userguide/upgrading_major_version_9.html">To version 9.0.0</a></li>
                         <li><a href="../userguide/upgrading_version_8.html">Within versions 8.x</a></li>
                         <li><a href="../userguide/upgrading_version_7.html">From version 7.x to 8.0</a></li>
@@ -5400,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading within Gradle 8.x</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250708200556+0000</span>
+<span id="revnumber">version 9.1.0-20250709153256+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6567,7 +6568,7 @@ This means that if you return to an older version of Gradle, an 8.9-provisioned 
 <div class="sect3">
 <h4 id="change_the_encoding_of_daemon_log_files"><a class="anchor" href="#change_the_encoding_of_daemon_log_files"></a><a class="link" href="#change_the_encoding_of_daemon_log_files">Change the encoding of daemon log files</a></h4>
 <div class="paragraph">
-<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250708200556+0000/</code>, was encoded with the default JVM encoding.
+<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250709153256+0000/</code>, was encoded with the default JVM encoding.
 This file is now always encoded with UTF-8 to prevent clients who may use different default encodings from reading data incorrectly.
 This change may affect third-party tools trying to read this file.</p>
 </div>
