@@ -5401,12 +5401,13 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Performance</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250710220726+0000</span>
+<span id="revnumber">version 9.1.0-20250711204752+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
 <ul class="sectlevel1">
 <li><a href="#use_utf8_encoding">Use UTF-8 File Encoding</a></li>
+<li><a href="#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></li>
 </ul>
 </div>
 </div>
@@ -5460,6 +5461,186 @@ Do not rely on the default encoding of the underlying JVM or operating system, a
 <h3 id="tags"><a class="anchor" href="#tags"></a><a class="link" href="#tags">Tags</a></h3>
 <div class="paragraph">
 <p><code><a href="tags_reference.html#tag:properties">#properties</a></code>, <code><a href="tags_reference.html#tag:caching">#caching</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="avoid_computations_in_configuration_phase"><a class="anchor" href="#avoid_computations_in_configuration_phase"></a><a class="link" href="#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Avoid expensive computations in the <a href="build_lifecycle.html#sec:build_phases">configuration phase</a>, instead, move them to task actions.</p>
+</div>
+<div class="sect2">
+<h3 id="explanation_2"><a class="anchor" href="#explanation_2"></a><a class="link" href="#explanation_2">Explanation</a></h3>
+<div class="paragraph">
+<p>In order for Gradle to execute tasks it first needs to build the project task graph.
+As part of discovering what tasks to include in the task graph, Gradle will configure all the tasks that are directly requested, any task dependencies of the requested tasks, and also any tasks that are not lazily registered.
+This work is done in the configuration phase.</p>
+</div>
+<div class="paragraph">
+<p>Performing expensive or slow operations such as file or network I/O, or CPU-heavy calculations in the configuration phase forces these to run even when they might be unnecessary to complete the requested work of the invoked tasks.
+It is better to move these operations to task actions so that they run only when required.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example"><a class="anchor" href="#example"></a><a class="link" href="#example">Example</a></h3>
+<div class="sect3">
+<h4 id="dont_do_this"><a class="anchor" href="#dont_do_this"></a><a class="link" href="#dont_do_this">Don&#8217;t Do This</a></h4>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">abstract class MyTask : DefaultTask() {
+    @get:Input
+    lateinit var computationResult: String
+    @TaskAction
+    fun run() {
+        logger.lifecycle(computationResult)
+    }
+}
+
+fun heavyWork(): String {
+    println("Start heavy work")
+    Thread.sleep(5000)
+    println("Finish heavy work")
+    return "Heavy computation result"
+}
+
+tasks.register&lt;MyTask&gt;("myTask") {
+    computationResult = heavyWork() <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">abstract class MyTask extends DefaultTask {
+    @Input
+    String computationResult
+    @TaskAction
+    void run() {
+        logger.lifecycle(computationResult)
+    }
+}
+
+String heavyWork() {
+    logger.lifecycle("Start heavy work")
+    Thread.sleep(5000)
+    logger.lifecycle("Finish heavy work")
+    return "Heavy computation result"
+}
+
+tasks.register("myTask", MyTask) {
+    computationResult = heavyWork() <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Performing heavy computation during configuration phase.
+==== Do This Instead</td>
+</tr>
+</table>
+</div>
+<div style="text-align: right;">
+  <a class="download-project-link"
+     data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidComputationInConfigurationPhase-do/"
+     href="https://download-directory.github.io/?url=https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidComputationInConfigurationPhase-do/kotlin">
+    <img src="https://img.shields.io/badge/Download%20Project-GitHub-blue?logo=github&style=flat" alt="Download"/>
+  </a>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">abstract class MyTask : DefaultTask() {
+    @TaskAction
+    fun run() {
+        logger.lifecycle(heavyWork()) <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+
+    fun heavyWork(): String {
+        logger.lifecycle("Start heavy work")
+        Thread.sleep(5000)
+        logger.lifecycle("Finish heavy work")
+        return "Heavy computation result"
+    }
+}
+
+tasks.register&lt;MyTask&gt;("myTask")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">abstract class MyTask extends DefaultTask {
+    @TaskAction
+    void run() {
+        logger.lifecycle(heavyWork()) <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+    String heavyWork() {
+        logger.lifecycle("Start heavy work")
+        Thread.sleep(5000)
+        logger.lifecycle("Finish heavy work")
+        return "Heavy computation result"
+    }
+}
+
+tasks.register("myTask", MyTask)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Performing heavy computation during execution phase in a task action.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="references_2"><a class="anchor" href="#references_2"></a><a class="link" href="#references_2">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="lazy_configuration.html#lazy_configuration">lazy configuration</a>.</p>
+</li>
+<li>
+<p><a href="build_lifecycle.html#build_lifecycle">Build Lifecycle</a> &gt;&gt;</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags_2"><a class="anchor" href="#tags_2"></a><a class="link" href="#tags_2">Tags</a></h3>
+<div class="paragraph">
+<p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code></p>
 </div>
 </div>
 </div>
