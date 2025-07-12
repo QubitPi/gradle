@@ -1,5 +1,5 @@
 :samples-dir: /home/runner/work/gradle/gradle/platforms/documentation/docs/build/working/samples/install/java-modules-with-transform
-:gradle-version: 9.0.0-milestone-10
+:gradle-version: 9.0.0-rc-2
 
 = Building Java Modules with Legacy Libraries Sample
 

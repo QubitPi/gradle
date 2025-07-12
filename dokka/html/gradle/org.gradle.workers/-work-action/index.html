@@ -48,7 +48,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-9.1.0-20250711204752+0000        </div>
+9.1.0-20250712154233+0000        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -112,7 +112,7 @@
     <h1 class="cover"><span>Work</span><wbr></wbr><span><span>Action</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">WorkAction</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator"> : </span><a href="../-work-parameters/index.html">WorkParameters</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/a2e3bae5a631f134d08534d1bb9b9aef3a7aa720/platforms/core-execution/daemon-server-worker/src/main/java//org/gradle/workers/WorkAction.java#L57">source</a>)</span></span></div><p class="paragraph">Represents the implementation of a unit of work to be used when submitting work to the <a href="../-worker-executor/index.html">WorkerExecutor</a>. </p><p class="paragraph"> A work action implementation is an abstract class implementing the <a href="execute.html">execute</a> method. A minimal implementation may look like this: </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">import org.gradle.workers.WorkParameters;
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">WorkAction</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator"> : </span><a href="../-work-parameters/index.html">WorkParameters</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/cc114e06be3a0c382562868f0799904d4b614b25/platforms/core-execution/daemon-server-worker/src/main/java//org/gradle/workers/WorkAction.java#L57">source</a>)</span></span></div><p class="paragraph">Represents the implementation of a unit of work to be used when submitting work to the <a href="../-worker-executor/index.html">WorkerExecutor</a>. </p><p class="paragraph"> A work action implementation is an abstract class implementing the <a href="execute.html">execute</a> method. A minimal implementation may look like this: </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">import org.gradle.workers.WorkParameters;
 
 public abstract class MyWorkAction implements WorkAction&lt;WorkParameters.None&gt; {
     private final String greeting;
