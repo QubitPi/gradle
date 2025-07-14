@@ -88,6 +88,25 @@ bar.attribute(color, &quot;orange&quot;)
 assert(bar.getAttribute(color) == &quot;orange&quot;) // `color` gets overwritten again
 assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` remains the same
 </code></pre>
+<h4><a href="#accessors-for-compileonly-plugin-dependencies-in-precompiled-kotlin-scripts" id="accessors-for-compileonly-plugin-dependencies-in-precompiled-kotlin-scripts">Accessors for <code>compileOnly</code> plugin dependencies in precompiled Kotlin scripts</a></h4>
+<p>Previously, it was not possible to use a plugin coming from a <code>compileOnly</code> dependency in a <a href="userguide/implementing_gradle_plugins_precompiled.html">precompiled Kotlin script</a>.
+Now it is supported, and [​type-safe accessors​]​(​userguide/kotlin_dsl.html#type-safe-accessors​) for plugins from such dependencies are available in the precompiled Kotlin scripts.</p>
+<p>As an example, the following <code>buildSrc/build.gradle.kts</code> build script declares a <code>compileOnly</code> dependency to a third party plugin:</p>
+<pre><code class="language-kotlin">plugins {
+    `kotlin-dsl`
+}
+dependencies {
+    compileOnly(&quot;com.android.tools.build:gradle:x.y.z&quot;)
+}
+</code></pre>
+<p>And a convention precompiled Kotlin script in <code>buildSrc/src/main/kotlin/my-convention-plugin.gradle.kts</code> applies it, and can now use type-safe accessors to configure the third party plugin:</p>
+<pre><code class="language-kotlin">plugins {
+    id(&quot;com.android.application&quot;)
+}
+android {
+    // The accessor to the `android` extension registered by the Android plugin is available
+}
+</code></pre>
 <h3><a href="#configuration-improvements" id="configuration-improvements">Configuration Improvements</a></h3>
 <h4><a href="#simpler-target-package-configuration-for-antlr-4" id="simpler-target-package-configuration-for-antlr-4">Simpler target package configuration for Antlr 4</a></h4>
 <p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4.

@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Understanding Plugins</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250712154233+0000</span>
+<span id="revnumber">version 9.1.0-20250714152459+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6154,29 +6154,71 @@ gradlePlugin {
 <div class="sectionbody">
 <div class="paragraph">
 <p>In the example used through this section, the plugin accepts the <a href="../dsl/org.gradle.api.Project.html">Project</a> type as a type parameter.
-Alternatively, the plugin can accept a parameter of type <a href="../dsl/org.gradle.api.initialization.Settings.html">Settings</a> to be applied in a settings script, or a parameter of type <a href="../dsl/org.gradle.api.invocation.Gradle.html">Gradle</a> to be applied in an initialization script.</p>
+However, Gradle supports applying plugins in three distinct contexts: <a href="../dsl/org.gradle.api.Project.html"><code>Project</code></a>, <a href="../dsl/org.gradle.api.initialization.Settings.html"><code>Settings</code></a>, and <a href="../dsl/org.gradle.api.invocation.Gradle.html"><code>Init</code></a>.
+Each type of plugin serves a different purpose and is applied in a different phase of the build lifecycle.</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Plugin Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Project Plugin</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A project plugin is applied to an individual project within a build. It can customize build logic, register tasks, and configure project-specific settings. These plugins are applied in <code>build.gradle</code> or <code>build.gradle.kts</code> files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Settings Plugin</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A settings plugin is applied in the <code>settings.gradle</code> or <code>settings.gradle.kts</code> file. It is used to configure settings that apply to the entire build, such as which subprojects are included, where to find build logic, and buildscript repositories.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Init Plugin</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An init plugin is applied in an <code>init.gradle</code> or <code>init.gradle.kts</code> file. It configures settings that apply globally across multiple Gradle builds on a machine, such as setting up plugin repositories, enforcing conventions, or applying common plugins to all builds.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>The difference between these types of plugins lies in the scope of their application:</p>
+<p>When writing <strong>precompiled script plugins</strong>, Gradle determines the intended plugin target (<code>Project</code>, <code>Settings</code>, or <code>Init</code>) based on the file name of the plugin source file:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Project Plugin </dt>
-<dd>
-<p>A project plugin is a plugin that is applied to a specific project in a build.
-It can customize the build logic, add tasks, and configure the project-specific settings.</p>
-</dd>
-<dt class="hdlist1">Settings Plugin </dt>
-<dd>
-<p>A settings plugin is a plugin that is applied in the <code>settings.gradle</code> or <code>settings.gradle.kts</code> file.
-It can configure settings that apply to the entire build, such as defining which projects are included in the build, configuring build script repositories, and applying common configurations to all projects.</p>
-</dd>
-<dt class="hdlist1">Init Plugin </dt>
-<dd>
-<p>An init plugin is a plugin that is applied in the <code>init.gradle</code> or <code>init.gradle.kts</code> file.
-It can configure settings that apply globally to all Gradle builds on a machine, such as configuring the Gradle version, setting up default repositories, or applying common plugins to all builds.</p>
-</dd>
-</dl>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Filename Suffix</th>
+<th class="tableblock halign-left valign-top">Applies To</th>
+<th class="tableblock halign-left valign-top">Recognized As</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.gradle</code>, <code>.gradle.kts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Project</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Plugin&lt;Project&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.settings.gradle</code>, <code>.settings.gradle.kts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Plugin&lt;Settings&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.init.gradle</code>, <code>.init.gradle.kts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Init</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Plugin&lt;Init&gt;</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For example, a file named <code>myplugin.gradle.kts</code> will always be treated as a Project plugin—even if it&#8217;s applied from a <code>settings.gradle.kts</code> file. To create a plugin for the settings context, it must be named something like <code>myplugin.settings.gradle.kts</code>.</p>
 </div>
 </div>
 </div>

@@ -5401,12 +5401,13 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Performance</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250712154233+0000</span>
+<span id="revnumber">version 9.1.0-20250714152459+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
 <ul class="sectlevel1">
 <li><a href="#use_utf8_encoding">Use UTF-8 File Encoding</a></li>
+<li><a href="#use_build_cache">Use the Build Cache</a></li>
 <li><a href="#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></li>
 </ul>
 </div>
@@ -5466,13 +5467,112 @@ Do not rely on the default encoding of the underlying JVM or operating system, a
 </div>
 </div>
 <div class="sect1">
+<h2 id="use_build_cache"><a class="anchor" href="#use_build_cache"></a><a class="link" href="#use_build_cache">Use the Build Cache</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use the Build Cache to save time by reusing outputs produced by previous builds.</p>
+</div>
+<div class="sect2">
+<h3 id="explanation_2"><a class="anchor" href="#explanation_2"></a><a class="link" href="#explanation_2">Explanation</a></h3>
+<div class="paragraph">
+<p>The Build Cache avoids re-executing tasks when their inputs haven&#8217;t changed by reusing outputs from previous builds.</p>
+</div>
+<div class="paragraph">
+<p>This prevents redundant work.
+If the inputs are the same, the outputs will be too, resulting in faster, more efficient builds.</p>
+</div>
+<div class="paragraph">
+<p>Build caching is disabled by default:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">gradle.properties</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="properties"># caching is off by default
+# org.gradle.caching=false</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="do_this_instead"><a class="anchor" href="#do_this_instead"></a><a class="link" href="#do_this_instead">Do This Instead</a></h4>
+<div class="paragraph">
+<p>To enable the Build Cache, add the following to your <code>gradle.properties</code> file:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">gradle.properties</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="properties">org.gradle.caching=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>When you build your project for the first time, Gradle populates the cache with the outputs of tasks like compilation.</p>
+</div>
+<div class="paragraph">
+<p>Even if you run <code>./gradlew clean</code> to delete the build directory, Gradle can reuse cached outputs in subsequent builds.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew clean
+:clean
+
+BUILD SUCCESSFUL</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On subsequent builds, instead of executing the <code>:compileJava</code> task again, the outputs of the task will be loaded from the Build Cache:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew compileJava
+
+&gt; Task :compileJava FROM-CACHE
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 from cache</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="references_2"><a class="anchor" href="#references_2"></a><a class="link" href="#references_2">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="build_cache.html#sec:build_cache_intro">Build Cache Overview</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags_2"><a class="anchor" href="#tags_2"></a><a class="link" href="#tags_2">Tags</a></h3>
+<div class="paragraph">
+<p><code><a href="tags_reference.html#tag:properties">#properties</a></code>, <code><a href="tags_reference.html#tag:caching">#caching</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="avoid_computations_in_configuration_phase"><a class="anchor" href="#avoid_computations_in_configuration_phase"></a><a class="link" href="#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Avoid expensive computations in the <a href="build_lifecycle.html#sec:build_phases">configuration phase</a>, instead, move them to task actions.</p>
 </div>
 <div class="sect2">
-<h3 id="explanation_2"><a class="anchor" href="#explanation_2"></a><a class="link" href="#explanation_2">Explanation</a></h3>
+<h3 id="explanation_3"><a class="anchor" href="#explanation_3"></a><a class="link" href="#explanation_3">Explanation</a></h3>
 <div class="paragraph">
 <p>In order for Gradle to execute tasks it first needs to build the project task graph.
 As part of discovering what tasks to include in the task graph, Gradle will configure all the tasks that are directly requested, any task dependencies of the requested tasks, and also any tasks that are not lazily registered.
@@ -5551,11 +5651,13 @@ tasks.register("myTask", MyTask) {
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Performing heavy computation during configuration phase.
-==== Do This Instead</td>
+<td>Performing heavy computation during configuration phase.</td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect3">
+<h4 id="do_this_instead_2"><a class="anchor" href="#do_this_instead_2"></a><a class="link" href="#do_this_instead_2">Do This Instead</a></h4>
 <div style="text-align: right;">
   <a class="download-project-link"
      data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidComputationInConfigurationPhase-do/"
@@ -5625,20 +5727,20 @@ tasks.register("myTask", MyTask)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="references_2"><a class="anchor" href="#references_2"></a><a class="link" href="#references_2">References</a></h3>
+<h3 id="references_3"><a class="anchor" href="#references_3"></a><a class="link" href="#references_3">References</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="lazy_configuration.html#lazy_configuration">lazy configuration</a>.</p>
+<p><a href="lazy_configuration.html#lazy_configuration">lazy configuration</a></p>
 </li>
 <li>
-<p><a href="build_lifecycle.html#build_lifecycle">Build Lifecycle</a> &gt;&gt;</p>
+<p><a href="build_lifecycle.html#build_lifecycle">Build Lifecycle</a></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tags_2"><a class="anchor" href="#tags_2"></a><a class="link" href="#tags_2">Tags</a></h3>
+<h3 id="tags_3"><a class="anchor" href="#tags_3"></a><a class="link" href="#tags_3">Tags</a></h3>
 <div class="paragraph">
 <p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code></p>
 </div>

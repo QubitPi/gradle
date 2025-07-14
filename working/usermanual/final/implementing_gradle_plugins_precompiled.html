@@ -5402,7 +5402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Implementing Pre-compiled Script Plugins</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250712154233+0000</span>
+<span id="revnumber">version 9.1.0-20250714152459+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5500,6 +5500,22 @@ They can apply and configure plugins, create new tasks and extensions, set depen
 </div>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>When creating precompiled script plugins intended for <code>Settings</code> or <code>Init</code> scripts, the filename suffix determines where Gradle applies them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>.settings.gradle</code> or <code>.settings.gradle.kts</code> → interpreted as <code>Plugin&lt;Settings&gt;</code></p>
+</li>
+<li>
+<p><code>.init.gradle</code> or <code>.init.gradle.kts</code> → interpreted as <code>Plugin&lt;Init&gt;</code></p>
+</li>
+<li>
+<p><code>.gradle</code> or <code>.gradle.kts</code> → interpreted as the default <code>Plugin&lt;Project&gt;</code></p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock important">
 <table>
