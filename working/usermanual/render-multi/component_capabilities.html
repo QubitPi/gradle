@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Capabilities</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250714152459+0000</span>
+<span id="revnumber">version 9.1.0-20250715171747+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5703,7 +5703,7 @@ class LoggingCapability implements ComponentMetadataRule {
    Failures:
       - Could not resolve log4j:log4j:1.2.16.
           - Module 'log4j:log4j' has been rejected:
-               Cannot select module with conflict on capability 'log4j:log4j:1.2.16' also provided by [org.slf4j:log4j-over-slf4j:1.7.10(compile)]
+               Cannot select module with conflict on capability 'log4j:log4j:1.2.16' also provided by ['org.slf4j:log4j-over-slf4j:1.7.10' (compile)]
 
 log4j:log4j:1.2.16 FAILED
 \--- org.apache.zookeeper:zookeeper:3.4.9
@@ -5713,7 +5713,7 @@ org.slf4j:log4j-over-slf4j:1.7.10 FAILED
    Failures:
       - Could not resolve org.slf4j:log4j-over-slf4j:1.7.10.
           - Module 'org.slf4j:log4j-over-slf4j' has been rejected:
-               Cannot select module with conflict on capability 'log4j:log4j:1.7.10' also provided by [log4j:log4j:1.2.16(compile)]
+               Cannot select module with conflict on capability 'log4j:log4j:1.7.10' also provided by ['log4j:log4j:1.2.16' (compile)]
 
 org.slf4j:log4j-over-slf4j:1.7.10 FAILED
 \--- compileClasspath</code></pre>
