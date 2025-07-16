@@ -5402,7 +5402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Services and Service Injection</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250715171747+0000</span>
+<span id="revnumber">version 9.1.0-20250716173026+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5419,8 +5419,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#toolingmodelbuilderregistry"><code>ToolingModelBuilderRegistry</code></a></li>
 <li><a href="#testeventreporterfactory"><code>TestEventReporterFactory</code></a></li>
 <li><a href="#dependencyfactory"><code>DependencyFactory</code></a></li>
-<li><a href="#service_injection_patterns">Constructor injection</a></li>
-<li><a href="#property_injection">Property injection</a></li>
+<li><a href="#service_injection_patterns">Service injection patterns</a></li>
 </ul>
 </div>
 </div>
@@ -6660,16 +6659,22 @@ This API is incubating.
 </div>
 </div>
 <div class="sect1">
-<h2 id="service_injection_patterns"><a class="anchor" href="#service_injection_patterns"></a><a class="link" href="#service_injection_patterns">Constructor injection</a></h2>
+<h2 id="service_injection_patterns"><a class="anchor" href="#service_injection_patterns"></a><a class="link" href="#service_injection_patterns">Service injection patterns</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 2 ways that an object can receive the services that it needs. The first option is to add the service as a parameter of the class constructor.
-The constructor must be annotated with the <code>javax.inject.Inject</code> annotation.
-Gradle uses the declared type of each constructor parameter to determine the services that the object requires.
+<p>There are two ways that services can be provided to an object.</p>
+</div>
+<div class="sect2">
+<h3 id="constructor_injection"><a class="anchor" href="#constructor_injection"></a><a class="link" href="#constructor_injection">Constructor injection</a></h3>
+<div class="paragraph">
+<p>A service can be injected into the constructor of the class. The constructor must be public and annotated with the <code>javax.inject.Inject</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>Gradle uses the declared type of each constructor parameter to determine the services that the object requires.
 The order of the constructor parameters and their names are not significant and can be whatever you like.</p>
 </div>
 <div class="paragraph">
-<p>Here is an example that shows a task type that receives an <code>ObjectFactory</code> via its constructor:</p>
+<p>Here is an example that shows a task type that receives an <code>WorkerExecutor</code> via its constructor:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -6677,23 +6682,17 @@ The order of the constructor parameters and their names are not significant and 
 <div class="title">Download.java</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="java">public class Download extends DefaultTask {
-    private final DirectoryProperty outputDirectory;
+    private final WorkerExecutor workerExecutor;
 
-    // Inject an ObjectFactory into the constructor
+    // Inject an WorkerExecutor into the constructor
     @Inject
-    public Download(ObjectFactory objectFactory) {
-        // Use the factory
-        outputDirectory = objectFactory.directoryProperty();
-    }
-
-    @OutputDirectory
-    public DirectoryProperty getOutputDirectory() {
-        return outputDirectory;
+    public Download(WorkerExecutor workerExecutor) {
+        this.workerExecutor = workerExecutor;
     }
 
     @TaskAction
     void run() {
-        // ...
+        // ...use workerExecutor to run some work
     }
 }</code></pre>
 </div>
@@ -6701,22 +6700,23 @@ The order of the constructor parameters and their names are not significant and 
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="property_injection"><a class="anchor" href="#property_injection"></a><a class="link" href="#property_injection">Property injection</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="property_injection"><a class="anchor" href="#property_injection"></a><a class="link" href="#property_injection">Property injection</a></h3>
 <div class="paragraph">
-<p>Alternatively, a service can be injected by adding a property getter method annotated with the <code>javax.inject.Inject</code> annotation to the class.
-This can be useful, for example, when you cannot change the constructor of the class due to backwards compatibility constraints.
-This pattern also allows Gradle to defer creation of the service until the getter method is called, rather than when the instance is created. This can help with performance.
-Gradle uses the declared return type of the getter method to determine the service to make available. The name of the property is not significant and can be whatever you like.</p>
+<p>A service can be injected by adding a property getter method annotated with the <code>javax.inject.Inject</code> annotation to the class.</p>
 </div>
 <div class="paragraph">
-<p>The property getter method must be <code>public</code> or <code>protected</code>. The method can be <code>abstract</code> or, in cases where this isn&#8217;t possible, can have a dummy method body.
-The method body is discarded.</p>
+<p>Gradle defers the creation of the service until the getter method is called. This can be more performant than constructor injection.</p>
 </div>
 <div class="paragraph">
-<p>Here is an example that shows a task type that receives a two services via property getter methods:</p>
+<p>The property getter method must be <code>public</code> or <code>protected</code>. Gradle uses the declared return type of the getter method to determine the service to make available.</p>
+</div>
+<div class="paragraph">
+<p>The method should be <code>abstract</code> or, in cases where this isn&#8217;t possible, should have a dummy method body.
+The method body is discarded. The name of the property is not significant and can be whatever you like.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example that shows a task type that receives two services via property getter methods:</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -6724,7 +6724,7 @@ The method body is discarded.</p>
 <div class="title">Download.java</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="java">public abstract class Download extends DefaultTask {
-    // Use an abstract getter method
+    // Preferrably, use an abstract getter method
     @Inject
     protected abstract ObjectFactory getObjectFactory();
 
@@ -6742,6 +6742,7 @@ The method body is discarded.</p>
         // Use the executor and factory ...
     }
 }</code></pre>
+</div>
 </div>
 </div>
 </div>
