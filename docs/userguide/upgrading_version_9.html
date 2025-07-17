@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 9.x to the latest</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250716173026+0000</span>
+<span id="revnumber">version 9.1.0-20250717174655+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5444,7 +5444,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250716173026+0000</code> to update the project to 9.1.0-20250716173026+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250717174655+0000</code> to update the project to 9.1.0-20250717174655+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5471,6 +5471,35 @@ If you want the artifact built when running the <code>assemble</code> task, you 
 <pre class="prettyprint highlight"><code data-lang="kotlin">val specialJar = tasks.register&lt;Jar&gt;("specialJar") {
     archiveBaseName.set("special")
     from("build/special")
+}
+
+tasks.named("assemble") {
+    dependsOn(specialJar)
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deprecate-visible-property"><a class="anchor" href="#deprecate-visible-property"></a><a class="link" href="#deprecate-visible-property">The <code>Configuration.visible</code> property is now deprecated</a></h4>
+<div class="paragraph">
+<p>Prior to Gradle 9.0, any configuration with <code>isVisible()</code> returning <code>true</code> would have its artifacts built automatically when the <code>assemble</code> task was executed.
+This implicit behavior was removed in 9.0.0, and the <code>Configuration.visible</code> property no longer has any meaningful effect.
+This property is now deprecated and will be removed in Gradle 10.0.0.
+Any usage of <code>visible</code> can be removed.
+If you want the artifacts of a configuration to be built as part of the <code>assemble</code> task, add an explicit task dependency on <code>assemble</code> instead:</p>
+</div>
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val specialJar = tasks.register&lt;Jar&gt;("specialJar") {
+    archiveBaseName.set("special")
+    from("build/special")
+}
+
+configurations {
+    consumable("special") {
+        outgoing.artifact(specialJar)
+    }
 }
 
 tasks.named("assemble") {

@@ -16,7 +16,7 @@
     <bookinfo>
         <title>Gradle Build Language Reference</title>
         <titleabbrev>Gradle DSL</titleabbrev>
-    <releaseinfo>9.1.0-20250716173026+0000</releaseinfo></bookinfo>
+    <releaseinfo>9.1.0-20250717174655+0000</releaseinfo></bookinfo>
 
     <section>
         <title>Introduction</title>
@@ -4820,7 +4820,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 <ulink url="../dsl/org.gradle.api.artifacts.Configuration.html#org.gradle.api.artifacts.Configuration:incoming"><classname>Configuration.getIncoming()</classname></ulink>. This API will be deprecated and removed in future Gradle versions.
 </para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.Configuration:state"><literal>state</literal></link></td><td><para>The state of the configuration.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.Configuration:transitive"><literal>transitive</literal></link></td><td><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.Configuration:visible"><literal>visible</literal></link></td><td><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.Configuration:visible"><literal>visible</literal></link></td><td><caution>Deprecated</caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para></td></tr></table></section><section><title>Methods</title><table><title>Methods - Configuration</title><thead><tr><td>Method</td><td>Description</td></tr></thead><tr><td><literal><link linkend="org.gradle.api.artifacts.Configuration:copy()">copy</link>()</literal></td><td><para>Creates a copy of this configuration that only contains the dependencies directly in this configuration
@@ -4865,7 +4865,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 </para><para>
 See <ulink url="../javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html"><classname>ResolvedConfiguration</classname></ulink> for details on why this API should not be used.</para></section><section id="org.gradle.api.artifacts.Configuration:state" role="detail"><title><classname>State</classname> <literal>state</literal> (read-only)</title><para>The state of the configuration.</para></section><section id="org.gradle.api.artifacts.Configuration:transitive" role="detail"><title><classname>boolean</classname> <literal>transitive</literal></title><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.Configuration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.Configuration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><caution><para>Note: This property is <ulink url="../userguide/feature_lifecycle.html">deprecated</ulink> and will be removed in the next major version of Gradle.</para></caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para><para>
@@ -5244,7 +5244,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 <ulink url="../dsl/org.gradle.api.artifacts.Configuration.html#org.gradle.api.artifacts.Configuration:incoming"><classname>Configuration.getIncoming()</classname></ulink>. This API will be deprecated and removed in future Gradle versions.
 </para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ConsumableConfiguration:state"><literal>state</literal></link></td><td><para>The state of the configuration.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ConsumableConfiguration:transitive"><literal>transitive</literal></link></td><td><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ConsumableConfiguration:visible"><literal>visible</literal></link></td><td><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ConsumableConfiguration:visible"><literal>visible</literal></link></td><td><caution>Deprecated</caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para></td></tr></table></section><section><title>Methods</title><table><title>Methods - ConsumableConfiguration</title><thead><tr><td>Method</td><td>Description</td></tr></thead><tr><td><literal><link linkend="org.gradle.api.artifacts.ConsumableConfiguration:copy()">copy</link>()</literal></td><td><para>Creates a copy of this configuration that only contains the dependencies directly in this configuration
@@ -5289,7 +5289,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 </para><para>
 See <ulink url="../javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html"><classname>ResolvedConfiguration</classname></ulink> for details on why this API should not be used.</para></section><section id="org.gradle.api.artifacts.ConsumableConfiguration:state" role="detail"><title><classname>State</classname> <literal>state</literal> (read-only)</title><para>The state of the configuration.</para></section><section id="org.gradle.api.artifacts.ConsumableConfiguration:transitive" role="detail"><title><classname>boolean</classname> <literal>transitive</literal></title><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.ConsumableConfiguration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.ConsumableConfiguration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><caution><para>Note: This property is <ulink url="../userguide/feature_lifecycle.html">deprecated</ulink> and will be removed in the next major version of Gradle.</para></caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para><para>
@@ -5357,7 +5357,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 <ulink url="../dsl/org.gradle.api.artifacts.Configuration.html#org.gradle.api.artifacts.Configuration:incoming"><classname>Configuration.getIncoming()</classname></ulink>. This API will be deprecated and removed in future Gradle versions.
 </para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ResolvableConfiguration:state"><literal>state</literal></link></td><td><para>The state of the configuration.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ResolvableConfiguration:transitive"><literal>transitive</literal></link></td><td><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ResolvableConfiguration:visible"><literal>visible</literal></link></td><td><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.ResolvableConfiguration:visible"><literal>visible</literal></link></td><td><caution>Deprecated</caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para></td></tr></table></section><section><title>Methods</title><table><title>Methods - ResolvableConfiguration</title><thead><tr><td>Method</td><td>Description</td></tr></thead><tr><td><literal><link linkend="org.gradle.api.artifacts.ResolvableConfiguration:copy()">copy</link>()</literal></td><td><para>Creates a copy of this configuration that only contains the dependencies directly in this configuration
@@ -5402,7 +5402,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 </para><para>
 See <ulink url="../javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html"><classname>ResolvedConfiguration</classname></ulink> for details on why this API should not be used.</para></section><section id="org.gradle.api.artifacts.ResolvableConfiguration:state" role="detail"><title><classname>State</classname> <literal>state</literal> (read-only)</title><para>The state of the configuration.</para></section><section id="org.gradle.api.artifacts.ResolvableConfiguration:transitive" role="detail"><title><classname>boolean</classname> <literal>transitive</literal></title><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.ResolvableConfiguration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.ResolvableConfiguration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><caution><para>Note: This property is <ulink url="../userguide/feature_lifecycle.html">deprecated</ulink> and will be removed in the next major version of Gradle.</para></caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para><para>
@@ -5469,7 +5469,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 <ulink url="../dsl/org.gradle.api.artifacts.Configuration.html#org.gradle.api.artifacts.Configuration:incoming"><classname>Configuration.getIncoming()</classname></ulink>. This API will be deprecated and removed in future Gradle versions.
 </para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.DependencyScopeConfiguration:state"><literal>state</literal></link></td><td><para>The state of the configuration.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.DependencyScopeConfiguration:transitive"><literal>transitive</literal></link></td><td><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.DependencyScopeConfiguration:visible"><literal>visible</literal></link></td><td><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></td></tr><tr><td><link linkend="org.gradle.api.artifacts.DependencyScopeConfiguration:visible"><literal>visible</literal></link></td><td><caution>Deprecated</caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para></td></tr></table></section><section><title>Methods</title><table><title>Methods - DependencyScopeConfiguration</title><thead><tr><td>Method</td><td>Description</td></tr></thead><tr><td><literal><link linkend="org.gradle.api.artifacts.DependencyScopeConfiguration:copy()">copy</link>()</literal></td><td><para>Creates a copy of this configuration that only contains the dependencies directly in this configuration
@@ -5514,7 +5514,7 @@ See docs for <ulink url="../dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 </para><para>
 See <ulink url="../javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html"><classname>ResolvedConfiguration</classname></ulink> for details on why this API should not be used.</para></section><section id="org.gradle.api.artifacts.DependencyScopeConfiguration:state" role="detail"><title><classname>State</classname> <literal>state</literal> (read-only)</title><para>The state of the configuration.</para></section><section id="org.gradle.api.artifacts.DependencyScopeConfiguration:transitive" role="detail"><title><classname>boolean</classname> <literal>transitive</literal></title><para>The transitivity of this configuration. A transitive configuration contains the transitive closure of its
 direct dependencies, and all their dependencies. An intransitive configuration contains only the direct
-dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.DependencyScopeConfiguration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><para>This is a legacy property and the value does not affect dependency resolution
+dependencies. The default value is true.</para></section><section id="org.gradle.api.artifacts.DependencyScopeConfiguration:visible" role="detail"><title><classname>boolean</classname> <literal>visible</literal></title><caution><para>Note: This property is <ulink url="../userguide/feature_lifecycle.html">deprecated</ulink> and will be removed in the next major version of Gradle.</para></caution><para>This is a legacy property and the value does not affect dependency resolution
 in any way. There is no need to read this property and this method will be deprecated
 in an upcoming Gradle version.
 </para><para>

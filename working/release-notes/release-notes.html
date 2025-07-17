@@ -3,18 +3,18 @@
   <head>
     <meta property="og:image" content="https://gradle.org/images/releases/gradle-default.png">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Gradle 9.1.0-20250716173026+0000 Release Notes">
+    <meta property="og:title" content="Gradle 9.1.0-20250717174655+0000 Release Notes">
     <meta property="og:site_name" content="Gradle Release Notes">
-    <meta property="og:description" content="We are excited to announce Gradle 9.1.0-20250716173026+0000.">
+    <meta property="og:description" content="We are excited to announce Gradle 9.1.0-20250717174655+0000.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@gradle">
     <meta name="twitter:creator" content="@gradle">
-    <meta name="twitter:title" content="Gradle 9.1.0-20250716173026+0000 Release Notes">
-    <meta name="twitter:description" content="We are excited to announce Gradle 9.1.0-20250716173026+0000.">
+    <meta name="twitter:title" content="Gradle 9.1.0-20250717174655+0000 Release Notes">
+    <meta name="twitter:description" content="We are excited to announce Gradle 9.1.0-20250717174655+0000.">
     <meta name="twitter:image" content="https://gradle.org/images/releases/gradle-default.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gradle 9.1.0-20250716173026+0000 Release Notes</title>
+    <title>Gradle 9.1.0-20250717174655+0000 Release Notes</title>
     <link rel="stylesheet" type="text/css" href="https://assets.gradle.com/lato/css/lato-font.css">
     <style>/* Lato (bold, regular) */
 @font-face {
@@ -1770,7 +1770,7 @@ a.incubating-marker:hover {
   <body>
     <div class="container">
       <h1>Gradle Release Notes</h1>
-      <p>We are excited to announce Gradle 9.1.0-20250716173026+0000 (released <a href="https://gradle.org/releases/">2025-07-16</a>).</p>
+      <p>We are excited to announce Gradle 9.1.0-20250717174655+0000 (released <a href="https://gradle.org/releases/">2025-07-17</a>).</p>
       <p>This release features <a href="">1</a>, <a href="">2</a>, ... <a href="">n</a>, and more.</p>
       <p>We would like to thank the following community members for their contributions to this release of Gradle:</p>
       <p>Be sure to check out the <a href="https://roadmap.gradle.org">public roadmap</a> for insight into what's planned for future releases.</p>
@@ -1782,6 +1782,7 @@ a.incubating-marker:hover {
           <li class="subTopic"><a href="#cli-improvement">CLI improvement</a></li>
           <li class="subTopic"><a href="#build-authoring-improvements">Build authoring improvements</a></li>
           <li class="subTopic"><a href="#configuration-improvements">Configuration Improvements</a></li>
+          <li class="subTopic"><a href="#task-graph-diagnostic">Task graph diagnostic</a></li>
           <li class="mainTopic"><a href="#promoted-features">Promoted features</a></li>
           <li class="mainTopic"><a href="#fixed-issues">Fixed issues</a></li>
           <li class="mainTopic"><a href="#known-issues">Known issues</a></li>
@@ -1791,24 +1792,26 @@ a.incubating-marker:hover {
       </section>
       <section class="topic">
         <h2><a href="#upgrade-instructions" id="upgrade-instructions">Upgrade instructions</a></h2>
-        <p>Switch your build to use Gradle 9.1.0-20250716173026+0000 by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
-        <pre><code class="language-text">./gradlew wrapper --gradle-version=9.1.0-20250716173026+0000 &amp;&amp; ./gradlew wrapper
+        <p>Switch your build to use Gradle 9.1.0-20250717174655+0000 by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
+        <pre><code class="language-text">./gradlew wrapper --gradle-version=9.1.0-20250717174655+0000 &amp;&amp; ./gradlew wrapper
 </code></pre>
-        <p>See the <a href="userguide/upgrading_version_9.html#changes_9.1.0">Gradle 9.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle 9.1.0-20250716173026+0000.</p>
+        <p>See the <a href="userguide/upgrading_version_9.html#changes_9.1.0">Gradle 9.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle 9.1.0-20250717174655+0000.</p>
         <p>For Java, Groovy, Kotlin, and Android compatibility, see the <a href="userguide/compatibility.html">full compatibility notes</a>.</p>
       </section>
       <section class="topic">
         <h2><a href="#new-features-and-usability-improvements" id="new-features-and-usability-improvements">New features and usability improvements</a></h2>
-        <p><a name="build-authoring"></a></p>
+        <p><a name="cli"></a></p>
         <h3><a href="#cli-improvement" id="cli-improvement">CLI improvement</a></h3>
-        <h4><a href="#plain-console-with-colors" id="plain-console-with-colors">Plain console with colors</a></h4>
-        <p>This release adds a new value for the <code>--console</code> command line option called <code>colored</code>, which enables color output for the console while omitting rich features such as progress bars. See <img src="release-notes-assets/colored-console.gif" alt="this recording"> for a demo.</p>
         <h4><a href="#off-screen-lines-reported-in-rich-console" id="off-screen-lines-reported-in-rich-console">Off-screen lines reported in rich console</a></h4>
         <p>This release adds a status line to the <code>rich</code> console that reports the number of in-progress events not currently visible on screen.</p>
-        <p>```console</p>
-        <blockquote>
-          <p>(2 lines not showing) ``` This occurs when there are more ongoing events than the console has lines available to display them. See <img src="release-notes-assets/off-screen-lines.gif" alt="this recording"> for a demo.</p>
-        </blockquote>
+        <pre><code class="language-console">&gt; (2 lines not showing)
+</code></pre>
+        <p>This occurs when there are more ongoing events than the console has lines available to display them.</p>
+        <p><img src="release-notes-assets/off-screen-lines.gif" alt="this recording"></p>
+        <h4><a href="#plain-console-with-colors" id="plain-console-with-colors">Plain console with colors</a></h4>
+        <p>This release adds a new value for the <code>--console</code> command line option called <code>colored</code>, which enables color output for the console while omitting rich features such as progress bars.</p>
+        <p><img src="release-notes-assets/colored-console.gif" alt="this recording"></p>
+        <p><a name="build-authoring"></a></p>
         <h3><a href="#build-authoring-improvements" id="build-authoring-improvements">Build authoring improvements</a></h3>
         <h4><a href="#introduce-attributecontaineraddalllater" id="introduce-attributecontaineraddalllater">Introduce <code>AttributeContainer#addAllLater</code></a></h4>
         <p>This release introduces a new API on <code>AttributeContainer</code> allowing all attributes from one attribute container to be lazily added to another.</p>
@@ -1884,6 +1887,26 @@ publications.withType&lt;MavenPublication&gt;().configureEach {
   }
 }
 </code></pre>
+        <h3><a href="#task-graph-diagnostic" id="task-graph-diagnostic">Task graph diagnostic</a></h3>
+        <p>A new task dependency graph is available to visualize the dependencies between tasks without executing them. You can enable it using the <code>--task-graph</code> option on the command line. For example:</p>
+        <pre><code>./gradlew root r2 --task-graph
+</code></pre>
+        <p>This prints a visual representation of the task graph for the specified tasks:</p>
+        <pre><code>Tasks graph for: root r2
++--- :root (org.gradle.api.DefaultTask)
+|    \--- :middle (org.gradle.api.DefaultTask)
+|         +--- :leaf1 (org.gradle.api.DefaultTask)
+|         \--- :leaf2 (org.gradle.api.DefaultTask, disabled)
+\--- :root2 (org.gradle.api.DefaultTask)
+    +--- :leaf1 (org.gradle.api.DefaultTask) (*)
+    |--- other build task :included:fromIncluded (org.gradle.api.DefaultTask)
+    \--- :leaf4 (org.gradle.api.DefaultTask, finalizer)
+         \--- :leaf3 (org.gradle.api.DefaultTask)
+         
+(*) - details omitted (listed previously)
+</code></pre>
+        <p>This feature provides a quick overview of the task graph, helping users understand the dependencies between tasks without running them. You can iterate by diving into a subgraph by adjusting an invocation.</p>
+        <p>This feature is incubating and may change in future releases. Additionally, it shares a known <a href="https://github.com/gradle/gradle/issues/2517">issue</a> with <code>--dry-run</code>: Tasks from included builds may still be executed.</p>
       </section>
       <section class="topic">
         <h2><a href="#promoted-features" id="promoted-features">Promoted features</a></h2>

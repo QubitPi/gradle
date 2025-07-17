@@ -9357,6 +9357,7 @@ $dokka.location:org.gradle.util/Path/removeFirstSegments/#int/PointingToDeclarat
 $dokka.location:org.gradle.util/Path/segment/#int/PointingToDeclaration/gradle/org.gradle.util/-path/segment.html
 $dokka.location:org.gradle.util/Path/segmentCount/#/PointingToDeclaration/gradle/org.gradle.util/-path/segment-count.html
 $dokka.location:org.gradle.util/Path/segments/#/PointingToDeclaration/gradle/org.gradle.util/-path/segments.html
+$dokka.location:org.gradle.util/Path/startsWith/#org.gradle.util.Path/PointingToDeclaration/gradle/org.gradle.util/-path/starts-with.html
 $dokka.location:org.gradle.util/Path/takeFirstSegments/#int/PointingToDeclaration/gradle/org.gradle.util/-path/take-first-segments.html
 $dokka.location:org.gradle.util/Path/toString/#/PointingToDeclaration/gradle/org.gradle.util/-path/to-string.html
 $dokka.location:org.gradle.util/Path/validatePath/#java.lang.String/PointingToDeclaration/gradle/org.gradle.util/-path/validate-path.html
@@ -9496,6 +9497,7 @@ $dokka.location:org.gradle/StartParameter/isProfile/#/PointingToDeclaration/gra
 $dokka.location:org.gradle/StartParameter/isRefreshDependencies/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/is-refresh-dependencies.html
 $dokka.location:org.gradle/StartParameter/isRefreshKeys/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/is-refresh-keys.html
 $dokka.location:org.gradle/StartParameter/isRerunTasks/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/is-rerun-tasks.html
+$dokka.location:org.gradle/StartParameter/isTaskGraph/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/is-task-graph.html
 $dokka.location:org.gradle/StartParameter/isWriteDependencyLocks/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/is-write-dependency-locks.html
 $dokka.location:org.gradle/StartParameter/lockedDependenciesToUpdate/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/locked-dependencies-to-update.html
 $dokka.location:org.gradle/StartParameter/newBuild/#/PointingToDeclaration/gradle/org.gradle/-start-parameter/new-build.html
@@ -9525,6 +9527,7 @@ $dokka.location:org.gradle/StartParameter/setRefreshDependencies/#boolean/Pointi
 $dokka.location:org.gradle/StartParameter/setRefreshKeys/#boolean/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-refresh-keys.html
 $dokka.location:org.gradle/StartParameter/setRerunTasks/#boolean/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-rerun-tasks.html
 $dokka.location:org.gradle/StartParameter/setShowStacktrace/#org.gradle.api.logging.configuration.ShowStacktrace/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-show-stacktrace.html
+$dokka.location:org.gradle/StartParameter/setTaskGraph/#boolean/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-task-graph.html
 $dokka.location:org.gradle/StartParameter/setTaskNames/#java.lang.Iterable<java.lang.String>/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-task-names.html
 $dokka.location:org.gradle/StartParameter/setTaskRequests/#java.lang.Iterable<? extends org.gradle.TaskExecutionRequest>/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-task-requests.html
 $dokka.location:org.gradle/StartParameter/setWarningMode/#org.gradle.api.logging.configuration.WarningMode/PointingToDeclaration/gradle/org.gradle/-start-parameter/set-warning-mode.html
