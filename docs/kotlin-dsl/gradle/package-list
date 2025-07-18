@@ -1650,6 +1650,7 @@ $dokka.location:org.gradle.api.invocation/Gradle/beforeSettings/#groovy.lang.Clo
 $dokka.location:org.gradle.api.invocation/Gradle/beforeSettings/#org.gradle.api.Action<? super org.gradle.api.initialization.Settings>/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/before-settings.html
 $dokka.location:org.gradle.api.invocation/Gradle/buildFinished/#groovy.lang.Closure/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/build-finished.html
 $dokka.location:org.gradle.api.invocation/Gradle/buildFinished/#org.gradle.api.Action<? super org.gradle.BuildResult>/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/build-finished.html
+$dokka.location:org.gradle.api.invocation/Gradle/getBuildPath/#/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/get-build-path.html
 $dokka.location:org.gradle.api.invocation/Gradle/getGradle/#/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/get-gradle.html
 $dokka.location:org.gradle.api.invocation/Gradle/getGradleHomeDir/#/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/get-gradle-home-dir.html
 $dokka.location:org.gradle.api.invocation/Gradle/getGradleUserHomeDir/#/PointingToDeclaration/gradle/org.gradle.api.invocation/-gradle/get-gradle-user-home-dir.html

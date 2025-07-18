@@ -3,18 +3,18 @@
   <head>
     <meta property="og:image" content="https://gradle.org/images/releases/gradle-default.png">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Gradle 9.1.0-20250717174655+0000 Release Notes">
+    <meta property="og:title" content="Gradle 9.1.0-20250718185710+0000 Release Notes">
     <meta property="og:site_name" content="Gradle Release Notes">
-    <meta property="og:description" content="We are excited to announce Gradle 9.1.0-20250717174655+0000.">
+    <meta property="og:description" content="We are excited to announce Gradle 9.1.0-20250718185710+0000.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@gradle">
     <meta name="twitter:creator" content="@gradle">
-    <meta name="twitter:title" content="Gradle 9.1.0-20250717174655+0000 Release Notes">
-    <meta name="twitter:description" content="We are excited to announce Gradle 9.1.0-20250717174655+0000.">
+    <meta name="twitter:title" content="Gradle 9.1.0-20250718185710+0000 Release Notes">
+    <meta name="twitter:description" content="We are excited to announce Gradle 9.1.0-20250718185710+0000.">
     <meta name="twitter:image" content="https://gradle.org/images/releases/gradle-default.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gradle 9.1.0-20250717174655+0000 Release Notes</title>
+    <title>Gradle 9.1.0-20250718185710+0000 Release Notes</title>
     <link rel="stylesheet" type="text/css" href="https://assets.gradle.com/lato/css/lato-font.css">
     <style>/* Lato (bold, regular) */
 @font-face {
@@ -1770,7 +1770,7 @@ a.incubating-marker:hover {
   <body>
     <div class="container">
       <h1>Gradle Release Notes</h1>
-      <p>We are excited to announce Gradle 9.1.0-20250717174655+0000 (released <a href="https://gradle.org/releases/">2025-07-17</a>).</p>
+      <p>We are excited to announce Gradle 9.1.0-20250718185710+0000 (released <a href="https://gradle.org/releases/">2025-07-18</a>).</p>
       <p>This release features <a href="">1</a>, <a href="">2</a>, ... <a href="">n</a>, and more.</p>
       <p>We would like to thank the following community members for their contributions to this release of Gradle:</p>
       <p>Be sure to check out the <a href="https://roadmap.gradle.org">public roadmap</a> for insight into what's planned for future releases.</p>
@@ -1792,10 +1792,10 @@ a.incubating-marker:hover {
       </section>
       <section class="topic">
         <h2><a href="#upgrade-instructions" id="upgrade-instructions">Upgrade instructions</a></h2>
-        <p>Switch your build to use Gradle 9.1.0-20250717174655+0000 by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
-        <pre><code class="language-text">./gradlew wrapper --gradle-version=9.1.0-20250717174655+0000 &amp;&amp; ./gradlew wrapper
+        <p>Switch your build to use Gradle 9.1.0-20250718185710+0000 by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
+        <pre><code class="language-text">./gradlew wrapper --gradle-version=9.1.0-20250718185710+0000 &amp;&amp; ./gradlew wrapper
 </code></pre>
-        <p>See the <a href="userguide/upgrading_version_9.html#changes_9.1.0">Gradle 9.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle 9.1.0-20250717174655+0000.</p>
+        <p>See the <a href="userguide/upgrading_version_9.html#changes_9.1.0">Gradle 9.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle 9.1.0-20250718185710+0000.</p>
         <p>For Java, Groovy, Kotlin, and Android compatibility, see the <a href="userguide/compatibility.html">full compatibility notes</a>.</p>
       </section>
       <section class="topic">
@@ -1856,6 +1856,13 @@ android {
     // The accessor to the `android` extension registered by the Android plugin is available
 }
 </code></pre>
+        <h4><a href="#introduce-gradlegetbuildpath" id="introduce-gradlegetbuildpath">Introduce <code>Gradle#getBuildPath</code></a></h4>
+        <p>This release introduces a new API on the <a href="javadoc/org/gradle/api/invocation/Gradle.html">Gradle</a> type that returns the path of the build represented by the <code>Gradle</code> instance, relative to the root of the build tree. For the root build, this will return <code>:</code>. For included builds, this will return the path of the included build relative to the root build.</p>
+        <p>This is the same path returned by <code>BuildIdentifier#getBuildPath</code>, but it is now available directly on the <code>Gradle</code> instance. This enables build authors to obtain the path of a build, similar to how they can already obtain the path of a project.</p>
+        <p>The following example demonstrates how to determine the path of the build which owns a given project:</p>
+        <pre><code class="language-kotlin">val project: Project = getProjectInstance()
+val buildPath: String = project.gradle.buildPath
+</code></pre>
         <h3><a href="#configuration-improvements" id="configuration-improvements">Configuration Improvements</a></h3>
         <h4><a href="#simpler-target-package-configuration-for-antlr-4" id="simpler-target-package-configuration-for-antlr-4">Simpler target package configuration for Antlr 4</a></h4>
         <p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4. Previously, setting the "-package" argument also required setting the output directory in order to generate classes into the proper package-specific directory structure. This release introduces a <code>packageName</code> property that allows you to set the target package without needing to also set the output directory properly. Setting this property will set the "-package" argument for the Antlr tool, and will also set the generated class directory to match the package.</p>
@@ -1906,7 +1913,11 @@ publications.withType&lt;MavenPublication&gt;().configureEach {
 (*) - details omitted (listed previously)
 </code></pre>
         <p>This feature provides a quick overview of the task graph, helping users understand the dependencies between tasks without running them. You can iterate by diving into a subgraph by adjusting an invocation.</p>
-        <p>This feature is incubating and may change in future releases. Additionally, it shares a known <a href="https://github.com/gradle/gradle/issues/2517">issue</a> with <code>--dry-run</code>: Tasks from included builds may still be executed.</p>
+        <p>This feature is incubating and may change in future releases.</p>
+        <h4><a href="#fixed---dry-run-behavior-in-composite-builds" id="fixed---dry-run-behavior-in-composite-builds">Fixed <code>--dry-run</code> behavior in composite builds</a></h4>
+        <p>Gradle now correctly respects <code>--dry-run</code> in composite builds, ensuring that tasks are not executed during the execution phase of included builds.</p>
+        <p>Note that tasks from some included builds may still be executed during configuration time, as part of their configuration logic.</p>
+        <p>This restores expected behavior and makes <code>--dry-run</code> safer for previewing task execution plans across composite builds.</p>
       </section>
       <section class="topic">
         <h2><a href="#promoted-features" id="promoted-features">Promoted features</a></h2>

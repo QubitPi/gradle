@@ -115,6 +115,16 @@ android {
     // The accessor to the `android` extension registered by the Android plugin is available
 }
 </code></pre>
+<h4><a href="#introduce-gradlegetbuildpath" id="introduce-gradlegetbuildpath">Introduce <code>Gradle#getBuildPath</code></a></h4>
+<p>This release introduces a new API on the <a href="javadoc/org/gradle/api/invocation/Gradle.html">Gradle</a> type that returns the path of the build represented by the <code>Gradle</code> instance, relative to the root of the build tree.
+For the root build, this will return <code>:</code>.
+For included builds, this will return the path of the included build relative to the root build.</p>
+<p>This is the same path returned by <code>BuildIdentifier#getBuildPath</code>, but it is now available directly on the <code>Gradle</code> instance.
+This enables build authors to obtain the path of a build, similar to how they can already obtain the path of a project.</p>
+<p>The following example demonstrates how to determine the path of the build which owns a given project:</p>
+<pre><code class="language-kotlin">val project: Project = getProjectInstance()
+val buildPath: String = project.gradle.buildPath
+</code></pre>
 <h3><a href="#configuration-improvements" id="configuration-improvements">Configuration Improvements</a></h3>
 <h4><a href="#simpler-target-package-configuration-for-antlr-4" id="simpler-target-package-configuration-for-antlr-4">Simpler target package configuration for Antlr 4</a></h4>
 <p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4.
@@ -178,9 +188,11 @@ You can enable it using the <code>--task-graph</code> option on the command line
 </code></pre>
 <p>This feature provides a quick overview of the task graph, helping users understand the dependencies between tasks without running them.
 You can iterate by diving into a subgraph by adjusting an invocation.</p>
-<p>This feature is incubating and may change in future releases.
-Additionally, it shares a known <a href="https://github.com/gradle/gradle/issues/2517">issue</a> with <code>--dry-run</code>:
-Tasks from included builds may still be executed.</p>
+<p>This feature is incubating and may change in future releases.</p>
+<h4><a href="#fixed---dry-run-behavior-in-composite-builds" id="fixed---dry-run-behavior-in-composite-builds">Fixed <code>--dry-run</code> behavior in composite builds</a></h4>
+<p>Gradle now correctly respects <code>--dry-run</code> in composite builds, ensuring that tasks are not executed during the execution phase of included builds.</p>
+<p>Note that tasks from some included builds may still be executed during configuration time, as part of their configuration logic.</p>
+<p>This restores expected behavior and makes <code>--dry-run</code> safer for previewing task execution plans across composite builds.</p>
 <h2><a href="#promoted-features" id="promoted-features">Promoted features</a></h2>
 <p>Promoted features are features that were incubating in previous versions of Gradle but are now supported and subject to backward compatibility.
 See the User Manual section on the &quot;<a href="userguide/feature_lifecycle.html">Feature Lifecycle</a>&quot; for more information.</p>
