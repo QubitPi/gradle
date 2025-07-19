@@ -4898,7 +4898,7 @@ document.addEventListener("DOMContentLoaded", function () {
     animation: clibpard_rotation_frame 1s;
 }
 </style></head>
-<body id="repository-content-filtering" class="book">
+<body class="book">
 <!--
   ~ Copyright 2025 the original author or authors.
   ~
@@ -5399,22 +5399,43 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content">
             <div class="chapter">
 <div id="header">
-<h1>Filtering Repository Content</h1>
-<div class="details">
-<span id="revnumber">version 9.1.0-20250718185710+0000</span>
-</div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
+<ul class="sectlevel0">
+<li><a href="#repository-content-filtering">Filtering Repository Content</a>
 <ul class="sectlevel1">
 <li><a href="#sec:declaring-repository-filter">Declaring a repository filter</a></li>
 <li><a href="#sec:declaring-content-repositories">Declaring content exclusively found in one repository</a></li>
-<li><a href="#sec:ivy_dynamic_resolve_mode">Enabling Ivy dynamic resolve mode</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    // Copyright (C) 2024 Gradle, Inc.
+//
+// Licensed under the Creative Commons Attribution-Noncommercial-ShareAlike 4.0 International License.;
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      https://creativecommons.org/licenses/by-nc-sa/4.0/
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.</pre>
+</div>
+</div>
+</div>
+</div>
+<h1 id="repository-content-filtering" class="sect0"><a class="anchor" href="#repository-content-filtering"></a><a class="link" href="#repository-content-filtering">Filtering Repository Content</a></h1>
+<div class="openblock partintro">
+<div class="content">
 <div class="paragraph">
 <p>Gradle exposes an API to declare what a repository may or may not contain.
 There are different use cases for it:</p>
@@ -5537,8 +5558,20 @@ If you do so:</p>
 </li>
 </ul>
 </div>
-<div class="exampleblock">
-<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Using exclusive repository content filters is a <a href="best_practices_dependencies.html#use_content_filtering">Gradle Best Practice</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5589,19 +5622,17 @@ If you do so:</p>
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>It is possible to filter either by explicit <em>group</em>, <em>module</em> or <em>version</em>, either strictly or using regular expressions.
 See <a href="../javadoc/org/gradle/api/artifacts/repositories/InclusiveRepositoryContentDescriptor.html">InclusiveRepositoryContentDescriptor</a> for details.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="paragraph">
+<p>When setting up exclusive content filters be sure to also consider what repository will contain the transitives dependencies your build will resolve.</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>If you leverage exclusive content filtering in the <a href="plugins.html#sec:custom_plugin_repositories"><code>pluginManagement</code> section of the <code>settings.gradle(.kts)</code></a>, it becomes illegal to add more repositories through the project <code>buildscript.repositories</code>.
 In that case, the build configuration will fail.</p>
@@ -5609,18 +5640,17 @@ In that case, the build configuration will fail.</p>
 <div class="paragraph">
 <p>Your options are either to declare all repositories in settings or to use non-exclusive content filtering.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>=== Maven repository filtering</p>
 </div>
-<div class="sect2">
-<h3 id="maven_repository_filtering"><a class="anchor" href="#maven_repository_filtering"></a><a class="link" href="#maven_repository_filtering">Maven repository filtering</a></h3>
 <div class="paragraph">
 <p>For <a href="supported_repository_types.html#sec:maven-repo">Maven repositories</a>, it&#8217;s often the case that a repository would either contain releases or snapshots.
 Gradle lets you declare what kind of artifacts are found in a repository using this DSL:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5667,14 +5697,11 @@ Gradle lets you declare what kind of artifacts are found in a repository using t
 </div>
 </div>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div id="sec:ivy_dynamic_resolve_mode" class="paragraph">
+<p>== Enabling Ivy dynamic resolve mode</p>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:ivy_dynamic_resolve_mode"><a class="anchor" href="#sec:ivy_dynamic_resolve_mode"></a><a class="link" href="#sec:ivy_dynamic_resolve_mode">Enabling Ivy dynamic resolve mode</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Normally, in an Ivy repository, dependencies are specified using the <code>rev</code> (revision) attribute in <code>ivy.xml</code>.
 However, dynamic resolve mode allows Gradle to prefer the <code>revConstraint</code> attribute over <code>rev</code>:</p>
@@ -5695,8 +5722,8 @@ However, dynamic resolve mode allows Gradle to prefer the <code>revConstraint</c
 <div class="paragraph">
 <p>You need to explicitly enable dynamic resolve mode when declaring an Ivy repository:</p>
 </div>
-<div class="exampleblock">
-<div class="content">
+</div>
+</div>
 <div class="exampleblock testable-sample multi-language-sample">
 <div class="content">
 <div class="listingblock">
@@ -5739,8 +5766,8 @@ repositories.withType(IvyArtifactRepository) {
 </div>
 </div>
 </div>
-</div>
-</div>
+<div class="exampleblock">
+<div class="content">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -5752,6 +5779,8 @@ Dynamic resolve mode is only available for Gradle&#8217;s Ivy repositories. It i
 </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 </div>
 </div>

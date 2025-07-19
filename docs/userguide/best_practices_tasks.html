@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Tasks</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250718185710+0000</span>
+<span id="revnumber">version 9.1.0-20250719165842+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5410,6 +5410,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#use_cacheability_annotations">Favor <code>@CacheableTask</code> and <code>@DisableCachingByDefault</code> over <code>cacheIf(Spec)</code> and <code>doNotCacheIf(String, Spec)</code></a></li>
 <li><a href="#avoid_provider_get_outside_task_action">Do not call <code>get()</code> on a Provider outside a Task action</a></li>
 <li><a href="#group_describe_tasks">Group and Describe custom Tasks</a></li>
+<li><a href="#dont_resolve_configurations_before_task_execution">Don&#8217;t resolve Configurations before Task Execution</a></li>
 </ul>
 </div>
 </div>
@@ -6393,6 +6394,253 @@ javadoc - Generates Javadoc API documentation for the 'main' feature.</code></pr
 <h3 id="tags_4"><a class="anchor" href="#tags_4"></a><a class="link" href="#tags_4">Tags</a></h3>
 <div class="paragraph">
 <p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dont_resolve_configurations_before_task_execution"><a class="anchor" href="#dont_resolve_configurations_before_task_execution"></a><a class="link" href="#dont_resolve_configurations_before_task_execution">Don&#8217;t resolve Configurations before Task Execution</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Resolving configurations before the task execution phase can lead to incorrect results and slower builds.</p>
+</div>
+<div class="sect2">
+<h3 id="explanation_5"><a class="anchor" href="#explanation_5"></a><a class="link" href="#explanation_5">Explanation</a></h3>
+<div class="paragraph">
+<p>Resolving a configuration - either directly via calling its <a href="../javadoc/org/gradle/api/artifacts/Configuration.html#resolve()"><code>resolve()</code></a> method or indirectly via accessing its set of artifacts - returns a set of files that does not preserve references to the tasks that produced those files.</p>
+</div>
+<div class="paragraph">
+<p>Configurations <em>are</em> file collections and can be added to <code>@InputFiles</code> properties on other tasks.
+It is important to do this correctly to avoid breaking automatic task dependency wiring between a consumer task and any tasks that are implicitly required to produce the artifacts being consumed.
+For example, if a configuration contains a project dependency, Gradle knows that consumers of the configuration must first run any tasks that produce that project&#8217;s artifacts.</p>
+</div>
+<div class="paragraph">
+<p>In addition to correctness concerns, resolving configurations during the configuration phase can slow down the build, even when running unrelated tasks (e.g., <code>help</code>) that don&#8217;t require the resolved dependencies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example_5"><a class="anchor" href="#example_5"></a><a class="link" href="#example_5">Example</a></h3>
+<div class="sect3">
+<h4 id="dont_do_this_5"><a class="anchor" href="#dont_do_this_5"></a><a class="link" href="#dont_do_this_5">Don&#8217;t Do This</a></h4>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
+    runtimeOnly(project(":lib")) <i class="conum" data-value="1"></i><b>(1)</b>
+}
+
+abstract class BadClasspathPrinter : DefaultTask() {
+    @get:InputFiles
+    var classpath: Set&lt;File&gt; = emptySet() <i class="conum" data-value="2"></i><b>(2)</b>
+
+    private fun calculateDigest(fileOrDirectory: File): Int {
+        require(fileOrDirectory.exists()) { "File or directory $fileOrDirectory doesn't exist" }
+        return 0 // actual implementation is stripped
+    }
+
+    @TaskAction
+    fun run() {
+        logger.lifecycle(
+            classpath.joinToString("\n") {
+                val digest = calculateDigest(it) <i class="conum" data-value="3"></i><b>(3)</b>
+                "$it#$digest"
+            }
+        )
+    }
+}
+
+tasks.register("badClasspathPrinter", BadClasspathPrinter::class) {
+    classpath = configurations.named("runtimeClasspath").get().resolve() <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
+    runtimeOnly(project(":lib")) <i class="conum" data-value="1"></i><b>(1)</b>
+}
+
+abstract class BadClasspathPrinter extends DefaultTask {
+    @InputFiles
+    Set&lt;File&gt; classpath = [] as Set <i class="conum" data-value="2"></i><b>(2)</b>
+
+    protected int calculateDigest(File fileOrDirectory) {
+        if (!fileOrDirectory.exists()) {
+            throw new IllegalArgumentException("File or directory $fileOrDirectory doesn't exist")
+        }
+        return 0 // actual implementation is stripped
+    }
+
+    @TaskAction
+    void run() {
+        logger.lifecycle(
+            classpath.collect { file -&gt;
+                def digest = calculateDigest(file) <i class="conum" data-value="3"></i><b>(3)</b>
+                "$file#$digest"
+            }.join("\n")
+        )
+    }
+}
+
+tasks.register("badClasspathPrinter", BadClasspathPrinter) {
+    classpath = configurations.named("runtimeClasspath").get().resolve() <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Add project dependency</strong>: The  <code>:lib</code> project must be built in order to resolve the runtime classpath successfully.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Declare input property as Set of files</strong>: A simple <code>Set</code> input doesn&#8217;t track task dependencies.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>Dependency artifacts are used to calculate digest</strong>: Artifacts from the already resolved classpath are used to calculate the digest.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>Resolve runtimeClasspath</strong>: The implicit task dependency on <code>:library:jar</code> task is lost here when the configuration is resolved prior to task execution.
+The <code>lib</code> project will not be built when the <code>:app:badClasspathPrinter</code> task is run, leading to a failure in <code>calculateDigest</code> because the <code>lib.jar</code> file will not exist.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="do_this_instead_5"><a class="anchor" href="#do_this_instead_5"></a><a class="link" href="#do_this_instead_5">Do This Instead</a></h4>
+<div class="paragraph">
+<p>To avoid issues, always defer resolution to the execution phase by using lazy APIs like <a href="../javadoc/org/gradle/api/file/FileCollection.html">FileCollection</a>.</p>
+</div>
+<div style="text-align: right;">
+  <a class="download-project-link"
+     data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidResolvingConfigurationsManually-do/"
+     href="https://download-directory.github.io/?url=https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidResolvingConfigurationsManually-do/kotlin">
+    <img src="https://img.shields.io/badge/Download%20Project-GitHub-blue?logo=github&style=flat" alt="Download"/>
+  </a>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
+    runtimeOnly(project(":lib")) <i class="conum" data-value="1"></i><b>(1)</b>
+}
+
+abstract class GoodClasspathPrinter : DefaultTask() {
+    @get:InputFiles
+    abstract val classpath: ConfigurableFileCollection <i class="conum" data-value="2"></i><b>(2)</b>
+
+    private fun calculateDigest(fileOrDirectory: File): Int {
+        require(fileOrDirectory.exists()) { "File or directory $fileOrDirectory doesn't exist" }
+        return 0 // actual implementation is stripped
+    }
+
+    @TaskAction
+    fun run() {
+        logger.lifecycle(
+            classpath.joinToString("\n") {
+                val digest = calculateDigest(it) <i class="conum" data-value="3"></i><b>(3)</b>
+                "$it#$digest"
+            }
+        )
+    }
+}
+
+tasks.register("goodClasspathPrinter", GoodClasspathPrinter::class.java) {
+    classpath.from(configurations.named("runtimeClasspath")) <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
+    runtimeOnly(project(":lib")) <i class="conum" data-value="1"></i><b>(1)</b>
+}
+
+abstract class GoodClasspathPrinter extends DefaultTask {
+
+    @InputFiles
+    abstract ConfigurableFileCollection getClasspath() <i class="conum" data-value="2"></i><b>(2)</b>
+
+    protected int calculateDigest(File fileOrDirectory) {
+        if (!fileOrDirectory.exists()) {
+            throw new IllegalArgumentException("File or directory $fileOrDirectory doesn't exist")
+        }
+        return 0 // actual implementation is stripped
+    }
+
+    @TaskAction
+    void run() {
+        logger.lifecycle(
+            classpath.collect { file -&gt;
+                def digest = calculateDigest(file) <i class="conum" data-value="3"></i><b>(3)</b>
+                "$file#$digest"
+            }.join("\n")
+        )
+    }
+}
+
+tasks.register("goodClasspathPrinter", GoodClasspathPrinter) {
+    classpath.from(configurations.named("runtimeClasspath")) <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Add project dependency</strong>: This is the same.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Declare input files property as ConfigurableFileCollection</strong>: This lazy collection type will track task dependencies.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>Dependency artifacts are resolved to calculate digest</strong>: The classpath will be resolved at execution time to calculate the digest.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>Configuration is passed to input property directly</strong>: Using <code>from</code> causes the configuration to be lazily wired to the input proeprty.
+The configuration will be resolved when necessary, preserving task dependencies.
+The output reveals that the <code>lib</code> project is now built when the <code>:app:goodClasspathPrinter</code> task is run because of the implicit task dependency, and the <code>lib.jar</code> file is found when calculating the digest.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags_5"><a class="anchor" href="#tags_5"></a><a class="link" href="#tags_5">Tags</a></h3>
+<div class="paragraph">
+<p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code>, <code><a href="tags_reference.html#tag:inputs-and-outputs">#inputs-and-outputs</a></code>, <code><a href="tags_reference.html#tag:configurations">#configurations</a></code></p>
 </div>
 </div>
 </div>

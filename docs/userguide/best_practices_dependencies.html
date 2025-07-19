@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Dependencies</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250718185710+0000</span>
+<span id="revnumber">version 9.1.0-20250719165842+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5412,6 +5412,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#dont_depend_on_kotlin_stdlib">Don&#8217;t Explicitly Depend on the Kotlin Standard Library</a></li>
 <li><a href="#avoid_duplicate_dependencies">Avoid Redundant Dependency Declarations</a></li>
 <li><a href="#single-gav-string">Declare Dependencies using a single GAV (<code>group:artifact:version</code>) String</a></li>
+<li><a href="#use_content_filtering">Use Content Filtering with multiple Repositories</a></li>
 </ul>
 </div>
 </div>
@@ -5983,7 +5984,7 @@ dependencyResolutionManagement {
 <div class="sect2">
 <h3 id="tags_3"><a class="anchor" href="#tags_3"></a><a class="link" href="#tags_3">Tags</a></h3>
 <div class="paragraph">
-<p><code><a href="tags_reference.html#tag:structuring-builds">#structuring-builds</a></code></p>
+<p><code><a href="tags_reference.html#tag:structuring-builds">#structuring-builds</a></code>, <code><a href="tags_reference.html#tag:repositories">#repositories</a></code></p>
 </div>
 </div>
 </div>
@@ -6426,6 +6427,245 @@ dependencies {
 <h3 id="tags_6"><a class="anchor" href="#tags_6"></a><a class="link" href="#tags_6">Tags</a></h3>
 <div class="paragraph">
 <p><code><a href="tags_reference.html#tag:dependencies">#dependencies</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use_content_filtering"><a class="anchor" href="#use_content_filtering"></a><a class="link" href="#use_content_filtering">Use Content Filtering with multiple Repositories</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When using multiple repositories in a build, use <a href="filtering_repository_content.html#repository-content-filtering">repository content filtering</a> to ensure that dependencies are resolved from an appropriate repository.</p>
+</div>
+<div class="sect2">
+<h3 id="explanation_7"><a class="anchor" href="#explanation_7"></a><a class="link" href="#explanation_7">Explanation</a></h3>
+<div class="paragraph">
+<p>If your build declares more than one repository, you should declare content filters on these repositories to ensure you search for and obtain dependencies from the correct place.</p>
+</div>
+<div class="paragraph">
+<p>Content filtering is necessary if you have a reason to restrict searching for a dependency to a particular repository, and can be a good idea even if acceptable dependency artifacts exist in multiple locations.</p>
+</div>
+<div class="paragraph">
+<p>When possible, you should use the <a href="filtering_repository_content.html#sec:declaring-content-repositories">exclusiveContent</a> feature to restrict dependencies to a particular known repository.</p>
+</div>
+<div class="paragraph">
+<p>Content filtering has three main benefits:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Performance</strong>, since you only query repositories for dependencies that should actually exist within them</p>
+</li>
+<li>
+<p><strong>Security</strong>, by avoiding asking potentially every repository for every dependency (even ones they shouldn&#8217;t contain), you improve resiliency to supply chain attacks by avoiding leaking information about your dependencies to other repositories, or even downloading potentially malicious artifacts</p>
+</li>
+<li>
+<p><strong>Reliability</strong>, by avoiding searching repositories that contain invalid or incorrect metadata for particular dependencies, which could result in obtaining incorrect transitive dependencies</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Repositories will be searched for dependencies that pass their filters in the order they are declared.
+Often the last repository is declared without any filters in order to serve as a default <em>fallback repository</em> that is queried for any dependencies that don&#8217;t pass the filters present on the other repositories.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Carefully consider using content filtering with a fallback repository.
+This can pose a security risk, so make sure you fully trust the fallback repository.
+This setup can result in inadvertently (and silently) resolving dependencies from the fallback repository that were intended to come from filtered repositories if the dependencies were not available in those repositories.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example_7"><a class="anchor" href="#example_7"></a><a class="link" href="#example_7">Example</a></h3>
+<div class="sect3">
+<h4 id="dont_do_this_6"><a class="anchor" href="#dont_do_this_6"></a><a class="link" href="#dont_do_this_6">Don&#8217;t Do This</a></h4>
+<div class="paragraph">
+<p>Don&#8217;t add multiple repositories without content filtering:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">settings.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">settings.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="do_this_instead_6"><a class="anchor" href="#do_this_instead_6"></a><a class="link" href="#do_this_instead_6">Do This Instead</a></h4>
+<div class="paragraph">
+<p>Use content filtering to ensure that the proper repositories are searched first for the expected artifacts:</p>
+</div>
+<div style="text-align: right;">
+  <a class="download-project-link"
+     data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/contentFiltering-do/"
+     href="https://download-directory.github.io/?url=https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/contentFiltering-do/kotlin">
+    <img src="https://img.shields.io/badge/Download%20Project-GitHub-blue?logo=github&style=flat" alt="Download"/>
+  </a>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">settings.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencyResolutionManagement {
+    repositories {
+        google {
+            content {
+                // Use this repository for androidx and GMS dependencies
+                includeGroupByRegex("androidx.*")
+                includeGroup("com.google.gms")
+            }
+        }
+        // Specify the fallback repository last
+        mavenCentral()
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">settings.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencyResolutionManagement {
+    repositories {
+        google {
+            content {
+                // Use this repository for androidx and GMS dependencies
+                includeGroupByRegex("androidx.*")
+                includeGroup("com.google.gms")
+            }
+        }
+        // Specify the fallback repository last
+        mavenCentral()
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In many cases, it is better to use exclusive content filtering, as it ensures that dependencies <em>can only be found in the expected repository</em>.
+If they are not present there, they will not be found at all.</p>
+</div>
+<div style="text-align: right;">
+  <a class="download-project-link"
+     data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/contentFilteringExclusive-do/"
+     href="https://download-directory.github.io/?url=https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/contentFilteringExclusive-do/kotlin">
+    <img src="https://img.shields.io/badge/Download%20Project-GitHub-blue?logo=github&style=flat" alt="Download"/>
+  </a>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">settings.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencyResolutionManagement {
+    repositories {
+        exclusiveContent {
+            forRepository {
+                google()
+            }
+            filter {
+                // Only use this repository, and use this repository only, for androidx and GMS dependencies
+                includeGroupByRegex("androidx.*")
+                includeGroup("com.google.gms")
+            }
+        }
+        // Specify the fallback repository last
+        mavenCentral()
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">settings.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencyResolutionManagement {
+    repositories {
+        exclusiveContent {
+            forRepository {
+                google()
+            }
+            filter {
+                // Only use this repository, and use this repository only, for androidx and GMS dependencies
+                includeGroupByRegex("androidx.*")
+                includeGroup("com.google.gms")
+            }
+        }
+        // Specify the fallback repository last
+        mavenCentral()
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="references_5"><a class="anchor" href="#references_5"></a><a class="link" href="#references_5">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="filtering_repository_content.html#repository-content-filtering">Filtering Repository Content</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags_7"><a class="anchor" href="#tags_7"></a><a class="link" href="#tags_7">Tags</a></h3>
+<div class="paragraph">
+<p><code><a href="tags_reference.html#tag:repositories">#repositories</a></code>, <code><a href="tags_reference.html#tag:dependencies">#dependencies</a></code></p>
 </div>
 </div>
 </div>

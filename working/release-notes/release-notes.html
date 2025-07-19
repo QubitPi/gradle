@@ -3,18 +3,18 @@
   <head>
     <meta property="og:image" content="https://gradle.org/images/releases/gradle-default.png">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Gradle 9.1.0-20250718185710+0000 Release Notes">
+    <meta property="og:title" content="Gradle 9.1.0-20250719165842+0000 Release Notes">
     <meta property="og:site_name" content="Gradle Release Notes">
-    <meta property="og:description" content="We are excited to announce Gradle 9.1.0-20250718185710+0000.">
+    <meta property="og:description" content="We are excited to announce Gradle 9.1.0-20250719165842+0000.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@gradle">
     <meta name="twitter:creator" content="@gradle">
-    <meta name="twitter:title" content="Gradle 9.1.0-20250718185710+0000 Release Notes">
-    <meta name="twitter:description" content="We are excited to announce Gradle 9.1.0-20250718185710+0000.">
+    <meta name="twitter:title" content="Gradle 9.1.0-20250719165842+0000 Release Notes">
+    <meta name="twitter:description" content="We are excited to announce Gradle 9.1.0-20250719165842+0000.">
     <meta name="twitter:image" content="https://gradle.org/images/releases/gradle-default.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gradle 9.1.0-20250718185710+0000 Release Notes</title>
+    <title>Gradle 9.1.0-20250719165842+0000 Release Notes</title>
     <link rel="stylesheet" type="text/css" href="https://assets.gradle.com/lato/css/lato-font.css">
     <style>/* Lato (bold, regular) */
 @font-face {
@@ -1770,7 +1770,7 @@ a.incubating-marker:hover {
   <body>
     <div class="container">
       <h1>Gradle Release Notes</h1>
-      <p>We are excited to announce Gradle 9.1.0-20250718185710+0000 (released <a href="https://gradle.org/releases/">2025-07-18</a>).</p>
+      <p>We are excited to announce Gradle 9.1.0-20250719165842+0000 (released <a href="https://gradle.org/releases/">2025-07-19</a>).</p>
       <p>This release features <a href="">1</a>, <a href="">2</a>, ... <a href="">n</a>, and more.</p>
       <p>We would like to thank the following community members for their contributions to this release of Gradle:</p>
       <p>Be sure to check out the <a href="https://roadmap.gradle.org">public roadmap</a> for insight into what's planned for future releases.</p>
@@ -1782,6 +1782,7 @@ a.incubating-marker:hover {
           <li class="subTopic"><a href="#cli-improvement">CLI improvement</a></li>
           <li class="subTopic"><a href="#build-authoring-improvements">Build authoring improvements</a></li>
           <li class="subTopic"><a href="#configuration-improvements">Configuration Improvements</a></li>
+          <li class="subTopic"><a href="#error-and-warning-reporting-improvements">Error and warning reporting improvements</a></li>
           <li class="subTopic"><a href="#task-graph-diagnostic">Task graph diagnostic</a></li>
           <li class="mainTopic"><a href="#promoted-features">Promoted features</a></li>
           <li class="mainTopic"><a href="#fixed-issues">Fixed issues</a></li>
@@ -1792,10 +1793,10 @@ a.incubating-marker:hover {
       </section>
       <section class="topic">
         <h2><a href="#upgrade-instructions" id="upgrade-instructions">Upgrade instructions</a></h2>
-        <p>Switch your build to use Gradle 9.1.0-20250718185710+0000 by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
-        <pre><code class="language-text">./gradlew wrapper --gradle-version=9.1.0-20250718185710+0000 &amp;&amp; ./gradlew wrapper
+        <p>Switch your build to use Gradle 9.1.0-20250719165842+0000 by updating the <a href="userguide/gradle_wrapper.html">wrapper</a> in your project:</p>
+        <pre><code class="language-text">./gradlew wrapper --gradle-version=9.1.0-20250719165842+0000 &amp;&amp; ./gradlew wrapper
 </code></pre>
-        <p>See the <a href="userguide/upgrading_version_9.html#changes_9.1.0">Gradle 9.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle 9.1.0-20250718185710+0000.</p>
+        <p>See the <a href="userguide/upgrading_version_9.html#changes_9.1.0">Gradle 9.x upgrade guide</a> to learn about deprecations, breaking changes, and other considerations when upgrading to Gradle 9.1.0-20250719165842+0000.</p>
         <p>For Java, Groovy, Kotlin, and Android compatibility, see the <a href="userguide/compatibility.html">full compatibility notes</a>.</p>
       </section>
       <section class="topic">
@@ -1894,6 +1895,37 @@ publications.withType&lt;MavenPublication&gt;().configureEach {
   }
 }
 </code></pre>
+        <h3><a href="#error-and-warning-reporting-improvements" id="error-and-warning-reporting-improvements">Error and warning reporting improvements</a></h3>
+        <h4><a href="#improved-error-message-for-version-constraint-conflicts" id="improved-error-message-for-version-constraint-conflicts">Improved error message for Version Constraint Conflicts</a></h4>
+        <p>In previous versions of Gradle when a version constraint conflict occurred the error message was extremely verbose and included extraneous information. It also was formatted in a way that was difficult to comprehend, especially when constraints involved in the conflict were added by transitive dependencies.</p>
+        <pre><code>&gt; Could not resolve org:foo:3.2.
+  Required by:
+      root project 'test'
+   &gt; Cannot find a version of 'org:foo' that satisfies the version constraints:
+        Dependency path: 'root project :' (conf) --&gt; 'org:bar:2.0' (runtime) --&gt; 'org:foo:3.1'
+        Constraint path: 'root project :' (conf) --&gt; 'org:platform:1.1' (platform) --&gt; 'org:foo:{strictly 3.1.1; reject 3.1 &amp; 3.2}'
+        Constraint path: 'root project :' (conf) --&gt; 'org:foo:3.2'
+        Constraint path: 'root project :' (conf) --&gt; 'org:baz:3.0' (runtime) --&gt; 'org:foo:3.3'
+        Constraint path: 'root project :' (conf) --&gt; 'org:other:3.0' (runtime) --&gt; 'org:foo:3.3'
+</code></pre>
+        <p>The new message focuses attention on the conflicting versions required by the constraints involved in the conflict.</p>
+        <pre><code>&gt; Could not resolve org:foo.
+  Required by:
+      root project 'mec0k'
+   &gt; Component is the target of multiple version constraints with conflicting requirements:
+     3.1.1 - directly in 'org:platform:1.1' (platform)
+     3.2
+     3.3 - transitively via 'org:baz:3.0' (runtime) (1 other path to this version)
+</code></pre>
+        <p>This makes it clearer by:</p>
+        <ul>
+          <li>Immediately stating that there is a conflict in version constraints for a component, and not merely a failure to <em>find</em> a suitable candidate in the searched repositories when resolving dependencies</li>
+          <li>Clearly showing each constrained version involved in the conflict</li>
+          <li>Showing where the conflicting constraints are declared (either the project doing resolution, its direct dependencies, its transitive dependencies, or dependency locking) <em>without</em> showing the complete dependency paths, which can be long and hard to read and are available in the dependency insight report</li>
+          <li>Showing how many paths to each constraint exist in the dependency graph, but only printing the first one, which is usually sufficient to understand the conflict</li>
+        </ul>
+        <p>It also avoids showing non-strict dependency declarations, like the first line in the old version, which are irrelevant to understanding the conflict.</p>
+        <p>A suggestion message at the end of the build will also provide the exact syntax for running <code>dependencyInsight</code> on the failing configuration, to further investigate it by viewing comprehensive dependency resolution information.</p>
         <h3><a href="#task-graph-diagnostic" id="task-graph-diagnostic">Task graph diagnostic</a></h3>
         <p>A new task dependency graph is available to visualize the dependencies between tasks without executing them. You can enable it using the <code>--task-graph</code> option on the command line. For example:</p>
         <pre><code>./gradlew root r2 --task-graph
@@ -1905,7 +1937,7 @@ publications.withType&lt;MavenPublication&gt;().configureEach {
 |         +--- :leaf1 (org.gradle.api.DefaultTask)
 |         \--- :leaf2 (org.gradle.api.DefaultTask, disabled)
 \--- :root2 (org.gradle.api.DefaultTask)
-    +--- :leaf1 (org.gradle.api.DefaultTask) (*)
+    +--- :leaf1 (*)
     |--- other build task :included:fromIncluded (org.gradle.api.DefaultTask)
     \--- :leaf4 (org.gradle.api.DefaultTask, finalizer)
          \--- :leaf3 (org.gradle.api.DefaultTask)
