@@ -48,7 +48,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-9.1.0-20250719165842+0000        </div>
+9.1.0-20250721162032+0000        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -113,7 +113,7 @@
   </div>
   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="on-output.html"><span class="token function">onOutput</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">closure<span class="token operator">: </span><span data-unresolved-link="groovy.lang/Closure///PointingToDeclaration/">Closure</span></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/4f69fee25fea8e6f691f0d99d67244124eaaf7f1/platforms/software/testing-base/src/main/java//org/gradle/api/tasks/testing/AbstractTestTask.java#L356">source</a>)</span></span></div><p class="paragraph">Adds a closure to be notified when output from the test received. A <a href="../-test-descriptor/index.html">TestDescriptor</a> and <a href="../-test-output-event/index.html">TestOutputEvent</a> instance are passed to the closure as a parameter. </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">apply plugin: 'java'
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="on-output.html"><span class="token function">onOutput</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">closure<span class="token operator">: </span><span data-unresolved-link="groovy.lang/Closure///PointingToDeclaration/">Closure</span></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/e5656ea88de6ce36ad41ed3394d7fe1b6ede6beb/platforms/software/testing-base/src/main/java//org/gradle/api/tasks/testing/AbstractTestTask.java#L356">source</a>)</span></span></div><p class="paragraph">Adds a closure to be notified when output from the test received. A <a href="../-test-descriptor/index.html">TestDescriptor</a> and <a href="../-test-output-event/index.html">TestOutputEvent</a> instance are passed to the closure as a parameter. </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">apply plugin: 'java'
 
 test {
    onOutput { descriptor, event -&gt;
