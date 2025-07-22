@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>The Maven Publish Plugin</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5411,6 +5411,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#publishing_maven:publications">Publications</a></li>
 <li><a href="#publishing_maven:repositories">Repositories</a></li>
 <li><a href="#publishing_maven:install">Publishing to Maven Local</a></li>
+<li><a href="#publishing_to_maven_central">Publishing to Maven Central</a></li>
 <li><a href="#publishing_maven:relocation">Publishing Maven relocation information</a></li>
 <li><a href="#publishing_maven:complete_example">Complete example</a></li>
 <li><a href="#publishing_maven:deferred_configuration">Removal of deferred configuration behavior</a></li>
@@ -6018,6 +6019,17 @@ For guidance and recommendations, see the <a href="https://cookbook.gradle.org/i
 <div class="paragraph">
 <p>The Maven Publish Plugin makes this easy to do by automatically creating a <a href="../javadoc/org/gradle/api/publish/maven/tasks/PublishToMavenLocal.html">PublishToMavenLocal</a> task for each <a href="../dsl/org.gradle.api.publish.maven.MavenPublication.html">MavenPublication</a> in the <code>publishing.publications</code> container. The task name follows the pattern of <code>publish<em>PubName</em>PublicationToMavenLocal</code>. Each of these tasks is wired into the <code>publishToMavenLocal</code> aggregate task. You do not need to have <code>mavenLocal()</code> in your <code>publishing.repositories</code> section.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="publishing_to_maven_central"><a class="anchor" href="#publishing_to_maven_central"></a><a class="link" href="#publishing_to_maven_central">Publishing to Maven Central</a></h2>
+<div class="sectionbody">
+<p>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe src="https://www.youtube-nocookie.com/embed/nd2ULXyBaV8?si=yymYVoqGawuYx6Hh&rel=0" frameborder="0" allowfullscreen
+      style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+  </div>
+</p>
 </div>
 </div>
 <div class="sect1">

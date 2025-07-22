@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Configuration Cache Requirements for your Build Logic</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6012,7 +6012,8 @@ tasks.register('someTask') {
 <p><code>project.buildDir</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A task input or output property or a script variable to capture the result of using <code>project.buildDir</code> to calculate the actual parameter.</p>
+<p><code>project.buildDir</code> has been deprecated. You should use <code>project.layout.buildDirectory</code>.
+Use a task input or output property or a script variable to capture the result of using <code>project.layout.buildDirectory</code> to calculate the actual parameter.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -6420,13 +6421,39 @@ This includes listeners such as <code>BuildListener</code> or <code>TaskExecutio
 <div class="sect1">
 <h2 id="config_cache:requirements:external_processes"><a class="anchor" href="#config_cache:requirements:external_processes"></a><a class="link" href="#config_cache:requirements:external_processes">Running External Processes</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Plugin and build scripts should avoid running external processes at configuration time.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Plugin and build scripts should avoid running external processes at configuration time.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>In general, it is preferred to run external processes in tasks with properly declared inputs and outputs to avoid unnecessary work when the task is <code>UP-TO-DATE</code>.
-However, if needed, you should only use the configuration-cache-compatible APIs described below instead of Java and Groovy standard APIs, or Gradle-provided methods <code>Project.exec</code>, <code>Project.javaexec</code>, <code>ExecOperations.exec</code>, and <code>ExecOperations.javaexec</code>.
-The flexibility of these methods prevents Gradle from determining how the calls impact the build configuration, making it difficult to ensure that the Configuration Cache entry can be safely reused.</p>
+<p>You should avoid using these APIs for running processes during configuration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Java/Kotlin</strong>: <code>ProcessBuilder</code>, <code>Runtime.exec(&#8230;&#8203;)</code>, etc&#8230;&#8203;</p>
+</li>
+<li>
+<p><strong>Groovy</strong>: <code>*.execute()</code>, etc&#8230;&#8203;</p>
+</li>
+<li>
+<p><strong>Gradle</strong>: <code>ExecOperations.exec</code>, <code>ExecOperations.javaexec</code>, etc&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The flexibility of these methods prevent Gradle from determining how the calls impact the build configuration, making it difficult to ensure that the Configuration Cache entry can be safely reused.</p>
+</div>
+<div class="paragraph">
+<p>However, if running processes is required at configuration time, you can use the configuration-cache-compatible APIs detailed below.</p>
 </div>
 <div class="paragraph">
 <p>For simpler cases, when grabbing the output of the process is enough,

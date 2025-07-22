@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Tasks</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5410,6 +5410,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#use_cacheability_annotations">Favor <code>@CacheableTask</code> and <code>@DisableCachingByDefault</code> over <code>cacheIf(Spec)</code> and <code>doNotCacheIf(String, Spec)</code></a></li>
 <li><a href="#avoid_provider_get_outside_task_action">Do not call <code>get()</code> on a Provider outside a Task action</a></li>
 <li><a href="#group_describe_tasks">Group and Describe custom Tasks</a></li>
+<li><a href="#avoid_eager_file_collection_apis">Avoid using eager APIs on File Collections</a></li>
 <li><a href="#dont_resolve_configurations_before_task_execution">Don&#8217;t resolve Configurations before Task Execution</a></li>
 </ul>
 </div>
@@ -6399,13 +6400,242 @@ javadoc - Generates Javadoc API documentation for the 'main' feature.</code></pr
 </div>
 </div>
 <div class="sect1">
+<h2 id="avoid_eager_file_collection_apis"><a class="anchor" href="#avoid_eager_file_collection_apis"></a><a class="link" href="#avoid_eager_file_collection_apis">Avoid using eager APIs on File Collections</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When working with Gradle&#8217;s file collection types, be careful to avoid triggering dependency resolution during the configuration phase.</p>
+</div>
+<div class="sect2">
+<h3 id="explanation_5"><a class="anchor" href="#explanation_5"></a><a class="link" href="#explanation_5">Explanation</a></h3>
+<div class="paragraph">
+<p>Gradle&#8217;s <a href="../javadoc/org/gradle/api/artifacts/Configuration.html"><code>Configuration</code></a> and <a href="../javadoc/org/gradle/api/file/FileCollection.html"><code>FileCollection</code></a> types extend the JDK’s <code>Collection&lt;File&gt;</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>However, calling some available methods from this interface—such as <code>.size()</code>, <code>.isEmpty()</code>, <code>getFiles()</code>, <code>asPath()</code>, or <code>.toList()</code>—on these Gradle types will implicitly trigger resolution of their dependencies.
+The same is possible using Kotlin stdlib collection extension methods or Groovy GDK collection extensions.
+Converting a <code>Configuration</code> to a <code>Set&lt;File&gt;</code> also discards any implicit task dependencies it carries.</p>
+</div>
+<div class="paragraph">
+<p>You should avoid using these methods when configuring your build.
+Instead, use the methods defined directly on the Gradle interfaces - this is a necessary <em>first step</em> towards preventing eager resolutions.
+Be sure to use <a href="lazy_configuration.html#working_with_files_in_lazy_properties">lazy types and APIs</a> that defer resolution to wire task dependencies and inputs correctly.
+Some methods that cause resolution are not obvious.
+Be sure to check the actual behavior when using configurations in an atypical way.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example_5"><a class="anchor" href="#example_5"></a><a class="link" href="#example_5">Example</a></h3>
+<div class="sect3">
+<h4 id="dont_do_this_5"><a class="anchor" href="#dont_do_this_5"></a><a class="link" href="#dont_do_this_5">Don&#8217;t Do This</a></h4>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">abstract class FileCounterTask: DefaultTask() {
+    @get:InputFiles
+    abstract val countMe: ConfigurableFileCollection
+
+    @TaskAction
+    fun countFiles() {
+        logger.lifecycle("Count: " + countMe.files.size)
+    }
+}
+
+tasks.register&lt;FileCounterTask&gt;("badCountingTask") {
+    if (!configurations.runtimeClasspath.get().isEmpty()) { <i class="conum" data-value="1"></i><b>(1)</b>
+        logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.get().state == RESOLVED))
+        countMe.from(configurations.runtimeClasspath)
+    }
+}
+
+tasks.register&lt;FileCounterTask&gt;("badCountingTask2") {
+    val files = configurations.runtimeClasspath.get().files <i class="conum" data-value="2"></i><b>(2)</b>
+    countMe.from(files)
+    logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.get().state == RESOLVED))
+}
+
+tasks.register&lt;FileCounterTask&gt;("badCountingTask3") {
+    val files = configurations.runtimeClasspath.get() + layout.projectDirectory.file("extra.txt") <i class="conum" data-value="3"></i><b>(3)</b>
+    countMe.from(files)
+    logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.get().state == RESOLVED))
+}
+
+tasks.register&lt;Zip&gt;("badZippingTask") { <i class="conum" data-value="4"></i><b>(4)</b>
+    if (!configurations.runtimeClasspath.get().isEmpty()) {
+        logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.get().state == RESOLVED))
+        from(configurations.runtimeClasspath)
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">abstract class FileCounterTask extends DefaultTask {
+    @InputFiles
+    abstract ConfigurableFileCollection getCountMe();
+
+    @TaskAction
+    void countFiles() {
+        logger.lifecycle("Count: " + countMe.files.size())
+    }
+}
+
+tasks.register("badCountingTask", FileCounterTask) {
+    if (!configurations.runtimeClasspath.isEmpty()) { <i class="conum" data-value="1"></i><b>(1)</b>
+        logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.state == RESOLVED))
+        countMe.from(configurations.runtimeClasspath)
+    }
+}
+
+tasks.register("badCountingTask2", FileCounterTask) {
+    def files = configurations.runtimeClasspath.files <i class="conum" data-value="2"></i><b>(2)</b>
+    countMe.from(files)
+    logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.state == RESOLVED))
+}
+
+tasks.register("badCountingTask3", FileCounterTask) {
+    def files = configurations.runtimeClasspath + layout.projectDirectory.file("extra.txt") <i class="conum" data-value="3"></i><b>(3)</b>
+    countMe.from(files)
+    logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.state == RESOLVED))
+}
+
+tasks.register("badZippingTask", Zip) { <i class="conum" data-value="4"></i><b>(4)</b>
+    if (!configurations.runtimeClasspath.isEmpty()) {
+        logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.state == RESOLVED))
+        from(configurations.runtimeClasspath)
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong><code>isEmpty()</code> causes resolution</strong>: Many seemingly harmless Collection API methods like <code>isEmpty()</code> cause Gradle to resolve dependencies.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Accessing files directly</strong>: Using <code>getFiles()</code> to access the files in a <code>Configuration</code> will also cause Gradle to resolve the file collection.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>Adding a file via plus operator</strong>: Using the plus operator will force the <code>runtimeClasspath</code> configuration to be resolved implicitly.
+The implementation of <code>Configuration</code> doesn&#8217;t override the plus operator for regular files, therefore it falls back to using the eager API, which causes resolution.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>Be careful with indirect inputs</strong>: Some built-in tasks, for example subtypes of <code>AbstractCopyTask</code> like <code>Zip</code>, allow adding inputs indirectly and can have the same problems.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="do_this_instead_5"><a class="anchor" href="#do_this_instead_5"></a><a class="link" href="#do_this_instead_5">Do This Instead</a></h4>
+<div class="paragraph">
+<p>To avoid issues, always defer resolution until the execution phase.
+Use APIs that support lazy evaluation.</p>
+</div>
+<div style="text-align: right;">
+  <a class="download-project-link"
+     data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidJdkCollectionApiOnFileCollections-do/"
+     href="https://download-directory.github.io/?url=https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidJdkCollectionApiOnFileCollections-do/kotlin">
+    <img src="https://img.shields.io/badge/Download%20Project-GitHub-blue?logo=github&style=flat" alt="Download"/>
+  </a>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">abstract class FileCounterTask: DefaultTask() {
+    @get:InputFiles
+    abstract val countMe: ConfigurableFileCollection
+
+    @TaskAction
+    fun countFiles() {
+        logger.lifecycle("Count: " + countMe.files.size)
+    }
+}
+
+tasks.register&lt;FileCounterTask&gt;("goodCountingTask") {
+    countMe.from(configurations.runtimeClasspath) <i class="conum" data-value="1"></i><b>(1)</b>
+    countMe.from(layout.projectDirectory.file("extra.txt"))
+    logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.get().state == RESOLVED))
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">abstract class FileCounterTask extends DefaultTask {
+    @InputFiles
+    abstract ConfigurableFileCollection getCountMe();
+
+    @TaskAction
+    void countFiles() {
+        logger.lifecycle("Count: " + countMe.files.size())
+    }
+}
+
+tasks.register("goodCountingTask", FileCounterTask) {
+    countMe.from(configurations.runtimeClasspath) <i class="conum" data-value="1"></i><b>(1)</b>
+    countMe.from(layout.projectDirectory.file("extra.txt")) <i class="conum" data-value="2"></i><b>(2)</b>
+    logger.lifecycle("Resolved: " + (configurations.runtimeClasspath.state == RESOLVED))
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Add configurations to Task properties or Specs directly</strong>: This will defer resolution until the task is executed.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Add files to Specs separately</strong>: This allows combining files with file collections without triggering implicit resolutions.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags_5"><a class="anchor" href="#tags_5"></a><a class="link" href="#tags_5">Tags</a></h3>
+<div class="paragraph">
+<p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code>, <code><a href="tags_reference.html#tag:inputs-and-outputs">#inputs-and-outputs</a></code>, <code><a href="tags_reference.html#tag:configurations">#configurations</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="dont_resolve_configurations_before_task_execution"><a class="anchor" href="#dont_resolve_configurations_before_task_execution"></a><a class="link" href="#dont_resolve_configurations_before_task_execution">Don&#8217;t resolve Configurations before Task Execution</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Resolving configurations before the task execution phase can lead to incorrect results and slower builds.</p>
 </div>
 <div class="sect2">
-<h3 id="explanation_5"><a class="anchor" href="#explanation_5"></a><a class="link" href="#explanation_5">Explanation</a></h3>
+<h3 id="explanation_6"><a class="anchor" href="#explanation_6"></a><a class="link" href="#explanation_6">Explanation</a></h3>
 <div class="paragraph">
 <p>Resolving a configuration - either directly via calling its <a href="../javadoc/org/gradle/api/artifacts/Configuration.html#resolve()"><code>resolve()</code></a> method or indirectly via accessing its set of artifacts - returns a set of files that does not preserve references to the tasks that produced those files.</p>
 </div>
@@ -6419,9 +6649,9 @@ For example, if a configuration contains a project dependency, Gradle knows that
 </div>
 </div>
 <div class="sect2">
-<h3 id="example_5"><a class="anchor" href="#example_5"></a><a class="link" href="#example_5">Example</a></h3>
+<h3 id="example_6"><a class="anchor" href="#example_6"></a><a class="link" href="#example_6">Example</a></h3>
 <div class="sect3">
-<h4 id="dont_do_this_5"><a class="anchor" href="#dont_do_this_5"></a><a class="link" href="#dont_do_this_5">Don&#8217;t Do This</a></h4>
+<h4 id="dont_do_this_6"><a class="anchor" href="#dont_do_this_6"></a><a class="link" href="#dont_do_this_6">Don&#8217;t Do This</a></h4>
 <div class="exampleblock">
 <div class="content">
 <div class="exampleblock testable-sample multi-language-sample">
@@ -6523,7 +6753,7 @@ The <code>lib</code> project will not be built when the <code>:app:badClasspathP
 </div>
 </div>
 <div class="sect3">
-<h4 id="do_this_instead_5"><a class="anchor" href="#do_this_instead_5"></a><a class="link" href="#do_this_instead_5">Do This Instead</a></h4>
+<h4 id="do_this_instead_6"><a class="anchor" href="#do_this_instead_6"></a><a class="link" href="#do_this_instead_6">Do This Instead</a></h4>
 <div class="paragraph">
 <p>To avoid issues, always defer resolution to the execution phase by using lazy APIs like <a href="../javadoc/org/gradle/api/file/FileCollection.html">FileCollection</a>.</p>
 </div>
@@ -6638,7 +6868,7 @@ The output reveals that the <code>lib</code> project is now built when the <code
 </div>
 </div>
 <div class="sect2">
-<h3 id="tags_5"><a class="anchor" href="#tags_5"></a><a class="link" href="#tags_5">Tags</a></h3>
+<h3 id="tags_6"><a class="anchor" href="#tags_6"></a><a class="link" href="#tags_6">Tags</a></h3>
 <div class="paragraph">
 <p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code>, <code><a href="tags_reference.html#tag:inputs-and-outputs">#inputs-and-outputs</a></code>, <code><a href="tags_reference.html#tag:configurations">#configurations</a></code></p>
 </div>

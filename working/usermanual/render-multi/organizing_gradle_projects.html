@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Structuring and Organizing Gradle Projects</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5624,16 +5624,16 @@ include 'app'</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ ./gradlew -q projects
-
 Projects:
-
 ------------------------------------------------------------
 Root project 'my-project'
 ------------------------------------------------------------
-
+Location: /home/user/gradle/samples
+Project hierarchy:
 Root project 'my-project'
 \--- Project ':app'
-
+Project locations:
+project ':app' - /app
 To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
 For example, try running gradle :app:tasks</pre>
 </div>

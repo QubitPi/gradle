@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Migrating Builds From Apache Maven</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6143,17 +6143,18 @@ include 'simple-weather', 'simple-webapp'  <i class="conum" data-value="2"></i><
 <div class="title">Output of <strong><code>gradle projects</code></strong></div>
 <div class="content">
 <pre>&gt; gradle projects
-
 Projects:
-
 ------------------------------------------------------------
 Root project 'simple-multi-module'
 ------------------------------------------------------------
-
+Location: /home/user/gradle/samples
+Project hierarchy:
 Root project 'simple-multi-module'
 +--- Project ':simple-weather'
 \--- Project ':simple-webapp'
-
+Project locations:
+project ':simple-weather' - /simple-weather
+project ':simple-webapp' - /simple-webapp
 To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
 For example, try running gradle :simple-weather:tasks</pre>
 </div>

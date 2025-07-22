@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Structuring Builds</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6689,11 +6689,22 @@ Projects:
 Root project 'avoidEmptyProjects-avoid'
 ------------------------------------------------------------
 
+Location: /home/user/gradle/samples
+
+Project hierarchy:
+
 Root project 'avoidEmptyProjects-avoid'
 +--- Project ':app'
 \--- Project ':subs'
      \--- Project ':subs:web'
           \--- Project ':subs:web:my-web-module'
+
+Project locations:
+
+project ':app' - /app
+project ':subs' - /subs
+project ':subs:web' - /subs/web
+project ':subs:web:my-web-module' - /subs/web/my-web-module
 
 To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
 For example, try running gradle :app:tasks
@@ -6765,9 +6776,18 @@ Projects:
 Root project 'avoidEmptyProjects-do'
 ------------------------------------------------------------
 
+Location: /home/user/gradle/samples
+
+Project hierarchy:
+
 Root project 'avoidEmptyProjects-do'
 +--- Project ':app'
 \--- Project ':my-web-module'
+
+Project locations:
+
+project ':app' - /app
+project ':my-web-module' - /subs/web/my-web-module
 
 To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
 For example, try running gradle :app:tasks

@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Multi-Project Build Basics</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5706,20 +5706,24 @@ Most notably for <a href="composite_builds.html#defining_composite_builds">compo
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="text">$ gradle -q projects
-
 Projects:
-
 ------------------------------------------------------------
 Root project 'multiproject'
 ------------------------------------------------------------
-
+Location: /home/user/gradle/samples
+Project hierarchy:
 Root project 'multiproject'
 +--- Project ':api'
 +--- Project ':services'
 |    +--- Project ':services:shared'
 |    \--- Project ':services:webservice'
 \--- Project ':shared'
-
+Project locations:
+project ':api' - /api
+project ':services' - /services
+project ':services:shared' - /services/shared
+project ':services:webservice' - /services/webservice
+project ':shared' - /shared
 To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
 For example, try running gradle :api:tasks</code></pre>
 </div>

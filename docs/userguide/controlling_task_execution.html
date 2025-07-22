@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Controlling Task Execution</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250721162032+0000</span>
+<span id="revnumber">version 9.1.0-20250722173028+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5887,6 +5887,10 @@ taskX</pre>
 <h2 id="sec:finalizer_tasks"><a class="anchor" href="#sec:finalizer_tasks"></a><a class="link" href="#sec:finalizer_tasks">Finalizer tasks</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>Finalizer tasks are useful when the build creates a resource that must be cleaned up, regardless of whether the build fails or succeeds.
+An example of such a resource is a web container that is started before an integration test task and must be shut down, even if some tests fail.</p>
+</div>
+<div class="paragraph">
 <p>Finalizer tasks are automatically added to the task graph when the finalized task is scheduled to run.</p>
 </div>
 <div class="paragraph">
@@ -6020,10 +6024,6 @@ BUILD FAILED in 0s</pre>
 </div>
 </div>
 </div>
-</div>
-<div class="paragraph">
-<p>Finalizer tasks are useful when the build creates a resource that must be cleaned up, regardless of whether the build fails or succeeds.
-An example of such a resource is a web container that is started before an integration test task and must be shut down, even if some tests fail.</p>
 </div>
 </div>
 </div>
