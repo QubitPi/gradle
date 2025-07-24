@@ -5402,7 +5402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Implementing Binary Plugins</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250722173028+0000</span>
+<span id="revnumber">version 9.1.0-20250724185453+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6815,20 +6815,6 @@ Dependencies can be created lazily using these factory methods, as shown below.<
 <ul>
 <li>
 <p><code>dependencies.add("implementation", x)</code> becomes <code>getImplementation().add(x)</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>You cannot declare dependencies with the <code>Map</code> notation from Kotlin and Java.
-Use multi-argument methods instead in Kotlin and Java.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Kotlin: <code>compileOnly(mapOf("group" to "foo", "name" to "bar"))</code> becomes <code>compileOnly(module(group = "foo", name = "bar"))</code></p>
-</li>
-<li>
-<p>Java: <code>compileOnly(Map.of("group", "foo", "name", "bar"))</code> becomes <code>getCompileOnly().add(module("foo", "bar", null))</code></p>
 </li>
 </ul>
 </div>

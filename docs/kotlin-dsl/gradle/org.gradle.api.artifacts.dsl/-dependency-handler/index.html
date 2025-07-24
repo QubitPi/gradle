@@ -48,7 +48,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-9.1.0-20250722173028+0000        </div>
+9.1.0-20250724185453+0000        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -122,116 +122,108 @@
     <h1 class="cover"><span>Dependency</span><wbr></wbr><span><span>Handler</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.gradle.internal.service.scopes/ServiceScope///PointingToDeclaration/"><span class="token annotation builtin">ServiceScope</span></span><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span data-unresolved-link="org.gradle.internal.service.scopes/Scope.Project///PointingToDeclaration/">Project::class</span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="index.html">DependencyHandler</a> : <a href="../../org.gradle.api.plugins/-extension-aware/index.html">ExtensionAware</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/4ef6fb72bb3b1410040df515d79d274a3bd4d694/subprojects/core-api/src/main/java//org/gradle/api/artifacts/dsl/DependencyHandler.java#L261">source</a>)</span></span></div><p class="paragraph">A <code class="lang-kotlin">DependencyHandler</code> is used to declare dependencies. Dependencies are grouped into configurations (see <a href="../../org.gradle.api.artifacts/-configuration/index.html">org.gradle.api.artifacts.Configuration</a>).</p><p class="paragraph">To declare a specific dependency for a configuration you can use the following syntax:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {
-    <i>configurationName</i><i>dependencyNotation</i>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.gradle.internal.service.scopes/ServiceScope///PointingToDeclaration/"><span class="token annotation builtin">ServiceScope</span></span><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span data-unresolved-link="org.gradle.internal.service.scopes/Scope.Project///PointingToDeclaration/">Project::class</span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="index.html">DependencyHandler</a> : <a href="../../org.gradle.api.plugins/-extension-aware/index.html">ExtensionAware</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/829dce56e7ca8044fe01ce70c1204ec3fb172c8c/subprojects/core-api/src/main/java//org/gradle/api/artifacts/dsl/DependencyHandler.java#L241">source</a>)</span></span></div><p class="paragraph">A <code class="lang-kotlin">DependencyHandler</code> is used to declare dependencies. Dependencies are grouped into configurations (see <a href="../../org.gradle.api.artifacts/-configuration/index.html">org.gradle.api.artifacts.Configuration</a>).</p><p class="paragraph">To declare a specific dependency for a configuration you can use the following syntax:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {
+    <i>configurationName</i>(<i>dependencyNotation</i>)
 }
 </code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Example shows a basic way of declaring dependencies. </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
-    id 'java' // so that we can use 'implementation', 'testImplementation' for dependencies
-}
-
-dependencies {
-  //for dependencies found in artifact repositories you can use
-  //the group:name:version notation
-  implementation 'commons-lang:commons-lang:2.6'
-  testImplementation 'org.mockito:mockito:1.9.0-rc1'
-
-  //map-style notation:
-  implementation group: 'com.google.code.guice', name: 'guice', version: '1.0'
-
-  //declaring arbitrary files as dependencies
-  implementation files('hibernate.jar', 'libs/spring.jar')
-
-  //putting all jars from 'libs' onto compile classpath
-  implementation fileTree('libs')
-}
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class="">Advanced dependency configuration</h2><p class="paragraph">To do some advanced configuration on a dependency when it is declared, you can additionally pass a configuration closure:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {
-    <i>configurationName</i>(<i>dependencyNotation</i>){
-        <i>configStatement1</i><i>configStatement2</i>
-    }
-}
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div> Examples of advanced dependency declaration including: <ul><li>Forcing certain dependency version in case of the conflict.</li><li>Excluding certain dependencies by name, group or both. More details about per-dependency exclusions can be found in docs for <a href="../../org.gradle.api.artifacts/-module-dependency/exclude.html">exclude</a>.</li><li>Avoiding transitive dependencies for certain dependency.</li></ul><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
-    id 'java' // so that I can declare 'implementation' dependencies
-}
-
-dependencies {
-  implementation('org.hibernate:hibernate') {
-    //in case of versions conflict '3.1' version of hibernate wins:
-    version {
-      strictly('3.1')
-    }
-
-    //excluding a particular transitive dependency:
-    exclude module: 'cglib' //by artifact name
-    exclude group: 'org.jmock' //by group
-    exclude group: 'org.unwanted', module: 'iAmBuggy' //by both name and group
-
-    //disabling all transitive dependencies of this dependency
-    transitive = false
-  }
-}
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div> More examples of advanced configuration, useful when dependency module has multiple artifacts: <ul><li>Declaring dependency to a specific configuration of the module.</li><li>Explicit specification of the artifact. See also <a href="../../org.gradle.api.artifacts/-module-dependency/artifact.html">artifact</a>.</li></ul><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
     id(&quot;java-library&quot;)
 }
 
 dependencies {
-  // Configuring dependency to specific configuration of the module
-  // This notation should _only_ be used for Ivy dependencies
-  implementation(&quot;org.someOrg:someModule:1.0&quot;) {
-      targetConfiguration = &quot;someConf&quot;
-  }
+    // Declare dependency on module components
+    // Coordinates are separated by a single colon -- group:name:version
+    implementation(&quot;org.apache.commons:commons-lang3:3.17.0&quot;)
+    testImplementation(&quot;org.mockito:mockito-core:5.18.0&quot;)
 
-  // Configuring dependency on 'someLib' module
-  implementation(group: 'org.myorg', name: 'someLib', version:'1.0') {
-    // Explicitly adding the dependency artifact:
-    // Prefer variant-aware dependency resolution
-    artifact {
-      // Useful when some artifact properties unconventional
-      name = 'someArtifact' // Artifact name different than module name
-      extension = 'someExt'
-      type = 'someType'
-      classifier = 'someClassifier'
+    // Declare dependency on arbitrary files
+    implementation(files(&quot;hibernate.jar&quot;, &quot;libs/spring.jar&quot;))
+
+    // Declare dependency on all jars from the 'libs' directory
+    implementation(fileTree(&quot;libs&quot;))
+}
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class="">Advanced dependency configuration</h2><p class="paragraph">To perform advanced configuration on a dependency when it is declared, you can pass an additional configuration closure:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {
+    <i>configurationName</i>(<i>dependencyNotation</i>){
+        <i>configStatement1</i><i>configStatement2</i>
     }
-  }
 }
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class="">Dependency notations</h2><p class="paragraph">There are several supported dependency notations. These are described below. For each dependency declared this way, a <a href="../../org.gradle.api.artifacts/-dependency/index.html">Dependency</a> object is created. You can use this object to query or further configure the dependency.</p><p class="paragraph">You can also always add instances of <a href="../../org.gradle.api.artifacts/-dependency/index.html">org.gradle.api.artifacts.Dependency</a> directly:</p><code class="lang-kotlin"><i>configurationName</i> &lt;instance&gt;</code><p class="paragraph">Dependencies can also be declared with a <a href="../../org.gradle.api.provider/-provider/index.html">org.gradle.api.provider.Provider</a> that provides any of the other supported dependency notations.</p><h3 class="">External dependencies</h3><p class="paragraph">The following notation is used to declare a dependency on an external module:</p><code class="lang-kotlin"><i>configurationName</i>(&quot;<i>group</i>:<i>name</i>:<i>version</i>:<i>classifier</i>@<i>extension</i>&quot;)</code><p class="paragraph">All properties, except name, are optional.</p><p class="paragraph">External dependencies are represented by a .</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
-    id 'java' // so that we can use 'implementation', 'testImplementation' for dependencies
-}
-
-dependencies {
-  //for dependencies found in artifact repositories you can use
-  //the string notation, e.g. group:name:version
-  implementation 'commons-lang:commons-lang:2.6'
-  testImplementation 'org.mockito:mockito:1.9.0-rc1'
-
-  //map notation:
-  implementation group: 'com.google.code.guice', name: 'guice', version: '1.0'
-}
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h3 class="">Project dependencies</h3><p class="paragraph">To add a project dependency, you use the following notation: </p><p class="paragraph"><code class="lang-kotlin"><i>configurationName</i> project(':some-project')</code></p><p class="paragraph">The notation <code class="lang-kotlin">project(':project-a')</code> is similar to the syntax you use when configuring a projectA in a multi-module gradle project. </p><p class="paragraph">Project dependencies are resolved by treating each consumable configuration in the target project as a variant and performing variant-aware attribute matching against them. However, in order to override this process, an explicit target configuration can be specified: </p><p class="paragraph"><code class="lang-kotlin"><i>configurationName</i> project(path: ':project-a', configuration: 'someOtherConfiguration')</code></p><p class="paragraph">Project dependencies are represented using a <a href="../../org.gradle.api.artifacts/-project-dependency/index.html">org.gradle.api.artifacts.ProjectDependency</a>. </p><h3 class="">File dependencies</h3><p class="paragraph">You can also add a dependency using a <a href="../../org.gradle.api.file/-file-collection/index.html">org.gradle.api.file.FileCollection</a>:</p><code class="lang-kotlin"><i>configurationName</i> files('a file')</code><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
-    id 'java' // so that we can use 'implementation', 'testImplementation' for dependencies
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div> Examples of advanced dependency declaration include: <ul><li>Forcing certain dependency version in case of the conflict.</li><li>Excluding certain dependencies by name, group or both. More details about per-dependency exclusions can be found in docs for <a href="../../org.gradle.api.artifacts/-module-dependency/exclude.html">exclude</a>.</li><li>Avoiding transitive dependencies for certain dependency.</li></ul><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
+    id(&quot;java-library&quot;)
 }
 
 dependencies {
-  //declaring arbitrary files as dependencies
-  implementation files('hibernate.jar', 'libs/spring.jar')
+    implementation('org.hibernate:hibernate') {
+        // In case of versions conflict '3.1' version of hibernate wins:
+        version {
+            strictly('3.1')
+        }
 
-  //putting all jars from 'libs' onto compile classpath
-  implementation fileTree('libs')
+        // Excluding a particular transitive dependency:
+        exclude module: 'cglib' //by artifact name
+        exclude group: 'org.jmock' //by group
+        exclude group: 'org.unwanted', module: 'iAmBuggy' //by both name and group
+
+        // Disabling all transitive dependencies of this dependency
+        transitive = false
+    }
 }
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">File dependencies are represented using a <a href="../../org.gradle.api.artifacts/-file-collection-dependency/index.html">org.gradle.api.artifacts.FileCollectionDependency</a>.</p><h3 class="">Dependencies to other configurations</h3><p class="paragraph">You can add a dependency using a <a href="../../org.gradle.api.artifacts/-configuration/index.html">org.gradle.api.artifacts.Configuration</a>.</p><p class="paragraph">When the configuration is from the same project as the target configuration, the target configuration is changed to extend from the provided configuration.</p><p class="paragraph">When the configuration is from a different project, a project dependency is added.</p><h3 class="">Gradle distribution specific dependencies</h3><p class="paragraph">It is possible to depend on certain Gradle APIs or libraries that Gradle ships with. It is particularly useful for Gradle plugin development. Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">//Our Gradle plugin is written in groovy
-plugins {
-    id 'groovy'
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div> Below are more examples of advanced configuration, which may be useful when a target component has multiple artifacts: <ul><li>Declaring dependency on a specific configuration of the component.</li><li>Declaring explicit artifact requests. See also <a href="../../org.gradle.api.artifacts/-module-dependency/artifact.html">artifact</a>.</li></ul><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
+    id(&quot;java-library&quot;)
 }
-// now we can use the 'implementation' configuration for declaring dependencies
 
 dependencies {
-  //we will use the Groovy version that ships with Gradle:
-  implementation localGroovy()
+    // Configuring dependency to specific configuration of the module
+    // This notation should _only_ be used for Ivy dependencies
+    implementation(&quot;org.someOrg:someModule:1.0&quot;) {
+        targetConfiguration = &quot;someConf&quot;
+    }
 
-  //our plugin requires Gradle API interfaces and classes to compile:
-  implementation gradleApi()
+    // Configuring dependency on 'someLib' module
+    implementation(&quot;org.myorg:someLib:1.0&quot;) {
+        // Explicitly adding the dependency artifact:
+        // Prefer variant-aware dependency resolution
+        artifact {
+            // Useful when some artifact properties unconventional
+            name = &quot;someArtifact&quot; // Artifact name different than module name
+            extension = &quot;someExt&quot;
+            type = &quot;someType&quot;
+            classifier = &quot;someClassifier&quot;
+        }
+    }
+}
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class="">Dependency notations</h2><p class="paragraph">There are several supported dependency notations. These are described below. For each dependency declared this way, a <a href="../../org.gradle.api.artifacts/-dependency/index.html">Dependency</a> object is created. You can use this object to query or further configure the dependency.</p><p class="paragraph">You can also always add instances of <a href="../../org.gradle.api.artifacts/-dependency/index.html">org.gradle.api.artifacts.Dependency</a> directly:</p><code class="lang-kotlin"><i>configurationName</i>(&lt;instance&gt;)</code><p class="paragraph">Dependencies can also be declared with a <a href="../../org.gradle.api.provider/-provider/index.html">org.gradle.api.provider.Provider</a> that provides any of the other supported dependency notations.</p><h3 class="">External dependencies</h3><p class="paragraph">The following notation is used to declare a dependency on an external module:</p><code class="lang-kotlin"><i>configurationName</i>(&quot;<i>group</i>:<i>name</i>:<i>version</i>:<i>classifier</i>@<i>extension</i>&quot;)</code><p class="paragraph">All properties, except name, are optional.</p><p class="paragraph">External dependencies are represented by a .</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
+    id(&quot;java-library&quot;)
+}
 
-  //we will use the Gradle test-kit to test build logic:
-  testImplementation gradleTestKit()
+dependencies {
+    // Declare dependency on module components
+    // Coordinates are separated by a single colon -- group:name:version
+    implementation(&quot;org.apache.commons:commons-lang3:3.17.0&quot;)
+    testImplementation(&quot;org.mockito:mockito-core:5.18.0&quot;)
+}
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h3 class="">Project dependencies</h3><p class="paragraph">To add a project dependency, you use the following notation: </p><p class="paragraph"><code class="lang-kotlin"><i>configurationName</i>(project(&quot;:some-project&quot;))</code></p><p class="paragraph">Project dependencies are resolved by treating each consumable configuration in the target project as a variant and performing variant-aware attribute matching against them. However, in order to override this process, an explicit target configuration can be specified: </p><p class="paragraph"><code class="lang-kotlin"><i>configurationName</i>(project(path: &quot;:project-a&quot;, configuration: &quot;someOtherConfiguration&quot;))</code></p><p class="paragraph">Project dependencies are represented using a <a href="../../org.gradle.api.artifacts/-project-dependency/index.html">org.gradle.api.artifacts.ProjectDependency</a>. </p><h3 class="">File dependencies</h3><p class="paragraph">You can also add a dependency using a <a href="../../org.gradle.api.file/-file-collection/index.html">org.gradle.api.file.FileCollection</a>:</p><code class="lang-kotlin"><i>configurationName</i>(files(&quot;a file&quot;))</code><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
+    id(&quot;java-library&quot;)
+}
+
+dependencies {
+    // Declare dependency on arbitrary files
+    implementation(files(&quot;hibernate.jar&quot;, &quot;libs/spring.jar&quot;))
+
+    // Declare dependency on all jars from the 'libs' directory
+    implementation(fileTree(&quot;libs&quot;))
+}
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">File dependencies are represented using a <a href="../../org.gradle.api.artifacts/-file-collection-dependency/index.html">org.gradle.api.artifacts.FileCollectionDependency</a>.</p><h3 class="">Gradle distribution specific dependencies</h3><p class="paragraph">It is possible to depend on certain Gradle APIs or libraries that Gradle ships with. It is particularly useful for Gradle plugin development. Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
+    id(&quot;groovy&quot;)
+}
+
+dependencies {
+    // Declare dependency on the Groovy version that ships with Gradle
+    implementation(localGroovy())
+
+    // Declare dependency on the Gradle API interfaces and classes
+    implementation(gradleApi())
+
+    // Declare dependency on the Gradle test-kit to test build logic
+    testImplementation(gradleTestKit())
 }
 </code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
   </div>
@@ -443,7 +435,7 @@ dependencies {
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/kotlin_dsl" data-filterable-set=":docs/kotlin_dsl" data-active="" data-toggle=":docs/kotlin_dsl">DSL</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/kotlin_dsl"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="index.html#-498385534%2FMain%2F-1867656071">DependencyHandler</a><span class="token punctuation">.</span><a href="../../org.gradle.kotlin.dsl/create.html"><span class="token function">create</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dependencyNotation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">dependencyConfiguration<span class="token operator">: </span><span data-unresolved-link="org.gradle.api.artifacts/ExternalModuleDependency///PointingToDeclaration/">ExternalModuleDependency</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.artifacts/ExternalModuleDependency///PointingToDeclaration/">ExternalModuleDependency</span></div><div class="brief "><p class="paragraph">Creates a dependency without adding it to a configuration.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#-498385534%2FMain%2F-1867656071">DependencyHandler</a><span class="token punctuation">.</span><a href="../../org.gradle.kotlin.dsl/create.html"><span class="token function">create</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">group<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">version<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">configuration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">classifier<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">ext<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.artifacts/ExternalModuleDependency///PointingToDeclaration/">ExternalModuleDependency</span></div><div class="brief "><p class="paragraph">Creates a dependency on a module without adding it to a configuration.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/kotlin_dsl"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="index.html#-498385534%2FMain%2F-1867656071">DependencyHandler</a><span class="token punctuation">.</span><a href="../../org.gradle.kotlin.dsl/create.html"><span class="token function">create</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dependencyNotation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">dependencyConfiguration<span class="token operator">: </span><span data-unresolved-link="org.gradle.api.artifacts/ExternalModuleDependency///PointingToDeclaration/">ExternalModuleDependency</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.artifacts/ExternalModuleDependency///PointingToDeclaration/">ExternalModuleDependency</span></div><div class="brief "><p class="paragraph">Creates a dependency without adding it to a configuration.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#-498385534%2FMain%2F-1867656071">DependencyHandler</a><span class="token punctuation">.</span><a href="../../org.gradle.kotlin.dsl/create.html"><span class="token function"><strike>create</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">group<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">version<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">configuration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">classifier<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">ext<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.artifacts/ExternalModuleDependency///PointingToDeclaration/">ExternalModuleDependency</span></div><div class="brief "><p class="paragraph">Creates a dependency on a module without adding it to a configuration.</p></div></div>                  </div>
                 </div>
               </div>
             </div>

@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 9.x to the latest</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250722173028+0000</span>
+<span id="revnumber">version 9.1.0-20250724185453+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5444,7 +5444,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250722173028+0000</code> to update the project to 9.1.0-20250722173028+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250724185453+0000</code> to update the project to 9.1.0-20250724185453+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5458,6 +5458,155 @@ The previous step will help you identify potential problems by issuing deprecati
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="deprecations"><a class="anchor" href="#deprecations"></a><a class="link" href="#deprecations">Deprecations</a></h3>
+<div class="sect3">
+<h4 id="dependency_multi_string_notation"><a class="anchor" href="#dependency_multi_string_notation"></a><a class="link" href="#dependency_multi_string_notation">Deprecated multi-string dependency notation</a></h4>
+<div class="paragraph">
+<p>In an effort to simplify and standardize the Gradle API, the multi-string dependency notation has been deprecated and will no longer be permitted in Gradle 10.
+Gradle will primarily accept dependency declarations in the form of a single string, with each dependency coordinate separated by a colon.</p>
+</div>
+<div class="paragraph">
+<p>Below are examples of the deprecated multi-string notation:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
+    implementation(group = "org", name = "foo", version = "1.0")
+    implementation(group = "org", name = "foo", version = "1.0", configuration = "conf")
+    implementation(group = "org", name = "foo", version = "1.0", classifier = "classifier")
+    implementation(group = "org", name = "foo", version = "1.0", ext = "ext")
+}
+
+testing.suites.named&lt;JvmTestSuite&gt;("test") {
+    dependencies {
+        implementation(module(group = "org", name = "foo", version = "1.0"))
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
+    implementation(group: 'org', name: 'foo', version: '1.0')
+    implementation(group: 'org', name: 'foo', version: '1.0', configuration: 'conf')
+    implementation(group: 'org', name: 'foo', version: '1.0', classifier: 'classifier')
+    implementation(group: 'org', name: 'foo', version: '1.0', ext: 'ext')
+}
+
+testing.suites.test {
+    dependencies {
+        implementation(module(group: 'org', name: 'foo', version: '1.0'))
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>These declarations should be replaced with the single-string notation:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
+    implementation("org:foo:1.0")
+    implementation("org:foo:1.0") {
+        targetConfiguration = "conf"
+    }
+    implementation("org:foo:1.0:classifier")
+    implementation("org:foo:1.0@ext")
+}
+
+testing.suites.named&lt;JvmTestSuite&gt;("test") {
+    dependencies {
+        implementation("org:foo:1.0")
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
+    implementation("org:foo:1.0")
+    implementation("org:foo:1.0") {
+        targetConfiguration = "conf"
+    }
+    implementation("org:foo:1.0:classifier")
+    implementation("org:foo:1.0@ext")
+}
+
+testing.suites.test {
+    dependencies {
+        implementation("org:foo:1.0")
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In some cases, a complete single-string notation may not be known up front.
+Instead of concatenating the coordinates into a new string, it is possible to use a <a href="../javadoc/org/gradle/api/artifacts/dsl/DependencyFactory.html"><code>DependencyFactory</code></a> to create <code>Dependency</code> instances directly from the individual components:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val group = "org"
+val artifactId = "foo"
+val version = "1.0"
+
+configurations.dependencyScope("implementation") {
+    dependencies.add(project.dependencyFactory.create(group, artifactId, version))
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">def group = "org"
+def artifactId = "foo"
+def version = "1.0"
+
+configurations.dependencyScope("implementation") {
+    dependencies.add(project.dependencyFactory.create(group, artifactId, version))
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="archives-configuration"><a class="anchor" href="#archives-configuration"></a><a class="link" href="#archives-configuration">Deprecation of the <code>archives</code> configuration</a></h4>
 <div class="paragraph">

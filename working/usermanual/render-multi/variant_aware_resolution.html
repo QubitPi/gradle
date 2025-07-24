@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Variant Selection and Attribute Matching</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250722173028+0000</span>
+<span id="revnumber">version 9.1.0-20250724185453+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5412,6 +5412,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li><a href="#sec:abm-algorithm">Attribute Matching Algorithm</a></li>
 <li><a href="#a_simple_example">A Simple Example</a></li>
 <li><a href="#a_complicated_example">A Complicated Example</a></li>
+<li><a href="#sec:secondary-variants">Secondary Variants (Secondary Artifact Sets)</a></li>
 <li><a href="#sec:variant-visual">Visualizing Variant Information</a></li>
 </ul>
 </div>
@@ -6157,6 +6158,358 @@ Gradle would then select the highest compatible version—Java 11.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="sec:secondary-variants"><a class="anchor" href="#sec:secondary-variants"></a><a class="link" href="#sec:secondary-variants">Secondary Variants (Secondary Artifact Sets)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Secondary variants</strong> are <strong>additional sets of artifacts</strong> that a variant can expose, which do <strong>not</strong> participate in graph resolution.
+Instead, they are considered <strong>only during artifact selection</strong>.</p>
+</div>
+<div class="paragraph">
+<p>A secondary variant:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Is an additional artifact set exposed by a configuration.</p>
+</li>
+<li>
+<p>Has its own attributes and artifacts.</p>
+</li>
+<li>
+<p>Is published automatically unless explicitly skipped.</p>
+</li>
+<li>
+<p>May be selected during dependency resolution or by <code>ArtifactView</code> if the requested attributes match.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Secondary variants are typically used to expose <strong>precomputed transforms</strong> of the main artifact like <code>.class</code> files or the <code>resources</code> directory.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Secondary variants are sometimes referred to in tooling or logs, but this term is being deprecated in favor of more precise concepts like <strong>artifact sets</strong> or <strong>precomputed transforms</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The simplest scenario is a typical Java library</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
+    id("java-library")
+}
+
+group = "com.gradle"
+version = "1.2.3"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
+    id("java-library")
+}
+
+group = "com.gradle"
+version = "1.2.3"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>apiElements</code> variant represents the public API of a library and is used during dependency resolution when a consuming project requests <code>java-api</code> usage:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew outgoingVariants -q
+
+&gt; Task :outgoingVariants
+
+--------------------------------------------------
+Variant apiElements
+--------------------------------------------------
+API elements for the 'main' feature.
+
+Capabilities
+    - com.gradle:some-library:1.2.3 (default capability)
+Attributes
+    - org.gradle.category            = library
+    - org.gradle.dependency.bundling = external
+    - org.gradle.jvm.version         = 17
+    - org.gradle.libraryelements     = jar
+    - org.gradle.usage               = java-api
+Artifacts
+    - build/libs/some-library-1.2.3.jar (artifactType = jar)
+
+Secondary Variants (*)
+
+    --------------------------------------------------
+    Secondary Variant classes
+    --------------------------------------------------
+    Directories containing compiled class files for main.
+
+    Attributes
+        - org.gradle.category            = library
+        - org.gradle.dependency.bundling = external
+        - org.gradle.jvm.version         = 17
+        - org.gradle.libraryelements     = classes
+        - org.gradle.usage               = java-api
+    Artifacts
+        - build/classes/java/main (artifactType = java-classes-directory)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the output, in addition to its main artifact (<code>some-library-1.2.3.jar</code>), <code>apiElements</code> also exposes a <strong>secondary variant</strong> named <code>classes</code>, which provides the compiled class files as a <code>java-classes-directory</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>classes</code> secondary variant (which does not contribute dependencies during graph resolution so it does not influence graph resolution) provides Gradle with additional flexibility during artifact selection.
+For example, enabling consumers to use unjarred class files for faster access in IDEs or incremental compilation.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s create a secondary variant of our Java library:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">// Create a new secondary variant on the existing 'apiElements' configuration.
+// This variant will be available during artifact selection (not graph resolution).
+val apiElementVariant: ConfigurationVariant by configurations.apiElements.get().outgoing.variants.creating {
+    attributes {
+        // Override the 'Usage' attribute to distinguish this variant from the default 'java-api'.
+        // This allows consumers requesting 'custom-variant' usage to select this artifact set.
+        attribute(Usage.USAGE_ATTRIBUTE, objects.named("custom-variant"))
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">// Create a new secondary variant on the existing 'apiElements' configuration.
+// This variant will be available during artifact selection (not graph resolution).
+configurations.apiElements.outgoing.variants.create("customApiElement") {
+    attributes {
+        attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage, "custom-variant"))
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>And we can see our new secondary variant is created for <code>apiElements</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew outgoingVariants -q
+
+&gt; Task :outgoingVariants
+
+--------------------------------------------------
+Variant apiElements
+--------------------------------------------------
+API elements for the 'main' feature.
+
+Capabilities
+    - com.gradle:some-library:1.2.3 (default capability)
+Attributes
+    - org.gradle.category            = library
+    - org.gradle.dependency.bundling = external
+    - org.gradle.jvm.version         = 17
+    - org.gradle.libraryelements     = jar
+    - org.gradle.usage               = java-api
+Artifacts
+    - build/libs/some-library-1.2.3.jar (artifactType = jar)
+
+Secondary Variants (*)
+
+    --------------------------------------------------
+    Secondary Variant apiElementVariant
+    --------------------------------------------------
+
+    Attributes
+        - org.gradle.category            = library
+        - org.gradle.dependency.bundling = external
+        - org.gradle.jvm.version         = 17
+        - org.gradle.libraryelements     = jar
+        - org.gradle.usage               = custom-variant
+
+    --------------------------------------------------
+    Secondary Variant classes
+    --------------------------------------------------
+    Directories containing compiled class files for main.
+
+    Attributes
+        - org.gradle.category            = library
+        - org.gradle.dependency.bundling = external
+        - org.gradle.jvm.version         = 17
+        - org.gradle.libraryelements     = classes
+        - org.gradle.usage               = java-api
+    Artifacts
+        - build/classes/java/main (artifactType = java-classes-directory)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To create a completely new variant for our library, we must also create a new configuration.</p>
+</div>
+<div class="paragraph">
+<p>The code below defines a custom consumable configuration <code>fooFiles</code> with two <strong>secondary variants</strong>, <code>fooFilesVariant1</code> and <code>fooFilesVariant2</code>, each distinguished by a unique combination of custom attributes.
+The base configuration sets <code>FooAttribute = main</code>, which is inherited by <code>fooFilesVariant1</code>, while <code>fooFilesVariant2</code> overrides it to <code>secondary</code>.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">// Define custom attributes for variant identification
+val fooAttribute = Attribute.of("com.example.foo", String::class.java)
+val fooVariantAttribute = Attribute.of("com.example.fooVariant", String::class.java)
+
+// Create a consumable configuration named 'fooFiles'
+// This configuration serves as the container for outgoing variants
+val fooFiles: Configuration by configurations.creating {
+    isCanBeDeclared = false
+    isCanBeResolved = false
+    isCanBeConsumed = true
+    attributes {
+        // Base attribute for the configuration
+        attribute(fooAttribute, "main")
+    }
+}
+
+// Define the first variant of 'fooFiles'
+// This variant inherits all attributes from the parent configuration and adds a distinguishing attribute to identify the variant
+val fooFilesVariant1: ConfigurationVariant by fooFiles.outgoing.variants.creating {
+    attributes {
+        attribute(fooVariantAttribute, "variant1")
+    }
+}
+
+// Define a second variant of 'fooFiles'
+// This one overrides the inherited 'fooAttribute' value and sets a different 'fooVariantAttribute' value
+val fooFilesVariant2: ConfigurationVariant by fooFiles.outgoing.variants.creating {
+    attributes {
+        attribute(fooAttribute, "secondary") // Overrides inherited attribute
+        attribute(fooVariantAttribute, "variant2")
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">// Define custom attributes for variant identification
+def fooAttribute = Attribute.of("com.example.foo", String)
+def fooVariantAttribute = Attribute.of("com.example.fooVariant", String)
+
+// Create a consumable configuration named 'fooFiles'
+// This configuration serves as the container for outgoing variants
+def fooFiles = configurations.create("fooFiles") {
+    canBeDeclared = false
+    canBeResolved = false
+    canBeConsumed = true
+    attributes {
+        attribute(fooAttribute, "main")
+    }
+}
+
+// Define the first variant of 'fooFiles'
+// This variant inherits all attributes from the parent configuration and adds a distinguishing attribute
+fooFiles.outgoing.variants.create("fooFilesVariant1") {
+    attributes {
+        attribute(fooVariantAttribute, "variant1")
+    }
+}
+
+// Define a second variant of 'fooFiles'
+// This one overrides the inherited 'fooAttribute' value and sets a different 'fooVariantAttribute' value
+fooFiles.outgoing.variants.create("fooFilesVariant2") {
+    attributes {
+        attribute(fooAttribute, "secondary") // Overrides inherited attribute
+        attribute(fooVariantAttribute, "variant2")
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The output reflects this structure, showing <code>fooFiles</code> as the primary variant and both secondary variants with their corresponding <code>FooAttribute</code> and <code>FooVariantAttribute</code> values, which Gradle uses during <strong>artifact selection</strong> to match a consumer&#8217;s requested attributes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew outgoingVariants -q
+
+&gt; Task :outgoingVariants
+
+--------------------------------------------------
+Variant fooFiles
+--------------------------------------------------
+
+Capabilities
+    - com.gradle:some-library:1.2.3 (default capability)
+Attributes
+    - FooAttribute = main
+
+Secondary Variants (*)
+
+    --------------------------------------------------
+    Secondary Variant fooFilesVariant1
+    --------------------------------------------------
+
+    Attributes
+        - FooAttribute        = main
+        - FooVariantAttribute = variant1
+
+    --------------------------------------------------
+    Secondary Variant fooFilesVariant2
+    --------------------------------------------------
+
+    Attributes
+        - FooAttribute        = secondary
+        - FooVariantAttribute = variant2</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="sec:variant-visual"><a class="anchor" href="#sec:variant-visual"></a><a class="link" href="#sec:variant-visual">Visualizing Variant Information</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -6282,8 +6635,8 @@ Notice that the main difference is on the <code>org.gradle.usage</code> <strong>
 As they indicate, this is where the difference is made between what needs to be on the <em>compile</em> classpath of <em>consumers</em>, versus what&#8217;s needed on the <em>runtime</em> classpath.</p>
 </div>
 <div class="paragraph">
-<p>It also shows <em>secondary</em> <strong>variants</strong>, which are exclusive to Gradle projects and not published.
-For example, the secondary <strong>variant</strong> <code>classes</code> from <code>apiElements</code> is what allows Gradle to skip the JAR creation when compiling against a <a href="java_library_plugin.html#sec:java_library_classes_usage"><code>java-library</code> project</a>.</p>
+<p>It also shows <strong>secondary variants</strong>.
+For example, the <strong>secondary variant</strong> <code>classes</code> from <code>apiElements</code> is what allows Gradle to skip the JAR creation when compiling against a <a href="java_library_plugin.html#sec:java_library_classes_usage"><code>java-library</code> project</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="information_about_invalid_consumable_configurations"><a class="anchor" href="#information_about_invalid_consumable_configurations"></a><a class="link" href="#information_about_invalid_consumable_configurations">Information about invalid consumable configurations</a></h4>

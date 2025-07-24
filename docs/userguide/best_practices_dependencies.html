@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Dependencies</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250722173028+0000</span>
+<span id="revnumber">version 9.1.0-20250724185453+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6269,19 +6269,8 @@ dependencies {
 <div class="sectionbody">
 <div class="paragraph">
 <p>When declaring dependencies without a <a href="version_catalogs.html#version-catalog">version catalog</a>, prefer using the single GAV string notation <code>implementation("org.example:library:1.0")</code>.
-Avoid using the named argument notation unless necessary <code>implementation(group = "org.example", name = "library", version = "1.0")</code>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The named argument and map notations may be deprecated in the future.
-</td>
-</tr>
-</table>
+Avoid using the named argument notation.
+The named argument notation has been deprecated and will no longer be supported starting in Gradle 10.</p>
 </div>
 <div class="sect2">
 <h3 id="explanation_6"><a class="anchor" href="#explanation_6"></a><a class="link" href="#explanation_6">Explanation</a></h3>
@@ -6291,18 +6280,6 @@ However, the single-string form is more concise, easier to read, and is widely a
 </div>
 <div class="paragraph">
 <p>This format is also recommended by <a href="https://central.sonatype.com/artifact/com.google.guava/guava">Maven Central</a> in its documentation and usage examples, making it the most familiar and consistent style for developers across tools.</p>
-</div>
-<div class="paragraph">
-<p>A valid reason to use named arguments format is when resolving a dependency from an Ivy repository that requires selecting a specific configuration by name.
-This syntax is only applicable for Ivy dependencies and should not be used with standard Maven modules:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">// Use this syntax only for Ivy modules when a specific configuration must be selected
-dependencies {
-    implementation(group = "org.someOrg", name = "someModule", version = "1.0", configuration = "someConf")
-}</code></pre>
-</div>
 </div>
 </div>
 <div class="sect2">

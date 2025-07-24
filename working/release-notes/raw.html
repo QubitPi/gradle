@@ -58,6 +58,16 @@ For Wistia, contact Gradle's Video Team.
 ==========================================================
 ADD RELEASE FEATURES BELOW
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
+<p><a name="ear-plugin"></a></p>
+<h3><a href="#ear-plugin" id="ear-plugin">Ear Plugin</a></h3>
+<p>It is now possible to generate valid deployment descriptors for Jakarta EE 11
+by specifying the corresponding version in the <code>deploymentDescriptor</code> instead of having to use a custom descriptor file.</p>
+<pre><code class="language-kotlin">tasks.ear {
+    deploymentDescriptor {  // custom entries for application.xml:
+        version = &quot;11&quot;
+    }
+}
+</code></pre>
 <p><a name="cli"></a></p>
 <h3><a href="#cli-improvement" id="cli-improvement">CLI improvement</a></h3>
 <h4><a href="#off-screen-lines-reported-in-rich-console" id="off-screen-lines-reported-in-rich-console">Off-screen lines reported in rich console</a></h4>
