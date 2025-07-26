@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading within Gradle 8.x</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250724185453+0000</span>
+<span id="revnumber">version 9.1.0-20250726035043+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -6343,7 +6343,7 @@ The <a href="configuration_cache_requirements.html#config_cache:requirements:ext
 <p>This behavior has been deprecated and will become an error in Gradle 9.0.</p>
 </div>
 <div class="paragraph">
-<p>To create extension relationships between configurations, you should change to using non-detached configurations created via the other factory methods present in the project&#8217;s <code><a href="../javadoc/org/gradle/api/artifacts/ConfigurationContainer.html)">ConfigurationContainer</a></code>.</p>
+<p>To create extension relationships between configurations, you should change to using non-detached configurations created via the other factory methods present in the project&#8217;s <code><a href="../javadoc/org/gradle/api/artifacts/ConfigurationContainer.html">ConfigurationContainer</a></code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -6568,7 +6568,7 @@ This means that if you return to an older version of Gradle, an 8.9-provisioned 
 <div class="sect3">
 <h4 id="change_the_encoding_of_daemon_log_files"><a class="anchor" href="#change_the_encoding_of_daemon_log_files"></a><a class="link" href="#change_the_encoding_of_daemon_log_files">Change the encoding of daemon log files</a></h4>
 <div class="paragraph">
-<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250724185453+0000/</code>, was encoded with the default JVM encoding.
+<p>In previous versions of Gradle, the daemon log file, located at <code>$<a href="directory_layout.html#dir:gradle_user_home">GRADLE_USER_HOME</a>/daemon/9.1.0-20250726035043+0000/</code>, was encoded with the default JVM encoding.
 This file is now always encoded with UTF-8 to prevent clients who may use different default encodings from reading data incorrectly.
 This change may affect third-party tools trying to read this file.</p>
 </div>
@@ -6760,7 +6760,7 @@ tasks.register("resolve") {
 <p>In an ongoing effort to simplify the Gradle API, the following methods that support filtering based on declared dependencies have been deprecated:</p>
 </div>
 <div class="paragraph">
-<p>On <a href="../javadoc/org/gradle/api/artifacts/Configuration.html--">Configuration</a>:</p>
+<p>On <a href="../javadoc/org/gradle/api/artifacts/Configuration.html">Configuration</a>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -6785,7 +6785,7 @@ tasks.register("resolve") {
 </ul>
 </div>
 <div class="paragraph">
-<p>On <a href="../javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html--">ResolvedConfiguration</a>:</p>
+<p>On <a href="../javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html">ResolvedConfiguration</a>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -6798,7 +6798,7 @@ tasks.register("resolve") {
 </ul>
 </div>
 <div class="paragraph">
-<p>On <a href="../javadoc/org/gradle/api/artifacts/LenientConfiguration.html--">LenientConfiguration</a>:</p>
+<p>On <a href="../javadoc/org/gradle/api/artifacts/LenientConfiguration.html">LenientConfiguration</a>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -7129,7 +7129,7 @@ tasks.create("foo", { it.description = "Foo task" } as Action&lt;Task&gt;)</code
 <div class="sect3">
 <h4 id="replacement_and_upgrade_of_jsch"><a class="anchor" href="#replacement_and_upgrade_of_jsch"></a><a class="link" href="#replacement_and_upgrade_of_jsch">Replacement and upgrade of JSch</a></h4>
 <div class="paragraph">
-<p><a href="http://www.jcraft.com/jsch/">JSch</a> has been replaced by <a href="https://github.com/mwiede/jsch"><code>com.github.mwiede:jsch</code></a> and updated from 0.1.55 to <a href="https://github.com/mwiede/jsch/releases/tag/jsch-0.2.16">0.2.16</a></p>
+<p>JSch has been replaced by <a href="https://github.com/mwiede/jsch"><code>com.github.mwiede:jsch</code></a> and updated from 0.1.55 to <a href="https://github.com/mwiede/jsch/releases/tag/jsch-0.2.16">0.2.16</a></p>
 </div>
 </div>
 <div class="sect3">
@@ -8426,7 +8426,7 @@ This applies to builds applying the Kotlin plugin v1.8.20 or the <code>kotlin-ds
 <div class="sect3">
 <h4 id="upgrade_to_ant_1_10_13"><a class="anchor" href="#upgrade_to_ant_1_10_13"></a><a class="link" href="#upgrade_to_ant_1_10_13">Upgrade to Ant 1.10.13</a></h4>
 <div class="paragraph">
-<p>Ant has been updated to <a href="https://archive.apache.org/dist/ant/RELEASE-NOTES-1.10.13.html">Ant 1.10.13</a>.</p>
+<p>Ant has been updated to <a href="https://ant.apache.org/index.html">Ant 1.10.13</a>.</p>
 </div>
 <div class="paragraph">
 <p>Since the previous version was 1.10.11, the <a href="https://github.com/apache/ant/blob/rel/1.10.12/WHATSNEW">1.10.12</a> changes are also included.</p>

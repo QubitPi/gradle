@@ -5401,13 +5401,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices for Performance</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250724185453+0000</span>
+<span id="revnumber">version 9.1.0-20250726035043+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
 <ul class="sectlevel1">
 <li><a href="#use_utf8_encoding">Use UTF-8 File Encoding</a></li>
 <li><a href="#use_build_cache">Use the Build Cache</a></li>
+<li><a href="#use_configuration_cache">Use the Configuration Cache</a></li>
 <li><a href="#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></li>
 </ul>
 </div>
@@ -5481,6 +5482,11 @@ Do not rely on the default encoding of the underlying JVM or operating system, a
 <p>This prevents redundant work.
 If the inputs are the same, the outputs will be too, resulting in faster, more efficient builds.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="example"><a class="anchor" href="#example"></a><a class="link" href="#example">Example</a></h3>
+<div class="sect3">
+<h4 id="dont_do_this"><a class="anchor" href="#dont_do_this"></a><a class="link" href="#dont_do_this">Don&#8217;t Do This</a></h4>
 <div class="paragraph">
 <p>Build caching is disabled by default:</p>
 </div>
@@ -5493,6 +5499,7 @@ If the inputs are the same, the outputs will be too, resulting in faster, more e
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="properties"># caching is off by default
 # org.gradle.caching=false</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -5528,7 +5535,6 @@ If the inputs are the same, the outputs will be too, resulting in faster, more e
 <div class="content">
 <pre>&gt; ./gradlew clean
 :clean
-
 BUILD SUCCESSFUL</pre>
 </div>
 </div>
@@ -5538,7 +5544,6 @@ BUILD SUCCESSFUL</pre>
 <div class="listingblock">
 <div class="content">
 <pre>&gt; ./gradlew compileJava
-
 &gt; Task :compileJava FROM-CACHE
 
 BUILD SUCCESSFUL in 0s
@@ -5566,13 +5571,159 @@ BUILD SUCCESSFUL in 0s
 </div>
 </div>
 <div class="sect1">
+<h2 id="use_configuration_cache"><a class="anchor" href="#use_configuration_cache"></a><a class="link" href="#use_configuration_cache">Use the Configuration Cache</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use the Configuration Cache to significantly improve build performance by caching the result of the configuration phase and reusing it in subsequent builds.</p>
+</div>
+<div class="sect2">
+<h3 id="explanation_3"><a class="anchor" href="#explanation_3"></a><a class="link" href="#explanation_3">Explanation</a></h3>
+<div class="paragraph">
+<p>The Configuration Cache works by saving the result of the configuration phase.
+On the next build, if nothing relevant has changed, Gradle skips configuration entirely and loads the cached task graph from disk, jumping straight to task execution.</p>
+</div>
+<div class="paragraph">
+<p>This can dramatically reduce build time for large builds, but it’s just as valuable for smaller builds where configuration overhead can dominate short iterations.
+Faster feedback helps developers stay focused, without waiting on redundant configuration work.</p>
+</div>
+<div class="paragraph">
+<p>It’s important to understand how this differs from the Build Cache.
+The Build Cache stores the outputs of task execution, while the Configuration Cache stores the configured task graph before execution begins.
+These are independent mechanisms that solve different problems, but they are designed to work together for optimal performance.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Configuration Cache is the preferred way to execute Gradle builds, but it is not enabled by default.
+Many existing builds and plugins are not yet fully compatible, and adopting it may involve refactoring of build logic.
+Enabling it by default could lead to unexpected build failures, so Gradle uses an opt-in adoption model to allow teams to verify compatibility and adopt configuration caching incrementally and safely.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example_2"><a class="anchor" href="#example_2"></a><a class="link" href="#example_2">Example</a></h3>
+<div class="sect3">
+<h4 id="dont_do_this_2"><a class="anchor" href="#dont_do_this_2"></a><a class="link" href="#dont_do_this_2">Don&#8217;t Do This</a></h4>
+<div class="paragraph">
+<p>Configuration Caching is not enabled by default:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">gradle.properties</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="properties"># caching is off by default
+# org.gradle.configuration-cache=false</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="do_this_instead_2"><a class="anchor" href="#do_this_instead_2"></a><a class="link" href="#do_this_instead_2">Do This Instead</a></h4>
+<div class="paragraph">
+<p>To enable the Configuration Cache, add the following to your <code>gradle.properties</code> file:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock testable-sample multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">gradle.properties</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="properties">org.gradle.configuration-cache=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>When you build your project for the first time, Gradle stores the outcome of the configuration phase, including the task graph, in the Configuration Cache.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew compileJava
+
+Configuration cache entry stored.
+&gt; Task :processResources NO-SOURCE
+&gt; Task :processTestResources NO-SOURCE
+&gt; Task :compileJava
+&gt; Task :classes
+&gt; Task :compileTestJava NO-SOURCE
+&gt; Task :testClasses UP-TO-DATE
+&gt; Task :test NO-SOURCE
+&gt; Task :check UP-TO-DATE
+&gt; Task :jar
+&gt; Task :assemble
+&gt; Task :build
+
+BUILD SUCCESSFUL in 0s
+2 actionable tasks: 2 executed</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On subsequent builds, instead of reconfiguring tasks like <code>:compileJava</code>, Gradle loads the task graph from the Configuration Cache and proceeds directly to execution.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; ./gradlew compileJava
+
+Configuration cache entry reused.
+&gt; Task :processResources NO-SOURCE
+&gt; Task :processTestResources NO-SOURCE
+&gt; Task :compileJava
+&gt; Task :classes
+&gt; Task :compileTestJava NO-SOURCE
+&gt; Task :testClasses UP-TO-DATE
+&gt; Task :test NO-SOURCE
+&gt; Task :check UP-TO-DATE
+&gt; Task :jar
+&gt; Task :assemble
+&gt; Task :build
+
+BUILD SUCCESSFUL in 0s
+2 actionable tasks: 2 executed</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="references_3"><a class="anchor" href="#references_3"></a><a class="link" href="#references_3">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuration_cache_enabling.html#config_cache:usage:enable">Enabling The Configuration Cache</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tags_3"><a class="anchor" href="#tags_3"></a><a class="link" href="#tags_3">Tags</a></h3>
+<div class="paragraph">
+<p><code><a href="tags_reference.html#tag:properties">#properties</a></code>, <code><a href="tags_reference.html#tag:caching">#caching</a></code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="avoid_computations_in_configuration_phase"><a class="anchor" href="#avoid_computations_in_configuration_phase"></a><a class="link" href="#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Avoid expensive computations in the <a href="build_lifecycle.html#sec:build_phases">configuration phase</a>, instead, move them to task actions.</p>
 </div>
 <div class="sect2">
-<h3 id="explanation_3"><a class="anchor" href="#explanation_3"></a><a class="link" href="#explanation_3">Explanation</a></h3>
+<h3 id="explanation_4"><a class="anchor" href="#explanation_4"></a><a class="link" href="#explanation_4">Explanation</a></h3>
 <div class="paragraph">
 <p>In order for Gradle to execute tasks it first needs to build the project task graph.
 As part of discovering what tasks to include in the task graph, Gradle will configure all the tasks that are directly requested, any task dependencies of the requested tasks, and also any tasks that are not lazily registered.
@@ -5584,9 +5735,9 @@ It is better to move these operations to task actions so that they run only when
 </div>
 </div>
 <div class="sect2">
-<h3 id="example"><a class="anchor" href="#example"></a><a class="link" href="#example">Example</a></h3>
+<h3 id="example_3"><a class="anchor" href="#example_3"></a><a class="link" href="#example_3">Example</a></h3>
 <div class="sect3">
-<h4 id="dont_do_this"><a class="anchor" href="#dont_do_this"></a><a class="link" href="#dont_do_this">Don&#8217;t Do This</a></h4>
+<h4 id="dont_do_this_3"><a class="anchor" href="#dont_do_this_3"></a><a class="link" href="#dont_do_this_3">Don&#8217;t Do This</a></h4>
 <div class="exampleblock">
 <div class="content">
 <div class="exampleblock testable-sample multi-language-sample">
@@ -5657,7 +5808,7 @@ tasks.register("myTask", MyTask) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="do_this_instead_2"><a class="anchor" href="#do_this_instead_2"></a><a class="link" href="#do_this_instead_2">Do This Instead</a></h4>
+<h4 id="do_this_instead_3"><a class="anchor" href="#do_this_instead_3"></a><a class="link" href="#do_this_instead_3">Do This Instead</a></h4>
 <div style="text-align: right;">
   <a class="download-project-link"
      data-base-path="https://github.com/gradle/gradle/tree/master/platforms/documentation/docs/src/snippets/bestPractices/avoidComputationInConfigurationPhase-do/"
@@ -5727,7 +5878,7 @@ tasks.register("myTask", MyTask)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="references_3"><a class="anchor" href="#references_3"></a><a class="link" href="#references_3">References</a></h3>
+<h3 id="references_4"><a class="anchor" href="#references_4"></a><a class="link" href="#references_4">References</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -5740,7 +5891,7 @@ tasks.register("myTask", MyTask)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tags_3"><a class="anchor" href="#tags_3"></a><a class="link" href="#tags_3">Tags</a></h3>
+<h3 id="tags_4"><a class="anchor" href="#tags_4"></a><a class="link" href="#tags_4">Tags</a></h3>
 <div class="paragraph">
 <p><code><a href="tags_reference.html#tag:tasks">#tasks</a></code></p>
 </div>

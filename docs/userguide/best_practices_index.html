@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Best Practices Index</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250724185453+0000</span>
+<span id="revnumber">version 9.1.0-20250726035043+0000</span>
 </div>
 </div>
 <div id="content">
@@ -5413,7 +5413,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>There are currently <strong>26 Best Practices</strong>.</p>
+<p>There are currently <strong>27 Best Practices</strong>.</p>
 </div>
 </div>
 </div>
@@ -5430,7 +5430,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <tr>
 <th class="tableblock halign-left valign-top">Title</th>
 <th class="tableblock halign-left valign-top">Section</th>
-<th class="tableblock halign-left valign-top">Introduced in Gradle</th>
+<th class="tableblock halign-left valign-top">Added in Gradle Version</th>
 </tr>
 </thead>
 <tbody>
@@ -5510,54 +5510,64 @@ document.addEventListener("DOMContentLoaded", function () {
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;best_practices_dependencies.adoc#use_content_filtering,Use Content Filtering with multiple Repositories</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_dependencies.html#use_content_filtering">Use Content Filtering with multiple Repositories</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dependencies</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_tasks.html#avoid_depends_on">Avoid DependsOn</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8.14</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_tasks.html#use_cacheability_annotations">Favor @CacheableTask and @DisableCachingByDefault over cacheIf(Spec) and doNotCacheIf(String, Spec)</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8.14</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_tasks.html#group_describe_tasks">Group and Describe custom Tasks</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_tasks.html#avoid_provider_get_outside_task_action">Do not call <code>get()</code> on a Provider outside a Task action</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_tasks.html#dont_resolve_configurations_before_task_execution">Don&#8217;t resolve Configurations before Task Execution</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_tasks.html#avoid_eager_file_collection_apis">Avoid using eager APIs on File Collections</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#use_utf8_encoding">Enable UTF‑8</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#use_utf8_encoding">Enable UTF‑8</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#use_build_cache">Use the Build Cache</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#use_build_cache">Use the Build Cache</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#use_configuration_cache">Use the Configuration Cache</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_performance.html#avoid_computations_in_configuration_phase">Avoid Expensive Computations in Configuration Phase</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="best_practices_security.html#best_practices_for_security">Validate the Gradle Distribution SHA-256 Checksum</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9.1.0</p></td>
 </tr>
 </tbody>
 </table>
