@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Structuring and Organizing Gradle Projects</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250726035043+0000</span>
+<span id="revnumber">version 9.1.0-20250728161813+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5532,10 +5532,10 @@ From Gradle&#8217;s perspective, the root is the top-level directory <code>.</co
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="kotlin">.   <i class="conum" data-value="1"></i><b>(1)</b>
-├── settings.gradle <i class="conum" data-value="2"></i><b>(2)</b>
-└── app/                <i class="conum" data-value="3"></i><b>(3)</b>
-    ├── build.gradle       <i class="conum" data-value="4"></i><b>(4)</b>
-    └── src/            <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+├── settings.gradle.kts <i class="conum" data-value="2"></i><b>(2)</b>
+└── app/                   <i class="conum" data-value="3"></i><b>(3)</b>
+    ├── build.gradle.kts       <i class="conum" data-value="4"></i><b>(4)</b>
+    └── src/               <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
 </div>
 </div>
 </div>
@@ -5545,10 +5545,10 @@ From Gradle&#8217;s perspective, the root is the top-level directory <code>.</co
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="groovy">.   <i class="conum" data-value="1"></i><b>(1)</b>
-├── settings.gradle.kts <i class="conum" data-value="2"></i><b>(2)</b>
-└── app/                    <i class="conum" data-value="3"></i><b>(3)</b>
-    ├── build.gradle.kts        <i class="conum" data-value="4"></i><b>(4)</b>
-    └── src/                <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+├── settings.gradle <i class="conum" data-value="2"></i><b>(2)</b>
+└── app/                 <i class="conum" data-value="3"></i><b>(3)</b>
+    ├── build.gradle        <i class="conum" data-value="4"></i><b>(4)</b>
+    └── src/             <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
 </div>
 </div>
 </div>
@@ -5561,15 +5561,15 @@ From Gradle&#8217;s perspective, the root is the top-level directory <code>.</co
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Subproject</td>
+<td>Settings file</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Subproject build file</td>
+<td>Subproject</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Settings file</td>
+<td>Subproject build file</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
