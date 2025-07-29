@@ -16,7 +16,7 @@
     <bookinfo>
         <title>Gradle Build Language Reference</title>
         <titleabbrev>Gradle DSL</titleabbrev>
-    <releaseinfo>9.1.0-20250728161813+0000</releaseinfo></bookinfo>
+    <releaseinfo>9.1.0-20250729190912+0000</releaseinfo></bookinfo>
 
     <section>
         <title>Introduction</title>
@@ -936,13 +936,23 @@ sourceSets {
 </para><para>
 Example usage:
 </para><programlisting language="java">
+plugins {
+    id("org.gradle.reporting-base")
+}
+
 reporting {
+    // change the base directory where all reports are generated
     baseDirectory = layout.buildDirectory.dir("our-reports")
 }
+
+// A directory for test reports
+reporting.baseDirectory.dir("test-reports")
+
+// A report file
+reporting.baseDirectory.file("index.html")
 </programlisting><para>
-When implementing a task that produces reports, the location of where to generate reports should be obtained
-via the <ulink url="../dsl/org.gradle.api.reporting.ReportingExtension.html#org.gradle.api.reporting.ReportingExtension:file(java.lang.String)"><classname>ReportingExtension.file(java.lang.String)</classname></ulink> method of this extension.</para><section><title>Properties</title><table><title>Properties - ReportingExtension</title><thead><tr><td>Property</td><td>Description</td></tr></thead><tr><td><link linkend="org.gradle.api.reporting.ReportingExtension:baseDirectory"><literal>baseDirectory</literal></link></td><td><para>Returns base directory property to use for all reports.</para></td></tr></table></section><section><title>Methods</title><table><title>Methods - ReportingExtension</title><thead><tr><td>Method</td><td>Description</td></tr></thead><tr><td><literal><link linkend="org.gradle.api.reporting.ReportingExtension:file(java.lang.String)">file</link>(path)</literal></td><td><para>Creates a file object for the given path, relative to <ulink url="../dsl/org.gradle.api.reporting.ReportingExtension.html#org.gradle.api.reporting.ReportingExtension:baseDirectory"><classname>ReportingExtension.getBaseDirectory()</classname></ulink>.
-</para></td></tr></table></section><section><title>Script blocks</title><para>No script blocks</para></section><section><title>Property details</title><section id="org.gradle.api.reporting.ReportingExtension:baseDirectory" role="detail"><title><ulink url="../javadoc/org/gradle/api/file/DirectoryProperty.html"><classname>DirectoryProperty</classname></ulink> <literal>baseDirectory</literal></title><para>Returns base directory property to use for all reports.</para></section></section><section><title>Method details</title><section id="org.gradle.api.reporting.ReportingExtension:file(java.lang.String)" role="detail"><title><ulink url="https://docs.oracle.com/javase/8/docs/api/java/io/File.html"><classname>File</classname></ulink> <literal>file</literal>(<ulink url="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"><classname>String</classname></ulink> path)</title><para>Creates a file object for the given path, relative to <ulink url="../dsl/org.gradle.api.reporting.ReportingExtension.html#org.gradle.api.reporting.ReportingExtension:baseDirectory"><classname>ReportingExtension.getBaseDirectory()</classname></ulink>.
+When implementing a task that produces reports, the location of where to generate reports should be obtained from <ulink url="../dsl/org.gradle.api.reporting.ReportingExtension.html#org.gradle.api.reporting.ReportingExtension:baseDirectory"><classname>ReportingExtension.getBaseDirectory()</classname></ulink>.</para><section><title>Properties</title><table><title>Properties - ReportingExtension</title><thead><tr><td>Property</td><td>Description</td></tr></thead><tr><td><link linkend="org.gradle.api.reporting.ReportingExtension:baseDirectory"><literal>baseDirectory</literal></link></td><td><para>Returns base directory property to use for all reports.</para></td></tr><tr><td><link linkend="org.gradle.api.reporting.ReportingExtension:reports"><literal>reports</literal></link></td><td><caution>Incubating</caution><para>Container for aggregation reports, which may be configured automatically in reaction to the presence of the jvm-test-suite plugin.</para></td></tr></table></section><section><title>Methods</title><table><title>Methods - ReportingExtension</title><thead><tr><td>Method</td><td>Description</td></tr></thead><tr><td><literal><link linkend="org.gradle.api.reporting.ReportingExtension:file(java.lang.String)">file</link>(path)</literal></td><td><caution>Deprecated</caution><para>Creates a file object for the given path, relative to <ulink url="../dsl/org.gradle.api.reporting.ReportingExtension.html#org.gradle.api.reporting.ReportingExtension:baseDirectory"><classname>ReportingExtension.getBaseDirectory()</classname></ulink>.
+</para></td></tr></table></section><section><title>Script blocks</title><para>No script blocks</para></section><section><title>Property details</title><section id="org.gradle.api.reporting.ReportingExtension:baseDirectory" role="detail"><title><ulink url="../javadoc/org/gradle/api/file/DirectoryProperty.html"><classname>DirectoryProperty</classname></ulink> <literal>baseDirectory</literal></title><para>Returns base directory property to use for all reports.</para></section><section id="org.gradle.api.reporting.ReportingExtension:reports" role="detail"><title><classname><ulink url="../javadoc/org/gradle/api/ExtensiblePolymorphicDomainObjectContainer.html"><classname>ExtensiblePolymorphicDomainObjectContainer</classname></ulink>&lt;<ulink url="../javadoc/org/gradle/api/reporting/ReportSpec.html"><classname>ReportSpec</classname></ulink>&gt;</classname> <literal>reports</literal> (read-only)</title><caution><para>Note: This property is <ulink url="../userguide/feature_lifecycle.html">incubating</ulink> and may change in a future version of Gradle.</para></caution><para>Container for aggregation reports, which may be configured automatically in reaction to the presence of the jvm-test-suite plugin.</para></section></section><section><title>Method details</title><section id="org.gradle.api.reporting.ReportingExtension:file(java.lang.String)" role="detail"><title><ulink url="https://docs.oracle.com/javase/8/docs/api/java/io/File.html"><classname>File</classname></ulink> <literal>file</literal>(<ulink url="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"><classname>String</classname></ulink> path)</title><caution><para>Note: This method is <ulink url="../userguide/feature_lifecycle.html">deprecated</ulink> and will be removed in the next major version of Gradle.</para></caution><para>Creates a file object for the given path, relative to <ulink url="../dsl/org.gradle.api.reporting.ReportingExtension.html#org.gradle.api.reporting.ReportingExtension:baseDirectory"><classname>ReportingExtension.getBaseDirectory()</classname></ulink>.
 </para><para>
 The reporting base dir can be changed, so users of this method should use it on demand where appropriate.</para></section></section></chapter><chapter id="org.gradle.api.publish.PublishingExtension"><title>PublishingExtension</title><segmentedlist><segtitle>API Documentation</segtitle><seglistitem><seg><ulink url="../javadoc/org/gradle/api/publish/PublishingExtension.html"><classname>PublishingExtension</classname></ulink></seg></seglistitem></segmentedlist><para>The configuration of how to "publish" the different components of a project.</para><section><title>Properties</title><table><title>Properties - PublishingExtension</title><thead><tr><td>Property</td><td>Description</td></tr></thead><tr><td><link linkend="org.gradle.api.publish.PublishingExtension:publications"><literal>publications</literal></link></td><td><para>The publications of the project.
 </para></td></tr><tr><td><link linkend="org.gradle.api.publish.PublishingExtension:repositories"><literal>repositories</literal></link></td><td><para>The container of possible repositories to publish to.
@@ -9814,12 +9824,12 @@ configurations {
 }
 
 dependencies {
-  //jaxDoclet "some.interesting:Dependency:1.0"
+  // jaxDoclet "some.interesting:Dependency:1.0"
 }
 
 task generateRestApiDocs(type: Javadoc) {
   source = sourceSets.main.allJava
-  destinationDir = reporting.file("rest-api-docs")
+
   options.docletpath = configurations.jaxDoclet.files.asType(List)
   options.doclet = "com.lunatech.doclets.jax.jaxrs.JAXRSDoclet"
   options.addStringOption("jaxrscontext", "http://localhost:8080/myapp")

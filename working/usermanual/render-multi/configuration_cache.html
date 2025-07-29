@@ -5402,7 +5402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Configuration Cache</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250728161813+0000</span>
+<span id="revnumber">version 9.1.0-20250729190912+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5468,22 +5468,22 @@ Additionally, Gradle applies performance optimizations to task execution.</p>
 <tr>
 <th class="tableblock halign-left valign-top">Phase</th>
 <th class="tableblock halign-left valign-top">Cache</th>
+<th class="tableblock halign-left valign-top">Cache Key</th>
 <th class="tableblock halign-left valign-top">Work Avoidance</th>
-<th class="tableblock halign-left valign-top">Parallelism and Performance</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Execution</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Build Cache</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uses task inputs and outputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Runs independent tasks in parallel with <code>--parallel</code></p></td>
-</tr>
-<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parallelism and Performance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Configuration</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Configuration Cache</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uses build logic and environment</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Runs tasks in parallel (within the same project), optimizes memory, and more</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Build logic and environment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Skip project configuration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs tasks in parallel within the same project, optimizes memory, and more</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Execution</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Build Cache</p></td>
 </tr>
 </tbody>
 </table>
@@ -5601,6 +5601,18 @@ Gradle performs the configuration phase as usual:</p>
 <p>Gradle then stores a snapshot of the task graph in the Configuration Cache for future use.
 After this, Gradle loads the task graph from the cache and proceeds with task execution.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When it is enabled, Gradle always loads from the configuration cache - even on a cache miss - to ensure that hits and misses are handled consistently.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="subsequent_runs"><a class="anchor" href="#subsequent_runs"></a><a class="link" href="#subsequent_runs">Subsequent Runs</a></h3>
@@ -5623,8 +5635,8 @@ After this, Gradle loads the task graph from the cache and proceeds with task ex
 </ul>
 </div>
 <div class="paragraph">
-<p>Before using the cache, Gradle verifies that no build configuration inputs have changed.
-If any input has changed, Gradle reruns the configuration phase and updates the cache.</p>
+<p>To match a saved entry in the cache, Gradle verifies that no build configuration inputs have changed.
+If any input has changed, Gradle reruns the configuration phase and stores a new entry in the cache.</p>
 </div>
 </div>
 <div class="sect2">
@@ -5685,7 +5697,7 @@ It automatically serializes object graphs containing simple state or supported t
 </div>
 <div class="paragraph">
 <p>While Configuration Cache serialization doesn&#8217;t rely on Java Serialization, it understands <a href="configuration_cache_status.html#config_cache:not_yet_implemented:java_serialization">some of its features</a>.
-This can be used to customize serialization behavior, but incurs performance penalty and should be avoided.</p>
+This can be used to customize serialization behavior, but incurs a performance penalty and should be avoided.</p>
 </div>
 </div>
 </div>
@@ -5699,13 +5711,10 @@ This can be used to customize serialization behavior, but incurs performance pen
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Parallel Task Execution</strong>: All tasks run in parallel by default, subject to dependency constraints.</p>
+<p><strong>Parallel Task Execution</strong>: When parallel execution is enabled, even tasks within the same project can be run in parallel, subject to dependency constraints.</p>
 </li>
 <li>
 <p><strong>Cached Dependency Resolution</strong>: Dependency resolution results are stored and reused.</p>
-</li>
-<li>
-<p><strong>Optimized Memory Usage</strong>: After writing the task graph to the cache, Gradle discards configuration and dependency resolution state from memory, lowering peak heap usage.</p>
 </li>
 </ul>
 </div>
@@ -5724,7 +5733,8 @@ This can be used to customize serialization behavior, but incurs performance pen
 No additional setup is required.</p>
 </div>
 <div class="paragraph">
-<p>Because <code>gradle.properties</code> is typically checked into source control, enabling the Configuration Cache this way will apply to your entire team.
+<p>Because <code>gradle.properties</code> is typically checked into source control,
+<a href="userguide/best-practices/best_practices_general.html#use_the_gradle_properties_file">enabling the Configuration Cache this way will apply to your entire team</a>.
 If you prefer to enable it only for your local environment, you can configure it directly in your IDE instead.</p>
 </div>
 <div class="admonitionblock note">

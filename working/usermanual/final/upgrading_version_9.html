@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 9.x to the latest</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250728161813+0000</span>
+<span id="revnumber">version 9.1.0-20250729190912+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5444,7 +5444,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250728161813+0000</code> to update the project to 9.1.0-20250728161813+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250729190912+0000</code> to update the project to 9.1.0-20250729190912+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5608,6 +5608,24 @@ configurations.dependencyScope("implementation") {
 </div>
 </div>
 <div class="sect3">
+<h4 id="reporting_extension_file"><a class="anchor" href="#reporting_extension_file"></a><a class="link" href="#reporting_extension_file">Deprecation of <code>ReportingExtension.file(String)</code></a></h4>
+<div class="paragraph">
+<p>The <a href="../javadoc/org/gradle/api/reporting/ReportingExtension.html#file(String)"><code>file()</code> method</a> on <code>ReportingExtension</code> has been deprecated and will be removed in Gradle 10.0.0.</p>
+</div>
+<div class="paragraph">
+<p>Use <code>ReportingExtension.getBaseDirectory()</code> with <code>file(String)</code> or <code>dir(String)</code> instead.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reporting_extension_api_doc_title"><a class="anchor" href="#reporting_extension_api_doc_title"></a><a class="link" href="#reporting_extension_api_doc_title">Deprecation of <code>ReportingExtension.getApiDocTitle()</code></a></h4>
+<div class="paragraph">
+<p>The <a href="../javadoc/org/gradle/api/reporting/ReportingExtension.html#getApiDocTitle()"><code>getApiDocTitle()</code> method</a> on <code>ReportingExtension</code> has been deprecated and will be removed in Gradle 10.0.0.</p>
+</div>
+<div class="paragraph">
+<p>There is no direct replacement for this method.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="archives-configuration"><a class="anchor" href="#archives-configuration"></a><a class="link" href="#archives-configuration">Deprecation of the <code>archives</code> configuration</a></h4>
 <div class="paragraph">
 <p>The <code>archives</code> configuration added by the <code>base</code> plugin has been deprecated and will be removed in Gradle 10.0.0.
@@ -5654,6 +5672,49 @@ configurations {
 tasks.named("assemble") {
     dependsOn(specialJar)
 }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deprecated-gradle-build-non-string-properties"><a class="anchor" href="#deprecated-gradle-build-non-string-properties"></a><a class="link" href="#deprecated-gradle-build-non-string-properties">Non-String project properties in <code>GradleBuild</code> task</a></h4>
+<div class="paragraph">
+<p>The <code>GradleBuild</code> task now deprecates using non-String values in <code>startParameter.projectProperties</code>.
+While the type is declared as <code>Map&lt;String, String&gt;</code>, there was no strict enforcement, allowing non-String values to be set.
+This deprecated behavior will be removed in Gradle 10.0.0.</p>
+</div>
+<div class="paragraph">
+<p>If you are using non-String values in project properties, convert them to String representation:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val myIntProp = 42
+
+tasks.register&lt;GradleBuild&gt;("nestedBuild") {
+    startParameter.projectProperties.put("myIntProp", "$myIntProp") // Convert int to String
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">def myIntProp = 42
+
+tasks.register('nestedBuild', GradleBuild) {
+    startParameter.projectProperties.put('myIntProp', "$myIntProp") // Convert int to String
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

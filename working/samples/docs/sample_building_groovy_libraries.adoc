@@ -1,5 +1,5 @@
 :samples-dir: /home/runner/work/gradle/gradle/platforms/documentation/docs/build/working/samples/install/building-groovy-libraries
-:gradle-version: 9.0.0-rc-3
+:gradle-version: 9.0.0-rc-4
 
 = Building Groovy Libraries Sample
 

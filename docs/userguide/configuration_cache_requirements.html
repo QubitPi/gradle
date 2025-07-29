@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Configuration Cache Requirements for your Build Logic</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250728161813+0000</span>
+<span id="revnumber">version 9.1.0-20250729190912+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5440,7 +5440,7 @@ Using the Configuration Cache is effectively an opt-in to these improvements.</p
 <h2 id="config_cache:requirements:disallowed_types"><a class="anchor" href="#config_cache:requirements:disallowed_types"></a><a class="link" href="#config_cache:requirements:disallowed_types">Certain Types must not be Referenced by Tasks</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some types must not be referenced by task fields or in task actions (such as <code>doFirst {}</code> or <code>doLast {}</code>).</p>
+<p>Some types must not be referenced by task fields or in task actions (methods annotated <code>@TaskAction</code>, or the <code>doFirst {}</code> and <code>doLast {}</code> DSL blocks).</p>
 </div>
 <div class="paragraph">
 <p>These types fall into the following categories:</p>
@@ -5624,7 +5624,7 @@ Gradle may allow them as task inputs if necessary.</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>No more problems reported, we now reference the supported type <code>FileCollection</code></td>
+<td>No more problems reported, the task now uses the supported type <code>ConfigurableFileCollection</code></td>
 </tr>
 </table>
 </div>
@@ -5672,7 +5672,7 @@ Gradle may allow them as task inputs if necessary.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>You still need to fulfil the same requirement, that is not referencing a disallowed type.</p>
+<p>You still need to fulfill the same requirement, that is, do not reference the disallowed type during task execution.</p>
 </div>
 <div class="paragraph">
 <p>This is how the task declaration above can be fixed:</p>
@@ -6217,7 +6217,7 @@ Use a task input or output property or a script variable to capture the result o
 <div class="sectionbody">
 <div class="paragraph">
 <p>Tasks must not directly access the state of another task instance.
-Instead, they should be connected using <a href="lazy_configuration.html#working_with_task_dependencies_in_lazy_properties">inputs and outputs relationships</a>.</p>
+Instead, they should be connected using <a href="lazy_configuration.html#working_with_task_dependencies_in_lazy_properties">input and output relationships</a>.</p>
 </div>
 <div class="paragraph">
 <p>This requirement ensures that tasks remain isolated and correctly cacheable.
@@ -6249,7 +6249,7 @@ After deserialization, fields that referred to these objects may reference diffe
 <div class="title">build.gradle.kts</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="kotlin">class StateObject {
-    // ...
+    // ...we assume there is some mutable state here, and an equals implementation...
 }
 
 abstract class StatefulTask : DefaultTask() {
@@ -6263,6 +6263,7 @@ abstract class StatefulTask : DefaultTask() {
 
 tasks.register&lt;StatefulTask&gt;("checkEquality") {
     val objectValue = StateObject()
+    // ...configure objectValue as needed...
     val stringsValue = arrayListOf("a", "b")
 
     stateObject = objectValue
@@ -6284,7 +6285,7 @@ tasks.register&lt;StatefulTask&gt;("checkEquality") {
 <div class="title">build.gradle</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="groovy">class StateObject {
-    // ...
+    // ...we assume there is some mutable state here, and an equals implementation...
 }
 
 abstract class StatefulTask extends DefaultTask {
@@ -6298,6 +6299,7 @@ abstract class StatefulTask extends DefaultTask {
 
 tasks.register("checkEquality", StatefulTask) {
     def objectValue = new StateObject()
+    // ...configure objectValue as needed...
     def stringsValue = ["a", "b"] as ArrayList&lt;String&gt;
 
     stateObject = objectValue

@@ -48,7 +48,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-9.1.0-20250728161813+0000        </div>
+9.1.0-20250729190912+0000        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -112,10 +112,21 @@
     <h1 class="cover"><span>Reporting</span><wbr></wbr><span><span>Extension</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">ReportingExtension</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/f391f708266e8637100f11425ed15cabb72b6d04/platforms/software/reporting/src/main/java//org/gradle/api/reporting/ReportingExtension.java#L42">source</a>)</span></span></div><p class="paragraph">A project extension named &quot;reporting&quot; that provides basic reporting settings and utilities. </p><p class="paragraph"> Example usage: </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">reporting {
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">ReportingExtension</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/gradle/gradle/blob/53be56e7e7ac672df3469c0d1ddcb30bd2e83334/platforms/software/reporting/src/main/java//org/gradle/api/reporting/ReportingExtension.java#L53">source</a>)</span></span></div><p class="paragraph">A project extension named &quot;reporting&quot; that provides basic reporting settings and utilities. </p><p class="paragraph"> Example usage: </p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">plugins {
+    id(&quot;org.gradle.reporting-base&quot;)
+}
+
+reporting {
+    // change the base directory where all reports are generated
     baseDirectory = layout.buildDirectory.dir(&quot;our-reports&quot;)
 }
-</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph"> When implementing a task that produces reports, the location of where to generate reports should be obtained via the <a href="file.html">file</a> method of this extension.</p></div>    </div>
+
+// A directory for test reports
+reporting.baseDirectory.dir(&quot;test-reports&quot;)
+
+// A report file
+reporting.baseDirectory.file(&quot;index.html&quot;)
+</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph"> When implementing a task that produces reports, the location of where to generate reports should be obtained from <a href="get-base-directory.html">getBaseDirectory</a>.</p></div>    </div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -143,24 +154,7 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="-1793141299%2FProperties%2F-1793262594" anchor-label="baseDirectory" id="-1793141299%2FProperties%2F-1793262594" data-filterable-set=":docs/java_api"></a>
-          <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="base-directory.html"><span>base</span><wbr></wbr><span><span>Directory</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1793141299%2FProperties%2F-1793262594"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">val </span><a href="base-directory.html">baseDirectory</a><span class="token operator">: </span><a href="../../org.gradle.api.file/-directory-property/index.html">DirectoryProperty</a></div></div>                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="1621465942%2FProperties%2F-1793262594" anchor-label="DEFAULT_REPORTS_DIR_NAME" id="1621465942%2FProperties%2F-1793262594" data-filterable-set=":docs/java_api"></a>
+        <div class="table"><a data-name="1621465942%2FProperties%2F-1793262594" anchor-label="DEFAULT_REPORTS_DIR_NAME" id="1621465942%2FProperties%2F-1793262594" data-filterable-set=":docs/java_api"></a>
           <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -194,23 +188,6 @@
               </div>
             </div>
           </div>
-<a data-name="681338122%2FProperties%2F-1793262594" anchor-label="reports" id="681338122%2FProperties%2F-1793262594" data-filterable-set=":docs/java_api"></a>
-          <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="reports.html"><span><span>reports</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="681338122%2FProperties%2F-1793262594"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="../../org.gradle.api/-incubating/index.html"><span class="token annotation builtin">Incubating</span></a></div></div><span class="token keyword">val </span><a href="reports.html">reports</a><span class="token operator">: </span><a href="../../org.gradle.api/-extensible-polymorphic-domain-object-container/index.html">ExtensiblePolymorphicDomainObjectContainer</a><span class="token operator">&lt;</span><a href="../-report-spec/index.html">ReportSpec</a><span class="token operator">&gt;</span></div></div>                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div data-togglable="FUNCTION">
@@ -227,7 +204,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="file.html"><span class="token function">file</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html">File</a></div><div class="brief ">Creates a file object for the given path, relative to <span data-unresolved-link="org.gradle.api.reporting/ReportingExtension/getBaseDirectory/#/PointingToDeclaration/">getBaseDirectory</span>.</div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="file.html"><span class="token function"><strike>file</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html">File</a></div><div class="brief ">Creates a file object for the given path, relative to <a href="get-base-directory.html">getBaseDirectory</a>.</div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -244,7 +221,58 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="get-api-doc-title.html"><span class="token function">getApiDocTitle</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="get-api-doc-title.html"><span class="token function"><strike>getApiDocTitle</strike></span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></div><div class="brief ">Provides a default title for API documentation based on the project's name and version.</div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-167885077%2FFunctions%2F-1793262594" anchor-label="getBaseDirectory" id="-167885077%2FFunctions%2F-1793262594" data-filterable-set=":docs/java_api"></a>
+          <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-base-directory.html"><span>get</span><wbr></wbr><span>Base</span><wbr></wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-167885077%2FFunctions%2F-1793262594"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="get-base-directory.html"><span class="token function">getBaseDirectory</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.gradle.api.file/-directory-property/index.html">DirectoryProperty</a></div><div class="brief ">Returns base directory property to use for all reports.</div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1112111960%2FFunctions%2F-1793262594" anchor-label="getReports" id="-1112111960%2FFunctions%2F-1793262594" data-filterable-set=":docs/java_api"></a>
+          <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-reports.html"><span>get</span><wbr></wbr><span><span>Reports</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1112111960%2FFunctions%2F-1793262594"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="../../org.gradle.api/-incubating/index.html"><span class="token annotation builtin">Incubating</span></a></div></div><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="get-reports.html"><span class="token function">getReports</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.gradle.api/-extensible-polymorphic-domain-object-container/index.html">ExtensiblePolymorphicDomainObjectContainer</a><span class="token operator">&lt;</span><a href="../-report-spec/index.html">ReportSpec</a><span class="token operator">&gt;</span></div><div class="brief ">Container for aggregation reports, which may be configured automatically in reaction to the presence of the jvm-test-suite plugin.</div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1522804859%2FFunctions%2F-1793262594" anchor-label="reports" id="1522804859%2FFunctions%2F-1793262594" data-filterable-set=":docs/java_api"></a>
+          <div class="table-row" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="reports.html"><span><span>reports</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1522804859%2FFunctions%2F-1793262594"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":docs/java_api" data-filterable-set=":docs/java_api" data-active="" data-toggle=":docs/java_api">API</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":docs/java_api"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="../../org.gradle.api/-incubating/index.html"><span class="token annotation builtin">Incubating</span></a></div></div><span class="token keyword">open </span><span class="token keyword">fun </span><a href="reports.html"><span class="token function">reports</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><a href="../../org.gradle.api/-action/index.html">Action</a><span class="token operator">&lt;</span><span class="token keyword">in </span><a href="../../org.gradle.api/-extensible-polymorphic-domain-object-container/index.html">ExtensiblePolymorphicDomainObjectContainer</a><span class="token operator">&lt;</span><a href="../-report-spec/index.html">ReportSpec</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief ">Add more reports or configure the available reports.</div></div>                  </div>
                 </div>
               </div>
             </div>

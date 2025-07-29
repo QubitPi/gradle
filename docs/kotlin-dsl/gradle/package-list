@@ -2880,10 +2880,11 @@ $dokka.location:org.gradle.api.reporting/ReportingExtension///PointingToDeclarat
 $dokka.location:org.gradle.api.reporting/ReportingExtension/DEFAULT_REPORTS_DIR_NAME/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/-d-e-f-a-u-l-t_-r-e-p-o-r-t-s_-d-i-r_-n-a-m-e.html
 $dokka.location:org.gradle.api.reporting/ReportingExtension/NAME/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/-n-a-m-e.html
 $dokka.location:org.gradle.api.reporting/ReportingExtension/ReportingExtension/#org.gradle.api.Project/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/-reporting-extension.html
-$dokka.location:org.gradle.api.reporting/ReportingExtension/baseDirectory/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/base-directory.html
 $dokka.location:org.gradle.api.reporting/ReportingExtension/file/#java.lang.String/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/file.html
 $dokka.location:org.gradle.api.reporting/ReportingExtension/getApiDocTitle/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/get-api-doc-title.html
-$dokka.location:org.gradle.api.reporting/ReportingExtension/reports/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/reports.html
+$dokka.location:org.gradle.api.reporting/ReportingExtension/getBaseDirectory/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/get-base-directory.html
+$dokka.location:org.gradle.api.reporting/ReportingExtension/getReports/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/get-reports.html
+$dokka.location:org.gradle.api.reporting/ReportingExtension/reports/#org.gradle.api.Action<? super org.gradle.api.ExtensiblePolymorphicDomainObjectContainer<org.gradle.api.reporting.ReportSpec>>/PointingToDeclaration/gradle/org.gradle.api.reporting/-reporting-extension/reports.html
 $dokka.location:org.gradle.api.reporting/SingleFileReport///PointingToDeclaration/gradle/org.gradle.api.reporting/-single-file-report/index.html
 $dokka.location:org.gradle.api.reporting/SingleFileReport/getOutputLocation/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-single-file-report/get-output-location.html
 $dokka.location:org.gradle.api.reporting/SingleFileReport/getOutputType/#/PointingToDeclaration/gradle/org.gradle.api.reporting/-single-file-report/get-output-type.html

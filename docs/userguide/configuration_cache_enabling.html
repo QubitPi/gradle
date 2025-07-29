@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Enabling and Configuring the Configuration Cache</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250728161813+0000</span>
+<span id="revnumber">version 9.1.0-20250729190912+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5448,7 +5448,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <h3 id="config_cache:usage:ignore_problems"><a class="anchor" href="#config_cache:usage:ignore_problems"></a><a class="link" href="#config_cache:usage:ignore_problems">Ignoring Configuration Cache Problems</a></h3>
 <div class="paragraph">
 <p>By default, Gradle fails the build if Configuration Cache problems occur.
-However, when gradually updating plugins or build logic to support the Configuration Cache, it can be useful to temporarily turn problems into warnings by enabling the <em>warning mode</em>.</p>
+However, when gradually updating plugins or build logic to support the Configuration Cache, it can be useful to temporarily turn problems into warnings by enabling <em>warning mode</em>.</p>
 </div>
 <div class="paragraph">
 <p>To change this behavior at build time, use the following flag:</p>
@@ -5487,7 +5487,7 @@ This does not guarantee that the build will succeed.
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The warning mode is a migration and troubleshooting aid and not intended as a persistent way of ignoring incompatibilities.
+<p>Warning mode is a migration and troubleshooting aid and not intended as a persistent way of ignoring incompatibilities.
 It will also not prevent new incompatibilities being accidentally added to your build later.</p>
 </div>
 <div class="paragraph">
@@ -5605,7 +5605,7 @@ However, this feature is expected to work well for <a href="multi_project_config
 </dd>
 <dt class="hdlist1">Deprecation Enforcement Without Configuration Cache</dt>
 <dd>
-<p>Even when the Configuration Cache is not enabled, Gradle will enforce deprecations for the following requirements if the feature flag is present:</p>
+<p>Even when the Configuration Cache is not enabled, Gradle will warn if the following deprecated features are used:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -5848,10 +5848,10 @@ This will help during iterations and prevent regressions.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Ensure your builds stays CC compliant, developers can’t introduce problem accidentally!</p>
+<p>This ensures your builds stays CC compliant, and developers can’t introduce problems accidentally!</p>
 </li>
 <li>
-<p>CC overhead is compensated by the intra-project task parallelism.</p>
+<p>CC overhead is compensated for by the intra-project task parallelism.</p>
 </li>
 <li>
 <p>Getting cache hits may not be possible initially (this is normal).</p>
