@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading to Gradle 9.0.0</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250729190912+0000</span>
+<span id="revnumber">version 9.1.0-20250730172940+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5895,6 +5895,136 @@ That means that:</p>
 <div class="title">gradle.properties</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="properties">org.gradle.archives.use-file-system-permissions=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test_tasks_may_no_longer_execute_expected_tests"><a class="anchor" href="#test_tasks_may_no_longer_execute_expected_tests"></a><a class="link" href="#test_tasks_may_no_longer_execute_expected_tests"><code>Test</code> tasks may no longer execute expected tests</a></h3>
+<div class="paragraph">
+<p>In previous releases, it was possible to create <code>Test</code> tasks without any additional configuration.
+By convention, Gradle used the classpath and test classes from the <code>test</code> source set.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
+    id("java-library")
+}
+
+// configure test dependencies
+// ...
+
+tasks.register&lt;Test&gt;("otherTest")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
+    id 'java-library'
+}
+
+// configure test dependencies
+// ...
+
+tasks.register("otherTest", Test)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, <code>otherTest</code> relied on the deprecated convention. This scenario started to emit a <a href="upgrading_version_8.html#test_task_default_classpath">deprecation warning</a> in 8.1.
+Gradle would execute the same tests with <code>otherTest</code> and the built-in <code>test</code> task because Gradle used the classpath and test classes from the <code>test</code> source set.</p>
+</div>
+<div class="paragraph">
+<p>The convention has been removed, but builds will not fail if they were relying on this behavior. Builds that emitted the deprecation warning will silently stop executing tests.
+In the example above, <code>otherTest</code> will be skipped and execute no tests because it has no test classes configured.</p>
+</div>
+<div class="paragraph">
+<p>To return to the previous behavior, you must explicitly configure the <code>Test</code> task:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val test by testing.suites.existing(JvmTestSuite::class)
+tasks.register&lt;Test&gt;("otherTest") {
+    testClassesDirs = files(test.map { it.sources.output.classesDirs })
+    classpath = files(test.map { it.sources.runtimeClasspath })
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">tasks.register("otherTest", Test) {
+    testClassesDirs = testing.suites.test.sources.output.classesDirs
+    classpath = testing.suites.test.sources.runtimeClasspath
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>or add the extra <code>Test</code> task through test suites:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle.kts</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">testing {
+    suites {
+        named&lt;JvmTestSuite&gt;("test") {
+            targets {
+                register("otherTest")
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock multi-language-sample">
+<div class="content">
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">testing {
+    suites {
+        test {
+            targets {
+                otherTest
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
