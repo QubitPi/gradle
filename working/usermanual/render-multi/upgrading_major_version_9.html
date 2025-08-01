@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading to Gradle 9.0.0</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250731222851+0000</span>
+<span id="revnumber">version 9.1.0-20250801155057+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5519,6 +5519,19 @@ If they are used to reference a top-level symbol that happens to have the same n
 The update to Groovy 4 comes with many breaking changes, such as the removal of legacy packages, changes in the module structure, a parser rewrite, and bytecode output changes.
 For a complete overview of Groovy language changes from 3.x to 4.x, see the <a href="https://groovy-lang.org/releasenotes/groovy-4.0.html">Groovy 4.0 release notes</a>.
 These changes may affect those who use Groovy directly or indirectly in Gradle, and in rare cases, users relying on transitive dependencies.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Popular Groovy classes that used to be in packages like <code>groovy.util</code> are now in different packages to account for the JPMS "split package requirement".
+See <a href="https://groovy-lang.org/releasenotes/groovy-4.0.html#Groovy4.0-split-package-renaming">this specific entry</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="is_prefixed_boolean_properties_no_longer_recognized_by_groovy"><a class="anchor" href="#is_prefixed_boolean_properties_no_longer_recognized_by_groovy"></a><a class="link" href="#is_prefixed_boolean_properties_no_longer_recognized_by_groovy"><code>is</code>-prefixed <code>Boolean</code> properties no longer recognized by Groovy</a></h4>

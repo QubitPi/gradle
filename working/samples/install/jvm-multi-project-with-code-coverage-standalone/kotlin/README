@@ -1,5 +1,5 @@
 :samples-dir: /home/runner/work/gradle/gradle/platforms/documentation/docs/build/working/samples/install/jvm-multi-project-with-code-coverage-standalone
-:gradle-version: 9.0.0-rc-4
+:gradle-version: 9.0.0
 
 = Aggregating code coverage with JaCoCo using a standalone utility project (Incubating) Sample
 

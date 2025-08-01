@@ -1,5 +1,5 @@
 :samples-dir: /home/runner/work/gradle/gradle/platforms/documentation/docs/build/working/samples/install/task-with-arguments
-:gradle-version: 9.0.0-rc-4
+:gradle-version: 9.0.0
 
 = Implementing Tasks with Command-line Arguments Sample
 
