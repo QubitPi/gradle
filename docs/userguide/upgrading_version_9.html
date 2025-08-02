@@ -5401,7 +5401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="header">
 <h1>Upgrading your build from Gradle 9.x to the latest</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250801155057+0000</span>
+<span id="revnumber">version 9.1.0-20250802174549+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
@@ -5444,7 +5444,7 @@ The previous step will help you identify potential problems by issuing deprecati
 </div>
 </li>
 <li>
-<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250801155057+0000</code> to update the project to 9.1.0-20250801155057+0000.</p>
+<p>Run <code>gradle wrapper --gradle-version 9.1.0-20250802174549+0000</code> to update the project to 9.1.0-20250802174549+0000.</p>
 </li>
 <li>
 <p>Try to run the project and debug any errors using the <a href="troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</p>
@@ -5623,6 +5623,28 @@ configurations.dependencyScope("implementation") {
 </div>
 <div class="paragraph">
 <p>There is no direct replacement for this method.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="set-all-jvm-args"><a class="anchor" href="#set-all-jvm-args"></a><a class="link" href="#set-all-jvm-args">Deprecation of <code>JavaForkOptions.setAllJvmArgs()</code></a></h4>
+<div class="paragraph">
+<p>The <a href="../javadoc/org/gradle/process/JavaForkOptions.html#setAllJvmArgs(java.util.List)"><code>setAllJvmArgs()</code> method</a> on <code>JavaForkOptions</code> has been deprecated and will be removed in Gradle 10.0.0.</p>
+</div>
+<div class="paragraph">
+<p>Instead, use one of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>JavaForkOptions.jvmArgs()</code></p>
+</li>
+<li>
+<p><code>JavaForkOptions.setJvmArgs()</code></p>
+</li>
+<li>
+<p>Provide a <a href="incremental_build.html#sec:task_input_nested_inputs"><code>CommandLineArgumentProvider</code></a> to add arguments via <code>JavaForkOptions.getJvmArgumentProviders()</code>.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
