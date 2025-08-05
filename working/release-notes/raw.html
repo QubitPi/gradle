@@ -11,7 +11,7 @@
 <meta name="twitter:image" content="https://gradle.org/images/releases/gradle-default.png">
 <p>We are excited to announce Gradle @version@ (released <a href="https://gradle.org/releases/">@releaseDate@</a>).</p>
 <p>This release features <a href="">1</a>, <a href="">2</a>, ... <a href="">n</a>, and more.</p>
-<!--
+<!-- 
 Include only their name, impactful features should be called out separately below.
  [Some person](https://github.com/some-person)
 
@@ -46,8 +46,8 @@ Example:
 > PROVIDE a screenshot or snippet illustrating the new feature, if applicable
 > LINK to the full documentation for more details
 
-To embed videos, use the macros below.
-You can extract the URL from YouTube by clicking the "Share" button.
+To embed videos, use the macros below. 
+You can extract the URL from YouTube by clicking the "Share" button. 
 For Wistia, contact Gradle's Video Team.
 @youtube(Summary,6aRM8lAYyUA?si=qeXDSX8_8hpVmH01)@
 @wistia(Summary,a5izazvgit)@
@@ -58,213 +58,6 @@ For Wistia, contact Gradle's Video Team.
 ==========================================================
 ADD RELEASE FEATURES BELOW
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
-<p><a name="ear-plugin"></a></p>
-<h3><a href="#ear-plugin" id="ear-plugin">Ear Plugin</a></h3>
-<p>It is now possible to generate valid deployment descriptors for Jakarta EE 11
-by specifying the corresponding version in the <code>deploymentDescriptor</code> instead of having to use a custom descriptor file.</p>
-<pre><code class="language-kotlin">tasks.ear {
-    deploymentDescriptor {  // custom entries for application.xml:
-        version = &quot;11&quot;
-    }
-}
-</code></pre>
-<p><a name="cli"></a></p>
-<h3><a href="#cli-improvement" id="cli-improvement">CLI improvement</a></h3>
-<h4><a href="#off-screen-lines-reported-in-rich-console" id="off-screen-lines-reported-in-rich-console">Off-screen lines reported in rich console</a></h4>
-<p>This release adds a status line to the <code>rich</code> console that reports the number of in-progress events not currently visible on screen.</p>
-<pre><code class="language-console">&gt; (2 lines not showing)
-</code></pre>
-<p>This occurs when there are more ongoing events than the console has lines available to display them.</p>
-<p><img src="release-notes-assets/off-screen-lines.gif" alt="this recording" /></p>
-<h4><a href="#plain-console-with-colors" id="plain-console-with-colors">Plain console with colors</a></h4>
-<p>This release adds a new value for the <code>--console</code> command line option called <code>colored</code>, which enables color output for the console while omitting rich features such as progress bars.</p>
-<p><img src="release-notes-assets/colored-console.gif" alt="this recording" /></p>
-<p><a name="build-authoring"></a></p>
-<h3><a href="#build-authoring-improvements" id="build-authoring-improvements">Build authoring improvements</a></h3>
-<h4><a href="#introduce-attributecontaineraddalllater" id="introduce-attributecontaineraddalllater">Introduce <code>AttributeContainer#addAllLater</code></a></h4>
-<p>This release introduces a new API on <code>AttributeContainer</code> allowing all attributes from one attribute container to be lazily added to another.</p>
-<p>Consider the following example demonstrating the new API's behavior:</p>
-<pre><code class="language-kotlin">val color = Attribute.of(&quot;color&quot;, String::class.java)
-val shape = Attribute.of(&quot;shape&quot;, String::class.java)
-
-val foo = configurations.create(&quot;foo&quot;).attributes
-foo.attribute(color, &quot;green&quot;)
-
-val bar = configurations.create(&quot;bar&quot;).attributes
-bar.attribute(color, &quot;red&quot;)
-bar.attribute(shape, &quot;square&quot;)
-assert(bar.getAttribute(color) == &quot;red&quot;)    // `color` is originally red
-
-bar.addAllLater(foo)
-assert(bar.getAttribute(color) == &quot;green&quot;)  // `color` gets overwritten
-assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` does not
-
-foo.attribute(color, &quot;purple&quot;)
-bar.getAttribute(color) == &quot;purple&quot;         // addAllLater is lazy
-
-bar.attribute(color, &quot;orange&quot;)
-assert(bar.getAttribute(color) == &quot;orange&quot;) // `color` gets overwritten again
-assert(bar.getAttribute(shape) == &quot;square&quot;) // `shape` remains the same
-</code></pre>
-<h4><a href="#accessors-for-compileonly-plugin-dependencies-in-precompiled-kotlin-scripts" id="accessors-for-compileonly-plugin-dependencies-in-precompiled-kotlin-scripts">Accessors for <code>compileOnly</code> plugin dependencies in precompiled Kotlin scripts</a></h4>
-<p>Previously, it was not possible to use a plugin coming from a <code>compileOnly</code> dependency in a <a href="userguide/implementing_gradle_plugins_precompiled.html">precompiled Kotlin script</a>.
-Now it is supported, and [​type-safe accessors​]​(​userguide/kotlin_dsl.html#type-safe-accessors​) for plugins from such dependencies are available in the precompiled Kotlin scripts.</p>
-<p>As an example, the following <code>buildSrc/build.gradle.kts</code> build script declares a <code>compileOnly</code> dependency to a third party plugin:</p>
-<pre><code class="language-kotlin">plugins {
-    `kotlin-dsl`
-}
-dependencies {
-    compileOnly(&quot;com.android.tools.build:gradle:x.y.z&quot;)
-}
-</code></pre>
-<p>And a convention precompiled Kotlin script in <code>buildSrc/src/main/kotlin/my-convention-plugin.gradle.kts</code> applies it, and can now use type-safe accessors to configure the third party plugin:</p>
-<pre><code class="language-kotlin">plugins {
-    id(&quot;com.android.application&quot;)
-}
-android {
-    // The accessor to the `android` extension registered by the Android plugin is available
-}
-</code></pre>
-<h4><a href="#introduce-gradlegetbuildpath" id="introduce-gradlegetbuildpath">Introduce <code>Gradle#getBuildPath</code></a></h4>
-<p>This release introduces a new API on the <a href="javadoc/org/gradle/api/invocation/Gradle.html">Gradle</a> type that returns the path of the build represented by the <code>Gradle</code> instance, relative to the root of the build tree.
-For the root build, this will return <code>:</code>.
-For included builds, this will return the path of the included build relative to the root build.</p>
-<p>This is the same path returned by <code>BuildIdentifier#getBuildPath</code>, but it is now available directly on the <code>Gradle</code> instance.
-This enables build authors to obtain the path of a build, similar to how they can already obtain the path of a project.</p>
-<p>The following example demonstrates how to determine the path of the build which owns a given project:</p>
-<pre><code class="language-kotlin">val project: Project = getProjectInstance()
-val buildPath: String = project.gradle.buildPath
-</code></pre>
-<h4><a href="#build-initialization-now-uses-the-kotlin-test-dependency-for-kotlin-projects" id="build-initialization-now-uses-the-kotlin-test-dependency-for-kotlin-projects">Build initialization now uses the <code>kotlin-test</code> dependency for Kotlin projects</a></h4>
-<p>In previous versions of Gradle, the <a href="userguide/build_init_plugin.html"><code>init</code> task</a> generated build scripts with the <code>org.jetbrains.kotlin:kotlin-test-junit5</code> dependency for kotlin projects.
-The <code>init</code> task now generates build scripts with the <code>org.jetbrains.kotlin:kotlin-test</code> dependency instead.
-The appropriate test framework variant will be inferred automatically based on the test runner configured.
-For more information, refer to the <a href="https://kotlinlang.org/docs/gradle-configure-project.html#set-dependencies-on-test-libraries">Kotlin Gradle Configuration documentation</a> or
-the <code>[kotlin-test](https://kotlinlang.org/api/core/kotlin-test/)</code> api documentation.</p>
-<h3><a href="#configuration-improvements" id="configuration-improvements">Configuration Improvements</a></h3>
-<h4><a href="#simpler-target-package-configuration-for-antlr-4" id="simpler-target-package-configuration-for-antlr-4">Simpler target package configuration for Antlr 4</a></h4>
-<p>The AntlrTask class now supports explicitly setting the target package for generated code when using Antlr 4.
-Previously, setting the &quot;-package&quot; argument also required setting the output directory in order to generate classes into the proper package-specific directory structure.
-This release introduces a <code>packageName</code> property that allows you to set the target package without needing to also set the output directory properly.
-Setting this property will set the &quot;-package&quot; argument for the Antlr tool, and will also set the generated class directory to match the package.</p>
-<p>Explicitly setting the &quot;-package&quot; argument is now deprecated, and will become an error in Gradle 10.</p>
-<p>This option is not available for versions before Antlr 4 and will result in an error if this property is set.</p>
-<pre><code class="language-kotlin">tasks.named(&quot;generateGrammarSource&quot;).configure {
-    // Set the target package for generated code
-    packageName = &quot;com.example.generated&quot;
-}
-</code></pre>
-<h4><a href="#antlr-generated-sources-are-automatically-tracked" id="antlr-generated-sources-are-automatically-tracked">Antlr generated sources are automatically tracked</a></h4>
-<p>In previous versions of Gradle, the Antlr-generated sources were added to a java source set for compilation, but if the generated sources directory was changed, this change was not reflected in the source set.
-This required manually updating the source set to include the new generated sources directory any time it was changed.
-In this release, the generated sources directory is automatically tracked and updates the source set accordingly.
-A task dependency is also created between the source generation task and the source set, ensuring that tasks that consume the source set as an input will automatically create a task dependency on the source generation task.</p>
-<h4><a href="#specify-the-repository-in-mavenpublicationdistributionmanagement" id="specify-the-repository-in-mavenpublicationdistributionmanagement">Specify the Repository in MavenPublication.distributionManagement</a></h4>
-<p>For a Maven publication, it is now possible to specify the repository used for distribution in the published POM file.</p>
-<p>For example, to specify the GitHub Packages repository in the POM file, use this code:</p>
-<pre><code class="language-kotlin">plugins {
-  id(&quot;maven-publish&quot;)
-}
-
-publications.withType&lt;MavenPublication&gt;().configureEach {
-  pom {
-    distributionManagement {
-      repository {
-        id = &quot;github&quot;
-        name = &quot;GitHub OWNER Apache Maven Packages&quot;
-        url = &quot;https://maven.pkg.github.com/OWNER/REPOSITORY&quot;
-      }
-    }
-  }
-}
-</code></pre>
-<h3><a href="#error-and-warning-reporting-improvements" id="error-and-warning-reporting-improvements">Error and warning reporting improvements</a></h3>
-<h4><a href="#improved-error-message-for-version-constraint-conflicts" id="improved-error-message-for-version-constraint-conflicts">Improved error message for Version Constraint Conflicts</a></h4>
-<p>In previous versions of Gradle when a version constraint conflict occurred the error message was extremely verbose and included extraneous information.
-It also was formatted in a way that was difficult to comprehend, especially when constraints involved in the conflict were added by transitive dependencies.</p>
-<pre><code>&gt; Could not resolve org:foo:3.2.
-  Required by:
-      root project 'test'
-   &gt; Cannot find a version of 'org:foo' that satisfies the version constraints:
-        Dependency path: 'root project :' (conf) --&gt; 'org:bar:2.0' (runtime) --&gt; 'org:foo:3.1'
-        Constraint path: 'root project :' (conf) --&gt; 'org:platform:1.1' (platform) --&gt; 'org:foo:{strictly 3.1.1; reject 3.1 &amp; 3.2}'
-        Constraint path: 'root project :' (conf) --&gt; 'org:foo:3.2'
-        Constraint path: 'root project :' (conf) --&gt; 'org:baz:3.0' (runtime) --&gt; 'org:foo:3.3'
-        Constraint path: 'root project :' (conf) --&gt; 'org:other:3.0' (runtime) --&gt; 'org:foo:3.3'
-</code></pre>
-<p>The new message focuses attention on the conflicting versions required by the constraints involved in the conflict.</p>
-<pre><code>&gt; Could not resolve org:foo.
-  Required by:
-      root project 'mec0k'
-   &gt; Component is the target of multiple version constraints with conflicting requirements:
-     3.1.1 - directly in 'org:platform:1.1' (platform)
-     3.2
-     3.3 - transitively via 'org:baz:3.0' (runtime) (1 other path to this version)
-</code></pre>
-<p>This makes it clearer by:</p>
-<ul>
-<li>Immediately stating that there is a conflict in version constraints for a component, and not merely a failure to <em>find</em> a suitable candidate in the searched repositories when resolving dependencies</li>
-<li>Clearly showing each constrained version involved in the conflict</li>
-<li>Showing where the conflicting constraints are declared (either the project doing resolution, its direct dependencies, its transitive dependencies, or dependency locking) <em>without</em> showing the complete dependency paths, which can be long and hard to read and are available in the dependency insight report</li>
-<li>Showing how many paths to each constraint exist in the dependency graph, but only printing the first one, which is usually sufficient to understand the conflict</li>
-</ul>
-<p>It also avoids showing non-strict dependency declarations, like the first line in the old version, which are irrelevant to understanding the conflict.</p>
-<p>A suggestion message at the end of the build will also provide the exact syntax for running <code>dependencyInsight</code> on the failing configuration, to further investigate it by viewing comprehensive dependency resolution information.</p>
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ADD RELEASE FEATURES ABOVE
-==========================================================
-
--->
-<h3><a href="#task-graph-diagnostic" id="task-graph-diagnostic">Task graph diagnostic</a></h3>
-<p>A new task dependency graph is available to visualize the dependencies between tasks without executing them.
-You can enable it using the <code>--task-graph</code> option on the command line. For example:</p>
-<pre><code>./gradlew root r2 --task-graph
-</code></pre>
-<p>This prints a visual representation of the task graph for the specified tasks:</p>
-<pre><code>Tasks graph for: root r2
-+--- :root (org.gradle.api.DefaultTask)
-|    \--- :middle (org.gradle.api.DefaultTask)
-|         +--- :leaf1 (org.gradle.api.DefaultTask)
-|         \--- :leaf2 (org.gradle.api.DefaultTask, disabled)
-\--- :root2 (org.gradle.api.DefaultTask)
-    +--- :leaf1 (*)
-    |--- other build task :included:fromIncluded (org.gradle.api.DefaultTask)
-    \--- :leaf4 (org.gradle.api.DefaultTask, finalizer)
-         \--- :leaf3 (org.gradle.api.DefaultTask)
-
-(*) - details omitted (listed previously)
-</code></pre>
-<p>This feature provides a quick overview of the task graph, helping users understand the dependencies between tasks without running them.
-You can iterate by diving into a subgraph by adjusting an invocation.</p>
-<p>This feature is incubating and may change in future releases.</p>
-<h4><a href="#fixed---dry-run-behavior-in-composite-builds" id="fixed---dry-run-behavior-in-composite-builds">Fixed <code>--dry-run</code> behavior in composite builds</a></h4>
-<p>Gradle now correctly respects <code>--dry-run</code> in composite builds, ensuring that tasks are not executed during the execution phase of included builds.</p>
-<p>Note that tasks from some included builds may still be executed during configuration time, as part of their configuration logic.</p>
-<p>This restores expected behavior and makes <code>--dry-run</code> safer for previewing task execution plans across composite builds.</p>
-<h3><a href="#project-report-updated" id="project-report-updated">Project report updated</a></h3>
-<p>The <a href="userguide/project_report_plugin.html">Project Report</a> has been updated to show projects' physical locations in the file system, as well as their logical build paths.</p>
-<pre><code>------------------------------------------------------------
-Root project 'avoidEmptyProjects-do'
-------------------------------------------------------------
-
-Location: /usr/jsmith/projects/avoidEmptyProjects-do
-Description: Example project to demonstrate Gradle's project hierarchy and locations
-
-Project hierarchy:
-
-Root project 'avoidEmptyProjects-do'
-+--- Project ':app'
-\--- Project ':my-web-module'
-
-Project locations:
-
-project ':app' - /app
-project ':my-web-module' - /subs/web/my-web-module
-
-To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks
-For example, try running gradle :app:tasks
-</code></pre>
-<p>This will help authors better understand the structure of hierarchical builds that use non-standard project directories.</p>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ADD RELEASE FEATURES ABOVE
 ==========================================================
@@ -274,9 +67,9 @@ ADD RELEASE FEATURES ABOVE
 <p>Promoted features are features that were incubating in previous versions of Gradle but are now supported and subject to backward compatibility.
 See the User Manual section on the &quot;<a href="userguide/feature_lifecycle.html">Feature Lifecycle</a>&quot; for more information.</p>
 <p>The following are the features that have been promoted in this Gradle release.</p>
-<ul>
-<li><a href="javadoc/org/gradle/api/Project.html"><code>getDependencyFactory()</code></a> in <code>Project</code></li>
-</ul>
+<!--
+### Example promoted
+-->
 <h2><a href="#fixed-issues" id="fixed-issues">Fixed issues</a></h2>
 <!--
 This section will be populated automatically

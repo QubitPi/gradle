@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Using Plugins</title>
+<title>Understanding Gradle Plugins</title>
 <style>
 /*
  * Copyright 2018 the original author or authors.
@@ -4185,6 +4185,10 @@ body.dark-theme {
 		margin: 0;
 	}
 
+    #header {
+    	padding-right: 260px;
+    }
+
 	/* #toc here must be referenced as #header #toc
             since we don't want to change single page #toc */
 	#header #toc {
@@ -4265,6 +4269,7 @@ body.dark-theme {
 
 	#header {
 		margin: 0 auto;
+		padding-right: 0;
 	}
 
 	#content {
@@ -4613,7 +4618,7 @@ input:checked+.slider:before {
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<meta name="adoc-src-path" content="authoring-builds/basics/plugins.adoc">
+<meta name="adoc-src-path" content="reference/plugin-development/plugins.adoc">
 <link crossorigin href="//assets.gradle.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
 
@@ -4898,7 +4903,7 @@ document.addEventListener("DOMContentLoaded", function () {
     animation: clibpard_rotation_frame 1s;
 }
 </style></head>
-<body id="using_plugins" class="book">
+<body class="book">
 <!--
   ~ Copyright 2025 the original author or authors.
   ~
@@ -5033,10 +5038,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- Primary Navigation -->
         <nav class="docs-navigation">
             <div class="search-container"></div>
-            <h3 id="overview">Overview</h3>
-            <ul>
-                <li><a href="../userguide/userguide.html">Getting Started</a></li>
-            </ul>
+            <h3 id="overview"><a href="../userguide/userguide.html">Gradle User Manual</a></h3>
 
             <h3 id="what-is-new">Releases</h3>
             <ul>
@@ -5060,15 +5062,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/migrating_from_ant.html">from Ant</a></li>
                     </ul>
                 </li>
-                <li><a href="../userguide/troubleshooting.html">Troubleshooting</a></li>
                 <li><a href="../userguide/compatibility.html">Compatibility Notes</a></li>
                 <li><a href="../userguide/feature_lifecycle.html">Gradle's Feature Lifecycle</a></li>
             </ul>
 
-            <h3 id="running-gradle-builds">Running Gradle Builds</h3>
+            <h3 id="running-gradle-builds">Gradle Tutorials</h3>
             <ul>
-                <li><a href="../userguide/getting_started_eng.html">Getting Started</a></li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#running-introduction" aria-expanded="false" aria-controls="introduction">Learning the Basics</a>
+                <li><a href="../userguide/getting_started.html">Getting Started</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#running-introduction" aria-expanded="false" aria-controls="introduction">Running Gradle Builds</a>
                     <ul id="running-introduction">
                         <li><a href="../userguide/gradle_basics.html">1. Core Concepts</a></li>
                         <li><a href="../userguide/gradle_wrapper_basics.html">2. Wrapper Basics</a></li>
@@ -5077,9 +5078,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/build_file_basics.html">5. Build File Basics</a></li>
                         <li><a href="../userguide/dependency_management_basics.html">6. Dependencies Basics</a></li>
                         <li><a href="../userguide/task_basics.html">7. Tasks Basics</a></li>
-                        <li><a href="../userguide/plugin_basics.html">8. Plugins Basics</a></li>
-                        <li><a href="../userguide/gradle_optimizations.html">9. Caching Basics</a></li>
-                        <li><a href="../userguide/build_scans.html">10. Build Scan</a></li>
+                        <li><a href="../userguide/gradle_optimizations.html">8. Caching Basics</a></li>
+                        <li><a href="../userguide/plugin_basics.html">9. Plugins Basics</a></li>
+                        <li><a href="../userguide/build_scans.html">10. Build Scan Basics</a></li>
 
                     </ul>
                 </li>
@@ -5091,41 +5092,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/part4_gradle_plugins.html">4. Applying Plugins</a></li>
                         <li><a href="../userguide/part5_gradle_inc_builds.html">5. Exploring Incremental Builds</a></li>
                         <li><a href="../userguide/part6_gradle_caching.html">6. Enabling the Build Cache</a></li>
-                        <li><a href="../userguide/part7_gradle_refs.html">7. Using Reference Materials</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Gradle Features</a>
-                    <ul id="gradle-features">
-                        <li><a href="../userguide/command_line_interface.html">Gradle Command-Line Interface</a></li>
-                        <li><a href="../userguide/logging.html">Gradle Log Levels</a></li>
-                        <li><a href="../userguide/gradle_wrapper.html">Gradle Wrapper</a></li>
-                        <li><a href="../userguide/gradle_daemon.html">Gradle Daemon</a></li>
-                        <li><a href="../userguide/inspect.html">Build Scan</a></li>
-                        <li><a href="../userguide/continuous_builds.html">Continuous Builds</a></li>
-                        <li><a href="../userguide/file_system_watching.html">File System Watching</a></li>
-                    </ul>
-                </li>
-                <li><a href="../userguide/directory_layout.html">Gradle-managed Directories</a></li>
-                <li><a href="../userguide/build_environment.html">Configuring the Build Environment</a></li>
-            </ul>
-
-            <h3 id="authoring-gradle-builds">Authoring Gradle Builds</h3>
-            <ul>
-                <li><a href="../userguide/getting_started_dev.html">Getting Started</a></li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#beyond-the-basics" aria-expanded="false" aria-controls="beyond-the-basics">Beyond the Basics</a>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#beyond-the-basics" aria-expanded="false" aria-controls="beyond-the-basics">Authoring Gradle Builds</a>
                     <ul id="authoring-introduction">
-                        <li><a href="../userguide/gradle_directories.html">1. Gradle Directories</a></li>
-                        <li><a href="../userguide/intro_multi_project_builds.html">2. Multi-Project Builds</a></li>
-                        <li><a href="../userguide/build_lifecycle.html">3. Gradle Build Lifecycle</a></li>
-                        <li><a href="../userguide/writing_settings_files.html">4. Writing Settings Files</a></li>
-                        <li><a href="../userguide/writing_build_scripts.html">5. Writing Build Scripts</a></li>
-                        <li><a href="../userguide/tutorial_using_tasks.html">6. Using Tasks</a></li>
-                        <li><a href="../userguide/writing_tasks.html">7. Writing Tasks</a></li>
-                        <li><a href="../userguide/plugins.html">8. Using Plugins</a></li>
-                        <li><a href="../userguide/writing_plugins.html">9. Writing Plugins</a></li>
+                        <li><a href="../userguide/gradle_directories_intermediate.html">1. Anatomy of a Gradle Build</a></li>
+                        <li><a href="../userguide/multi_project_builds_intermediate.html">2. Structuring Multi-Project Builds</a></li>
+                        <li><a href="../userguide/build_lifecycle_intermediate.html">3. Gradle Build Lifecycle</a></li>
+                        <li><a href="../userguide/writing_build_scripts_intermediate.html">4. Writing Build Scripts</a></li>
+                        <li><a href="../userguide/gradle_managed_types_intermediate.html">5. Gradle Managed Types</a></li>
+                        <li><a href="../userguide/dependencies_intermediate.html">6. Declaring Dependencies</a></li>
+                        <li><a href="../userguide/writing_tasks_intermediate.html">7. Creating and Registering Tasks</a></li>
+                        <li><a href="../userguide/plugins_intermediate.html">8. Working with Plugins</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Advanced Tutorial</a>
+                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Intermediate Tutorial</a>
                     <ul id="authoring-tutorial">
                         <li><a href="../userguide/part1_gradle_init_project.html">1. Initializing the Project</a></li>
                         <li><a href="../userguide/part2_build_lifecycle.html">2. Understanding the Build Lifecycle</a></li>
@@ -5136,64 +5117,124 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/part7_writing_plugins.html">7. Writing Plugins</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-properties" aria-expanded="false" aria-controls="gradle-properties">Gradle Types</a>
-                    <ul id="gradle-properties-topics">
-                        <li><a href="../userguide/properties_providers.html">Understanding Properties and Providers</a></li>
-                        <li><a href="../userguide/collections.html">Understanding Collections</a></li>
-                        <li><a href="../userguide/service_injection.html">Understanding Services and Service Injection</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#deep-dive" aria-expanded="false" aria-controls="deep-dive">Developing Gradle Plugins</a>
+                    <ul id="developing-introduction">
+                        <li><a href="../userguide/plugin_introduction_advanced.html">1. Plugin Introduction</a></li>
+                        <li><a href="../userguide/pre_compiled_script_plugin_advanced.html">2. Pre-Compiled Script Plugins</a></li>
+                        <li><a href="../userguide/binary_plugin_advanced.html">3. Binary Plugins</a></li>
+                        <li><a href="../userguide/developing_binary_plugin_advanced.html">4. Developing Binary Plugins</a></li>
+                        <li><a href="../userguide/testing_binary_plugin_advanced.html">5. Testing Binary Plugins</a></li>
+                        <li><a href="../userguide/publishing_binary_plugin_advanced.html">6. Publishing Binary Plugins</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#authoring-multi-project-builds" aria-expanded="false" aria-controls="authoring-multi-project-builds">Structuring Builds</a>
-                    <ul id="authoring-multi-project-builds">
-                        <li><a href="../userguide/organizing_gradle_projects.html">Structuring and Organizing Gradle Projects</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Advanced Tutorial</a>
+                    <ul id="authoring-tutorial">
+                        <li><a href="../userguide/part1_gradle_init_plugin.html">1. Initializing the Project</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="gradle-reference">Gradle Reference</h3>
+            <ul>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-core" aria-expanded="false" aria-controls="gradle-core">Runtime and Configuration</a>
+                    <ul id="core-topics">
+                        <li><a href="../userguide/command_line_interface.html">Command-Line Interface</a></li>
+                        <li><a href="../userguide/logging.html">Logging and Output</a></li>
+                        <li><a href="../userguide/gradle_wrapper.html">Gradle Wrapper</a></li>
+                        <li><a href="../userguide/gradle_daemon.html">Gradle Daemon</a></li>
+                        <li><a href="../userguide/directory_layout.html">Gradle Directories</a></li>
+                        <li><a href="../userguide/build_environment.html">Build Configuration</a></li>
+                        <li><a href="../userguide/build_lifecycle.html">Build Lifecycle</a></li>
+                        <li><a href="../userguide/inspect.html">Build Scan</a></li>
+                        <li><a href="../userguide/continuous_builds.html">Continuous Builds</a></li>
+                        <li><a href="../userguide/file_system_watching.html">File System Watching</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#dsl-and-apis" aria-expanded="false" aria-controls="dsl-and-apis">DSLs and APIs</a>
+                    <ul id="dsl-topics">
+                        <li><a href="../javadoc/index.html?overview-summary.html">Java API</a></li>
+                        <li><a href="../userguide/groovy_build_script_primer.html">Groovy DSL Primer</a></li>
+                        <li><a href="../dsl/index.html">Groovy DSL</a></li>
+                        <li><a href="../userguide/kotlin_dsl.html">Kotlin DSL Primer</a></li>
+                        <li><a href="../kotlin-dsl/index.html" target="_blank">Kotlin DSL</a></li>
+                        <li><a href="../userguide/public_apis.html">Public APIs</a></li>
+                        <li><a href="../userguide/default_script_imports.html">Default Script Imports</a></li>
+                        <li><a href="../userguide/migrating_from_groovy_to_kotlin_dsl.html">Groovy to Kotlin DSL Migration</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#best-practices" aria-expanded="false" aria-controls="best-practices">Best Practices</a>
+                    <ul id="best-practices-topics">
+                        <li><a href="../userguide/best_practices.html">Introduction</a></li>
+                        <li><a href="../userguide/best_practices_index.html">Index</a></li>
+                        <li><a href="../userguide/best_practices_general.html">General Best Practices</a></li>
+                        <li><a href="../userguide/best_practices_structuring_builds.html">Best Practices for Structuring Builds</a></li>
+                        <li><a href="../userguide/best_practices_dependencies.html">Best Practices for Dependencies</a></li>
+                        <li><a href="../userguide/best_practices_tasks.html">Best Practices for Tasks</a></li>
+                        <li><a href="../userguide/best_practices_performance.html">Best Practices for Performance</a></li>
+                        <li><a href="../userguide/best_practices_security.html">Best Practices for Security</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#core-plugins" aria-expanded="false" aria-controls="core-plugins">Core Plugins</a>
+                    <ul id="core-plugins-topics">
+                        <li><a href="../userguide/plugin_reference.html">List of Core Plugins</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#types-and-objects" aria-expanded="false" aria-controls="types-and-objects">Gradle Types</a>
+                    <ul id="types-and-objects-topics">
+                        <li><a href="../userguide/lazy_eager_evaluation.html">Lazy vs Eager Evaluation</a></li>
+                        <li><a href="../userguide/properties_providers.html">Properties and Providers</a></li>
+                        <li><a href="../userguide/collections.html">Collections</a></li>
+                        <li><a href="../userguide/service_injection.html">Services and Service Injection</a></li>
+                        <li><a href="../userguide/working_with_files.html">Working with Files</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#build-structure" aria-expanded="false" aria-controls="build-structure">Structuring Builds</a>
+                    <ul id="build-structure-topics">
+                        <li><a href="../userguide/organizing_gradle_projects.html">Structuring and Organizing Projects</a></li>
                         <li><a href="../userguide/multi_project_builds.html">Multi-Project Builds</a></li>
-                        <li><a href="../userguide/sharing_build_logic_between_subprojects.html">Sharing Build Logic in BuildSrc</a></li>
+                        <li><a href="../userguide/sharing_build_logic_between_subprojects.html">Sharing Build Logic using buildSrc</a></li>
                         <li><a href="../userguide/composite_builds.html">Composite Builds</a></li>
                         <li><a href="../userguide/multi_project_configuration_and_execution.html">Configuration on Demand</a></li>
+                        <li><a href="../userguide/isolated_projects.html">Isolated Projects</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#developing-tasks" aria-expanded="false" aria-controls="developing-tasks">Developing Tasks</a>
-                    <ul id="developing-tasks">
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#task-development" aria-expanded="false" aria-controls="task-development">Task Development</a>
+                    <ul id="task-development-topics">
                         <li><a href="../userguide/more_about_tasks.html">Understanding Tasks</a></li>
                         <li><a href="../userguide/controlling_task_execution.html">Controlling Task Execution</a></li>
                         <li><a href="../userguide/organizing_tasks.html">Organizing Tasks</a></li>
                         <li><a href="../userguide/implementing_custom_tasks.html">Implementing Custom Tasks</a></li>
-                        <li><a href="../userguide/lazy_configuration.html">Configuring Tasks Lazily</a></li>
-                        <li><a href="../userguide/worker_api.html">Developing Parallel Tasks</a></li>
-                        <li><a href="../userguide/custom_tasks.html">Developing Advanced Tasks</a></li>
-                        <li><a href="../userguide/build_services.html">Using Shared Build Services</a></li>
+                        <li><a href="../userguide/lazy_configuration.html">Lazy Configuration</a></li>
+                        <li><a href="../userguide/worker_api.html">Parallel Task Execution</a></li>
+                        <li><a href="../userguide/custom_tasks.html">Advanced Task Development</a></li>
+                        <li><a href="../userguide/build_services.html">Shared Build Services</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#developing-plugins" aria-expanded="false" aria-controls="developing-plugins">Developing Plugins</a>
-                    <ul id="developing-plugins">
-                        <li><a href="../userguide/custom_plugins.html">Understanding Plugins</a></li>
-                        <li><a href="../userguide/implementing_gradle_plugins.html">Understanding Implementation Options</a></li>
-                        <li><a href="../userguide/implementing_gradle_plugins_precompiled.html">Implementing Pre-compiled Script Plugins</a></li>
-                        <li><a href="../userguide/implementing_gradle_plugins_binary.html">Implementing Binary Plugins</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#plugin-development" aria-expanded="false" aria-controls="plugin-development">Plugin Development</a>
+                    <ul id="plugin-development-topics">
+                        <li><a href="../userguide/plugins.html">Introduction to Plugins</a></li>
+                        <li><a href="../userguide/custom_plugins.html">Introduction to Plugins</a></li>
+                        <li><a href="../userguide/implementing_gradle_plugins.html">Plugin Implementation Options</a></li>
+                        <li><a href="../userguide/implementing_gradle_plugins_precompiled.html">Precompiled Script Plugins</a></li>
+                        <li><a href="../userguide/implementing_gradle_plugins_binary.html">Binary Plugins</a></li>
                         <li><a href="../userguide/testing_gradle_plugins.html">Testing Plugins</a></li>
                         <li><a href="../userguide/publishing_gradle_plugins.html">Publishing Plugins</a></li>
-                        <li><a href="../userguide/reporting_problems.html">Reporting Problems</a></li>
+                        <li><a href="../userguide/reporting_problems.html">Reporting Plugin Problems</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#other-developing-topics" aria-expanded="false" aria-controls="other-developing-topics">Other Topics</a>
-                    <ul id="other-developing-topics">
-                        <li><a href="../userguide/working_with_files.html">Working with Files</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#advanced-topics" aria-expanded="false" aria-controls="advanced-topics">Other Topics</a>
+                    <ul id="advanced-topics-topics">
                         <li><a href="../userguide/init_scripts.html">Initialization Scripts</a></li>
                         <li><a href="../userguide/dataflow_actions.html">Dataflow Actions</a></li>
                         <li><a href="../userguide/test_kit.html">Testing with TestKit</a></li>
                         <li><a href="../userguide/ant.html">Using Ant from Gradle</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to" aria-expanded="false" aria-controls="how-to">How-To-Guides</a>
-                    <ul id="how-to-authoring">
-                        <li><a href="../userguide/how_to_convert_single_build_to_multi_build.html">How to Convert a Single-Project Build into a Multi-Project Build</a></li>
-                    </ul>
-                </li>
             </ul>
 
             <h3 id="optimizing-build-performance">Optimizing Gradle Builds</h3>
             <ul>
-                <li><a href="../userguide/performance.html">Improving Performance Basics</a></li>
+                <li><a href="../userguide/performance.html">Improving Performance</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#build-cache" aria-expanded="false" aria-controls="build-cache">Build Cache</a>
                     <ul id="build-cache">
                         <li><a href="../userguide/build_cache.html">Enabling and Configuring</a></li>
@@ -5239,7 +5280,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#declaring-dependencies" aria-expanded="false" aria-controls="declaring-dependencies">Declaring Dependencies</a>
                     <ul id="declaring-dependencies">
-                        <li><a href="../userguide/declaring_dependencies_basics.html">Declaring Dependencies Basics</a></li>
+                        <li><a href="../userguide/declaring_dependencies_basics.html">Declaring Dependencies</a></li>
                         <li><a href="../userguide/viewing_debugging_dependencies.html">Viewing Dependencies</a></li>
                         <li><a href="../userguide/dependency_versions.html">Declaring Versions and Ranges</a></li>
                         <li><a href="../userguide/dependency_constraints.html">Declaring Dependency Constraints</a></li>
@@ -5250,7 +5291,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#declaring-repositories" aria-expanded="false" aria-controls="declaring-repositories">Declaring Repositories</a>
                     <ul id="declaring-repositories">
-                        <li><a href="../userguide/declaring_repositories_basics.html">Declaring Repositories Basics</a></li>
+                        <li><a href="../userguide/declaring_repositories_basics.html">Declaring Repositories</a></li>
                         <li><a href="../userguide/centralizing_repositories.html">Centralizing Repository Declarations</a></li>
                         <li><a href="../userguide/supported_repository_types.html">Repository Types</a></li>
                         <li><a href="../userguide/supported_metadata_formats.html">Metadata Formats</a></li>
@@ -5291,20 +5332,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/publishing_customization.html">Customizing Publishing</a></li>
                         <li><a href="../userguide/publishing_maven.html">Maven Publish Plugin</a></li>
                         <li><a href="../userguide/publishing_ivy.html">Ivy Publish Plugin</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to" aria-expanded="false" aria-controls="how-to">How-To-Guides</a>
-                    <ul id="how-to">
-                        <li><a href="../userguide/how_to_downgrade_transitive_dependencies.html">How to Downgrade Transitive Dependencies</a></li>
-                        <li><a href="../userguide/how_to_upgrade_transitive_dependencies.html">How to Upgrade Transitive Dependencies</a></li>
-                        <li><a href="../userguide/how_to_exclude_transitive_dependencies.html">How to Exclude Transitive Dependencies</a></li>
-                        <li><a href="../userguide/how_to_prevent_accidental_dependency_upgrades.html">How to Prevent Accidental or Eager Dependency Upgrades</a></li>
-                        <li><a href="../userguide/how_to_align_dependency_versions.html">How to Align Dependency Versions</a></li>
-                        <li><a href="../userguide/how_to_share_outputs_between_projects.html">How to Share Outputs Between Projects</a></li>
-                        <li><a href="../userguide/how_to_resolve_specific_artifacts.html">How to Resolve Specific Artifacts from a Module Dependency</a></li>
-                        <li><a href="../userguide/how_to_use_local_forks.html">How to Use a Local Fork of a Module Dependency</a></li>
-                        <li><a href="../userguide/how_to_fix_version_catalog_problems.html">How to Fix Version Catalog Problems</a></li>
-                        <li><a href="../userguide/how_to_create_feature_variants_of_a_library.html">How to Create Feature Variants of a Library</a></li>
                     </ul>
                 </li>
             </ul>
@@ -5358,36 +5385,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
             </ul>
 
-            <h3 id="reference">Reference</h3>
+            <h3 id="how-to-guides">How-To-Guides</h3>
             <ul>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-api" aria-expanded="false" aria-controls="gradle-api">Gradle DSLs and API</a>
-                    <ul id="gradle-api">
-                        <li><a href="../javadoc/index.html?overview-summary.html">Javadoc</a></li>
-                        <li><a href="../userguide/groovy_build_script_primer.html">Groovy DSL Primer</a></li>
-                        <li><a href="../dsl/index.html">Groovy DSL Reference</a></li>
-                        <li><a href="../userguide/kotlin_dsl.html">Kotlin DSL Primer</a></li>
-                        <li><a href="../kotlin-dsl/index.html" target="_blank">Kotlin DSL API</a></li>
-                        <li><a href="../userguide/migrating_from_groovy_to_kotlin_dsl.html">Groovy to Kotlin DSL Migration</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to-guides" aria-expanded="false" aria-controls="how-to-guides">Structuring Builds</a>
+                    <ul id="how-to-guides-structuring">
+                        <li><a href="../userguide/how_to_convert_single_build_to_multi_build.html">Convert a Single-Project Build to Multi-Project</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-best-practices" aria-expanded="false" aria-controls="gradle-best-practices">Gradle Best Practices</a>
-                    <ul id="gradle-best-practices">
-                        <li><a href="../userguide/best_practices.html">Introduction</a></li>
-                        <li><a href="../userguide/best_practices_index.html">Index</a></li>
-                        <li><a href="../userguide/best_practices_general.html">General Best Practices</a></li>
-                        <li><a href="../userguide/best_practices_structuring_builds.html">Best Practices for Structuring Builds</a></li>
-                        <li><a href="../userguide/best_practices_dependencies.html">Best Practices for Dependencies</a></li>
-                        <li><a href="../userguide/best_practices_tasks.html">Best Practices for Tasks</a></li>
-                        <li><a href="../userguide/best_practices_performance.html">Best Practices for Performance</a></li>
-                        <li><a href="../userguide/best_practices_security.html">Best Practices for Security</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to" aria-expanded="false" aria-controls="how-to">Dependency Management</a>
+                    <ul id="how-to-guides-dep-man">
+                        <li><a href="../userguide/how_to_downgrade_transitive_dependencies.html">How to Downgrade Transitive Dependencies</a></li>
+                        <li><a href="../userguide/how_to_upgrade_transitive_dependencies.html">How to Upgrade Transitive Dependencies</a></li>
+                        <li><a href="../userguide/how_to_exclude_transitive_dependencies.html">How to Exclude Transitive Dependencies</a></li>
+                        <li><a href="../userguide/how_to_prevent_accidental_dependency_upgrades.html">How to Prevent Accidental or Eager Dependency Upgrades</a></li>
+                        <li><a href="../userguide/how_to_align_dependency_versions.html">How to Align Dependency Versions</a></li>
+                        <li><a href="../userguide/how_to_share_outputs_between_projects.html">How to Share Outputs Between Projects</a></li>
+                        <li><a href="../userguide/how_to_resolve_specific_artifacts.html">How to Resolve Specific Artifacts from a Module Dependency</a></li>
+                        <li><a href="../userguide/how_to_use_local_forks.html">How to Use a Local Fork of a Module Dependency</a></li>
+                        <li><a href="../userguide/how_to_fix_version_catalog_problems.html">How to Fix Version Catalog Problems</a></li>
+                        <li><a href="../userguide/how_to_create_feature_variants_of_a_library.html">How to Create Feature Variants of a Library</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#core-plugins" aria-expanded="false" aria-controls="core-plugins">Core Plugins</a>
-                    <ul id="core-plugins">
-                        <li><a href="../userguide/plugin_reference.html">List of Core Plugins</a></li>
-                    </ul>
-                </li>
-                <li><a href="../userguide/isolated_projects.html">Isolated Projects</a></li>
+            </ul>
+
+            <h3 id="reference">Additional</h3>
+            <ul>
                 <li><a href="../samples/index.html">Samples</a></li>
                 <li><a href="../userguide/glossary.html">Glossary</a></li>
                 <li><a href="https://community.gradle.org/cookbook/">Cookbook</a></li>
@@ -5399,21 +5421,18 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content">
             <div class="chapter">
 <div id="header">
-<h1>Using Plugins</h1>
+<h1>Understanding Gradle Plugins</h1>
 <div class="details">
-<span id="revnumber">version 9.1.0-20250804160102+0000</span>
+<span id="revnumber">version 9.2.0-20250805122931+0000</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#benefits_of_plugins">Benefits of plugins</a></li>
-<li><a href="#plugin_distribution">Plugin distribution</a></li>
-<li><a href="#sec:types_of_plugins">Types of plugins</a></li>
-<li><a href="#sec:using_plugins">Using plugins</a></li>
-<li><a href="#sec:binary_plugin_locations">Applying plugins</a></li>
-<li><a href="#sec:plugin_management">Plugin Management</a></li>
-<li><a href="#sec:old_plugin_application">Legacy Plugin Application</a></li>
-<li><a href="#sec:version_catalog_plugin_application">Using a Version Catalog</a></li>
+<li><a href="#types_of_plugins_in_gradle">Types of Plugins in Gradle</a></li>
+<li><a href="#example_project_setup">Example Project Setup</a></li>
+<li><a href="#creating_a_convention_plugin">Creating a Convention Plugin</a></li>
+<li><a href="#benefits">Benefits</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -5421,1684 +5440,116 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Much of Gradle&#8217;s functionality is delivered via plugins, including core plugins distributed with Gradle, third-party plugins, and script plugins defined within builds.</p>
-</div>
-<div id="sec:what_plugins_do" class="paragraph">
-<p>Plugins introduce new tasks (e.g., <code>JavaCompile</code>), domain objects (e.g., <code>SourceSet</code>), conventions (e.g., locating Java source at <code>src/main/java</code>), and extend core or other plugin objects.</p>
-</div>
-<div class="paragraph">
-<p>Plugins in Gradle are essential for automating common build tasks, integrating with external tools or services, and tailoring the build process to meet specific project needs.
-They also serve as the primary mechanism for organizing build logic.</p>
+<p>This guide explores the different types of plugins in Gradle and shows how to simplify and standardize build configuration using convention plugins. It is based on a walkthrough video from the "Understanding Gradle" series.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="benefits_of_plugins"><a class="anchor" href="#benefits_of_plugins"></a><a class="link" href="#benefits_of_plugins">Benefits of plugins</a></h2>
+<h2 id="types_of_plugins_in_gradle"><a class="anchor" href="#types_of_plugins_in_gradle"></a><a class="link" href="#types_of_plugins_in_gradle">Types of Plugins in Gradle</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Writing many tasks and duplicating configuration blocks in build scripts can get messy.
-Plugins offer several advantages over adding logic directly to the build script:</p>
+<p>Gradle&#8217;s core functionality is extensible through plugins. Plugins can be categorized into three types:
+. Core Plugins: Bundled with Gradle and applied using a simple ID.  Example: [source,groovy]
+plugins { id 'java-library' }
+. Community Plugins: Published in the Gradle Plugin Portal. Require a qualified plugin ID and version.  Example: [source,groovy]
+plugins { id 'org.jetbrains.kotlin.jvm' version '1.8.20' }
+. Convention Plugins: Custom plugins you write and maintain locally to share and enforce common build logic.
+== Why Use Convention Plugins?
+As projects grow, build files can become large and repetitive. Applying and configuring multiple plugins across subprojects can lead to duplication. Convention plugins solve this by:
+* Encapsulating shared plugin application and configuration
+* Centralizing build logic in one place
+* Simplifying individual build scripts</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="example_project_setup"><a class="anchor" href="#example_project_setup"></a><a class="link" href="#example_project_setup">Example Project Setup</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Suppose we have a multi-project build with subprojects:
+* data-model
+* business-logic
+* app
+Each of these subprojects needs to:
+* Use the java-library plugin
+* Apply the Kotlin plugin
+* Target the same Java version
+Rather than repeating this in every build.gradle.kts, we can extract it into a convention plugin.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating_a_convention_plugin"><a class="anchor" href="#creating_a_convention_plugin"></a><a class="link" href="#creating_a_convention_plugin">Creating a Convention Plugin</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="1_create_a_separate_build_for_plugins"><a class="anchor" href="#1_create_a_separate_build_for_plugins"></a><a class="link" href="#1_create_a_separate_build_for_plugins">1. Create a Separate Build for Plugins</a></h3>
+<div class="paragraph">
+<p>Create a new directory: [source,shell]
+mkdir my-build-logic
+Inside settings.gradle.kts of the main build, include it: [source,kotlin]
+pluginManagement { includeBuild("my-build-logic") }
+=== 2. Set Up the Plugin Build
+In my-build-logic, create:
+* settings.gradle.kts
+*</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencyResolutionManagement { repositories { gradlePluginPortal() } }
+* One subproject for the plugins, e.g. my-plugins with its own build.gradle.kts</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="3_use_the_kotlin_dsl_plugin"><a class="anchor" href="#3_use_the_kotlin_dsl_plugin"></a><a class="link" href="#3_use_the_kotlin_dsl_plugin">3. Use the Kotlin DSL Plugin</a></h3>
+<div class="paragraph">
+<p>Apply the kotlin-dsl plugin: [source,kotlin]
+plugins { kotlin-dsl }</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="4_add_plugin_dependencies"><a class="anchor" href="#4_add_plugin_dependencies"></a><a class="link" href="#4_add_plugin_dependencies">4. Add Plugin Dependencies</a></h3>
+<div class="paragraph">
+<p>To apply community plugins in your convention plugin, declare them as dependencies. You can find the coordinates in the Gradle Plugin Portal.
+Example: [source,kotlin]
+dependencies { implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:1.8.20") }
+=== 5. Write the Convention Plugin
+Create src/main/kotlin/my-java-library.gradle.kts: [source,kotlin]
+plugins { id("java-library") id("org.jetbrains.kotlin.jvm") }
+java { toolchain.languageVersion.set(JavaLanguageVersion.of(17)) }
+This file defines the plugin logic. The file name (my-java-library) becomes the plugin ID.
+== Applying the Convention Plugin
+In any subproject, replace multiple plugin declarations with: [source,kotlin]
+plugins { id("my-java-library") }
+Now all shared configuration is inherited, and subprojects stay lean and consistent.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="benefits"><a class="anchor" href="#benefits"></a><a class="link" href="#benefits">Benefits</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Promotes Reusability</strong>: Reduces the need to duplicate similar logic across projects.</p>
+<p>Single source of truth for shared build logic</p>
 </li>
 <li>
-<p><strong>Enhances Modularity</strong>: Allows for a more modular and organized build script.</p>
+<p>Fully supports Kotlin DSL and static typing</p>
 </li>
 <li>
-<p><strong>Encapsulates Logic</strong>: Keeps imperative logic separate, enabling more declarative build scripts.</p>
+<p>Encourages modular and maintainable build setups</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="plugin_distribution"><a class="anchor" href="#plugin_distribution"></a><a class="link" href="#plugin_distribution">Plugin distribution</a></h2>
+<h2 id="summary"><a class="anchor" href="#summary"></a><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can leverage plugins from Gradle and the Gradle community or create your own.</p>
-</div>
-<div class="paragraph">
-<p>Plugins are available in three ways:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Core plugins</strong> - Gradle develops and maintains a set of <a href="plugin_reference.html#plugin_reference">Core Plugins</a>.</p>
-</li>
-<li>
-<p><strong>Community plugins</strong> - Gradle plugins shared in a remote repository such as Maven or the <a href="https://plugins.gradle.org">Gradle Plugin Portal</a>.</p>
-</li>
-<li>
-<p><strong>Custom plugins</strong> - Gradle enables users to create plugins using <a href="../javadoc/org/gradle/api/Plugin.html">APIs</a>.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:types_of_plugins"><a class="anchor" href="#sec:types_of_plugins"></a><a class="link" href="#sec:types_of_plugins">Types of plugins</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Plugins can be implemented as <strong>binary plugins</strong>, <strong>precompiled script plugins</strong>, or <strong>script plugins</strong>:</p>
-</div>
-<div class="sect2">
-<h3 id="1_script_plugins"><a class="anchor" href="#1_script_plugins"></a><a class="link" href="#1_script_plugins">1. Script Plugins</a></h3>
-<div class="paragraph">
-<p>Script plugins are Groovy DSL or Kotlin DSL scripts that are applied directly to a Gradle build script using the <code>apply from:</code> syntax.
-They are applied inline within a build script to add functionality or customize the build process.
-<strong>They are not recommended</strong> but it&#8217;s important to understand how to work:</p>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">// Define a plugin
-class HelloWorldPlugin : Plugin&lt;Project&gt; {
-    override fun apply(project: Project) {
-        project.tasks.register("helloWorld") {
-            group = "Example"
-            description = "Prints 'Hello, World!' to the console"
-            doLast {
-                println("Hello, World!")
-            }
-        }
-    }
-}
-
-// Apply the plugin
-apply&lt;HelloWorldPlugin&gt;()</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="2_precompiled_script_plugins"><a class="anchor" href="#2_precompiled_script_plugins"></a><a class="link" href="#2_precompiled_script_plugins">2. Precompiled Script Plugins</a></h3>
-<div class="paragraph">
-<p>Precompiled script plugins are Groovy DSL or Kotlin DSL scripts compiled and distributed as Java class files packaged in some library.
-They are meant to be consumed as a binary Gradle plugin, so they are applied to a project using the <code>plugins {}</code> block.
-The plugin ID by which the precompiled script can be referenced is derived from its name and optional package declaration.</p>
-</div>
-<div class="listingblock">
-<div class="title">plugin/src/main/kotlin/my-plugin.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">// This script is automatically exposed to downstream consumers as the `my-plugin` plugin
-tasks {
-    register("myCopyTask", Copy::class) {
-        group = "sample"
-        from("build.gradle.kts")
-        into("build/copy")
-    }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">consumer/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("my-plugin") version "1.0"
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="3_buildsrc_and_convention_plugins"><a class="anchor" href="#3_buildsrc_and_convention_plugins"></a><a class="link" href="#3_buildsrc_and_convention_plugins">3. <code>BuildSrc</code> and Convention Plugins</a></h3>
-<div class="paragraph">
-<p>These are a hybrid of precompiled plugins and binary plugins that provide a way to reuse complex logic across projects and allow for better organization of build logic.</p>
-</div>
-<div class="listingblock">
-<div class="title">buildSrc/src/main/kotlin/shared-build-conventions.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    java
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    implementation("com.google.guava:guava:30.1.1-jre")
-}
-
-tasks.named&lt;Test&gt;("test") {
-    useJUnitPlatform()
-}
-
-tasks.register&lt;Copy&gt;("backupTestXml") {
-    from("build/test-results/test")
-    into("/tmp/results/")
-    exclude("binary/**")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">app/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    application
-    id("shared-build-conventions")
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="4_binary_plugins"><a class="anchor" href="#4_binary_plugins"></a><a class="link" href="#4_binary_plugins">4. Binary Plugins</a></h3>
-<div class="paragraph">
-<p>Binary plugins are compiled plugins typically written in Java or Kotlin DSL that are packaged as JAR files.
-They are applied to a project using the <code>plugins {}</code> block.
-They offer better performance and maintainability compared to script plugins or precompiled script plugins.</p>
-</div>
-<div class="listingblock">
-<div class="title">plugin/src/main/kotlin/plugin/MyPlugin.kt</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">class MyPlugin : Plugin&lt;Project&gt; {
-    override fun apply(project: Project) {
-        project.run {
-            tasks {
-                register("myCopyTask", Copy::class) {
-                    group = "sample"
-                    from("build.gradle.kts")
-                    into("build/copy")
-                }
-            }
-        }
-    }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">consumer/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("my-plugin") version "1.0"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The difference between a <strong>binary plugin</strong> and a <strong>script plugin</strong> lies in how they are shared and executed:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A <strong>binary plugin</strong> is compiled into bytecode, and the bytecode is shared.</p>
-</li>
-<li>
-<p>A <strong>script plugin</strong> is shared as source code, and it is compiled at the time of use.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Binary plugins can be written in any language that produces JVM bytecode, such as Java, Kotlin, or Groovy.
-In contrast, script plugins can only be written using Kotlin DSL or Groovy DSL.</p>
-</div>
-<div class="paragraph">
-<p>However, there is also a middle ground: <strong>precompiled script plugins</strong>.
-These are written in Kotlin DSL or Groovy DSL, like script plugins, but are compiled into bytecode and shared like binary plugins.</p>
-</div>
-<div class="paragraph">
-<p>A plugin often starts as a script plugin (because they are easy to write).
-Then, as the code becomes more valuable, it&#8217;s migrated to a binary plugin that can be easily tested and shared between multiple projects or organizations.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:using_plugins"><a class="anchor" href="#sec:using_plugins"></a><a class="link" href="#sec:using_plugins">Using plugins</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To use the build logic encapsulated in a plugin, Gradle needs to perform two steps.
-First, it needs to <strong>resolve</strong> the plugin, and then it needs to <strong>apply</strong> the plugin to the target, usually a <a href="../dsl/org.gradle.api.Project.html"><code>Project</code></a>.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Resolving</strong> a plugin means finding the correct version of the JAR that contains a given plugin and adding it to the script classpath.
-Once a plugin is resolved, its API can be used in a build script.
-Script plugins are self-resolving in that they are resolved from the specific file path or URL provided when applying them.
-Core binary plugins provided as part of the Gradle distribution are automatically resolved.</p>
-</li>
-<li>
-<p><strong>Applying</strong> a plugin means executing the plugin&#8217;s <a href="../javadoc/org/gradle/api/Plugin.html#apply-T-">Plugin.apply(T)</a> on a project.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <a href="#sec:plugins_block">plugins DSL</a> is recommended to resolve and apply plugins in one step.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:binary_plugin_locations"><a class="anchor" href="#sec:binary_plugin_locations"></a><a class="link" href="#sec:binary_plugin_locations">Applying plugins</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Gradle provides the <strong>core plugins</strong> (e.g., <code>JavaPlugin</code>, <code>GroovyPlugin</code>, <code>MavenPublishPlugin</code>, etc.) as part of its distribution, which means they are automatically resolved.</p>
-</div>
-<div class="paragraph">
-<p>Core plugins are applied in a build script using the plugin name:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">plugins {
-    id «plugin name»
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For example:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("java")
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'java'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Non-core plugins must be resolved before they can be applied.
-Non-core plugins are identified by a unique ID and a version in the build file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">plugins {
-    id «plugin id» version «plugin version»
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For example:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("com.gradleup.shadow") version "8.3.4"
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'com.gradleup.shadow' version '8.3.4'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>And the location of the plugin must be specified in the settings file:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">pluginManagement {  <i class="conum" data-value="1"></i><b>(1)</b>
-    repositories {
-        gradlePluginPortal()
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">pluginManagement {  <i class="conum" data-value="1"></i><b>(1)</b>
-    repositories {
-        gradlePluginPortal()
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>There are additional considerations for resolving and applying plugins:</p>
-</div>
-<table class="tableblock frame-all grid-all fit-content stretch">
-<colgroup>
-<col>
-<col>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">#</th>
-<th class="tableblock halign-left valign-top">To</th>
-<th class="tableblock halign-left valign-top">Use</th>
-<th class="tableblock halign-left valign-top">For example:</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:plugins_block">1</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Apply a plugin to a project.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:plugins_block">The <code>plugins</code> block in the build file</a>.</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>plugins {
-  id("org.barfuin.gradle.taskinfo") version "2.1.0"
-}</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:subprojects_plugins_dsl">2</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Apply a plugin to multiple projects.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:subprojects_plugins_dsl">The <code>subprojects</code> or <code>allprojects</code> blocks in the root build file</a>. <strong>Not Recommended</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>plugins {
-    id("org.barfuin.gradle.taskinfo") version "2.1.0"
-}
-allprojects {
-    apply(plugin = "org.barfuin.gradle.taskinfo")
-    repositories {
-        mavenCentral()
-    }
-}</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:root_plugins_dsl">3</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Apply a plugin to multiple projects.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:root_plugins_dsl">The <code>plugins</code> block in the root build file</a>.</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>plugins {
-    id("com.gradleup.shadow") version "8.3.4" apply false
-    id("io.ratpack.ratpack-java") version "1.8.2" apply false
-}</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:buildsrc_plugins_dsl">4</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Apply a plugin to multiple projects.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:buildsrc_plugins_dsl">A convention plugin in the <code>buildSrc</code> directory</a>. <strong>Recommended</strong>.</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>plugins {
-    id("my-convention.gradle.taskinfo")
-}</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:applying_plugins_buildscript">5</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Apply a plugin needed <em>for the build script itself</em>.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:applying_plugins_buildscript">The <code>buildscript</code> block in the build file itself</a>. <strong>Legacy</strong>.</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath("org.barfuin.gradle.taskinfo:gradle-taskinfo:2.1.0")
-  }
-}
-apply(plugin = "org.barfuin.gradle.taskinfo")</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:script_plugins">6</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Apply a script plugins.</p>
-<p class="tableblock">Applying a plugin when type-safe accessors are not available.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sec:script_plugins">The legacy <code>apply()</code> method in the build file</a>. <strong>Not Recommended</strong>. <strong>Legacy</strong>.</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>apply&lt;MyCustomBarfuinTaskInfoPlugin&gt;()</pre>
-</div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="sec:plugins_block"><a class="anchor" href="#sec:plugins_block"></a><a class="link" href="#sec:plugins_block">1. Applying plugins using the <code>plugins{}</code> block</a></h3>
-<div class="paragraph">
-<p>The plugin DSL provides a concise and convenient way to declare plugin dependencies.</p>
-</div>
-<div id="sec:binary_plugins" class="paragraph">
-<p>The plugins block configures an instance of <a href="../javadoc/org/gradle/plugin/use/PluginDependenciesSpec.html"><code>PluginDependenciesSpec</code></a>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">plugins {
-    application                                     // by name
-    java                                            // by name
-    id("java")                                      // by id - recommended
-    id("org.jetbrains.kotlin.jvm") version "1.9.0"  // by id - recommended
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Core Gradle plugins are unique in that they provide short names, such as <code>java</code> for the core <a href="../javadoc/org/gradle/api/plugins/JavaPlugin.html">JavaPlugin</a>.</p>
-</div>
-<div class="paragraph">
-<p>To apply a core plugin, the short <strong>name</strong> can be used:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    java
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'java'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>All other binary plugins must use the fully qualified form of the plugin id (e.g., <code>com.github.foo.bar</code>).</p>
-</div>
-<div class="paragraph">
-<p>To apply a community plugin from <a href="http://plugins.gradle.org">Gradle plugin portal</a>, the fully qualified <strong>plugin id</strong>, a globally unique identifier, must be used:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("org.springframework.boot") version "3.3.1"
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'org.springframework.boot' version '3.3.1'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>See <a href="../javadoc/org/gradle/plugin/use/PluginDependenciesSpec.html"><code>PluginDependenciesSpec</code></a> for more information on using the Plugin DSL.</p>
-</div>
-<div class="sect3">
-<h4 id="plugins_dsl_limitations"><a class="anchor" href="#plugins_dsl_limitations"></a><a class="link" href="#plugins_dsl_limitations">Limitations of the plugins DSL</a></h4>
-<div class="paragraph">
-<p>The plugins DSL provides a convenient syntax for users and the ability for Gradle to determine which plugins are used quickly.
-This allows Gradle to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Optimize the loading and reuse of plugin classes.</p>
-</li>
-<li>
-<p>Provide editors with detailed information about the potential properties and values in the build script.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>However, the DSL requires that plugins be defined statically.</p>
-</div>
-<div class="paragraph">
-<p>There are some key differences between the <code>plugins {}</code> block mechanism and the "traditional" <code>apply()</code> method mechanism.
-There are also some constraints and possible limitations.</p>
-</div>
-<div id="sec:build_scripts_only" class="paragraph">
-<p>The <code>plugins{}</code> block can only be used in a project&#8217;s build script <code>build.gradle(.kts)</code> and the <code>settings.gradle(.kts)</code> file.
-It must appear before any other block.
-It cannot be used in script plugins or init scripts.</p>
-</div>
-<div class="sect4">
-<h5 id="sec:constrained_syntax"><a class="anchor" href="#sec:constrained_syntax"></a><a class="link" href="#sec:constrained_syntax">Constrained Syntax</a></h5>
-<div class="paragraph">
-<p>The <code>plugins {}</code> block does not support arbitrary code.</p>
-</div>
-<div class="paragraph">
-<p>It is constrained to be idempotent (produce the same result every time) and side effect-free (safe for Gradle to execute at any time).</p>
-</div>
-<div class="paragraph">
-<p>The form is:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">plugins {
-    id(«plugin id»)                             <i class="conum" data-value="1"></i><b>(1)</b>
-    id(«plugin id») version «plugin version»    <i class="conum" data-value="2"></i><b>(2)</b>
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>for core Gradle plugins or plugins already available to the build script</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>for binary Gradle plugins that need to be resolved</td>
-</tr>
-</table>
-</div>
-<div class="paragraph multi-language-text lang-kotlin">
-<p>Where <code>«plugin id»</code> and <code>«plugin version»</code> are a string.</p>
-</div>
-<div class="paragraph multi-language-text lang-groovy">
-<p>Where <code>«plugin id»</code> and <code>«plugin version»</code> must be constant, literal strings.</p>
-</div>
-<div class="paragraph">
-<p>The <code>plugins{}</code> block must also be a top-level statement in the build script.
-It cannot be nested inside another construct (e.g., an if-statement or for-loop).</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:subprojects_plugins_dsl"><a class="anchor" href="#sec:subprojects_plugins_dsl"></a><a class="link" href="#sec:subprojects_plugins_dsl">2. Applying plugins to all subprojects{} or allprojects{}</a></h3>
-<div class="paragraph">
-<p>Suppose you have a <a href="multi_project_builds.html#multi_project_builds">multi-project build</a>, you probably want to apply plugins to some or all of the subprojects in your build but not to the <code>root</code> project.</p>
-</div>
-<div class="paragraph">
-<p>While the default behavior of the <code>plugins{}</code> block is to immediately <code>resolve</code> <em>and</em> <code>apply</code> the plugins, you can use the <code>apply false</code> syntax to tell Gradle not to apply the plugin to the current project. Then, use the <code>plugins{}</code> block without the version in subprojects' build scripts:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">include("hello-a")
-include("hello-b")
-include("goodbye-c")</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    // These plugins are not automatically applied.
-    // They can be applied in subprojects as needed (in their respective build files).
-    id("com.example.hello") version "1.0.0" apply false
-    id("com.example.goodbye") version "1.0.0" apply false
-}
-
-allprojects {
-    // Apply the common 'java' plugin to all projects (including the root)
-    plugins.apply("java")
-}
-
-subprojects {
-    // Apply the 'java-library' plugin to all subprojects (excluding the root)
-    plugins.apply("java-library")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">hello-a/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("com.example.hello")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">hello-b/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("com.example.hello")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">goodbye-c/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("com.example.goodbye")
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">include 'hello-a'
-include 'hello-b'
-include 'goodbye-c'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    // These plugins are not automatically applied.
-    // They can be applied in subprojects as needed (in their respective build files).
-    id 'com.example.hello' version '1.0.0' apply false
-    id 'com.example.goodbye' version '1.0.0' apply false
-}
-
-allprojects {
-    // Apply the common 'java' plugin to all projects (including the root)
-    apply(plugin: 'java')
-}
-
-subprojects {
-    // Apply the 'java-library' plugin to all subprojects (excluding the root)
-    apply(plugin: 'java-library')
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">hello-a/build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'com.example.hello'
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">hello-b/build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'com.example.hello'
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">goodbye-c/build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'com.example.goodbye'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>You can also encapsulate the versions of external plugins by composing the build logic using your own <a href="sharing_build_logic_between_subprojects.html#sec:sharing_logic_via_convention_plugins">convention plugins</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:root_plugins_dsl"><a class="anchor" href="#sec:root_plugins_dsl"></a><a class="link" href="#sec:root_plugins_dsl">3. Applying plugins declared in the root project</a></h3>
-<div class="paragraph">
-<p>You can apply plugins from the root or parent project in a multi-project build to share common logic and behavior with other projects.
-The root/parent project is the project at the top of the directory hierarchy.</p>
-</div>
-<div class="paragraph">
-<p>You should use the <code>plugins {}</code> block because it ensures that the plugin is applied and configured before the project’s evaluation phase.
-This way, you can safely use type-safe accessors for any model elements introduced by the plugin:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">rootProject.name = "multi-project-build"
-include("domain", "infra", "http")</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("com.gradleup.shadow") version "8.3.4" apply false
-    id("io.ratpack.ratpack-java") version "2.0.0-rc-1" apply false
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">domain/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    `java-library`
-}
-
-dependencies {
-    api("javax.measure:unit-api:1.0")
-    implementation("tec.units:unit-ri:1.0.3")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">infra/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    `java-library`
-    id("com.gradleup.shadow")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">http/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    java
-    id("io.ratpack.ratpack-java")
-}
-
-dependencies {
-    implementation(project(":domain"))
-    implementation(project(":infra"))
-    implementation(ratpack.dependency("dropwizard-metrics"))
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In the root/parent <code>build.gradle(.kts)</code>, plugins are declared but not applied (via <code>apply false</code>).
-This approach, while optional, makes the plugins available to be explicitly applied in specific subprojects.
-Without <code>apply false</code>, plugins declared in the root project cannot be explicitly applied only to certain subprojects.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>apply false</code> is optional. If <code>apply false</code> is not used when declaring plugins in the root build file, those plugins would automatically be applied to the root project.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>In the <code>infra</code> subproject, the <code>com.gradleup.shadow</code> plugin, which was made available in the root project, is explicitly applied.
-The <code>http</code> subproject applies <code>io.ratpack.ratpack-java</code>.
-The <code>domain</code> subproject does not apply a plugin from the root.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:buildsrc_plugins_dsl"><a class="anchor" href="#sec:buildsrc_plugins_dsl"></a><a class="link" href="#sec:buildsrc_plugins_dsl">4. Applying convention plugins from the <code>buildSrc</code> directory</a></h3>
-<div class="paragraph">
-<p><code>buildSrc</code> is an optional directory at the Gradle project root that contains build logic (i.e., plugins) used in building the main project.
-You can apply plugins that reside in a project&#8217;s <code>buildSrc</code> directory as long as they have a defined ID.</p>
-</div>
-<div class="paragraph">
-<p>The following example shows how to tie the plugin implementation class <code>my.MyPlugin</code>, defined in <code>buildSrc</code>, to the id "my-plugin":</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">buildSrc/build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    `java-gradle-plugin`
-}
-
-gradlePlugin {
-    plugins {
-        create("myPlugins") {
-            id = "my-plugin"
-            implementationClass = "my.MyPlugin"
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">buildSrc/build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'java-gradle-plugin'
-}
-
-gradlePlugin {
-    plugins {
-        myPlugins {
-            id = 'my-plugin'
-            implementationClass = 'my.MyPlugin'
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The plugin can then be applied by ID:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("my-plugin")
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'my-plugin'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:applying_plugins_buildscript"><a class="anchor" href="#sec:applying_plugins_buildscript"></a><a class="link" href="#sec:applying_plugins_buildscript">5. Applying plugins using the <code>buildscript{}</code> block</a></h3>
-<div class="paragraph">
-<p>To define libraries or plugins used in the build script itself, you can use the <code>buildscript</code> block.
-The <code>buildscript</code> block is also used for specifying where to find those dependencies.</p>
-</div>
-<div class="paragraph">
-<p>This approach is less common with newer versions of Gradle, as the <code>plugins {}</code> block simplifies plugin usage.
-However, <code>buildscript {}</code> may be necessary when dealing with custom or non-standard plugin repositories as well as libraries dependencies:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">import org.yaml.snakeyaml.Yaml
-import java.io.File
-
-buildscript {
-    repositories {
-        maven {
-            url = uri("https://plugins.gradle.org/m2/")
-        }
-        mavenCentral()  // Where to find the plugin
-    }
-    dependencies {
-        classpath("org.yaml:snakeyaml:1.19") // The library's classpath dependency
-        classpath("com.gradleup.shadow:shadow-gradle-plugin:8.3.4") // Plugin dependency for legacy plugin application
-    }
-}
-
-// Applies legacy Shadow plugin
-apply(plugin = "com.gradleup.shadow")
-
-// Uses the library in the build script
-val yamlContent = """
-        name: Project
-    """.trimIndent()
-val yaml = Yaml()
-val data: Map&lt;String, Any&gt; = yaml.load(yamlContent)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">import org.yaml.snakeyaml.Yaml
-
-buildscript {
-    repositories { // Where to find the plugin or library
-        maven {
-            url = uri("https://plugins.gradle.org/m2/")
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.yaml:snakeyaml:1.19' // The library's classpath dependency
-        classpath 'com.gradleup.shadow:shadow-gradle-plugin:8.3.4' // Plugin dependency for legacy plugin application
-    }
-}
-
-// Applies legacy Shadow plugin
-apply plugin: 'com.gradleup.shadow'
-
-// Uses the library in the build script
-def yamlContent = """
-        name: Project Name
-    """
-def yaml = new Yaml()
-def data = yaml.load(yamlContent)</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:script_plugins"><a class="anchor" href="#sec:script_plugins"></a><a class="link" href="#sec:script_plugins">6. Applying script plugins using the legacy <code>apply()</code> method</a></h3>
-<div class="paragraph">
-<p>A script plugin is an ad-hoc plugin, typically written and applied in the same build script.
-It is applied using the <a href="#sec:old_plugin_application">legacy application method</a>:</p>
-</div>
-<div id="sec:binary_plugin_example" class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">class MyPlugin : Plugin&lt;Project&gt; {
-    override fun apply(project: Project) {
-        println("Plugin ${this.javaClass.simpleName} applied on ${project.name}")
-    }
-}
-
-apply&lt;MyPlugin&gt;()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">class MyPlugin implements Plugin&lt;Project&gt; {
-    @Override
-    void apply(Project project) {
-        println("Plugin ${this.getClass().getSimpleName()} applied on ${project.name}")
-    }
-}
-
-apply plugin: MyPlugin</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:plugin_management"><a class="anchor" href="#sec:plugin_management"></a><a class="link" href="#sec:plugin_management">Plugin Management</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>pluginManagement{}</code> block is used to configure repositories for plugin resolution and to define version constraints for plugins that are applied in the build scripts.</p>
-</div>
-<div class="paragraph">
-<p>The <code>pluginManagement{}</code> block can be used in a <code>settings.gradle(.kts)</code> file, where it must be the first block in the file:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">pluginManagement {
-    plugins {
-    }
-    resolutionStrategy {
-    }
-    repositories {
-    }
-}
-rootProject.name = "plugin-management"</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">pluginManagement {
-    plugins {
-    }
-    resolutionStrategy {
-    }
-    repositories {
-    }
-}
-rootProject.name = 'plugin-management'</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The block can also be used in <a href="init_scripts.html#init_scripts">Initialization Script</a>:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">init.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">settingsEvaluated {
-    pluginManagement {
-        plugins {
-        }
-        resolutionStrategy {
-        }
-        repositories {
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">init.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">settingsEvaluated { settings -&gt;
-    settings.pluginManagement {
-        plugins {
-        }
-        resolutionStrategy {
-        }
-        repositories {
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:custom_plugin_repositories"><a class="anchor" href="#sec:custom_plugin_repositories"></a><a class="link" href="#sec:custom_plugin_repositories">Custom Plugin Repositories</a></h3>
-<div class="paragraph">
-<p>By default, the <code>plugins{}</code> DSL resolves plugins from the public <a href="https://plugins.gradle.org">Gradle Plugin Portal</a>.</p>
-</div>
-<div class="paragraph">
-<p>Many build authors would also like to resolve plugins from private Maven or Ivy repositories because they contain proprietary implementation details or to have more control over what plugins are available to their builds.</p>
-</div>
-<div class="paragraph">
-<p>To specify custom plugin repositories, use the <code>repositories{}</code> block inside <code>pluginManagement{}</code>:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">pluginManagement {
-    repositories {
-        maven(url = file("./maven-repo"))
-        gradlePluginPortal()
-        ivy(url = file("./ivy-repo"))
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">pluginManagement {
-    repositories {
-        maven {
-            url = file('./maven-repo')
-        }
-        gradlePluginPortal()
-        ivy {
-            url = file('./ivy-repo')
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>This tells Gradle to first look in the Maven repository at <code>../maven-repo</code> when resolving plugins and then to check the Gradle Plugin Portal if the plugins are not found in the Maven repository.
-If you don&#8217;t want the Gradle Plugin Portal to be searched, omit the <code>gradlePluginPortal()</code> line.
-Finally, the Ivy repository at <code>../ivy-repo</code> will be checked.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:plugin_version_management"><a class="anchor" href="#sec:plugin_version_management"></a><a class="link" href="#sec:plugin_version_management">Plugin Version Management</a></h3>
-<div class="paragraph">
-<p>A <code>plugins{}</code> block inside <code>pluginManagement{}</code> allows all plugin versions for the build to be defined in a single location.
-Plugins can then be applied by id to any build script via the <code>plugins{}</code> block.</p>
-</div>
-<div class="paragraph">
-<p>One benefit of setting plugin versions this way is that the <code>pluginManagement.plugins{}</code> does not have the same <a href="#sec:constrained_syntax">constrained syntax</a> as the build script <code>plugins{}</code> block.
-This allows plugin versions to be taken from <code>gradle.properties</code>, or loaded via another mechanism.</p>
-</div>
-<div class="paragraph">
-<p>Managing plugin versions via <code>pluginManagement</code>:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">pluginManagement {
-  val helloPluginVersion: String by settings
-  plugins {
-    id("com.example.hello") version "${helloPluginVersion}"
-  }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("com.example.hello")
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">gradle.properties</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="properties">helloPluginVersion=1.0.0</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">pluginManagement {
-  plugins {
-        id 'com.example.hello' version "${helloPluginVersion}"
-    }
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'com.example.hello'
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">gradle.properties</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="properties">helloPluginVersion=1.0.0</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The plugin version is loaded from <code>gradle.properties</code> and configured in the settings script, allowing the plugin to be added to any project without specifying the version.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:plugin_resolution_rules"><a class="anchor" href="#sec:plugin_resolution_rules"></a><a class="link" href="#sec:plugin_resolution_rules">Plugin Resolution Rules</a></h3>
-<div class="paragraph">
-<p>Plugin resolution rules allow you to modify plugin requests made in <code>plugins{}</code> blocks, e.g., changing the requested version or explicitly specifying the implementation artifact coordinates.</p>
-</div>
-<div class="paragraph">
-<p>To add resolution rules, use the <code>resolutionStrategy{}</code> inside the <code>pluginManagement{}</code> block:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">pluginManagement {
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.namespace == "com.example") {
-                useModule("com.example:sample-plugins:1.0.0")
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = uri("./maven-repo")
-        }
-        gradlePluginPortal()
-        ivy {
-            url = uri("./ivy-repo")
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">settings.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">pluginManagement {
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.namespace == 'com.example') {
-                useModule('com.example:sample-plugins:1.0.0')
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = file('./maven-repo')
-        }
-        gradlePluginPortal()
-        ivy {
-            url = file('./ivy-repo')
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>This tells Gradle to use the specified plugin implementation artifact instead of its built-in default mapping from plugin ID to Maven/Ivy coordinates.</p>
-</div>
-<div class="paragraph">
-<p>Custom Maven and Ivy plugin repositories must contain <a href="#sec:plugin_markers">plugin marker artifacts</a> and the artifacts that implement the plugin.
-Read <a href="java_gradle_plugin.html#java_gradle_plugin">Gradle Plugin Development Plugin</a> for more information on publishing plugins to custom repositories.</p>
-</div>
-<div class="paragraph">
-<p>See <a href="../javadoc/org/gradle/plugin/management/PluginManagementSpec.html">PluginManagementSpec</a> for complete documentation for using the <code>pluginManagement{}</code> block.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:plugin_markers"><a class="anchor" href="#sec:plugin_markers"></a><a class="link" href="#sec:plugin_markers">Plugin Marker Artifacts</a></h3>
-<div class="paragraph">
-<p>Since the <code>plugins{}</code> DSL block only allows for declaring plugins by their globally unique plugin <code>id</code> and <code>version</code> properties, Gradle needs a way to look up the coordinates of the plugin implementation artifact.</p>
-</div>
-<div class="paragraph">
-<p>To do so, Gradle will look for a Plugin Marker Artifact with the coordinates <code>plugin.id:plugin.id.gradle.plugin:plugin.version</code>.
-This marker needs to have a dependency on the actual plugin implementation.
-Publishing these markers is automated by the <a href="java_gradle_plugin.html#java_gradle_plugin">java-gradle-plugin</a>.</p>
-</div>
-<div class="paragraph">
-<p>For example, the following complete sample from the <code>sample-plugins</code> project shows how to publish a <code>com.example.hello</code> plugin and a <code>com.example.goodbye</code> plugin to both an Ivy and Maven repository using the combination of the <a href="java_gradle_plugin.html#java_gradle_plugin">java-gradle-plugin</a>, the <a href="publishing_maven.html#publishing_maven">maven-publish</a> plugin, and the <a href="publishing_ivy.html#publishing_ivy">ivy-publish</a> plugin.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    `java-gradle-plugin`
-    `maven-publish`
-    `ivy-publish`
-}
-
-group = "com.example"
-version = "1.0.0"
-
-gradlePlugin {
-    plugins {
-        create("hello") {
-            id = "com.example.hello"
-            implementationClass = "com.example.hello.HelloPlugin"
-        }
-        create("goodbye") {
-            id = "com.example.goodbye"
-            implementationClass = "com.example.goodbye.GoodbyePlugin"
-        }
-    }
-}
-
-publishing {
-    repositories {
-        maven {
-            url = uri(layout.buildDirectory.dir("maven-repo"))
-        }
-        ivy {
-            url = uri(layout.buildDirectory.dir("ivy-repo"))
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'java-gradle-plugin'
-    id 'maven-publish'
-    id 'ivy-publish'
-}
-
-group = 'com.example'
-version = '1.0.0'
-
-gradlePlugin {
-    plugins {
-        hello {
-            id = 'com.example.hello'
-            implementationClass = 'com.example.hello.HelloPlugin'
-        }
-        goodbye {
-            id = 'com.example.goodbye'
-            implementationClass = 'com.example.goodbye.GoodbyePlugin'
-        }
-    }
-}
-
-publishing {
-    repositories {
-        maven {
-            url = layout.buildDirectory.dir('maven-repo')
-        }
-        ivy {
-            url = layout.buildDirectory.dir('ivy-repo')
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Running <code>gradle publish</code> in the sample directory creates the following Maven repository layout (the Ivy layout is similar):</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="img/plugin-markers.png" alt="plugin markers">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:old_plugin_application"><a class="anchor" href="#sec:old_plugin_application"></a><a class="link" href="#sec:old_plugin_application">Legacy Plugin Application</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>With the introduction of the <a href="#sec:plugins_block">plugins DSL</a>, users should have little reason to use the legacy method of applying plugins.
-It is documented here in case a build author cannot use the plugin DSL due to restrictions in how it currently works.</p>
-</div>
-<div id="sec:applying_binary_plugins" class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">apply(plugin = "java")</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">apply plugin: 'java'</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Plugins can be applied using a <em>plugin id</em>.
-In the above case, we are using the short name "java" to apply the <a href="../javadoc/org/gradle/api/plugins/JavaPlugin.html">JavaPlugin</a>.</p>
-</div>
-<div class="paragraph">
-<p>Rather than using a plugin id, plugins can also be applied by simply specifying the class of the plugin:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">apply&lt;JavaPlugin&gt;()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">apply plugin: JavaPlugin</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>JavaPlugin</code> symbol in the above sample refers to the <a href="../javadoc/org/gradle/api/plugins/JavaPlugin.html">JavaPlugin</a>.
-This class does not strictly need to be imported as the <code>org.gradle.api.plugins</code> package is automatically imported in all build scripts (see <a href="writing_build_scripts.html#script-default-imports">Default imports</a>).</p>
-</div>
-<div class="paragraph multi-language-text lang-kotlin">
-<p>Furthermore, one needs to append the <code>::class</code> suffix to identify a class literal in Kotlin instead of <code>.class</code> in Java.</p>
-</div>
-<div class="paragraph multi-language-text lang-groovy">
-<p>Furthermore, it is unnecessary to append <code>.class</code> to identify a class literal in Groovy as it is in Java.</p>
-</div>
-<div class="paragraph">
-<p>You may also see the <code>apply</code> method used to include an entire build file:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">apply(from = "other.gradle.kts")</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">apply from: 'other.gradle'</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec:version_catalog_plugin_application"><a class="anchor" href="#sec:version_catalog_plugin_application"></a><a class="link" href="#sec:version_catalog_plugin_application">Using a Version Catalog</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>When a project uses a version catalog, plugins can be referenced via aliases when applied.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s take a look at a simple Version Catalog:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">libs.versions.toml</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="toml">[versions]
-groovy = "3.0.5"
-checkstyle = "8.37"
-
-[libraries]
-groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
-groovy-json = { module = "org.codehaus.groovy:groovy-json", version.ref = "groovy" }
-groovy-nio = { module = "org.codehaus.groovy:groovy-nio", version.ref = "groovy" }
-commons-lang3 = { group = "org.apache.commons", name = "commons-lang3", version = { strictly = "[3.8, 4.0[", prefer="3.9" } }
-
-[bundles]
-groovy = ["groovy-core", "groovy-json", "groovy-nio"]
-
-[plugins]
-versions = { id = "com.github.ben-manes.versions", version = "0.45.0" }</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Then a plugin can be applied to any build script using the <code>alias</code> method:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    `java-library`
-    alias(libs.plugins.versions)
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'java-library'
-    alias(libs.plugins.versions)
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Gradle generates type safe accessors for catalog items.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph text-right">
-<p><strong>Next Step:</strong> <a href="writing_plugins.html#writing_plugins">Learn how to write Plugins</a> &gt;&gt;</p>
+<p>Gradle plugins are powerful tools for extending and structuring your build. Convention plugins allow you to reduce duplication and keep build files clean by centralizing logic in reusable modules. This approach is ideal for multi-project builds where consistency and maintainability are key.
+In future tutorials, we’ll explore more ways to customize and scale Gradle builds using your own plugins.</p>
 </div>
 </div>
 </div>

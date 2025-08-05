@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Writing Build Scripts</title>
+<title>Untitled</title>
 <style>
 /*
  * Copyright 2018 the original author or authors.
@@ -4185,6 +4185,10 @@ body.dark-theme {
 		margin: 0;
 	}
 
+    #header {
+    	padding-right: 260px;
+    }
+
 	/* #toc here must be referenced as #header #toc
             since we don't want to change single page #toc */
 	#header #toc {
@@ -4265,6 +4269,7 @@ body.dark-theme {
 
 	#header {
 		margin: 0 auto;
+		padding-right: 0;
 	}
 
 	#content {
@@ -4613,7 +4618,7 @@ input:checked+.slider:before {
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<meta name="adoc-src-path" content="authoring-builds/basics/writing_build_scripts.adoc">
+<meta name="adoc-src-path" content="redirects/writing_build_scripts.adoc">
 <link crossorigin href="//assets.gradle.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet"/>
 
@@ -4898,7 +4903,7 @@ document.addEventListener("DOMContentLoaded", function () {
     animation: clibpard_rotation_frame 1s;
 }
 </style></head>
-<body id="writing_build_scripts" class="book">
+<body class="book">
 <!--
   ~ Copyright 2025 the original author or authors.
   ~
@@ -5033,10 +5038,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- Primary Navigation -->
         <nav class="docs-navigation">
             <div class="search-container"></div>
-            <h3 id="overview">Overview</h3>
-            <ul>
-                <li><a href="../userguide/userguide.html">Getting Started</a></li>
-            </ul>
+            <h3 id="overview"><a href="../userguide/userguide.html">Gradle User Manual</a></h3>
 
             <h3 id="what-is-new">Releases</h3>
             <ul>
@@ -5060,15 +5062,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/migrating_from_ant.html">from Ant</a></li>
                     </ul>
                 </li>
-                <li><a href="../userguide/troubleshooting.html">Troubleshooting</a></li>
                 <li><a href="../userguide/compatibility.html">Compatibility Notes</a></li>
                 <li><a href="../userguide/feature_lifecycle.html">Gradle's Feature Lifecycle</a></li>
             </ul>
 
-            <h3 id="running-gradle-builds">Running Gradle Builds</h3>
+            <h3 id="running-gradle-builds">Gradle Tutorials</h3>
             <ul>
-                <li><a href="../userguide/getting_started_eng.html">Getting Started</a></li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#running-introduction" aria-expanded="false" aria-controls="introduction">Learning the Basics</a>
+                <li><a href="../userguide/getting_started.html">Getting Started</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#running-introduction" aria-expanded="false" aria-controls="introduction">Running Gradle Builds</a>
                     <ul id="running-introduction">
                         <li><a href="../userguide/gradle_basics.html">1. Core Concepts</a></li>
                         <li><a href="../userguide/gradle_wrapper_basics.html">2. Wrapper Basics</a></li>
@@ -5077,9 +5078,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/build_file_basics.html">5. Build File Basics</a></li>
                         <li><a href="../userguide/dependency_management_basics.html">6. Dependencies Basics</a></li>
                         <li><a href="../userguide/task_basics.html">7. Tasks Basics</a></li>
-                        <li><a href="../userguide/plugin_basics.html">8. Plugins Basics</a></li>
-                        <li><a href="../userguide/gradle_optimizations.html">9. Caching Basics</a></li>
-                        <li><a href="../userguide/build_scans.html">10. Build Scan</a></li>
+                        <li><a href="../userguide/gradle_optimizations.html">8. Caching Basics</a></li>
+                        <li><a href="../userguide/plugin_basics.html">9. Plugins Basics</a></li>
+                        <li><a href="../userguide/build_scans.html">10. Build Scan Basics</a></li>
 
                     </ul>
                 </li>
@@ -5091,41 +5092,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/part4_gradle_plugins.html">4. Applying Plugins</a></li>
                         <li><a href="../userguide/part5_gradle_inc_builds.html">5. Exploring Incremental Builds</a></li>
                         <li><a href="../userguide/part6_gradle_caching.html">6. Enabling the Build Cache</a></li>
-                        <li><a href="../userguide/part7_gradle_refs.html">7. Using Reference Materials</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Gradle Features</a>
-                    <ul id="gradle-features">
-                        <li><a href="../userguide/command_line_interface.html">Gradle Command-Line Interface</a></li>
-                        <li><a href="../userguide/logging.html">Gradle Log Levels</a></li>
-                        <li><a href="../userguide/gradle_wrapper.html">Gradle Wrapper</a></li>
-                        <li><a href="../userguide/gradle_daemon.html">Gradle Daemon</a></li>
-                        <li><a href="../userguide/inspect.html">Build Scan</a></li>
-                        <li><a href="../userguide/continuous_builds.html">Continuous Builds</a></li>
-                        <li><a href="../userguide/file_system_watching.html">File System Watching</a></li>
-                    </ul>
-                </li>
-                <li><a href="../userguide/directory_layout.html">Gradle-managed Directories</a></li>
-                <li><a href="../userguide/build_environment.html">Configuring the Build Environment</a></li>
-            </ul>
-
-            <h3 id="authoring-gradle-builds">Authoring Gradle Builds</h3>
-            <ul>
-                <li><a href="../userguide/getting_started_dev.html">Getting Started</a></li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#beyond-the-basics" aria-expanded="false" aria-controls="beyond-the-basics">Beyond the Basics</a>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#beyond-the-basics" aria-expanded="false" aria-controls="beyond-the-basics">Authoring Gradle Builds</a>
                     <ul id="authoring-introduction">
-                        <li><a href="../userguide/gradle_directories.html">1. Gradle Directories</a></li>
-                        <li><a href="../userguide/intro_multi_project_builds.html">2. Multi-Project Builds</a></li>
-                        <li><a href="../userguide/build_lifecycle.html">3. Gradle Build Lifecycle</a></li>
-                        <li><a href="../userguide/writing_settings_files.html">4. Writing Settings Files</a></li>
-                        <li><a href="../userguide/writing_build_scripts.html">5. Writing Build Scripts</a></li>
-                        <li><a href="../userguide/tutorial_using_tasks.html">6. Using Tasks</a></li>
-                        <li><a href="../userguide/writing_tasks.html">7. Writing Tasks</a></li>
-                        <li><a href="../userguide/plugins.html">8. Using Plugins</a></li>
-                        <li><a href="../userguide/writing_plugins.html">9. Writing Plugins</a></li>
+                        <li><a href="../userguide/gradle_directories_intermediate.html">1. Anatomy of a Gradle Build</a></li>
+                        <li><a href="../userguide/multi_project_builds_intermediate.html">2. Structuring Multi-Project Builds</a></li>
+                        <li><a href="../userguide/build_lifecycle_intermediate.html">3. Gradle Build Lifecycle</a></li>
+                        <li><a href="../userguide/writing_build_scripts_intermediate.html">4. Writing Build Scripts</a></li>
+                        <li><a href="../userguide/gradle_managed_types_intermediate.html">5. Gradle Managed Types</a></li>
+                        <li><a href="../userguide/dependencies_intermediate.html">6. Declaring Dependencies</a></li>
+                        <li><a href="../userguide/writing_tasks_intermediate.html">7. Creating and Registering Tasks</a></li>
+                        <li><a href="../userguide/plugins_intermediate.html">8. Working with Plugins</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Advanced Tutorial</a>
+                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Intermediate Tutorial</a>
                     <ul id="authoring-tutorial">
                         <li><a href="../userguide/part1_gradle_init_project.html">1. Initializing the Project</a></li>
                         <li><a href="../userguide/part2_build_lifecycle.html">2. Understanding the Build Lifecycle</a></li>
@@ -5136,64 +5117,124 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/part7_writing_plugins.html">7. Writing Plugins</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-properties" aria-expanded="false" aria-controls="gradle-properties">Gradle Types</a>
-                    <ul id="gradle-properties-topics">
-                        <li><a href="../userguide/properties_providers.html">Understanding Properties and Providers</a></li>
-                        <li><a href="../userguide/collections.html">Understanding Collections</a></li>
-                        <li><a href="../userguide/service_injection.html">Understanding Services and Service Injection</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#deep-dive" aria-expanded="false" aria-controls="deep-dive">Developing Gradle Plugins</a>
+                    <ul id="developing-introduction">
+                        <li><a href="../userguide/plugin_introduction_advanced.html">1. Plugin Introduction</a></li>
+                        <li><a href="../userguide/pre_compiled_script_plugin_advanced.html">2. Pre-Compiled Script Plugins</a></li>
+                        <li><a href="../userguide/binary_plugin_advanced.html">3. Binary Plugins</a></li>
+                        <li><a href="../userguide/developing_binary_plugin_advanced.html">4. Developing Binary Plugins</a></li>
+                        <li><a href="../userguide/testing_binary_plugin_advanced.html">5. Testing Binary Plugins</a></li>
+                        <li><a href="../userguide/publishing_binary_plugin_advanced.html">6. Publishing Binary Plugins</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#authoring-multi-project-builds" aria-expanded="false" aria-controls="authoring-multi-project-builds">Structuring Builds</a>
-                    <ul id="authoring-multi-project-builds">
-                        <li><a href="../userguide/organizing_gradle_projects.html">Structuring and Organizing Gradle Projects</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" aria-expanded="false">Advanced Tutorial</a>
+                    <ul id="authoring-tutorial">
+                        <li><a href="../userguide/part1_gradle_init_plugin.html">1. Initializing the Project</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="gradle-reference">Gradle Reference</h3>
+            <ul>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-core" aria-expanded="false" aria-controls="gradle-core">Runtime and Configuration</a>
+                    <ul id="core-topics">
+                        <li><a href="../userguide/command_line_interface.html">Command-Line Interface</a></li>
+                        <li><a href="../userguide/logging.html">Logging and Output</a></li>
+                        <li><a href="../userguide/gradle_wrapper.html">Gradle Wrapper</a></li>
+                        <li><a href="../userguide/gradle_daemon.html">Gradle Daemon</a></li>
+                        <li><a href="../userguide/directory_layout.html">Gradle Directories</a></li>
+                        <li><a href="../userguide/build_environment.html">Build Configuration</a></li>
+                        <li><a href="../userguide/build_lifecycle.html">Build Lifecycle</a></li>
+                        <li><a href="../userguide/inspect.html">Build Scan</a></li>
+                        <li><a href="../userguide/continuous_builds.html">Continuous Builds</a></li>
+                        <li><a href="../userguide/file_system_watching.html">File System Watching</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#dsl-and-apis" aria-expanded="false" aria-controls="dsl-and-apis">DSLs and APIs</a>
+                    <ul id="dsl-topics">
+                        <li><a href="../javadoc/index.html?overview-summary.html">Java API</a></li>
+                        <li><a href="../userguide/groovy_build_script_primer.html">Groovy DSL Primer</a></li>
+                        <li><a href="../dsl/index.html">Groovy DSL</a></li>
+                        <li><a href="../userguide/kotlin_dsl.html">Kotlin DSL Primer</a></li>
+                        <li><a href="../kotlin-dsl/index.html" target="_blank">Kotlin DSL</a></li>
+                        <li><a href="../userguide/public_apis.html">Public APIs</a></li>
+                        <li><a href="../userguide/default_script_imports.html">Default Script Imports</a></li>
+                        <li><a href="../userguide/migrating_from_groovy_to_kotlin_dsl.html">Groovy to Kotlin DSL Migration</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#best-practices" aria-expanded="false" aria-controls="best-practices">Best Practices</a>
+                    <ul id="best-practices-topics">
+                        <li><a href="../userguide/best_practices.html">Introduction</a></li>
+                        <li><a href="../userguide/best_practices_index.html">Index</a></li>
+                        <li><a href="../userguide/best_practices_general.html">General Best Practices</a></li>
+                        <li><a href="../userguide/best_practices_structuring_builds.html">Best Practices for Structuring Builds</a></li>
+                        <li><a href="../userguide/best_practices_dependencies.html">Best Practices for Dependencies</a></li>
+                        <li><a href="../userguide/best_practices_tasks.html">Best Practices for Tasks</a></li>
+                        <li><a href="../userguide/best_practices_performance.html">Best Practices for Performance</a></li>
+                        <li><a href="../userguide/best_practices_security.html">Best Practices for Security</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#core-plugins" aria-expanded="false" aria-controls="core-plugins">Core Plugins</a>
+                    <ul id="core-plugins-topics">
+                        <li><a href="../userguide/plugin_reference.html">List of Core Plugins</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#types-and-objects" aria-expanded="false" aria-controls="types-and-objects">Gradle Types</a>
+                    <ul id="types-and-objects-topics">
+                        <li><a href="../userguide/lazy_eager_evaluation.html">Lazy vs Eager Evaluation</a></li>
+                        <li><a href="../userguide/properties_providers.html">Properties and Providers</a></li>
+                        <li><a href="../userguide/collections.html">Collections</a></li>
+                        <li><a href="../userguide/service_injection.html">Services and Service Injection</a></li>
+                        <li><a href="../userguide/working_with_files.html">Working with Files</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#build-structure" aria-expanded="false" aria-controls="build-structure">Structuring Builds</a>
+                    <ul id="build-structure-topics">
+                        <li><a href="../userguide/organizing_gradle_projects.html">Structuring and Organizing Projects</a></li>
                         <li><a href="../userguide/multi_project_builds.html">Multi-Project Builds</a></li>
-                        <li><a href="../userguide/sharing_build_logic_between_subprojects.html">Sharing Build Logic in BuildSrc</a></li>
+                        <li><a href="../userguide/sharing_build_logic_between_subprojects.html">Sharing Build Logic using buildSrc</a></li>
                         <li><a href="../userguide/composite_builds.html">Composite Builds</a></li>
                         <li><a href="../userguide/multi_project_configuration_and_execution.html">Configuration on Demand</a></li>
+                        <li><a href="../userguide/isolated_projects.html">Isolated Projects</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#developing-tasks" aria-expanded="false" aria-controls="developing-tasks">Developing Tasks</a>
-                    <ul id="developing-tasks">
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#task-development" aria-expanded="false" aria-controls="task-development">Task Development</a>
+                    <ul id="task-development-topics">
                         <li><a href="../userguide/more_about_tasks.html">Understanding Tasks</a></li>
                         <li><a href="../userguide/controlling_task_execution.html">Controlling Task Execution</a></li>
                         <li><a href="../userguide/organizing_tasks.html">Organizing Tasks</a></li>
                         <li><a href="../userguide/implementing_custom_tasks.html">Implementing Custom Tasks</a></li>
-                        <li><a href="../userguide/lazy_configuration.html">Configuring Tasks Lazily</a></li>
-                        <li><a href="../userguide/worker_api.html">Developing Parallel Tasks</a></li>
-                        <li><a href="../userguide/custom_tasks.html">Developing Advanced Tasks</a></li>
-                        <li><a href="../userguide/build_services.html">Using Shared Build Services</a></li>
+                        <li><a href="../userguide/lazy_configuration.html">Lazy Configuration</a></li>
+                        <li><a href="../userguide/worker_api.html">Parallel Task Execution</a></li>
+                        <li><a href="../userguide/custom_tasks.html">Advanced Task Development</a></li>
+                        <li><a href="../userguide/build_services.html">Shared Build Services</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#developing-plugins" aria-expanded="false" aria-controls="developing-plugins">Developing Plugins</a>
-                    <ul id="developing-plugins">
-                        <li><a href="../userguide/custom_plugins.html">Understanding Plugins</a></li>
-                        <li><a href="../userguide/implementing_gradle_plugins.html">Understanding Implementation Options</a></li>
-                        <li><a href="../userguide/implementing_gradle_plugins_precompiled.html">Implementing Pre-compiled Script Plugins</a></li>
-                        <li><a href="../userguide/implementing_gradle_plugins_binary.html">Implementing Binary Plugins</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#plugin-development" aria-expanded="false" aria-controls="plugin-development">Plugin Development</a>
+                    <ul id="plugin-development-topics">
+                        <li><a href="../userguide/plugins.html">Introduction to Plugins</a></li>
+                        <li><a href="../userguide/custom_plugins.html">Introduction to Plugins</a></li>
+                        <li><a href="../userguide/implementing_gradle_plugins.html">Plugin Implementation Options</a></li>
+                        <li><a href="../userguide/implementing_gradle_plugins_precompiled.html">Precompiled Script Plugins</a></li>
+                        <li><a href="../userguide/implementing_gradle_plugins_binary.html">Binary Plugins</a></li>
                         <li><a href="../userguide/testing_gradle_plugins.html">Testing Plugins</a></li>
                         <li><a href="../userguide/publishing_gradle_plugins.html">Publishing Plugins</a></li>
-                        <li><a href="../userguide/reporting_problems.html">Reporting Problems</a></li>
+                        <li><a href="../userguide/reporting_problems.html">Reporting Plugin Problems</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#other-developing-topics" aria-expanded="false" aria-controls="other-developing-topics">Other Topics</a>
-                    <ul id="other-developing-topics">
-                        <li><a href="../userguide/working_with_files.html">Working with Files</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#advanced-topics" aria-expanded="false" aria-controls="advanced-topics">Other Topics</a>
+                    <ul id="advanced-topics-topics">
                         <li><a href="../userguide/init_scripts.html">Initialization Scripts</a></li>
                         <li><a href="../userguide/dataflow_actions.html">Dataflow Actions</a></li>
                         <li><a href="../userguide/test_kit.html">Testing with TestKit</a></li>
                         <li><a href="../userguide/ant.html">Using Ant from Gradle</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to" aria-expanded="false" aria-controls="how-to">How-To-Guides</a>
-                    <ul id="how-to-authoring">
-                        <li><a href="../userguide/how_to_convert_single_build_to_multi_build.html">How to Convert a Single-Project Build into a Multi-Project Build</a></li>
-                    </ul>
-                </li>
             </ul>
 
             <h3 id="optimizing-build-performance">Optimizing Gradle Builds</h3>
             <ul>
-                <li><a href="../userguide/performance.html">Improving Performance Basics</a></li>
+                <li><a href="../userguide/performance.html">Improving Performance</a></li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#build-cache" aria-expanded="false" aria-controls="build-cache">Build Cache</a>
                     <ul id="build-cache">
                         <li><a href="../userguide/build_cache.html">Enabling and Configuring</a></li>
@@ -5239,7 +5280,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#declaring-dependencies" aria-expanded="false" aria-controls="declaring-dependencies">Declaring Dependencies</a>
                     <ul id="declaring-dependencies">
-                        <li><a href="../userguide/declaring_dependencies_basics.html">Declaring Dependencies Basics</a></li>
+                        <li><a href="../userguide/declaring_dependencies_basics.html">Declaring Dependencies</a></li>
                         <li><a href="../userguide/viewing_debugging_dependencies.html">Viewing Dependencies</a></li>
                         <li><a href="../userguide/dependency_versions.html">Declaring Versions and Ranges</a></li>
                         <li><a href="../userguide/dependency_constraints.html">Declaring Dependency Constraints</a></li>
@@ -5250,7 +5291,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
                 <li><a class="nav-dropdown" data-toggle="collapse" href="#declaring-repositories" aria-expanded="false" aria-controls="declaring-repositories">Declaring Repositories</a>
                     <ul id="declaring-repositories">
-                        <li><a href="../userguide/declaring_repositories_basics.html">Declaring Repositories Basics</a></li>
+                        <li><a href="../userguide/declaring_repositories_basics.html">Declaring Repositories</a></li>
                         <li><a href="../userguide/centralizing_repositories.html">Centralizing Repository Declarations</a></li>
                         <li><a href="../userguide/supported_repository_types.html">Repository Types</a></li>
                         <li><a href="../userguide/supported_metadata_formats.html">Metadata Formats</a></li>
@@ -5291,20 +5332,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         <li><a href="../userguide/publishing_customization.html">Customizing Publishing</a></li>
                         <li><a href="../userguide/publishing_maven.html">Maven Publish Plugin</a></li>
                         <li><a href="../userguide/publishing_ivy.html">Ivy Publish Plugin</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to" aria-expanded="false" aria-controls="how-to">How-To-Guides</a>
-                    <ul id="how-to">
-                        <li><a href="../userguide/how_to_downgrade_transitive_dependencies.html">How to Downgrade Transitive Dependencies</a></li>
-                        <li><a href="../userguide/how_to_upgrade_transitive_dependencies.html">How to Upgrade Transitive Dependencies</a></li>
-                        <li><a href="../userguide/how_to_exclude_transitive_dependencies.html">How to Exclude Transitive Dependencies</a></li>
-                        <li><a href="../userguide/how_to_prevent_accidental_dependency_upgrades.html">How to Prevent Accidental or Eager Dependency Upgrades</a></li>
-                        <li><a href="../userguide/how_to_align_dependency_versions.html">How to Align Dependency Versions</a></li>
-                        <li><a href="../userguide/how_to_share_outputs_between_projects.html">How to Share Outputs Between Projects</a></li>
-                        <li><a href="../userguide/how_to_resolve_specific_artifacts.html">How to Resolve Specific Artifacts from a Module Dependency</a></li>
-                        <li><a href="../userguide/how_to_use_local_forks.html">How to Use a Local Fork of a Module Dependency</a></li>
-                        <li><a href="../userguide/how_to_fix_version_catalog_problems.html">How to Fix Version Catalog Problems</a></li>
-                        <li><a href="../userguide/how_to_create_feature_variants_of_a_library.html">How to Create Feature Variants of a Library</a></li>
                     </ul>
                 </li>
             </ul>
@@ -5358,36 +5385,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 </li>
             </ul>
 
-            <h3 id="reference">Reference</h3>
+            <h3 id="how-to-guides">How-To-Guides</h3>
             <ul>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-api" aria-expanded="false" aria-controls="gradle-api">Gradle DSLs and API</a>
-                    <ul id="gradle-api">
-                        <li><a href="../javadoc/index.html?overview-summary.html">Javadoc</a></li>
-                        <li><a href="../userguide/groovy_build_script_primer.html">Groovy DSL Primer</a></li>
-                        <li><a href="../dsl/index.html">Groovy DSL Reference</a></li>
-                        <li><a href="../userguide/kotlin_dsl.html">Kotlin DSL Primer</a></li>
-                        <li><a href="../kotlin-dsl/index.html" target="_blank">Kotlin DSL API</a></li>
-                        <li><a href="../userguide/migrating_from_groovy_to_kotlin_dsl.html">Groovy to Kotlin DSL Migration</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to-guides" aria-expanded="false" aria-controls="how-to-guides">Structuring Builds</a>
+                    <ul id="how-to-guides-structuring">
+                        <li><a href="../userguide/how_to_convert_single_build_to_multi_build.html">Convert a Single-Project Build to Multi-Project</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#gradle-best-practices" aria-expanded="false" aria-controls="gradle-best-practices">Gradle Best Practices</a>
-                    <ul id="gradle-best-practices">
-                        <li><a href="../userguide/best_practices.html">Introduction</a></li>
-                        <li><a href="../userguide/best_practices_index.html">Index</a></li>
-                        <li><a href="../userguide/best_practices_general.html">General Best Practices</a></li>
-                        <li><a href="../userguide/best_practices_structuring_builds.html">Best Practices for Structuring Builds</a></li>
-                        <li><a href="../userguide/best_practices_dependencies.html">Best Practices for Dependencies</a></li>
-                        <li><a href="../userguide/best_practices_tasks.html">Best Practices for Tasks</a></li>
-                        <li><a href="../userguide/best_practices_performance.html">Best Practices for Performance</a></li>
-                        <li><a href="../userguide/best_practices_security.html">Best Practices for Security</a></li>
+                <li><a class="nav-dropdown" data-toggle="collapse" href="#how-to" aria-expanded="false" aria-controls="how-to">Dependency Management</a>
+                    <ul id="how-to-guides-dep-man">
+                        <li><a href="../userguide/how_to_downgrade_transitive_dependencies.html">How to Downgrade Transitive Dependencies</a></li>
+                        <li><a href="../userguide/how_to_upgrade_transitive_dependencies.html">How to Upgrade Transitive Dependencies</a></li>
+                        <li><a href="../userguide/how_to_exclude_transitive_dependencies.html">How to Exclude Transitive Dependencies</a></li>
+                        <li><a href="../userguide/how_to_prevent_accidental_dependency_upgrades.html">How to Prevent Accidental or Eager Dependency Upgrades</a></li>
+                        <li><a href="../userguide/how_to_align_dependency_versions.html">How to Align Dependency Versions</a></li>
+                        <li><a href="../userguide/how_to_share_outputs_between_projects.html">How to Share Outputs Between Projects</a></li>
+                        <li><a href="../userguide/how_to_resolve_specific_artifacts.html">How to Resolve Specific Artifacts from a Module Dependency</a></li>
+                        <li><a href="../userguide/how_to_use_local_forks.html">How to Use a Local Fork of a Module Dependency</a></li>
+                        <li><a href="../userguide/how_to_fix_version_catalog_problems.html">How to Fix Version Catalog Problems</a></li>
+                        <li><a href="../userguide/how_to_create_feature_variants_of_a_library.html">How to Create Feature Variants of a Library</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-dropdown" data-toggle="collapse" href="#core-plugins" aria-expanded="false" aria-controls="core-plugins">Core Plugins</a>
-                    <ul id="core-plugins">
-                        <li><a href="../userguide/plugin_reference.html">List of Core Plugins</a></li>
-                    </ul>
-                </li>
-                <li><a href="../userguide/isolated_projects.html">Isolated Projects</a></li>
+            </ul>
+
+            <h3 id="reference">Additional</h3>
+            <ul>
                 <li><a href="../samples/index.html">Samples</a></li>
                 <li><a href="../userguide/glossary.html">Glossary</a></li>
                 <li><a href="https://community.gradle.org/cookbook/">Cookbook</a></li>
@@ -5399,1397 +5421,11 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="content">
             <div class="chapter">
 <div id="header">
-<h1>Writing Build Scripts</h1>
-<div class="details">
-<span id="revnumber">version 9.1.0-20250804160102+0000</span>
-</div>
-<div id="toc" class="toc">
-<div id="toctitle">Contents</div>
-<ul class="sectlevel1">
-<li><a href="#build_scripts">Build Scripts</a></li>
-<li><a href="#the_project_object">The <code>Project</code> object</a></li>
-<li><a href="#build_script_structure">Build Script structure</a></li>
-<li><a href="#build_scripting">Build Scripting</a></li>
-<li><a href="#script-default-imports">Default imports</a></li>
-</ul>
-</div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>The initialization phase in the Gradle Build lifecycle finds the root project and subprojects included in your <a href="directory_layout.html#dir:project_root">project root directory</a> using the settings file.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="img/author-gradle-6.png" alt="author gradle 6">
-</div>
-</div>
-<div class="paragraph">
-<p>Then, for each project included in the settings file, Gradle creates a <a href="../javadoc/org/gradle/api/Project.html"><code>Project</code></a> instance.</p>
-</div>
-<div class="paragraph">
-<p>Gradle then looks for a corresponding build script file, which is used in the configuration phase.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="build_scripts"><a class="anchor" href="#build_scripts"></a><a class="link" href="#build_scripts">Build Scripts</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Every Gradle build comprises one or more <strong>projects</strong>; a <em>root</em> project and <em>subprojects</em>.</p>
-</div>
-<div class="paragraph">
-<p>A project typically corresponds to a software component that needs to be built, like a library or an application.
-It might represent a library JAR, a web application, or a distribution ZIP assembled from the JARs produced by other projects.</p>
-</div>
-<div class="paragraph">
-<p>On the other hand, it might represent a thing to be done, such as deploying your application to staging or production environments.</p>
-</div>
-<div class="paragraph">
-<p>Gradle scripts are written in either Groovy DSL or Kotlin DSL (domain-specific language).</p>
-</div>
-<div class="paragraph">
-<p>A <strong>build script</strong> configures a <strong>project</strong> and is associated with an object of type <a href="../javadoc/org/gradle/api/Project.html"><code>Project</code></a>.</p>
-</div>
-<div class="imageblock text-left">
-<div class="content">
-<img src="img/author-gradle-4.png" alt="Build" width="500" height="63">
-</div>
-</div>
-<div class="paragraph">
-<p>As the build script executes, it configures <code>Project</code>.</p>
-</div>
-<div class="paragraph">
-<p>The build script is either a <code>*.gradle</code> file in Groovy or a <code>*.gradle.kts</code> file in Kotlin.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<em>Build scripts</em> configure <code>Project</code> objects and their children.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_project_object"><a class="anchor" href="#the_project_object"></a><a class="link" href="#the_project_object">The <code>Project</code> object</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>Project</code> object is part of the <a href="../javadoc/org/gradle/api/Project.html">Gradle API</a>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>In the Groovy DSL, the <code>Project</code> object documentation is found <a href="../dsl/org.gradle.api.Project.html">here</a>.</p>
-</li>
-<li>
-<p>In the Kotlin DSL, the <code>Project</code> object documentation is found <a href="../kotlin-dsl/gradle/org.gradle.api/-project/index.html">here</a>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Many top-level properties and blocks in a build script are part of the Project API.</p>
-</div>
-<div class="paragraph">
-<p>For example, the following build script uses the <a href="../dsl/org.gradle.api.Project.html#org.gradle.api.Project:name">Project.name</a> property to print the name of the project:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">println(name)
-println(project.name)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">println name
-println project.name</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ gradle -q check
-project-api
-project-api</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Both <code>println</code> statements print out the same property.</p>
-</div>
-<div class="paragraph">
-<p>The first uses the top-level reference to the <code>name</code> property of the <code>Project</code> object.
-The second statement uses the <code>project</code> property available to any build script, which returns the associated <code>Project</code> object.</p>
-</div>
-<div class="sect2">
-<h3 id="sec:standard_project_properties"><a class="anchor" href="#sec:standard_project_properties"></a><a class="link" href="#sec:standard_project_properties">Standard project properties</a></h3>
-<div class="paragraph">
-<p>The <code>Project</code> object exposes a standard set of properties in your build script.</p>
-</div>
-<div class="paragraph">
-<p>The following table lists a few commonly used properties:</p>
-</div>
-<table class="tableblock frame-all grid-all fit-content">
-<colgroup>
-<col>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the project directory.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>path</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The fully qualified name of the project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A description for the project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dependencies</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DependencyHandler</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the dependency handler of the project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>repositories</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RepositoryHandler</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the repository handler of the project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>layout</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectLayout</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provides access to several important locations for a project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>group</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The group of this project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The version of this project.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>The following table lists a few commonly used methods:</p>
-</div>
-<table class="tableblock frame-all grid-all fit-content stretch">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uri()</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Resolves a file path to a URI, relative to the project directory of this project.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>task()</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Creates a Task with the given name and adds it to this project.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="build_script_structure"><a class="anchor" href="#build_script_structure"></a><a class="link" href="#build_script_structure">Build Script structure</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Build script is composed of <code>{ &#8230;&#8203; }</code>, a special object in both Groovy and Kotlin.
-This object is called a <em>lambda</em> in Kotlin or a <em>closure</em> in Groovy.</p>
-</div>
-<div class="paragraph">
-<p>Simply put, the <code>plugins{ }</code> block is a method invocation in which a Kotlin <em>lambda</em> object or Groovy <em>closure</em> object is passed as the argument.
-It is the short form for:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">plugins(function() {
-    id("plugin")
-})</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Blocks are mapped to Gradle API methods.</p>
-</div>
-<div class="paragraph">
-<p>The code inside the function is executed against a <code>this</code> object called a <em>receiver</em> in Kotlin lambda and a <em>delegate</em> in Groovy closure.
-Gradle determines the correct <code>this</code> object and invokes the correct corresponding method.
-The <code>this</code> of the method invocation <code>id("plugin")</code> object is of type <a href="../javadoc/org/gradle/plugin/use/PluginDependenciesSpec.html"><code>PluginDependenciesSpec</code></a>.</p>
-</div>
-<div class="paragraph">
-<p>The build script is essentially composed of Gradle API calls built on top of the DSLs.
-Gradle executes the script line by line, top to bottom.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s take a look at an example and break it down:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {   <i class="conum" data-value="1"></i><b>(1)</b>
-    id("application")
-}
-
-repositories {  <i class="conum" data-value="2"></i><b>(2)</b>
-    mavenCentral()
-}
-
-dependencies {  <i class="conum" data-value="3"></i><b>(3)</b>
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("com.google.guava:guava:32.1.1-jre")
-}
-
-application {   <i class="conum" data-value="4"></i><b>(4)</b>
-    mainClass = "com.example.Main"
-}
-
-tasks.named&lt;Test&gt;("test") { <i class="conum" data-value="5"></i><b>(5)</b>
-    useJUnitPlatform()
-}
-
-tasks.named&lt;Javadoc&gt;("javadoc").configure {
-    exclude("app/Internal*.java")
-    exclude("app/internal/*")
-}
-
-tasks.register&lt;Zip&gt;("zip-reports") {
-    from("Reports/")
-    include("*")
-    archiveFileName.set("Reports.zip")
-    destinationDirectory.set(file("/dir"))
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {   <i class="conum" data-value="1"></i><b>(1)</b>
-    id 'application'
-}
-
-repositories {  <i class="conum" data-value="2"></i><b>(2)</b>
-    mavenCentral()
-}
-
-dependencies {  <i class="conum" data-value="3"></i><b>(3)</b>
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'com.google.guava:guava:32.1.1-jre'
-}
-
-application {   <i class="conum" data-value="4"></i><b>(4)</b>
-    mainClass = 'com.example.Main'
-}
-
-tasks.named('test', Test) { <i class="conum" data-value="5"></i><b>(5)</b>
-    useJUnitPlatform()
-}
-
-tasks.named('javadoc', Javadoc).configure {
-    exclude 'app/Internal*.java'
-    exclude 'app/internal/*'
-}
-
-tasks.register('zip-reports', Zip) {
-    from 'Reports/'
-    include '*'
-    archiveFileName = 'Reports.zip'
-    destinationDirectory = file('/dir')
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Apply plugins to the build.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Define the locations where dependencies can be found.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Add dependencies.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Set properties.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Register and configure tasks.</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="1_apply_plugins_to_the_build"><a class="anchor" href="#1_apply_plugins_to_the_build"></a><a class="link" href="#1_apply_plugins_to_the_build">1. Apply plugins to the build</a></h3>
-<div class="paragraph">
-<p>Plugins are used to extend Gradle. They are also used to modularize and reuse project configurations.</p>
-</div>
-<div class="paragraph">
-<p>Plugins can be applied using the <code>PluginDependenciesSpec</code> plugins script block.</p>
-</div>
-<div class="paragraph">
-<p>The plugins block is preferred:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {   <i class="conum" data-value="1"></i><b>(1)</b>
-    id("application")
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {   <i class="conum" data-value="1"></i><b>(1)</b>
-    id 'application'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In the example, the <code>application</code> plugin, which is included with Gradle, has been applied, describing our project as a Java application.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="2_define_the_locations_where_dependencies_can_be_found"><a class="anchor" href="#2_define_the_locations_where_dependencies_can_be_found"></a><a class="link" href="#2_define_the_locations_where_dependencies_can_be_found">2. Define the locations where dependencies can be found</a></h3>
-<div class="paragraph">
-<p>A project generally has a number of dependencies it needs to do its work.
-Dependencies include plugins, libraries, or components that Gradle must download for the build to succeed.</p>
-</div>
-<div class="paragraph">
-<p>The build script lets Gradle know where to look for the binaries of the dependencies.
-More than one location can be provided:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">repositories {  <i class="conum" data-value="2"></i><b>(2)</b>
-    mavenCentral()
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">repositories {  <i class="conum" data-value="2"></i><b>(2)</b>
-    mavenCentral()
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In the example, the <code>guava</code> library will be downloaded from the <a href="https://repo.maven.apache.org/maven2/">Maven Central Repository</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="3_add_dependencies"><a class="anchor" href="#3_add_dependencies"></a><a class="link" href="#3_add_dependencies">3. Add dependencies</a></h3>
-<div class="paragraph">
-<p>A project generally has a number of dependencies it needs to do its work.
-These dependencies are often libraries of precompiled classes that are imported in the project&#8217;s source code.</p>
-</div>
-<div class="paragraph">
-<p>Dependencies are managed via <a href="glossary.html#sub:terminology_configuration">configurations</a> and are retrieved from repositories.</p>
-</div>
-<div class="paragraph">
-<p>Use the <code>DependencyHandler</code> returned by <code>Project.getDependencies()</code> method to manage the dependencies.
-Use the <code>RepositoryHandler</code> returned by <code>Project.getRepositories()</code> method to manage the repositories.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {  <i class="conum" data-value="3"></i><b>(3)</b>
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("com.google.guava:guava:32.1.1-jre")
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {  <i class="conum" data-value="3"></i><b>(3)</b>
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'com.google.guava:guava:32.1.1-jre'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In the example, the application code uses Google&#8217;s <code>guava</code> libraries.
-Guava provides utility methods for collections, caching, primitives support, concurrency, common annotations, string processing, I/O, and validations.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="4_set_properties"><a class="anchor" href="#4_set_properties"></a><a class="link" href="#4_set_properties">4. Set properties</a></h3>
-<div class="paragraph">
-<p>A plugin can add properties and methods to a project using extensions.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="../dsl/org.gradle.api.Project.html"><code>Project</code></a> object has an associated <a href="../javadoc/org/gradle/api/plugins/ExtensionContainer.html"><code>ExtensionContainer</code></a> object that contains all the settings and properties for the plugins that have been applied to the project.</p>
-</div>
-<div class="paragraph">
-<p>In the example, the <code>application</code> plugin added an <code>application</code> property, which is used to detail the main class of our Java application:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">application {   <i class="conum" data-value="4"></i><b>(4)</b>
-    mainClass = "com.example.Main"
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">application {   <i class="conum" data-value="4"></i><b>(4)</b>
-    mainClass = 'com.example.Main'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="5_register_and_configure_tasks"><a class="anchor" href="#5_register_and_configure_tasks"></a><a class="link" href="#5_register_and_configure_tasks">5. Register and configure tasks</a></h3>
-<div class="paragraph">
-<p>Tasks perform some basic piece of work, such as compiling classes, or running unit tests, or zipping up a WAR file.</p>
-</div>
-<div class="paragraph">
-<p>While tasks are typically defined in plugins, you may need to register or configure tasks in build scripts.</p>
-</div>
-<div class="paragraph">
-<p><strong>Registering</strong> a task adds the task to your project.</p>
-</div>
-<div class="paragraph">
-<p>You can register tasks in a project using the <a href="../javadoc/org/gradle/api/tasks/TaskContainer.html"><code>TaskContainer.register(java.lang.String)</code></a> method:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.register&lt;Zip&gt;("zip-reports") {
-    from("Reports/")
-    include("*")
-    archiveFileName.set("Reports.zip")
-    destinationDirectory.set(file("/dir"))
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">tasks.register('zip-reports', Zip) {
-    from 'Reports/'
-    include '*'
-    archiveFileName = 'Reports.zip'
-    destinationDirectory = file('/dir')
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>You may have seen usage of the <a href="../javadoc/org/gradle/api/tasks/TaskContainer.html"><code>TaskContainer.create(java.lang.String)</code></a> method <strong>which should be avoided</strong>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.create&lt;Zip&gt;("zip-reports") { }</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<code>register()</code>, which enables <a href="task_configuration_avoidance.html#task_configuration_avoidance">task configuration avoidance</a>, is preferred over <code>create()</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You can locate a task to configure it using the <code>TaskCollection.named(java.lang.String)</code> method:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.named&lt;Test&gt;("test") { <i class="conum" data-value="5"></i><b>(5)</b>
-    useJUnitPlatform()
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">tasks.named('test', Test) { <i class="conum" data-value="5"></i><b>(5)</b>
-    useJUnitPlatform()
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The example below configures the <a href="../dsl/org.gradle.api.tasks.javadoc.Javadoc.html"><code>Javadoc</code></a> task to automatically generate HTML documentation from Java code:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.named&lt;Javadoc&gt;("javadoc").configure {
-    exclude("app/Internal*.java")
-    exclude("app/internal/*")
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">tasks.named('javadoc', Javadoc).configure {
-    exclude 'app/Internal*.java'
-    exclude 'app/internal/*'
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="build_scripting"><a class="anchor" href="#build_scripting"></a><a class="link" href="#build_scripting">Build Scripting</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A build script is made up of zero or more statements and script blocks:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">println(project.layout.projectDirectory);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Statements can include method calls, property assignments, and local variable definitions:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">version = '1.0.0.GA'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A script block is a method call which takes a closure/lambda as a parameter:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">configurations {
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The closure/lambda configures some delegate object as it executes:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="text">repositories {
-    google()
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A build script is also a Groovy or a Kotlin script:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.register("upper") {
-    doLast {
-        val someString = "mY_nAmE"
-        println("Original: $someString")
-        println("Upper case: ${someString.uppercase()}")
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">tasks.register('upper') {
-    doLast {
-        String someString = 'mY_nAmE'
-        println "Original: $someString"
-        println "Upper case: ${someString.toUpperCase()}"
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ gradle -q upper
-Original: mY_nAmE
-Upper case: MY_NAME</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>It can contain elements allowed in a Groovy or Kotlin script, such as method definitions and class definitions:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">tasks.register("count") {
-    doLast {
-        repeat(4) { print("$it ") }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">tasks.register('count') {
-    doLast {
-        4.times { print "$it " }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ gradle -q count
-0 1 2 3 </pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:dynamic_tasks"><a class="anchor" href="#sec:dynamic_tasks"></a><a class="link" href="#sec:dynamic_tasks">Flexible task registration</a></h3>
-<div class="paragraph">
-<p>Using the capabilities of the Groovy or Kotlin language, you can register multiple tasks in a loop:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">repeat(4) { counter -&gt;
-    tasks.register("task$counter") {
-        doLast {
-            println("I'm task number $counter")
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">4.times { counter -&gt;
-    tasks.register("task$counter") {
-        doLast {
-            println "I'm task number $counter"
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ gradle -q task1
-I'm task number 1</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:gradle_types"><a class="anchor" href="#sec:gradle_types"></a><a class="link" href="#sec:gradle_types">Gradle Types</a></h3>
-<div class="paragraph">
-<p>In Gradle, <strong>types</strong>, <strong>properties</strong>, and <strong>providers</strong> are foundational for managing and configuring build logic:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Types</strong>: Gradle defines types (like <code>Task</code>, <code>Configuration</code>, <code>File</code>, etc.) to represent build components.
-You can extend these types to create custom tasks or domain objects.</p>
-</li>
-<li>
-<p><strong>Properties</strong>: Gradle properties (e.g., <code>Property&lt;T&gt;</code>, <code>ListProperty&lt;T&gt;</code>, <code>SetProperty&lt;T&gt;</code>) are used for build configuration.
-They allow lazy evaluation, meaning their values are calculated only when needed, enhancing flexibility and performance.</p>
-</li>
-<li>
-<p><strong>Providers</strong>: A <code>Provider&lt;T&gt;</code> represents a value that is computed or retrieved lazily.
-Providers are often used with properties to defer value computation until necessary. This is especially useful for integrating dynamic, runtime values into your build.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>You can learn more about this in <a href="properties_providers.html#properties_and_providers">Understanding Gradle Types</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:declaring_variables"><a class="anchor" href="#sec:declaring_variables"></a><a class="link" href="#sec:declaring_variables">Declare Variables</a></h3>
-<div class="paragraph">
-<p>Build scripts can declare two variables: <strong>local variables</strong> and <strong>extra properties</strong>.</p>
-</div>
-<div class="sect3">
-<h4 id="sec:local_variables"><a class="anchor" href="#sec:local_variables"></a><a class="link" href="#sec:local_variables">Local Variables</a></h4>
-<div class="paragraph multi-language-text lang-kotlin">
-<p>Declare local variables with the <code>val</code> keyword. Local variables are only visible in the scope where they have been declared. They are a feature of the underlying Kotlin language.</p>
-</div>
-<div class="paragraph multi-language-text lang-groovy">
-<p>Declare local variables with the <code>def</code> keyword. Local variables are only visible in the scope where they have been declared. They are a feature of the underlying Groovy language.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">val dest = "dest"
-
-tasks.register&lt;Copy&gt;("copy") {
-    from("source")
-    into(dest)
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">def dest = 'dest'
-
-tasks.register('copy', Copy) {
-    from 'source'
-    into dest
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="sec:extra_properties"><a class="anchor" href="#sec:extra_properties"></a><a class="link" href="#sec:extra_properties">Extra Properties</a></h4>
-<div class="paragraph">
-<p><a href="properties_providers.html#properties_and_providers">Gradle&#8217;s enhanced objects</a>, including projects, tasks, and source sets, can hold user-defined properties.</p>
-</div>
-<div class="paragraph multi-language-text lang-kotlin">
-<p>Add, read, and set extra properties via the owning object&#8217;s <code>extra</code> property. Alternatively, you can access extra properties via Kotlin delegated properties using <code>by extra</code>.</p>
-</div>
-<div class="paragraph multi-language-text lang-groovy">
-<p>Add, read, and set extra properties via the owning object&#8217;s <code>ext</code> property. Alternatively, you can use an <code>ext</code> block to add multiple properties simultaneously.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">plugins {
-    id("java-library")
-}
-
-val springVersion by extra("3.1.0.RELEASE")
-val emailNotification by extra { "build@master.org" }
-
-sourceSets.all { extra["purpose"] = null }
-
-sourceSets {
-    main {
-        extra["purpose"] = "production"
-    }
-    test {
-        extra["purpose"] = "test"
-    }
-    create("plugin") {
-        extra["purpose"] = "production"
-    }
-}
-
-tasks.register("printProperties") {
-    val springVersion = springVersion
-    val emailNotification = emailNotification
-    val productionSourceSets = provider {
-        sourceSets.matching { it.extra["purpose"] == "production" }.map { it.name }
-    }
-    doLast {
-        println(springVersion)
-        println(emailNotification)
-        productionSourceSets.get().forEach { println(it) }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id 'java-library'
-}
-
-ext {
-    springVersion = "3.1.0.RELEASE"
-    emailNotification = "build@master.org"
-}
-
-sourceSets.all { ext.purpose = null }
-
-sourceSets {
-    main {
-        purpose = "production"
-    }
-    test {
-        purpose = "test"
-    }
-    plugin {
-        purpose = "production"
-    }
-}
-
-tasks.register('printProperties') {
-    def springVersion = springVersion
-    def emailNotification = emailNotification
-    def productionSourceSets = provider {
-        sourceSets.matching { it.purpose == "production" }.collect { it.name }
-    }
-    doLast {
-        println springVersion
-        println emailNotification
-        productionSourceSets.get().each { println it }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ gradle -q printProperties
-3.1.0.RELEASE
-build@master.org
-main
-plugin</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph multi-language-text lang-kotlin">
-<p>This example adds two extra properties to the <code>project</code> object via <code>by extra</code>. Additionally, this example adds a property named <code>purpose</code> to each source set by setting <code>extra["purpose"]</code> to <code>null</code>. Once added, you can read and set these properties via <code>extra</code>.</p>
-</div>
-<div class="paragraph multi-language-text lang-groovy">
-<p>This example adds two extra properties to the <code>project</code> object via an <code>ext</code> block. Additionally, this example adds a property named <code>purpose</code> to each source set by setting <code>ext.purpose</code> to <code>null</code>. Once added, you can read and set all these properties just like predefined ones.</p>
-</div>
-<div class="paragraph">
-<p>Gradle requires special syntax for adding a property so that it can fail fast. For example, this allows Gradle to recognize
-when a script attempts to set a property that does not exist. You can access extra properties anywhere where you can
-access their owning object. This gives extra properties a wider scope than local variables.
-Subprojects can access extra properties on their parent projects.</p>
-</div>
-<div class="paragraph">
-<p>For more information about extra properties, see
-<a href="../dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html">ExtraPropertiesExtension</a> in the API documentation.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec:configuring_arbitrary_objects"><a class="anchor" href="#sec:configuring_arbitrary_objects"></a><a class="link" href="#sec:configuring_arbitrary_objects">Configure Arbitrary Objects</a></h3>
-<div class="paragraph">
-<p>The example <code>greet()</code> task shows an example of arbitrary object configuration:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle.kts</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">class UserInfo(
-    var name: String? = null,
-    var email: String? = null
-)
-
-tasks.register("greet") {
-    val user = UserInfo().apply {
-        name = "Isaac Newton"
-        email = "isaac@newton.me"
-    }
-    doLast {
-        println(user.name)
-        println(user.email)
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">class UserInfo {
-    String name
-    String email
-}
-
-tasks.register('greet') {
-    def user = configure(new UserInfo()) {
-        name = "Isaac Newton"
-        email = "isaac@newton.me"
-    }
-    doLast {
-        println user.name
-        println user.email
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ gradle -q greet
-Isaac Newton
-isaac@newton.me</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="sec:closure_delegate"><a class="anchor" href="#sec:closure_delegate"></a><a class="link" href="#sec:closure_delegate">Closure Delegates</a></h4>
-<div class="paragraph">
-<p>Each closure has a <code>delegate</code> object. Groovy uses this delegate to look up variable and method references to nonlocal variables and closure parameters.
-Gradle uses this for <em>configuration closures</em>,
-where the <code>delegate</code> object refers to the object being configured.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="exampleblock testable-sample multi-language-sample">
-<div class="content">
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
-    assert delegate == project.dependencies
-    testImplementation('junit:junit:4.13')
-    delegate.testImplementation('junit:junit:4.13')
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="script-default-imports"><a class="anchor" href="#script-default-imports"></a><a class="link" href="#script-default-imports">Default imports</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To make build scripts more concise, Gradle automatically adds a set of import statements to scripts.</p>
-</div>
-<div class="paragraph">
-<p>As a result, instead of writing <code>throw new org.gradle.api.tasks.StopExecutionException()</code>, you can write <code>throw new StopExecutionException()</code> instead.</p>
-</div>
-<div class="paragraph">
-<p>Gradle implicitly adds the following imports to each script:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">import org.gradle.*
-import org.gradle.api.*
-import org.gradle.api.artifacts.*
-import org.gradle.api.artifacts.capability.*
-import org.gradle.api.artifacts.component.*
-import org.gradle.api.artifacts.dsl.*
-import org.gradle.api.artifacts.ivy.*
-import org.gradle.api.artifacts.maven.*
-import org.gradle.api.artifacts.query.*
-import org.gradle.api.artifacts.repositories.*
-import org.gradle.api.artifacts.result.*
-import org.gradle.api.artifacts.transform.*
-import org.gradle.api.artifacts.type.*
-import org.gradle.api.artifacts.verification.*
-import org.gradle.api.attributes.*
-import org.gradle.api.attributes.java.*
-import org.gradle.api.attributes.plugin.*
-import org.gradle.api.cache.*
-import org.gradle.api.capabilities.*
-import org.gradle.api.component.*
-import org.gradle.api.configuration.*
-import org.gradle.api.credentials.*
-import org.gradle.api.distribution.*
-import org.gradle.api.distribution.plugins.*
-import org.gradle.api.execution.*
-import org.gradle.api.file.*
-import org.gradle.api.flow.*
-import org.gradle.api.initialization.*
-import org.gradle.api.initialization.definition.*
-import org.gradle.api.initialization.dsl.*
-import org.gradle.api.initialization.resolve.*
-import org.gradle.api.invocation.*
-import org.gradle.api.java.archives.*
-import org.gradle.api.jvm.*
-import org.gradle.api.launcher.cli.*
-import org.gradle.api.logging.*
-import org.gradle.api.logging.configuration.*
-import org.gradle.api.model.*
-import org.gradle.api.plugins.*
-import org.gradle.api.plugins.antlr.*
-import org.gradle.api.plugins.catalog.*
-import org.gradle.api.plugins.jvm.*
-import org.gradle.api.plugins.quality.*
-import org.gradle.api.plugins.scala.*
-import org.gradle.api.problems.*
-import org.gradle.api.project.*
-import org.gradle.api.provider.*
-import org.gradle.api.publish.*
-import org.gradle.api.publish.ivy.*
-import org.gradle.api.publish.ivy.plugins.*
-import org.gradle.api.publish.ivy.tasks.*
-import org.gradle.api.publish.maven.*
-import org.gradle.api.publish.maven.plugins.*
-import org.gradle.api.publish.maven.tasks.*
-import org.gradle.api.publish.plugins.*
-import org.gradle.api.publish.tasks.*
-import org.gradle.api.reflect.*
-import org.gradle.api.reporting.*
-import org.gradle.api.reporting.components.*
-import org.gradle.api.reporting.dependencies.*
-import org.gradle.api.reporting.dependents.*
-import org.gradle.api.reporting.model.*
-import org.gradle.api.reporting.plugins.*
-import org.gradle.api.resources.*
-import org.gradle.api.services.*
-import org.gradle.api.specs.*
-import org.gradle.api.tasks.*
-import org.gradle.api.tasks.ant.*
-import org.gradle.api.tasks.application.*
-import org.gradle.api.tasks.bundling.*
-import org.gradle.api.tasks.compile.*
-import org.gradle.api.tasks.diagnostics.*
-import org.gradle.api.tasks.diagnostics.artifact.transforms.*
-import org.gradle.api.tasks.diagnostics.configurations.*
-import org.gradle.api.tasks.incremental.*
-import org.gradle.api.tasks.javadoc.*
-import org.gradle.api.tasks.options.*
-import org.gradle.api.tasks.scala.*
-import org.gradle.api.tasks.testing.*
-import org.gradle.api.tasks.testing.junit.*
-import org.gradle.api.tasks.testing.junitplatform.*
-import org.gradle.api.tasks.testing.testng.*
-import org.gradle.api.tasks.util.*
-import org.gradle.api.tasks.wrapper.*
-import org.gradle.api.toolchain.management.*
-import org.gradle.authentication.*
-import org.gradle.authentication.aws.*
-import org.gradle.authentication.http.*
-import org.gradle.build.event.*
-import org.gradle.buildconfiguration.tasks.*
-import org.gradle.buildinit.*
-import org.gradle.buildinit.plugins.*
-import org.gradle.buildinit.specs.*
-import org.gradle.buildinit.tasks.*
-import org.gradle.caching.*
-import org.gradle.caching.configuration.*
-import org.gradle.caching.http.*
-import org.gradle.caching.local.*
-import org.gradle.concurrent.*
-import org.gradle.external.javadoc.*
-import org.gradle.ide.visualstudio.*
-import org.gradle.ide.visualstudio.plugins.*
-import org.gradle.ide.visualstudio.tasks.*
-import org.gradle.ide.xcode.*
-import org.gradle.ide.xcode.plugins.*
-import org.gradle.ide.xcode.tasks.*
-import org.gradle.ivy.*
-import org.gradle.jvm.*
-import org.gradle.jvm.application.scripts.*
-import org.gradle.jvm.application.tasks.*
-import org.gradle.jvm.tasks.*
-import org.gradle.jvm.toolchain.*
-import org.gradle.language.*
-import org.gradle.language.assembler.*
-import org.gradle.language.assembler.plugins.*
-import org.gradle.language.assembler.tasks.*
-import org.gradle.language.base.*
-import org.gradle.language.base.artifact.*
-import org.gradle.language.base.compile.*
-import org.gradle.language.base.plugins.*
-import org.gradle.language.base.sources.*
-import org.gradle.language.c.*
-import org.gradle.language.c.plugins.*
-import org.gradle.language.c.tasks.*
-import org.gradle.language.cpp.*
-import org.gradle.language.cpp.plugins.*
-import org.gradle.language.cpp.tasks.*
-import org.gradle.language.java.artifact.*
-import org.gradle.language.jvm.tasks.*
-import org.gradle.language.nativeplatform.*
-import org.gradle.language.nativeplatform.tasks.*
-import org.gradle.language.objectivec.*
-import org.gradle.language.objectivec.plugins.*
-import org.gradle.language.objectivec.tasks.*
-import org.gradle.language.objectivecpp.*
-import org.gradle.language.objectivecpp.plugins.*
-import org.gradle.language.objectivecpp.tasks.*
-import org.gradle.language.plugins.*
-import org.gradle.language.rc.*
-import org.gradle.language.rc.plugins.*
-import org.gradle.language.rc.tasks.*
-import org.gradle.language.scala.tasks.*
-import org.gradle.language.swift.*
-import org.gradle.language.swift.plugins.*
-import org.gradle.language.swift.tasks.*
-import org.gradle.maven.*
-import org.gradle.model.*
-import org.gradle.nativeplatform.*
-import org.gradle.nativeplatform.platform.*
-import org.gradle.nativeplatform.plugins.*
-import org.gradle.nativeplatform.tasks.*
-import org.gradle.nativeplatform.test.*
-import org.gradle.nativeplatform.test.cpp.*
-import org.gradle.nativeplatform.test.cpp.plugins.*
-import org.gradle.nativeplatform.test.cunit.*
-import org.gradle.nativeplatform.test.cunit.plugins.*
-import org.gradle.nativeplatform.test.cunit.tasks.*
-import org.gradle.nativeplatform.test.googletest.*
-import org.gradle.nativeplatform.test.googletest.plugins.*
-import org.gradle.nativeplatform.test.plugins.*
-import org.gradle.nativeplatform.test.tasks.*
-import org.gradle.nativeplatform.test.xctest.*
-import org.gradle.nativeplatform.test.xctest.plugins.*
-import org.gradle.nativeplatform.test.xctest.tasks.*
-import org.gradle.nativeplatform.toolchain.*
-import org.gradle.nativeplatform.toolchain.plugins.*
-import org.gradle.normalization.*
-import org.gradle.platform.*
-import org.gradle.platform.base.*
-import org.gradle.platform.base.binary.*
-import org.gradle.platform.base.component.*
-import org.gradle.platform.base.plugins.*
-import org.gradle.plugin.devel.*
-import org.gradle.plugin.devel.plugins.*
-import org.gradle.plugin.devel.tasks.*
-import org.gradle.plugin.management.*
-import org.gradle.plugin.use.*
-import org.gradle.plugins.ear.*
-import org.gradle.plugins.ear.descriptor.*
-import org.gradle.plugins.ide.*
-import org.gradle.plugins.ide.api.*
-import org.gradle.plugins.ide.eclipse.*
-import org.gradle.plugins.ide.idea.*
-import org.gradle.plugins.signing.*
-import org.gradle.plugins.signing.signatory.*
-import org.gradle.plugins.signing.signatory.pgp.*
-import org.gradle.plugins.signing.type.*
-import org.gradle.plugins.signing.type.pgp.*
-import org.gradle.process.*
-import org.gradle.swiftpm.*
-import org.gradle.swiftpm.plugins.*
-import org.gradle.swiftpm.tasks.*
-import org.gradle.testing.base.*
-import org.gradle.testing.base.plugins.*
-import org.gradle.testing.jacoco.plugins.*
-import org.gradle.testing.jacoco.tasks.*
-import org.gradle.testing.jacoco.tasks.rules.*
-import org.gradle.testkit.runner.*
-import org.gradle.util.*
-import org.gradle.vcs.*
-import org.gradle.vcs.git.*
-import org.gradle.work.*
-import org.gradle.workers.*</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Additionally, for Groovy, the following imports are added too:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">import java.lang.*
-import java.io.*
-import java.net.*
-import java.util.*
-import java.time.*
-import java.math.BigDecimal
-import java.math.BigInteger
-import javax.inject.Inject</code></pre>
-</div>
-</div>
-<div id="sec:closures_as_the_last_parameter_in_a_method" class="paragraph text-right">
-<p><strong>Next Step:</strong> <a href="tutorial_using_tasks.html#tutorial_using_tasks">Learn how to use Tasks</a> &gt;&gt;</p>
-</div>
+<meta http-equiv="refresh" content="0;URL=writing_build_scripts_intermediate.html">
 </div>
 </div>
 </div>
